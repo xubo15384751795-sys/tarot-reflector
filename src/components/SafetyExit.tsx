@@ -145,13 +145,13 @@ export default function SafetyExit({ onContinueAnyway, onBack }: Props) {
         <button
           type="button"
           onClick={onContinueAnyway}
-          className="text-[11px] tracking-[0.04em] underline underline-offset-4"
+          className="text-[12px] tracking-[0.04em] underline underline-offset-4"
           style={{
             color: "var(--text-faint)",
             background: "transparent",
             border: "none",
             cursor: "pointer",
-            opacity: 0.7,
+            opacity: 0.6,
           }}
         >
           我没事，继续翻档案

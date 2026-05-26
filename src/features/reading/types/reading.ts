@@ -36,6 +36,8 @@ export type ReadingStage =
   // 牌阵阶段
   | "spread_recommending"
   | "spread_select"
+  // 反刍护栏（在 shuffling 之前拦截，提醒用户今天已为同问题抽过多次）
+  | "rumination_pause"
   // 抽牌阶段
   | "shuffling"
   | "card_revealed"

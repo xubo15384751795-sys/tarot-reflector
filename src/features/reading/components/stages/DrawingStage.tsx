@@ -72,7 +72,15 @@ export default function DrawingStage({
         >
           <div
             className="absolute inset-0 rounded-[18px] overflow-hidden"
-            style={{ boxShadow: "0 30px 80px rgba(0,0,0,0.6)" }}
+            style={{
+              boxShadow: "0 30px 80px rgba(0,0,0,0.6)",
+              // 逆位不再 180° 翻转牌图——视觉上倒立的人/牌在低落情绪时会
+              // 放大不适感。改用底色微调（轻微暗金描边）+ 标签传达逆位语义。
+              border: isReversed
+                ? "1.5px solid rgba(146, 110, 60, 0.5)"
+                : undefined,
+              boxSizing: "border-box",
+            }}
           >
             <Image
               src={firstCard.image}
@@ -80,7 +88,6 @@ export default function DrawingStage({
               fill
               sizes="220px"
               className="object-cover"
-              style={isReversed ? { transform: "rotate(180deg)" } : undefined}
               priority
             />
           </div>

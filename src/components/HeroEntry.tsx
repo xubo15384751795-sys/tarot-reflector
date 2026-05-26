@@ -245,7 +245,7 @@ export default function HeroEntry({ onSubmit }: Props) {
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               onKeyDown={handleKey}
-              placeholder="一个决定、一段关系、一种不安，或一个反复出现的念头……"
+              placeholder="一个决定、一段关系、一个想看清楚的念头，或者就只是今天的心情……"
               autoFocus
             />
             <span className="hero-input-spark" style={{ color: "var(--accent)", opacity: 0.7 }}>
@@ -301,7 +301,7 @@ export default function HeroEntry({ onSubmit }: Props) {
             className={`hero-cta mt-10 ${canSubmit ? "" : "is-disabled"}`}
           >
             <IconSparkSmall />
-            <span className="ml-2 tracking-[0.18em]">翻开这一页</span>
+            <span className="ml-2 tracking-[0.18em]">看看这一页</span>
           </motion.button>
         </motion.section>
 

@@ -18,6 +18,8 @@
     "cards:download": "python3 scripts/download_major_arcana.py",
     "cards:wire": "python3 scripts/wire_card_images.py",
     "audit:motifs": "tsx scripts/audit_motifs.ts",
+    "audit:cards": "tsx scripts/audit_cards.ts",
+    "benchmark": "tsx scripts/run_benchmark.ts",
     "prepare": "husky"
   },
   "lint-staged": {

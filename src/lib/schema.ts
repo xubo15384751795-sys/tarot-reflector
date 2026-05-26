@@ -172,6 +172,16 @@ export type TarotScene = {
   body: string;
   connection?: string;
   visual_direction: string;
+  /**
+   * 该幕预设时长（秒）—— **仅供视频脚本 / 短视频生成使用**。
+   *
+   * 阅读 UI 永远手动翻页，不要用 duration 做自动推进——
+   * 这是「女性友好 / 不催促」原则：用户需要停下来的空间，
+   * 任何"N 秒后自动下一幕"都违反这条原则。
+   *
+   * 若未来要在 UI 上做"自动阅读"开关，必须默认关闭、用户主动启用，
+   * 而不是把 duration 当作 implicit 自动推进信号。
+   */
   duration: number;
   /** 该场景聚焦的牌（多牌阵中） */
   focus_card_id?: string | null;

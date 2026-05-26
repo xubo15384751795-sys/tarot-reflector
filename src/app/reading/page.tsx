@@ -48,11 +48,13 @@ function ReadingContent() {
 
   const { stage } = session.state;
   const showActions = stage === "position_readings" || stage === "summary";
+  // 分享按钮仅 summary 阶段露出，避免在用户还在读的过程中诱导社交分享
+  const canShare = stage === "summary";
 
   return (
     <AppShell
       onRedraw={showActions ? () => router.push("/") : undefined}
-      onShare={showActions ? actions.share : undefined}
+      onShare={canShare ? actions.share : undefined}
       showActions={showActions}
       shareHint={actions.shareHint}
     >
@@ -83,6 +85,9 @@ function ReadingContent() {
               onSafetyBack={() => router.push("/")}
               onReframeAccept={session.acceptReframe}
               onReframeEdit={() => router.push("/")}
+              onReframeSkip={session.skipReframe}
+              onRuminationPause={() => router.push("/")}
+              onRuminationContinue={session.overrideRumination}
               onPickSpread={(id: SpreadId) => session.selectSpread(id)}
               onConfirmSpread={session.confirmSpread}
               onOpenManualSelect={session.openManualSpread}

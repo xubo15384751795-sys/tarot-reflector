@@ -7,7 +7,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 
 type NavItem = {
@@ -136,6 +137,8 @@ export default function AppShell({
   shareHint,
 }: Props) {
   const pathname = usePathname();
+  // 重新抽牌的二次确认 —— 默认"保留这次"，需要明确确认才会丢弃当前解读
+  const [confirmRedraw, setConfirmRedraw] = useState(false);
 
   return (
     <div className="flex flex-row min-h-screen w-full">
@@ -225,7 +228,11 @@ export default function AppShell({
             <span className="hidden md:inline text-[10px] tracking-[0.14em]" style={{ color: "var(--text-faint)" }}>
               神秘档案馆
             </span>
-            <span className="hidden lg:inline text-[9px] tracking-[0.12em] px-2 py-0.5 rounded archive-border-thin" style={{ color: "var(--ink-warm)", opacity: 0.8 }}>
+            <span
+              className="hidden lg:inline text-[9px] tracking-[0.12em] px-2 py-0.5 rounded archive-border-thin"
+              style={{ color: "var(--ink-warm)", opacity: 0.8 }}
+              title="本项目基于 Rider–Waite–Smith 韦特派传统牌义；不混入其他塔罗体系。"
+            >
               RWS · 传统牌义
             </span>
           </div>
@@ -249,12 +256,12 @@ export default function AppShell({
                 </button>
               )}
               {onRedraw && (
-                /* 重新抽牌：女性友好原则下降级为次级，弱化视觉权重 */
+                /* 重新抽牌：弱化视觉权重 + 二次确认 —— 防止误触丢失当前解读 */
                 <button
-                  onClick={onRedraw}
+                  onClick={() => setConfirmRedraw(true)}
                   className="action-pill"
                   aria-label="重新抽牌"
-                  title="重新抽牌（建议先完成这次解读再决定）"
+                  title="重新抽牌"
                   style={{ opacity: 0.7 }}
                 >
                   <IconRedraw />
@@ -275,6 +282,83 @@ export default function AppShell({
         {/* Content */}
         <div className="flex-1 min-h-0 overflow-auto">{children}</div>
       </div>
+
+      {/* 重新抽牌的二次确认 —— 默认按钮是"保留这次" */}
+      <AnimatePresence>
+        {confirmRedraw && (
+          <motion.div
+            key="confirm-redraw"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center px-5"
+            style={{ background: "rgba(8,7,10,0.62)", backdropFilter: "blur(8px)" }}
+            onClick={() => setConfirmRedraw(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 8, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 4, scale: 0.98 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-[420px] rounded-2xl p-7 flex flex-col gap-5"
+              style={{
+                background: "var(--bg-elevated)",
+                border: "1px solid var(--border)",
+                boxShadow:
+                  "inset 0 1px 0 rgba(255,247,225,0.08), 0 24px 56px rgba(0,0,0,0.5)",
+              }}
+            >
+              <p
+                className="text-[15px] leading-[1.8] text-center"
+                style={{
+                  color: "var(--text-primary)",
+                  fontFamily: "var(--font-serif-like)",
+                }}
+              >
+                这次解读还在。
+                <br />
+                确定要重新开始吗？
+                <br />
+                <span
+                  className="text-[12px] block mt-2"
+                  style={{ color: "var(--text-faint)" }}
+                >
+                  你写下的笔记会保留。
+                </span>
+              </p>
+              <div className="flex flex-col items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setConfirmRedraw(false)}
+                  className="hero-cta w-full"
+                  style={{ padding: "12px 28px" }}
+                >
+                  <span className="tracking-[0.1em]">保留这次，下次再说</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setConfirmRedraw(false);
+                    onRedraw?.();
+                  }}
+                  className="text-[11px] tracking-[0.04em] underline underline-offset-4"
+                  style={{
+                    color: "var(--text-faint)",
+                    background: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    opacity: 0.7,
+                  }}
+                >
+                  确定重新开始
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

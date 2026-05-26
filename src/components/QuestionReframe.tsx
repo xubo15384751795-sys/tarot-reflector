@@ -9,6 +9,8 @@ type Props = {
   reframed: string;
   onAccept: () => void;
   onEdit: () => void;
+  /** 用户拒绝系统给的"观察"，不复述，直接用 original 抽牌。 */
+  onSkip: () => void;
 };
 
 function IconQuote() {
@@ -42,6 +44,7 @@ export default function QuestionReframe({
   reframed,
   onAccept,
   onEdit,
+  onSkip,
 }: Props) {
   return (
     <motion.div
@@ -112,6 +115,26 @@ export default function QuestionReframe({
         <button onClick={onEdit} className="archive-link" type="button" style={{ padding: "11px 24px" }}>
           <IconPen />
           <span>我想换个问法</span>
+        </button>
+      </div>
+
+      {/* 第三选项 · 拒绝复述权（视觉权重最低，但永远在）
+          用户主权：如果系统给的"一个观察"不像自己，可以跳过 reframe
+          直接用原问题抽牌，而不必整个回首页重来。 */}
+      <div className="flex justify-center -mt-3">
+        <button
+          type="button"
+          onClick={onSkip}
+          className="text-[11px] tracking-[0.04em] underline underline-offset-4 transition-opacity"
+          style={{
+            color: "var(--text-faint)",
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+            opacity: 0.7,
+          }}
+        >
+          这个观察不太像我，直接抽牌
         </button>
       </div>
 

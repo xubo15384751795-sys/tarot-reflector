@@ -20,6 +20,10 @@ import { analyzeInput } from "@/lib/reading/inputAnalyzer";
 import { reframeQuestion } from "@/lib/reading/reframeQuestion";
 import { normalizeReading } from "../lib/normalizeReading";
 import { lookupLocalMeaning } from "../lib/lookupLocalMeaning";
+import {
+  countRecentReadingsForQuestion,
+  RUMINATION_THRESHOLD,
+} from "../lib/ruminationCheck";
 import { useReadingApi } from "./useReadingApi";
 import type {
   LocalCardMeaning,
@@ -168,12 +172,16 @@ export type UseReadingSession = {
   setStage: (stage: ReadingStage) => void;
   // 问题阶段
   acceptReframe: () => void;
+  /** 拒绝系统给出的复述，直接用 original question 抽牌 */
+  skipReframe: () => void;
   editQuestion: () => void;
   // 牌阵阶段
   selectSpread: (spreadId: SpreadId) => void;
   confirmSpread: () => Promise<void>;
   openManualSpread: () => void;
   backToReframe: () => void;
+  /** 反刍护栏：用户决定无视提醒、继续抽牌 */
+  overrideRumination: () => Promise<void>;
   // 抽牌阶段
   drawForDaily: () => Promise<void>;
   drawForSpread: (spreadId: string) => Promise<void>;
@@ -242,6 +250,21 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
           }
         : { ...s, stage: "spread_recommending" },
     );
+  }, []);
+
+  /**
+   * 用户拒绝复述："这个观察不太像我"。
+   * 流程同 acceptReframe，但把 reframe 字段清空——下游任何展示
+   * "你接受的复述" 的 UI 都不会再渲染那一段。
+   * 不弹回首页、不丢已有的 spreadRec，保留 user agency。
+   */
+  const skipReframe = useCallback(() => {
+    setState((s) => ({
+      ...s,
+      reframe: null,
+      selectedSpread: s.spreadRec?.spread_id ?? s.selectedSpread,
+      stage: "spread_recommending",
+    }));
   }, []);
 
   const editQuestion = useCallback(() => {
@@ -395,6 +418,18 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
 
   const confirmSpread = useCallback(async () => {
     if (!state.selectedSpread) return;
+    // 反刍护栏：24h 内同问题 ≥ 阈值，先暂停一下让用户重新决定
+    const recentCount = countRecentReadingsForQuestion(input.question);
+    if (recentCount >= RUMINATION_THRESHOLD) {
+      setState((s) => ({ ...s, stage: "rumination_pause" }));
+      return;
+    }
+    await drawForSpread(state.selectedSpread);
+  }, [state.selectedSpread, drawForSpread, input.question]);
+
+  /** 用户在 rumination_pause 上按 "我知道，但我想再看一次" */
+  const overrideRumination = useCallback(async () => {
+    if (!state.selectedSpread) return;
     await drawForSpread(state.selectedSpread);
   }, [state.selectedSpread, drawForSpread]);
 
@@ -458,11 +493,13 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
       goTo,
       setStage,
       acceptReframe,
+      skipReframe,
       editQuestion,
       selectSpread,
       confirmSpread,
       openManualSpread,
       backToReframe,
+      overrideRumination,
       drawForDaily,
       drawForSpread,
       advanceFromCardRevealed,
@@ -477,9 +514,11 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
       goTo,
       setStage,
       acceptReframe,
+      skipReframe,
       editQuestion,
       selectSpread,
       confirmSpread,
+      overrideRumination,
       openManualSpread,
       backToReframe,
       drawForDaily,

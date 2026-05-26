@@ -5,8 +5,9 @@ const DOMAIN_REFRAMES: Record<
   { tensionPattern: string; reframePattern: string }
 > = {
   love: {
-    tensionPattern: "你在问一段关系的走向，但问题的背后可能是你在寻求确认或安全感。",
-    reframePattern: "在这段关系中，你内心最真实的需求是什么？你如何在自己的边界和对方的期待之间找到平衡？",
+    // 不预设"在挣扎"——允许欣喜 / 想确认 / 想看清都是合理动机
+    tensionPattern: "你在问一段关系，背后可能是想被看见，也可能是想看清。",
+    reframePattern: "这段关系里，此刻你最想被看见的部分是什么？",
   },
   career: {
     tensionPattern: "你在思考职业方向的选择，但问题的背后可能是对不确定性的焦虑。",

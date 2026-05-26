@@ -133,10 +133,38 @@ npm start
 | `npm run build` | 构建生产版本 |
 | `npm start` | 运行生产构建（需先 `build`） |
 | `npm run lint` | 代码检查 |
+| `npm run typecheck` | TypeScript 类型检查 |
+| `npm run test:unit` | 运行单元/集成测试 (Vitest) |
+| `npm run test:e2e` | 运行 E2E 测试 (Playwright) |
+| `npm run check` | 完整质量检查 (typecheck + lint + test + secrets:scan) |
+| `npm run benchmark` | 运行全链路基准测度，输出报告到 `reports/benchmark_report.md` |
+| `npm run audit:cards` | 审计 78 张牌完整性 |
+| `npm run audit:motifs` | 审计 motif 数据质量 |
+| `npm run secrets:scan` | 扫描泄露的密钥 |
 | `npm run cards:download` | 从 Wikimedia 下载 22 张大阿卡纳牌面 |
 | `npm run cards:wire` | 将牌面路径写入 `tarot_cards.json` |
 
 > 牌面图片已包含在 `public/cards/major/` 中，一般无需重新下载。只有图片缺失时才运行上面两条命令。
+
+### 运行 Benchmark
+
+```bash
+npm run benchmark
+```
+
+输出报告位于 `reports/benchmark_report.md`，包含 12 大类、100 分评分体系的自动化检测结果。
+
+**评级标准：**
+
+| 分数 | 等级 | 含义 |
+|------|------|------|
+| 90–100 | 优秀样本 | 可作为参考项目公开 |
+| 80–89 | 演示项目 | 可演示，需标注未完成部分 |
+| 70–79 | 原型可用 | 不适合作为参考样本 |
+| 60–69 | 工程风险 | 功能有雏形，风险明显 |
+| <60 | 实验 demo | 仍是实验性 |
+
+详见 [`BENCHMARK.md`](./BENCHMARK.md)。
 
 ---
 

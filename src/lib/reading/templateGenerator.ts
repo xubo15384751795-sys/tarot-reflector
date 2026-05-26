@@ -288,9 +288,10 @@ function buildClosing(
       : signals.richness === "brief"
       ? 2
       : 3;
+  // 用 —— 破折号代替 · 项目符号；前者像散文，后者像 todo 列表
   const adviceLines = advice
     .slice(0, adviceCount)
-    .map((a) => `· ${clip(a, Math.min(48, signals.recommendedBodyChars / 3))}`)
+    .map((a) => `—— ${clip(a, Math.min(48, signals.recommendedBodyChars / 3))}`)
     .join("\n");
   const grounding = groundingLineFor(signals.primaryEmotion);
   const body = grounding ? `${adviceLines}\n\n${grounding}` : adviceLines;
@@ -299,8 +300,8 @@ function buildClosing(
     scene_id: 0,
     type: "closing",
     step_label: STEP_LABELS[6],
-    headline: "建议",
-    subtitle: "下一步可以做的一件事",
+    headline: "留意",
+    subtitle: "不必现在就做。先听听这些句子。",
     insight: thesis,
     body,
     connection:

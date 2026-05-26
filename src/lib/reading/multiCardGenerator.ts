@@ -232,10 +232,11 @@ function buildSynthesisScene(
 
 function buildClosing(signals: InputSignals): TarotScene {
   // 简短输入：只留一两条；详细输入：保留三条 + grounding 句
+  // 用 —— 破折号代替 · 项目符号；前者像散文，后者像 todo 列表
   const bullets = [
-    "· 回顾每张牌在各自位置上的提示",
-    "· 留意牌之间的联系如何反映你的处境",
-    "· 选择其中最能共鸣的一点，作为今天的思考起点",
+    "—— 回顾每张牌在各自位置上的提示",
+    "—— 留意牌之间的联系如何反映你的处境",
+    "—— 选择其中最能共鸣的一点，作为今天的思考起点",
   ];
   const keepCount =
     signals.richness === "minimal" ? 1 : signals.richness === "brief" ? 2 : 3;
@@ -247,8 +248,8 @@ function buildClosing(signals: InputSignals): TarotScene {
     scene_id: 0,
     type: "closing",
     step_label: "反思",
-    headline: "下一步",
-    subtitle: "回顾与反思",
+    headline: "留意",
+    subtitle: "不必现在就做。先听听这些句子。",
     insight: "解读提供了一个视角，行动的主动权在你手中。",
     body,
     connection: signals.selfDoubt

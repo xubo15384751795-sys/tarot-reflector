@@ -14,6 +14,8 @@ import SpreadStage from "./stages/SpreadStage";
 import DrawingStage from "./stages/DrawingStage";
 import ReadingStage from "./stages/ReadingStage";
 import ErrorStage from "./stages/ErrorStage";
+import RuminationPauseStage from "./stages/RuminationPauseStage";
+import { countRecentReadingsForQuestion } from "../lib/ruminationCheck";
 
 type Props = {
   session: ReadingSessionState;
@@ -23,6 +25,11 @@ type Props = {
   onSafetyBack: () => void;
   onReframeAccept: () => void;
   onReframeEdit: () => void;
+  onReframeSkip: () => void;
+  /** 反刍护栏：用户决定无视提醒继续抽牌 */
+  onRuminationContinue: () => void;
+  /** 反刍护栏：用户决定先停一下，回首页 */
+  onRuminationPause: () => void;
   onPickSpread: (id: SpreadId) => void;
   onConfirmSpread: () => void;
   onOpenManualSelect: () => void;
@@ -56,6 +63,17 @@ export default function ReadingStageRouter(props: Props) {
     return <ErrorStage message={session.errorMessage} onBack={props.onErrorBack} />;
   }
 
+  if (stage === "rumination_pause") {
+    const count = countRecentReadingsForQuestion(session.input.question);
+    return (
+      <RuminationPauseStage
+        count={count}
+        onPause={props.onRuminationPause}
+        onContinue={props.onRuminationContinue}
+      />
+    );
+  }
+
   if (stage === "question_reframing") {
     if (!session.reframe) {
       return (
@@ -75,6 +93,7 @@ export default function ReadingStageRouter(props: Props) {
         reframe={session.reframe}
         onAccept={props.onReframeAccept}
         onEdit={props.onReframeEdit}
+        onSkip={props.onReframeSkip}
       />
     );
   }

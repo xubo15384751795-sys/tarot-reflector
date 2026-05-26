@@ -11,9 +11,10 @@ type Props = {
   reframe: QuestionReframeData;
   onAccept: () => void;
   onEdit: () => void;
+  onSkip: () => void;
 };
 
-export default function ReframeStage({ reframe, onAccept, onEdit }: Props) {
+export default function ReframeStage({ reframe, onAccept, onEdit, onSkip }: Props) {
   return (
     <div className="flex-1 flex items-center justify-center min-h-[60vh] px-6 py-12">
       <QuestionReframe
@@ -22,6 +23,7 @@ export default function ReframeStage({ reframe, onAccept, onEdit }: Props) {
         reframed={reframe.reframed}
         onAccept={onAccept}
         onEdit={onEdit}
+        onSkip={onSkip}
       />
     </div>
   );
