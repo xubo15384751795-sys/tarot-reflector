@@ -1,0 +1,1057 @@
+[
+  {
+    "id": "cups_ace",
+    "name_zh": "圣杯王牌",
+    "name_en": "Ace of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": 1,
+    "court_rank": null,
+    "image": "/cards/cups/cups_ace.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "新情感",
+          "爱",
+          "直觉",
+          "内在喜悦",
+          "精神觉醒"
+        ],
+        "meaning_zh": "新的情感机会正在萌芽，内心充满爱与喜悦。这是情感疗愈和精神觉醒的开始，敞开心扉迎接内在的转变。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "情感封闭",
+          "压抑感受",
+          "缺乏爱",
+          "精神空虚"
+        ],
+        "meaning_zh": "情感被压抑或封闭，难以感受内心的喜悦。可能经历精神空虚或情感麻木，需要找到释放情感的出口。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": "数字I代表种子、开始、机会、原初能量。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "水元素的原初种子，象征情感的觉醒和内在喜悦的开始，充满无限潜能。"
+    },
+    "domain_mapping": {
+      "感情": "新恋情的萌芽或感情进入充满爱意的新阶段",
+      "工作": "工作带来情感满足，找到真正热爱的事业",
+      "项目": "项目充满情感价值，能够触动人心",
+      "学习": "学习带来内在成长和精神满足",
+      "自我": "情感疗愈的开始，学会爱自己",
+      "财务": "财务状况改善带来内心的安定和喜悦"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "从云中伸出的手",
+        "meaning": "情感的馈赠，直觉的觉醒",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.05,
+          "w": 0.3,
+          "h": 0.15
+        }
+      },
+      {
+        "id": "m2",
+        "label": "圣杯",
+        "meaning": "情感的容器，爱的象征",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.15,
+          "w": 0.3,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "m3",
+        "label": "流淌的水",
+        "meaning": "情感的流动，直觉的源泉",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.3,
+          "w": 0.4,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "m4",
+        "label": "莲花与花园",
+        "meaning": "情感的绽放，内在的丰盛",
+        "bbox": {
+          "x": 0.1,
+          "y": 0.55,
+          "w": 0.8,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_2",
+    "name_zh": "圣杯二",
+    "name_en": "Two of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": 2,
+    "court_rank": null,
+    "image": "/cards/cups/cups_2.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "结合",
+          "吸引力",
+          "和谐",
+          "伙伴关系",
+          "爱的连接"
+        ],
+        "meaning_zh": "两人之间产生强烈的吸引力和情感连接，形成和谐的伙伴关系。这是爱情或深厚友谊的象征，彼此尊重和理解。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "分离",
+          "误解",
+          "关系失衡",
+          "缺乏信任"
+        ],
+        "meaning_zh": "关系中出现误解或分离，情感连接断裂。可能经历信任危机或关系失衡，需要重新建立沟通和理解。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": "数字II代表选择、平衡、关系、二元张力。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "水元素的二元结合，两个情感个体之间的和谐连接和相互吸引。"
+    },
+    "domain_mapping": {
+      "感情": "恋爱关系和谐，或遇到灵魂伴侣",
+      "工作": "与同事建立良好的合作关系",
+      "项目": "项目团队配合默契，协作顺畅",
+      "学习": "找到志同道合的学习伙伴",
+      "自我": "内在阴阳平衡，达到和谐状态",
+      "财务": "与他人建立互利共赢的财务关系"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "相互倾倒的杯子",
+        "meaning": "情感的交流与共鸣",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.3
+        }
+      },
+      {
+        "id": "m2",
+        "label": "舞蹈的人物",
+        "meaning": "和谐与伙伴关系",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.2,
+          "w": 0.4,
+          "h": 0.4
+        }
+      },
+      {
+        "id": "m3",
+        "label": "月亮与星辰",
+        "meaning": "直觉与情感的指引",
+        "bbox": {
+          "x": 0.1,
+          "y": 0.05,
+          "w": 0.8,
+          "h": 0.15
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_3",
+    "name_zh": "圣杯三",
+    "name_en": "Three of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": 3,
+    "court_rank": null,
+    "image": "/cards/cups/cups_3.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "庆祝",
+          "友谊",
+          "社交",
+          "快乐",
+          "创造力"
+        ],
+        "meaning_zh": "与朋友一起庆祝，享受社交的快乐。创造力得到释放，通过与他人的互动获得灵感和愉悦。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "孤立",
+          "过度社交",
+          "流言蜚语",
+          "缺乏深度"
+        ],
+        "meaning_zh": "社交生活过于表面，缺乏真正的友谊。可能遭遇流言蜚语或被孤立，需要寻找真正有意义的人际关系。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": "数字III代表成长、表达、初步成果、互动。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "水元素的社交互动，情感在群体中流动和表达，带来快乐和创造力。"
+    },
+    "domain_mapping": {
+      "感情": "社交场合遇到心仪对象，或朋友变恋人",
+      "工作": "团队合作愉快，工作氛围融洽",
+      "项目": "项目团队凝聚力强，创意碰撞",
+      "学习": "与同学一起学习，互相激励",
+      "自我": "通过社交拓展视野，丰富内心",
+      "财务": "与朋友合作投资或共同创业"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "三位庆祝的女性",
+        "meaning": "友谊与欢庆，社交的喜悦",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的圣杯",
+        "meaning": "分享与庆祝",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_4",
+    "name_zh": "圣杯四",
+    "name_en": "Four of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": 4,
+    "court_rank": null,
+    "image": "/cards/cups/cups_4.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "冥想",
+          "不满",
+          "忽视",
+          "重新评估",
+          "冷漠"
+        ],
+        "meaning_zh": "对现状感到不满，陷入冥想或冷漠。可能忽视眼前的机会，需要重新评估自己的需求和目标。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "觉醒",
+          "接受",
+          "新的机会",
+          "行动"
+        ],
+        "meaning_zh": "从冷漠中觉醒，开始接受新的机会。重新燃起热情，采取行动改变现状。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": "数字IV代表稳定、结构、停滞、边界。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "水元素的情感停滞，情感状态陷入固化，需要打破边界重新流动。"
+    },
+    "domain_mapping": {
+      "感情": "对感情现状不满，需要重新审视关系",
+      "工作": "工作缺乏激情，考虑是否需要改变",
+      "项目": "项目遇到瓶颈，需要新的创意注入",
+      "学习": "学习动力不足，需要找到新的学习目标",
+      "自我": "内心空虚，需要重新连接内在感受",
+      "财务": "对财务状况不满，需要调整理财策略"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "沉思的人",
+        "meaning": "内省与不满，情感的倦怠",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "三个被忽视的杯子",
+        "meaning": "已有的机会被忽略",
+        "bbox": {
+          "x": 0.15,
+          "y": 0.55,
+          "w": 0.7,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_5",
+    "name_zh": "圣杯五",
+    "name_en": "Five of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": 5,
+    "court_rank": null,
+    "image": "/cards/cups/cups_5.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "失落",
+          "悲伤",
+          "后悔",
+          "执念",
+          "失望"
+        ],
+        "meaning_zh": "经历情感上的失落和悲伤，沉浸在后悔中。需要接受失去的事实，将目光转向仍然拥有的美好。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "接受",
+          "释怀",
+          "向前看",
+          "新的开始"
+        ],
+        "meaning_zh": "开始接受过去，释怀悲伤。将注意力转向未来，准备开始新的情感旅程。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": "数字V代表冲突、变化、损失、扰动。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "水元素的情感损失，经历情感的扰动和失落，需要疗愈和重新平衡。"
+    },
+    "domain_mapping": {
+      "感情": "经历分手或感情挫折，需要时间疗愈",
+      "工作": "工作失误或项目失败，感到失落",
+      "项目": "项目遇到挫折，需要重新调整",
+      "学习": "考试失利或学业受挫，感到失望",
+      "自我": "经历内心的失落，需要自我疗愈",
+      "财务": "财务损失，需要重新规划"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "失落的身影",
+        "meaning": "悲伤与失望，失去的痛苦",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "倾倒的杯子",
+        "meaning": "失去与遗憾",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.4,
+          "w": 0.6,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_6",
+    "name_zh": "圣杯六",
+    "name_en": "Six of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": 6,
+    "court_rank": null,
+    "image": "/cards/cups/cups_6.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "怀旧",
+          "童年",
+          "纯真",
+          "回忆",
+          "馈赠"
+        ],
+        "meaning_zh": "回忆美好的过去，怀念童年的纯真。可能收到礼物或重逢，重温旧日的美好时光。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "沉溺过去",
+          "不切实际",
+          "阻碍成长",
+          "怀旧过度"
+        ],
+        "meaning_zh": "过度沉溺于过去，无法面对现实。怀旧阻碍了个人成长，需要释放对过去的执念。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": "数字VI代表调整、恢复、流动、重新平衡。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "水元素的情感回忆，情感在记忆中流动，重温过去的美好带来慰藉。"
+    },
+    "domain_mapping": {
+      "感情": "与旧爱重逢或回忆美好的恋爱时光",
+      "工作": "回忆起工作中的美好时刻或老同事",
+      "项目": "项目借鉴过去成功的经验",
+      "学习": "回忆起学习中的乐趣或重拾旧日兴趣",
+      "自我": "重温童年记忆，找回纯真的自己",
+      "财务": "收到礼物或意外的财务帮助"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "回忆的场景",
+        "meaning": "怀旧与美好的回忆",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "六个杯子",
+        "meaning": "过去的美好，童年的纯真",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.3,
+          "w": 0.5,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_7",
+    "name_zh": "圣杯七",
+    "name_en": "Seven of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": 7,
+    "court_rank": null,
+    "image": "/cards/cups/cups_7.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "幻想",
+          "选择",
+          "诱惑",
+          "想象",
+          "不切实际"
+        ],
+        "meaning_zh": "面临多种选择，但大多是不切实际的幻想。需要分辨真假，选择真正有价值的道路，而非沉溺于美好的想象。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "清醒",
+          "决定",
+          "面对现实",
+          "放弃幻想"
+        ],
+        "meaning_zh": "从幻想中清醒，做出实际的决定。面对现实，放弃不切实际的期望，选择可行的道路。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": "数字VII代表挑战、策略、试炼、防守。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "水元素的情感挑战，面对众多幻想的选择，需要策略性地分辨和决策。"
+    },
+    "domain_mapping": {
+      "感情": "面临多个追求者，需要分辨真心",
+      "工作": "面临多个职业选择，需要理性判断",
+      "项目": "项目有多个方向，需要选择最可行的",
+      "学习": "学习资源过多，需要选择适合自己的",
+      "自我": "面对多个自我期许，需要找到真实的自己",
+      "财务": "投资机会众多，需要谨慎选择"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "幻想的景象",
+        "meaning": "想象与诱惑，选择的困惑",
+        "bbox": {
+          "x": 0.15,
+          "y": 0.1,
+          "w": 0.7,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "七个杯子",
+        "meaning": "多种可能性，需要辨别",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.4
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_8",
+    "name_zh": "圣杯八",
+    "name_en": "Eight of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": 8,
+    "court_rank": null,
+    "image": "/cards/cups/cups_8.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "离开",
+          "寻找",
+          "放弃",
+          "精神之旅",
+          "失望"
+        ],
+        "meaning_zh": "主动离开不再满足的现状，踏上寻找内在意义的旅程。虽然感到失望，但这是成长必经的过程。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "停留",
+          "恐惧改变",
+          "依赖",
+          "无法放下"
+        ],
+        "meaning_zh": "害怕改变而停留原地，无法放下过去。需要勇气面对未知，才能找到真正的满足。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": "数字VIII代表行动、重复、推进、力量积累。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "水元素的主动离开，情感上做出重大决定，放弃旧有模式寻找新的方向。"
+    },
+    "domain_mapping": {
+      "感情": "离开不再满足的感情关系",
+      "工作": "辞去工作寻找更有意义的事业",
+      "项目": "放弃不成功的项目，寻找新方向",
+      "学习": "转专业或改变学习方向",
+      "自我": "离开舒适区，寻找真实的自我",
+      "财务": "放弃不盈利的投资，重新规划"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "转身离开的人",
+        "meaning": "放下与前行，寻找更深的意义",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "八个杯子",
+        "meaning": "已建立的情感基础",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.35,
+          "w": 0.6,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_9",
+    "name_zh": "圣杯九",
+    "name_en": "Nine of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": 9,
+    "court_rank": null,
+    "image": "/cards/cups/cups_9.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "满足",
+          "愿望成真",
+          "幸福",
+          "丰盛",
+          "自信"
+        ],
+        "meaning_zh": "愿望成真，内心充满满足和幸福。情感上达到丰盛的状态，自信地享受来之不易的成果。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "不满足",
+          "贪婪",
+          "物质主义",
+          "情感空虚"
+        ],
+        "meaning_zh": "即使拥有也感到不满足，追求更多物质。内心依然空虚，需要找到真正的精神满足。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": "数字IX代表接近完成、个人状态、积累结果。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "水元素的情感满足，个人情感状态达到丰盛，积累的结果带来幸福。"
+    },
+    "domain_mapping": {
+      "感情": "感情关系美满，愿望成真",
+      "工作": "工作获得丰厚回报，感到满足",
+      "项目": "项目成功完成，达到预期目标",
+      "学习": "学业有成，获得理想的成果",
+      "自我": "内心充实，达到情感的丰盛",
+      "财务": "财务自由，享受物质带来的满足"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "满足的愿望",
+        "meaning": "愿望成真，情感的圆满",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "九个杯子",
+        "meaning": "丰盛与满足",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.2,
+          "w": 0.6,
+          "h": 0.4
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_10",
+    "name_zh": "圣杯十",
+    "name_en": "Ten of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": 10,
+    "court_rank": null,
+    "image": "/cards/cups/cups_10.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "家庭幸福",
+          "和谐",
+          "情感圆满",
+          "归属",
+          "幸福结局"
+        ],
+        "meaning_zh": "家庭和谐幸福，情感达到圆满。拥有深厚的归属感和爱，这是情感旅程的完美结局。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "家庭不和",
+          "期望落空",
+          "关系破裂",
+          "缺乏归属"
+        ],
+        "meaning_zh": "家庭关系出现问题，期望落空。可能经历关系破裂或缺乏归属感，需要重建情感连接。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": "数字X代表完成、负担、周期结束、转入下一阶段。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "水元素的情感完成，一个情感周期圆满结束，达到家庭和谐的幸福状态。"
+    },
+    "domain_mapping": {
+      "感情": "感情关系圆满，可能结婚或组建家庭",
+      "工作": "工作环境和谐，获得归属感",
+      "项目": "项目圆满完成，团队关系融洽",
+      "学习": "学业完成，获得家人的支持和认可",
+      "自我": "情感上达到圆满，找到归属感",
+      "财务": "财务稳定，家庭生活幸福美满"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "幸福的家庭",
+        "meaning": "情感的圆满，家庭的和谐",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "彩虹与十个杯子",
+        "meaning": "祝福与完满，情感的升华",
+        "bbox": {
+          "x": 0.15,
+          "y": 0.05,
+          "w": 0.7,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_page",
+    "name_zh": "圣杯侍从",
+    "name_en": "Page of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": null,
+    "court_rank": "page",
+    "image": "/cards/cups/cups_page.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "直觉",
+          "创意",
+          "情感",
+          "新消息",
+          "敏感"
+        ],
+        "meaning_zh": "直觉敏锐，充满创意和情感。可能收到情感上的好消息，适合倾听内心的声音，表达真实的感受。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "情感不成熟",
+          "幻想",
+          "缺乏方向",
+          "敏感过度"
+        ],
+        "meaning_zh": "容易被幻想迷惑，情感不够成熟。需要面对现实，找到情感表达的方向。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": null,
+      "court_rule_zh": "Page代表初学者、信使、观察、学习、试探。",
+      "combined_rule_zh": "水元素的初学者，以敏感和直觉探索情感世界，充满创意但需要成长。"
+    },
+    "domain_mapping": {
+      "感情": "收到情感上的消息或表白",
+      "工作": "新工作带来情感上的满足",
+      "项目": "项目充满创意和情感价值",
+      "学习": "学习新的艺术或情感表达方式",
+      "自我": "开始探索内心世界，发展直觉",
+      "财务": "新的理财方式带来情感满足"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "凝视圣杯的青年",
+        "meaning": "情感的探索，直觉的觉醒",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的圣杯",
+        "meaning": "情感的礼物，爱的讯息",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_knight",
+    "name_zh": "圣杯骑士",
+    "name_en": "Knight of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": null,
+    "court_rank": "knight",
+    "image": "/cards/cups/cups_knight.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "浪漫",
+          "追求",
+          "理想主义",
+          "魅力",
+          "情感冒险"
+        ],
+        "meaning_zh": "充满浪漫气息，勇于追求爱情和理想。具有魅力和艺术气质，但可能过于理想主义。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "情绪化",
+          "不切实际",
+          "失望",
+          "逃避现实"
+        ],
+        "meaning_zh": "情绪波动大，不切实际的期望导致失望。可能逃避现实，需要学会面对真实的情感。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": null,
+      "court_rule_zh": "Knight代表行动者、追求者、推进、追逐、冲刺。",
+      "combined_rule_zh": "水元素的追求者，以浪漫和理想主义追求情感目标，充满魅力但需要现实感。"
+    },
+    "domain_mapping": {
+      "感情": "浪漫的追求者出现，或主动追求爱情",
+      "工作": "追求有艺术价值或情感意义的工作",
+      "项目": "项目充满浪漫色彩和创意",
+      "学习": "学习艺术或情感相关的知识",
+      "自我": "追求理想化的自我形象",
+      "财务": "投资于有情感价值的项目"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "骑白马的骑士",
+        "meaning": "浪漫的追求，理想的化身",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.1,
+          "w": 0.5,
+          "h": 0.6
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的圣杯",
+        "meaning": "情感的献礼",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.15,
+          "w": 0.2,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_queen",
+    "name_zh": "圣杯王后",
+    "name_en": "Queen of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": null,
+    "court_rank": "queen",
+    "image": "/cards/cups/cups_queen.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "直觉",
+          "同理心",
+          "温柔",
+          "疗愈",
+          "情感智慧"
+        ],
+        "meaning_zh": "直觉敏锐，充满同理心和温柔。能够疗愈他人，具有深刻的情感智慧，是情感上的支持者。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "情绪化",
+          "依赖",
+          "自我牺牲",
+          "缺乏边界"
+        ],
+        "meaning_zh": "情绪波动大，过度依赖他人或自我牺牲。需要建立情感边界，学会关爱自己。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": null,
+      "court_rule_zh": "Queen代表内在掌握、滋养、感受、照料、吸收。",
+      "combined_rule_zh": "水元素的内在掌握，将情感和直觉转化为疗愈他人的能力。"
+    },
+    "domain_mapping": {
+      "感情": "在关系中给予情感支持，成为疗愈者",
+      "工作": "在工作中展现同理心，帮助他人",
+      "项目": "项目具有疗愈和情感价值",
+      "学习": "学习心理学或疗愈相关的知识",
+      "自我": "发展内在的直觉和情感智慧",
+      "财务": "理性管理财务，给予家人支持"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "温柔的女王",
+        "meaning": "同理心与直觉，情感的智慧",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的圣杯",
+        "meaning": "情感的滋养",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.2,
+          "w": 0.2,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "cups_king",
+    "name_zh": "圣杯国王",
+    "name_en": "King of Cups",
+    "arcana": "minor",
+    "suit": "cups",
+    "number": null,
+    "court_rank": "king",
+    "image": "/cards/cups/cups_king.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "情感成熟",
+          "智慧",
+          "平衡",
+          "外交",
+          "掌控"
+        ],
+        "meaning_zh": "情感上成熟稳重，能够平衡理智与情感。具有外交智慧，能够在复杂的情感局势中保持冷静和掌控。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "情绪失控",
+          "操控",
+          "冷漠",
+          "情感压抑"
+        ],
+        "meaning_zh": "情绪失控或过度压抑，可能利用情感操控他人。需要找回情感的平衡，学会健康地表达感受。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "圣杯对应水元素，代表情感、关系、直觉、内在感受、疗愈、亲密。",
+      "number_rule_zh": null,
+      "court_rule_zh": "King代表外在掌握、管理、决策、管理、定规则。",
+      "combined_rule_zh": "水元素的外在掌握，将情感和直觉转化为管理能力和决策智慧。"
+    },
+    "domain_mapping": {
+      "感情": "在关系中扮演成熟稳重的角色，给予安全感",
+      "工作": "以情感智慧处理工作关系，成为优秀的领导者",
+      "项目": "以平衡和智慧指导项目方向",
+      "学习": "成为情感或心理学领域的专家",
+      "自我": "达到情感的成熟和平衡",
+      "财务": "理性与感性结合，做出明智的财务决策"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "智慧的国王",
+        "meaning": "情感的成熟，直觉的权威",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.1,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的圣杯",
+        "meaning": "情感的掌控",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.15,
+          "w": 0.2,
+          "h": 0.3
+        }
+      }
+    ]
+  }
+]

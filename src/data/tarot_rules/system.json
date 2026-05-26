@@ -1,0 +1,37 @@
+{
+  "system": "Rider-Waite-Smith",
+  "version": "1.0.0",
+  "deck_size": 78,
+  "major_arcana_count": 22,
+  "minor_arcana_count": 56,
+  "suits_count": 4,
+  "suit_size": 14,
+  "court_cards_per_suit": 4,
+  "number_cards_per_suit": 10,
+  "language": "zh-CN",
+  "principles": [
+    "遵循 Rider-Waite-Smith 传统牌义",
+    "不自创牌义替代传统规则",
+    "不做确定性预测",
+    "不替用户做重大决定",
+    "所有用户可见文字必须为中文",
+    "逆位不简单等同于坏",
+    "多牌阵必须分析牌间关系",
+    "关系牌阵不替对方内心下确定判断"
+  ],
+  "card_id_format": {
+    "major": "major_{number}_{slug}",
+    "minor": "{suit}_{number}",
+    "court": "{suit}_{rank}",
+    "examples": [
+      "major_00_fool",
+      "major_21_world",
+      "wands_01",
+      "wands_10",
+      "wands_page",
+      "wands_knight",
+      "wands_queen",
+      "wands_king"
+    ]
+  }
+}

@@ -1,0 +1,1021 @@
+[
+  {
+    "id": "swords_ace",
+    "name_zh": "宝剑Ace",
+    "name_en": "Ace of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": 1,
+    "court_rank": null,
+    "image": "/cards/swords/swords_ace.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "突破",
+          "清晰",
+          "真相",
+          "胜利"
+        ],
+        "meaning_zh": "一把剑从云中伸出，象征思维的突破和真相的揭示。新的认知和洞察力正在降临，带来清晰的判断和理性的力量。这是思想的种子，预示着新的理解即将到来。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "混乱",
+          "误判",
+          "偏见",
+          "思维受阻"
+        ],
+        "meaning_zh": "真相被遮蔽，思维陷入混乱。你可能在错误的方向上寻求答案，或者被偏见蒙蔽了双眼。需要停下来清理思绪，避免在冲动中做出判断。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": "数字I代表种子、开始、机会、原初能量。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "风元素的原初能量——思想的诞生，真相的第一道光芒，理性的觉醒。"
+    },
+    "domain_mapping": {
+      "感情": "新的认知或真相浮现，关系进入新阶段",
+      "工作": "突破性想法出现，思维清晰带来决策优势",
+      "项目": "项目迎来关键转折点，新方案浮现",
+      "学习": "领悟力增强，对复杂概念突然理解",
+      "自我": "思维突破旧有模式，获得新的自我认知",
+      "财务": "理性分析带来新的财务策略"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "从云中伸出的手",
+        "meaning": "理性的力量，思维的觉醒",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.05,
+          "w": 0.3,
+          "h": 0.15
+        }
+      },
+      {
+        "id": "m2",
+        "label": "宝剑",
+        "meaning": "真理与正义，思维的锐利",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.15,
+          "w": 0.2,
+          "h": 0.4
+        }
+      },
+      {
+        "id": "m3",
+        "label": "王冠与橄榄枝",
+        "meaning": "胜利与和平，思维的成果",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.1,
+          "w": 0.4,
+          "h": 0.15
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_two",
+    "name_zh": "宝剑二",
+    "name_en": "Two of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": 2,
+    "court_rank": null,
+    "image": "/cards/swords/swords_two.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "僵局",
+          "选择",
+          "权衡",
+          "回避"
+        ],
+        "meaning_zh": "蒙眼女子手持双剑交叉于胸前，象征着面对选择时的内心挣扎。你可能在两个选项之间难以抉择，或者有意回避某个需要面对的真相。平衡是暂时的，选择终将做出。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "决定",
+          "突破",
+          "失衡",
+          "被迫选择"
+        ],
+        "meaning_zh": "僵局被打破，可能是主动做出决定，也可能是外部力量迫使你不得不选。蒙眼布脱落意味着不得不面对之前回避的现实。注意做出决定时是否足够理性。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": "数字II代表选择、平衡、关系、二元张力。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "风元素的二元张力——理性与情感的拉扯，两个同样重要的选择之间的对峙。"
+    },
+    "domain_mapping": {
+      "感情": "关系中存在未解决的矛盾，双方各执己见",
+      "工作": "两个职业选项难以抉择，或与同事意见僵持",
+      "项目": "项目方向存在分歧，需要权衡利弊",
+      "学习": "两种学习方法各有优劣，难以取舍",
+      "自我": "内心矛盾，理智与情感的冲突",
+      "财务": "两个投资方向各有风险，需要审慎权衡"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "蒙眼的女性",
+        "meaning": "内心的平衡，不做判断",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.15,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "交叉的双剑",
+        "meaning": "对立与平衡，二元性",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.25,
+          "w": 0.4,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_three",
+    "name_zh": "宝剑三",
+    "name_en": "Three of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": 3,
+    "court_rank": null,
+    "image": "/cards/swords/swords_three.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "心碎",
+          "悲伤",
+          "背叛",
+          "痛苦"
+        ],
+        "meaning_zh": "三把剑刺穿一颗心脏，乌云中落下大雨。这是最直接的伤痛牌——分离、背叛、失去带来的深刻痛苦。真相往往是残酷的，但直面痛苦是疗愈的第一步。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "恢复",
+          "释放",
+          "压抑",
+          "自我疗愈"
+        ],
+        "meaning_zh": "伤痛开始愈合，你正在学习释放痛苦。但也可能是压抑悲伤、逃避面对。逆位提醒你不要把痛苦锁在心里，允许自己经历完整的悲伤过程才能真正走出。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": "数字III代表成长、表达、初步成果、互动。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "风元素的互动与表达——言语的伤害，真相的刺痛，人际冲突带来的初步成果往往是痛的领悟。"
+    },
+    "domain_mapping": {
+      "感情": "关系中遭遇背叛或心碎，面临分离之痛",
+      "工作": "职场中遭遇不公平对待或信任破裂",
+      "项目": "项目经历重大挫折，团队信任受损",
+      "学习": "学习中遭遇打击，自信心受挫",
+      "自我": "内心深处的创伤需要面对和疗愈",
+      "财务": "因轻信他人导致财务损失"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "心碎的女性",
+        "meaning": "悲伤与背叛，情感的创伤",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "三把宝剑",
+        "meaning": "痛苦的根源，思维的伤害",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_four",
+    "name_zh": "宝剑四",
+    "name_en": "Four of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": 4,
+    "court_rank": null,
+    "image": "/cards/swords/swords_four.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "休息",
+          "恢复",
+          "独处",
+          "暂停"
+        ],
+        "meaning_zh": "骑士躺在石棺上冥想，三把剑挂在墙上，一把垫在身下。这是主动选择暂停的时刻——在激烈的争斗之后，你需要暂时退出，让身心得到恢复。休息是为了走更远的路。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "焦躁",
+          "不安",
+          "过度消耗",
+          "拒绝休息"
+        ],
+        "meaning_zh": "你拒绝休息，或者休息后仍然无法平静。焦虑驱使你不断行动，即使身体已经发出警告。逆位提醒你，逃避休息并不能解决问题，反而会让疲惫累积到崩溃边缘。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": "数字IV代表稳定、结构、停滞、边界。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "风元素的稳定与边界——思想的暂停，理性的休止，为思维划定休息的边界。"
+    },
+    "domain_mapping": {
+      "感情": "关系进入冷静期，需要空间和距离",
+      "工作": "工作节奏放缓，适合休整和反思",
+      "项目": "项目暂停，等待时机或资源到位",
+      "学习": "学习倦怠期，需要休息调整状态",
+      "自我": "精神疲惫，需要独处和冥想恢复",
+      "财务": "财务状况稳定但停滞，不宜冒进"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "冥想的人物",
+        "meaning": "休息与恢复，内在的平静",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "四把宝剑",
+        "meaning": "暂时的停顿，思维的休憩",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.35,
+          "w": 0.6,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_five",
+    "name_zh": "宝剑五",
+    "name_en": "Five of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": 5,
+    "court_rank": null,
+    "image": "/cards/swords/swords_five.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "冲突",
+          "胜负",
+          "背叛",
+          "自私"
+        ],
+        "meaning_zh": "一人捡起地上的剑，另外两人垂头丧气地离去。这是一场有人赢有人输的冲突——胜利者可能使用了不光彩的手段。争夺中没有真正的赢家，胜利的代价可能是关系的破裂。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "和解",
+          "放下",
+          "自责",
+          "认输"
+        ],
+        "meaning_zh": "冲突结束，但可能是以认输或逃避的方式。你可能在反思自己的行为，或者决定放下争执。逆位也可能意味着你虽然获胜却心怀愧疚，需要面对胜利带来的道德困境。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": "数字V代表冲突、变化、损失、扰动。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "风元素的冲突与扰动——思想的交锋，言语的争夺，胜负分明的冲突局面。"
+    },
+    "domain_mapping": {
+      "感情": "关系中出现争执，可能有人以不光彩方式获胜",
+      "工作": "职场竞争激烈，存在恶性竞争或权力斗争",
+      "项目": "项目团队内部出现分歧和冲突",
+      "学习": "学习竞争中感到挫败，或与同学产生矛盾",
+      "自我": "内心两个声音在争论，需要整合",
+      "财务": "财务争夺或利益冲突，需谨慎处理"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "胜利者与失败者",
+        "meaning": "竞争的结果，胜负的代价",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.2,
+          "w": 0.6,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "散落的宝剑",
+        "meaning": "冲突后的残局",
+        "bbox": {
+          "x": 0.15,
+          "y": 0.5,
+          "w": 0.7,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_six",
+    "name_zh": "宝剑六",
+    "name_en": "Six of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": 6,
+    "court_rank": null,
+    "image": "/cards/swords/swords_six.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "过渡",
+          "离开",
+          "疗愈",
+          "前进"
+        ],
+        "meaning_zh": "母亲和孩子乘船离开平静的水面，驶向对岸。六把剑竖在船上，象征带走的包袱。这是从困境中抽身、向更好状态过渡的时刻。虽然带着过去的重担，但方向是向前的。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "停滞",
+          "无法前进",
+          "逃避",
+          "旧伤复发"
+        ],
+        "meaning_zh": "过渡期延长，你可能被困在旧有模式中无法前进。也可能是你试图逃避问题但问题如影随形。逆位提醒你，离开困境需要面对而非逃避，否则旧伤会反复发作。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": "数字VI代表调整、恢复、流动、重新平衡。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "风元素的流动与恢复——思维的转变，理性的过渡，带着经验向新的平衡移动。"
+    },
+    "domain_mapping": {
+      "感情": "关系中的过渡期，从动荡走向平静",
+      "工作": "离开旧环境，向新的职业方向过渡",
+      "项目": "项目阶段性完成，准备进入下一阶段",
+      "学习": "从困难的学习阶段逐渐过渡到理解",
+      "自我": "心理上的疗愈过程，从创伤中恢复",
+      "财务": "财务状况正在改善，从困境中脱身"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "乘船远行",
+        "meaning": "过渡与转变，离开困境",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "六把宝剑",
+        "meaning": "携带的智慧，过去的教训",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.2,
+          "w": 0.4,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_seven",
+    "name_zh": "宝剑七",
+    "name_en": "Seven of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": 7,
+    "court_rank": null,
+    "image": "/cards/swords/swords_seven.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "策略",
+          "欺骗",
+          "机智",
+          "隐秘"
+        ],
+        "meaning_zh": "一人偷走五把剑，留下两把。这代表使用策略而非蛮力——可能是巧妙的计划，也可能涉及欺骗或隐瞒。在某些情境下是机智的自保，在另一些情境下是不诚实的行为。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "暴露",
+          "坦白",
+          "失败",
+          "自欺欺人"
+        ],
+        "meaning_zh": "欺骗被揭穿，或者你决定坦白。逆位也可能意味着你一直欺骗自己的策略失败了。面对真相虽然痛苦，但坦诚能让你从谎言的网中解脱出来。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": "数字VII代表挑战、策略、试炼、防守。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "风元素的策略与试炼——思维的博弈，理性的算计，在挑战面前选择迂回而非正面冲突。"
+    },
+    "domain_mapping": {
+      "感情": "关系中存在隐瞒或不诚实，需要坦诚沟通",
+      "工作": "职场中需要策略性思维，但注意底线",
+      "项目": "项目进展需要巧妙的策略规划",
+      "学习": "学习方法上可能在走捷径，需要反思",
+      "自我": "反思是否在自我欺骗或逃避",
+      "财务": "理财策略需要灵活，但避免投机取巧"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "偷窃者",
+        "meaning": "策略与机智，非常规手段",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "五把被偷的剑",
+        "meaning": "已获取的优势",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.4,
+          "w": 0.6,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_eight",
+    "name_zh": "宝剑八",
+    "name_en": "Eight of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": 8,
+    "court_rank": null,
+    "image": "/cards/swords/swords_eight.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "束缚",
+          "限制",
+          "无力感",
+          "自我困住"
+        ],
+        "meaning_zh": "蒙眼女子被八把剑围住，绑在泥沼中。但绳索是松的，蒙眼布也可以取下——这些限制很大程度上是自我施加的。你被自己的恐惧和思维困住了，其实你有能力挣脱。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "解脱",
+          "突破",
+          "觉醒",
+          "自我解放"
+        ],
+        "meaning_zh": "束缚正在松动，你开始意识到限制是自己制造的。逆位是解脱的信号——要么是外力帮助你挣脱，要么是你主动打破了思维的牢笼。关键是认识到你一直有选择。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": "数字VIII代表行动、重复、推进、力量积累。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "风元素的力量积累与行动——思维的重复循环形成牢笼，理性的积累既可以困住你也可以解放你。"
+    },
+    "domain_mapping": {
+      "感情": "感觉在关系中被困住，但其实是自我设限",
+      "工作": "工作环境感到受限，缺乏发展空间",
+      "项目": "项目进展受阻，但阻碍可能来自内部",
+      "学习": "学习中遇到瓶颈，感觉无法突破",
+      "自我": "自我怀疑和恐惧限制了潜能发挥",
+      "财务": "财务困境中感到无力，但资源可能比想象的多"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "被束缚的人物",
+        "meaning": "限制与困境，思维的牢笼",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "八把宝剑",
+        "meaning": "自我设限，恐惧的束缚",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.4
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_nine",
+    "name_zh": "宝剑九",
+    "name_en": "Nine of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": 9,
+    "court_rank": null,
+    "image": "/cards/swords/swords_nine.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "焦虑",
+          "噩梦",
+          "失眠",
+          "恐惧"
+        ],
+        "meaning_zh": "深夜中一人坐在床上掩面而泣，九把剑挂在墙上。这是焦虑的极致——失眠、噩梦、对未来的恐惧。你的担忧可能被放大了，但痛苦的感觉是真实的。需要区分想象中的威胁和真实的威胁。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "释放",
+          "好转",
+          "面对",
+          "走出阴影"
+        ],
+        "meaning_zh": "焦虑开始缓解，你正在走出最黑暗的时刻。逆位意味着最坏的已经过去，或者你决定正面面对恐惧而非被它控制。释放内心的恐惧是康复的第一步。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": "数字IX代表接近完成、个人状态、积累结果。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "风元素的积累结果——焦虑和恐惧的累积达到顶峰，个人状态陷入思维的困局。"
+    },
+    "domain_mapping": {
+      "感情": "对关系过度担忧，陷入负面思维循环",
+      "工作": "工作压力导致严重焦虑，影响睡眠和健康",
+      "项目": "对项目结果过度担忧，压力倍增",
+      "学习": "考试焦虑或学业压力导致精神紧张",
+      "自我": "自我怀疑达到顶峰，需要寻求支持",
+      "财务": "对财务状况的焦虑影响生活质量"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "噩梦中的人",
+        "meaning": "焦虑与恐惧，思维的折磨",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "九把宝剑",
+        "meaning": "夜间的困扰，思维的负担",
+        "bbox": {
+          "x": 0.15,
+          "y": 0.15,
+          "w": 0.7,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_ten",
+    "name_zh": "宝剑十",
+    "name_en": "Ten of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": 10,
+    "court_rank": null,
+    "image": "/cards/swords/swords_ten.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "终结",
+          "痛苦",
+          "背叛",
+          "触底"
+        ],
+        "meaning_zh": "一人俯卧在地，十把剑刺穿背部，但远方天空已泛白。这是最深的痛苦——背叛、失败、绝望。然而黎明就在眼前，事情不可能更糟了。这是结束，也是新循环的起点。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "重生",
+          "恢复",
+          "拒绝结束",
+          "缓慢疗愈"
+        ],
+        "meaning_zh": "你拒绝接受结束，或者正在缓慢地从最深的创伤中恢复。逆位可能是旧事重提的痛苦，也是否极泰来的转机。承认结束才能开始新的旅程。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": "数字X代表完成、负担、周期结束、转入下一阶段。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "风元素的完成与终结——思维模式走到极限，旧的认知体系崩塌，为新循环腾出空间。"
+    },
+    "domain_mapping": {
+      "感情": "关系彻底破裂，但触底意味着反弹的开始",
+      "工作": "工作或职业生涯经历重大挫折或终结",
+      "项目": "项目彻底失败或被迫终止",
+      "学习": "学业上遭遇重大失败，需要重新开始",
+      "自我": "旧有认知体系崩塌，为新的自我重生铺路",
+      "财务": "财务状况跌入谷底，但黎明在即"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "倒地的人物",
+        "meaning": "终结与重生，思维的转变",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.3,
+          "w": 0.4,
+          "h": 0.4
+        }
+      },
+      {
+        "id": "m2",
+        "label": "十把宝剑",
+        "meaning": "彻底的结束，新的开始",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.4
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_page",
+    "name_zh": "宝剑侍从",
+    "name_en": "Page of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": null,
+    "court_rank": "page",
+    "image": "/cards/swords/swords_page.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "好奇",
+          "警觉",
+          "学习",
+          "探索"
+        ],
+        "meaning_zh": "年轻侍从高举宝剑，眺望远方。他代表对知识的渴求和对真相的警觉。这是一个学习和探索的阶段，你对新想法充满好奇，准备好用理性去探索未知。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "八卦",
+          "冲动",
+          "缺乏方向",
+          "冷酷"
+        ],
+        "meaning_zh": "好奇心变成八卦和闲言碎语，或者思想尚未成熟就急于表达。逆位也可能表示冷漠和缺乏同理心，用言语伤害他人而不自知。需要培养真正的智慧而非小聪明。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": null,
+      "court_rule_zh": "侍从代表初学者、信使、观察、学习、试探。",
+      "combined_rule_zh": "风元素的初学者——思维的萌芽，对知识的初步探索，理性思维的种子。"
+    },
+    "domain_mapping": {
+      "感情": "对感情关系充满好奇，正在学习如何沟通",
+      "工作": "职场新人，学习专业技能和职场规则",
+      "项目": "项目初期的信息收集和研究阶段",
+      "学习": "学习热情高涨，对新知识充满探索欲",
+      "自我": "思维能力正在发展，形成自己的观点",
+      "财务": "开始学习理财知识，探索财务规划"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "专注的青年",
+        "meaning": "思维的探索，好奇心",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的宝剑",
+        "meaning": "真理的追求",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.2,
+          "w": 0.2,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_knight",
+    "name_zh": "宝剑骑士",
+    "name_en": "Knight of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": null,
+    "court_rank": "knight",
+    "image": "/cards/swords/swords_knight.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "行动",
+          "果断",
+          "冲刺",
+          "挑战"
+        ],
+        "meaning_zh": "骑士骑马冲锋，宝剑高举直指前方。他是风元素的行动者——思维敏捷、行动果断、勇往直前。但冲锋的骑士可能忽视周围的危险，过于冲动。速度和勇气需要方向的指引。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "鲁莽",
+          "攻击性",
+          "方向错误",
+          "焦躁"
+        ],
+        "meaning_zh": "骑士的冲劲变成鲁莽和攻击性。你可能在没有充分思考的情况下贸然行动，或者用言语和思想伤害他人。逆位提醒你，速度不等于效率，勇气不等于智慧。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": null,
+      "court_rule_zh": "骑士代表行动者、追求者、推进、追逐、冲刺。",
+      "combined_rule_zh": "风元素的行动者——思维转化为行动，理性驱动冲锋，但也可能过于急躁而失去方向。"
+    },
+    "domain_mapping": {
+      "感情": "主动追求感情，但可能过于急躁吓到对方",
+      "工作": "职场中雷厉风行，快速推进项目",
+      "项目": "项目进入快速推进期，但需注意风险",
+      "学习": "学习效率高但可能急于求成",
+      "自我": "思维活跃，行动力强，但需平衡",
+      "财务": "财务决策果断，但可能冲动投资"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "冲锋的骑士",
+        "meaning": "果断与行动，思维的力量",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.1,
+          "w": 0.5,
+          "h": 0.6
+        }
+      },
+      {
+        "id": "m2",
+        "label": "高举的宝剑",
+        "meaning": "真理的捍卫",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.1,
+          "w": 0.2,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_queen",
+    "name_zh": "宝剑王后",
+    "name_en": "Queen of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": null,
+    "court_rank": "queen",
+    "image": "/cards/swords/swords_queen.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "智慧",
+          "独立",
+          "清晰",
+          "直言"
+        ],
+        "meaning_zh": "王后端坐宝座，手持宝剑指向天空。她是风元素的内在掌握者——思维清晰、判断准确、独立自主。她看穿虚伪，直言不讳，用理性而非情感做判断。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "冷酷",
+          "刻薄",
+          "孤立",
+          "操控"
+        ],
+        "meaning_zh": "王后的清晰变成冷酷，直言变成刻薄。你可能用理性作为伤害他人的武器，或者过度孤立自己。逆位提醒你，智慧需要温度，理性不应以牺牲同理心为代价。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": null,
+      "court_rule_zh": "王后代表内在掌握、滋养、感受、照料、吸收。",
+      "combined_rule_zh": "风元素的内在掌握者——将理性内化为智慧，用清晰的思维滋养自己和他人。"
+    },
+    "domain_mapping": {
+      "感情": "在感情中保持理性和独立，不轻易被情绪左右",
+      "工作": "以清晰的思维和专业能力赢得尊重",
+      "项目": "用理性和智慧引导项目方向",
+      "学习": "深度思考者，善于分析和整合知识",
+      "自我": "拥有独立思考的能力，不随波逐流",
+      "财务": "理性管理财务，不受情绪影响决策"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "冷静的女王",
+        "meaning": "智慧与清晰，思维的权威",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的宝剑",
+        "meaning": "判断力的体现",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.2,
+          "w": 0.2,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "swords_king",
+    "name_zh": "宝剑国王",
+    "name_en": "King of Swords",
+    "arcana": "minor",
+    "suit": "swords",
+    "number": null,
+    "court_rank": "king",
+    "image": "/cards/swords/swords_king.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "权威",
+          "公正",
+          "决断",
+          "领导"
+        ],
+        "meaning_zh": "国王端坐宝座，手持宝剑笔直向上。他是风元素的外在掌握者——拥有绝对的权威和公正的判断力。他用理性制定规则，用智慧做出决策，是思维领域的最高掌权者。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "专制",
+          "操控",
+          "滥用权力",
+          "冷血"
+        ],
+        "meaning_zh": "国王的权威变成专制，公正变成操控。你可能滥用权力，用理性和规则压制他人。逆位提醒你，真正的权威来自公正而非强权，智慧应当服务于更大的利益。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "宝剑对应风元素，代表理性、冲突、判断、语言、真相、焦虑。",
+      "number_rule_zh": null,
+      "court_rule_zh": "国王代表外在掌握、管理、决策、管理、定规则。",
+      "combined_rule_zh": "风元素的外在掌握者——将理性思维外化为规则和决策，用权威和智慧管理他人。"
+    },
+    "domain_mapping": {
+      "感情": "在关系中扮演决策者角色，理性管理感情",
+      "工作": "以权威和专业能力领导团队",
+      "项目": "项目由经验丰富的人掌控方向",
+      "学习": "学术权威，善于传授知识和制定标准",
+      "自我": "拥有成熟的思维体系和决策能力",
+      "财务": "财务管理权威，善于制定和执行财务规划"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "威严的国王",
+        "meaning": "思维的权威，理性的力量",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.1,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "高举的宝剑",
+        "meaning": "真理与正义",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.1,
+          "w": 0.2,
+          "h": 0.35
+        }
+      }
+    ]
+  }
+]

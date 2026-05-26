@@ -1,0 +1,2829 @@
+[
+  {
+    "id": "the_fool",
+    "name": "The Fool",
+    "zh_name": "愚者",
+    "arcana": "major",
+    "number": 0,
+    "core_symbols": [
+      "新的开始",
+      "无畏前行",
+      "未知旅程",
+      "天真与信任",
+      "无限可能"
+    ],
+    "upright": {
+      "keywords": [
+        "新的开始",
+        "冒险精神",
+        "自由",
+        "天真",
+        "潜力"
+      ],
+      "meaning": "愚者正位代表一个全新的开始，带着赤子之心踏上未知旅程。前方充满无限可能，当下最重要的是放下顾虑，勇敢出发。"
+    },
+    "reversed": {
+      "keywords": [
+        "鲁莽",
+        "犹豫不决",
+        "缺乏方向",
+        "逃避现实",
+        "轻率"
+      ],
+      "meaning": "愚者逆位提示你可能在冲动行事，或者因为害怕未知而迟迟不敢迈出第一步。需要审视自己的决定是否过于草率。"
+    },
+    "domains": {
+      "love": "感情中可能面临一个新的开始，或者需要放下过去的包袱，用更开放的心态去接纳新的可能。",
+      "career": "职业上可能有一个新机会在等待，但需要你敢于跳出舒适区。逆位时提醒不要因冲动而贸然辞职或跳槽。",
+      "study": "学习上适合开启新领域，保持好奇心比追求完美更重要。不要因为害怕学不会而不敢开始。",
+      "project": "项目正处于起步阶段，重点不是做得多完美，而是先行动起来。逆位提醒不要在没有充分准备的情况下盲目推进。",
+      "money": "财务上可能有新的收入来源或投资机会，但需要谨慎评估风险，不要被乐观冲昏头脑。",
+      "self": "这是一段自我探索的旅程，你需要的不是完美计划，而是踏出第一步的勇气。"
+    },
+    "visual_motifs": [
+      "悬崖边缘的年轻人",
+      "小白狗在旁提醒",
+      "手中的白玫瑰",
+      "远处的太阳升起",
+      "肩上的行囊"
+    ],
+    "risk": [
+      "在没有充分准备的情况下贸然行动",
+      "过度乐观忽略了实际风险",
+      "因为害怕失败而永远不出发",
+      "在多个选项中反复摇摆消耗时间"
+    ],
+    "advice": [
+      "先迈出第一步，不需要等到万事俱备",
+      "保持开放心态，但也要注意脚下的路",
+      "相信直觉，但不要完全无视理性",
+      "把大目标拆解成可执行的小步骤",
+      "允许自己在过程中学习和调整"
+    ],
+    "motifs": [
+      {
+        "id": "fool_youth",
+        "label": "悬崖边缘的年轻人",
+        "meaning": "象征着新旅程的起点，对未知全然信任。",
+        "label_zh": "悬崖边的青年",
+        "meaning_zh": "象征新开始与踏向未知的勇气。",
+        "traditional_note_zh": "青年面朝东方，目光抬起望向远方而非脚下。Pamela Colman Smith 用这个姿态表达「naïve trust」——一种尚未被经验磨损的信任。他是数字 0：尚未成型的潜能。",
+        "bbox": { "x": 0.32, "y": 0.08, "w": 0.36, "h": 0.32 },
+        "anchor": { "x": 0.50, "y": 0.30 },
+        "note": { "side": "left", "order": 1 }
+      },
+      {
+        "id": "fool_bundle",
+        "label": "肩上的行囊",
+        "meaning": "过去的经历与记忆，轻装上阵的勇气。",
+        "label_zh": "肩上行囊",
+        "meaning_zh": "象征过往经验，轻装上阵仍保留所得。",
+        "traditional_note_zh": "杖上挂着一只小袋，传统解读认为里面装着前世记忆或灵魂经验。袋上有时绘有鹰头，暗示来自更高维度的礼物。轻装意味着不被过去拖住，但记忆仍随身。",
+        "bbox": { "x": 0.15, "y": 0.18, "w": 0.22, "h": 0.16 },
+        "anchor": { "x": 0.26, "y": 0.26 },
+        "note": { "side": "left", "order": 2 }
+      },
+      {
+        "id": "fool_dog",
+        "label": "小白狗",
+        "meaning": "本能与直觉，提醒与陪伴。",
+        "label_zh": "小白狗",
+        "meaning_zh": "象征本能提醒，在冒险中保持警觉。",
+        "traditional_note_zh": "白狗象征忠实本能与未驯化的直觉。他既是同伴，也是警报：欢快地跳跃，但同时提醒愚人脚下的边缘。RWS 中狗朝上、朝前，与青年保持同一节奏。",
+        "bbox": { "x": 0.18, "y": 0.62, "w": 0.22, "h": 0.16 },
+        "anchor": { "x": 0.28, "y": 0.70 },
+        "note": { "side": "left", "order": 3 }
+      },
+      {
+        "id": "fool_rose",
+        "label": "手中的白玫瑰",
+        "meaning": "纯洁与天真，对未知的信任。",
+        "label_zh": "白玫瑰",
+        "meaning_zh": "象征纯洁、天真与对未知的信任。",
+        "traditional_note_zh": "白色玫瑰对应炼金术里「未被欲望染色的灵魂」。与「魔术师」桌上的红玫瑰相对——红是经验，白是出发。花朵轻持，不是抓握，是携带。",
+        "bbox": { "x": 0.55, "y": 0.45, "w": 0.2, "h": 0.12 },
+        "anchor": { "x": 0.65, "y": 0.50 },
+        "note": { "side": "right", "order": 1 }
+      },
+      {
+        "id": "fool_sun",
+        "label": "远处的太阳",
+        "meaning": "希望与光明，旅程的方向。",
+        "label_zh": "升起的太阳",
+        "meaning_zh": "象征希望、方向与新的黎明。",
+        "traditional_note_zh": "背景中升起的金色太阳代表「全知之光」——上方的世界（divine）在祝福这趟旅行。它不是终点，而是起步时的允诺：你被看见，你被允许出发。",
+        "bbox": { "x": 0.7, "y": 0.05, "w": 0.2, "h": 0.15 },
+        "anchor": { "x": 0.78, "y": 0.12 },
+        "note": { "side": "right", "order": 2 }
+      },
+      {
+        "id": "fool_cliff",
+        "label": "脚下的悬崖",
+        "meaning": "未知的危险，冒险的代价。",
+        "label_zh": "悬崖边缘",
+        "meaning_zh": "象征未知风险，冒险需同时看见脚下。",
+        "traditional_note_zh": "悬崖代表理性看不见的断层。愚人即将踏出的那一步是物理意义上的危险，也是象征意义上的「signal of faith」——理性叫停，灵魂仍向前。",
+        "bbox": { "x": 0.3, "y": 0.85, "w": 0.4, "h": 0.12 },
+        "anchor": { "x": 0.50, "y": 0.90 },
+        "note": { "side": "right", "order": 3 }
+      }
+    ],
+    "image": "/cards/major/00_the_fool.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_00_Fool.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg",
+      "downloaded_at": "2026-05-23T12:27:21+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "557c6592b73107508eac65ef140d090d2ccd657ac5a2d5d4fe31c6c2ceacbcb5",
+      "size_bytes": 1177006
+    }
+  },
+  {
+    "id": "the_magician",
+    "name": "The Magician",
+    "zh_name": "魔术师",
+    "arcana": "major",
+    "number": 1,
+    "core_symbols": [
+      "创造力",
+      "意志力",
+      "资源整合",
+      "行动转化",
+      "掌控力"
+    ],
+    "upright": {
+      "keywords": [
+        "创造力",
+        "技能",
+        "意志力",
+        "资源整合",
+        "行动力"
+      ],
+      "meaning": "魔术师正位象征你拥有将想法变为现实的所有资源与能力。当下是行动的最佳时机，你的意志和技巧可以创造奇迹。"
+    },
+    "reversed": {
+      "keywords": [
+        "才能被浪费",
+        "缺乏方向",
+        "操控他人",
+        "能力不足",
+        "散乱"
+      ],
+      "meaning": "魔术师逆位可能表示你有能力却不知如何使用，或者把精力分散在太多方向上。也可能是有人在操控或欺骗你。"
+    },
+    "domains": {
+      "love": "感情中你拥有创造理想关系的资源，主动沟通和真诚表达是关键。逆位时警惕过度控制或被人操纵。",
+      "career": "职业上你的技能和资源已经齐备，现在是展现能力的时候。主动争取机会，不要等待被看见。",
+      "study": "学习上你具备掌握新知识的能力，关键在于专注和系统化的方法，而不是天赋。",
+      "project": "项目推进的时机已经成熟，你手中已有足够的工具和资源。核心是整合和执行，而不是继续准备。",
+      "money": "财务上有能力创造新的收入渠道，善用已有的技能和资源。逆位提醒不要被虚假的投资机会蒙骗。",
+      "self": "你已经具备达成目标的所有要素，关键是相信自己并付诸行动。力量在你手中，不在外界。"
+    },
+    "visual_motifs": [
+      "手持魔杖指向天地",
+      "桌上摆放四元素法器",
+      "头顶无限符号",
+      "腰间衔尾蛇腰带",
+      "花园中的红白玫瑰"
+    ],
+    "risk": [
+      "空有能力却不行动，停留在计划阶段",
+      "精力过度分散导致一事无成",
+      "过度自信忽略了必要的准备",
+      "被花言巧语或虚假承诺所迷惑"
+    ],
+    "advice": [
+      "盘点你已经拥有的资源和能力",
+      "选择一个最重要的目标集中发力",
+      "不要等所有条件完美才开始行动",
+      "相信自己的能力，但保持谦逊",
+      "用行动而非空想来证明自己"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "手持魔杖指向天地",
+        "meaning": "承载着「创造力」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "桌上摆放四元素法器",
+        "meaning": "承载着「意志力」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "头顶无限符号",
+        "meaning": "承载着「资源整合」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "腰间衔尾蛇腰带",
+        "meaning": "承载着「行动转化」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "花园中的红白玫瑰",
+        "meaning": "承载着「掌控力」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/01_the_magician.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magician.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg",
+      "downloaded_at": "2026-05-23T12:27:23+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "e0569e468545abfd2987ec0af5d3c51da3a9d478e37077aeaa1d715ddfc9941b",
+      "size_bytes": 800458
+    }
+  },
+  {
+    "id": "the_high_priestess",
+    "name": "The High Priestess",
+    "zh_name": "女祭司",
+    "arcana": "major",
+    "number": 2,
+    "core_symbols": [
+      "直觉",
+      "潜意识",
+      "内在智慧",
+      "被动等待",
+      "神秘知识"
+    ],
+    "upright": {
+      "keywords": [
+        "直觉",
+        "潜意识",
+        "内在智慧",
+        "耐心",
+        "神秘"
+      ],
+      "meaning": "女祭司正位鼓励你倾听内心的声音。有些答案不在外界，而藏在你的潜意识中。当下不适合冲动行动，而是向内探索。"
+    },
+    "reversed": {
+      "keywords": [
+        "直觉被压抑",
+        "秘密被泄露",
+        "情感封闭",
+        "忽视内在声音",
+        "表面化"
+      ],
+      "meaning": "女祭司逆位提示你可能正在忽视自己的直觉，或者过度理性而切断了与内在智慧的连接。有些重要的信息被隐藏了。"
+    },
+    "domains": {
+      "love": "感情上需要更多倾听和感受，而非急于分析和判断。有些情感流动需要时间自然浮现。",
+      "career": "职业上不是急着做决定的时机，多观察、多收集信息，答案会在静默中浮现。",
+      "study": "学习上除了逻辑思考，也要信任你的直觉理解力。有些知识需要沉淀才能内化。",
+      "project": "项目可能有一些隐藏信息还没有被发现。先做深入调研，不要急于下结论或推进。",
+      "money": "财务决策需要更多信息，不要只看表面数据。相信你的直觉，如果不确定就先按兵不动。",
+      "self": "你内心已经有了答案，只是还没有静下来去听。留出独处的时间，让自己听见内在的声音。"
+    },
+    "visual_motifs": [
+      "坐在两根柱子之间",
+      "手中拿着Tora书卷",
+      "脚下的一弯新月",
+      "蓝色长袍覆盖全身",
+      "石榴图案的帷幕"
+    ],
+    "risk": [
+      "过度被动导致错失时机",
+      "完全依赖直觉而忽视客观事实",
+      "陷入了过度沉思而不行动",
+      "被隐藏的信息或秘密所误导"
+    ],
+    "advice": [
+      "每天留出独处和反思的时间",
+      "在做重大决定前先睡一觉",
+      "注意你忽略的直觉信号",
+      "不要急着向外界寻求答案，先问自己",
+      "记录梦境和直觉闪现的想法"
+    ],
+    "motifs": [
+      {
+        "id": "veil",
+        "label": "石榴图案的帷幕",
+        "meaning": "象征着隐藏知识与内在门槛。",
+        "label_zh": "石榴帷幕",
+        "meaning_zh": "象征隐藏知识、直觉与内在门槛。",
+        "traditional_note_zh": "她身后挂着一幅绣有石榴的帷幕。石榴源自希腊神话中珀耳塞福涅的故事——半在地上，半在冥府。它标记了一个门槛：女祭司守在「显意识」与「潜意识」之间，不让粗心的人轻易穿过。",
+        "bbox": { "x": 0.28, "y": 0.02, "w": 0.44, "h": 0.18 },
+        "anchor": { "x": 0.50, "y": 0.20 },
+        "note": { "side": "left", "order": 1 }
+      },
+      {
+        "id": "pillars",
+        "label": "黑白双柱",
+        "meaning": "象征着二元对立与超越。",
+        "label_zh": "黑白双柱",
+        "meaning_zh": "象征二元对立——直觉与理性之间的平衡。",
+        "traditional_note_zh": "左柱 B 为 Boaz（黑），右柱 J 为 Jachin（白），来自所罗门圣殿。一柱意味「严」，一柱意味「慈」。女祭司端坐于两柱之间，象征她不偏向任何一极——她是「中道」的化身。",
+        "bbox": { "x": 0.08, "y": 0.12, "w": 0.84, "h": 0.40 },
+        "anchor": { "x": 0.18, "y": 0.38 },
+        "note": { "side": "left", "order": 2 }
+      },
+      {
+        "id": "scroll",
+        "label": "手中的卷轴",
+        "meaning": "象征着隐秘知识与未展开的智慧。",
+        "label_zh": "手中的卷轴",
+        "meaning_zh": "象征隐秘知识，尚未展开的智慧。",
+        "traditional_note_zh": "卷轴上写着 TORA（妥拉）。它部分被长袍盖住——这是关键：智慧已经存在，但只露出一半。她不会主动讲解，等待你提问、等待你准备好。",
+        "bbox": { "x": 0.36, "y": 0.46, "w": 0.20, "h": 0.16 },
+        "anchor": { "x": 0.42, "y": 0.56 },
+        "note": { "side": "right", "order": 1 }
+      },
+      {
+        "id": "moon",
+        "label": "脚下的新月",
+        "meaning": "象征着潜意识与直觉周期。",
+        "label_zh": "脚下的新月",
+        "meaning_zh": "象征潜意识、直觉周期与阴性力量。",
+        "traditional_note_zh": "弯月放在她脚下，意味着她对潮汐、梦境与女性周期的支配。Waite 把月亮放在「下方」，提醒你：她不被月亮牵动，而是站在它之上。",
+        "bbox": { "x": 0.38, "y": 0.82, "w": 0.24, "h": 0.10 },
+        "anchor": { "x": 0.50, "y": 0.88 },
+        "note": { "side": "right", "order": 2 }
+      },
+      {
+        "id": "robe",
+        "label": "蓝色长袍",
+        "meaning": "象征着深度、宁静与神秘。",
+        "label_zh": "蓝色长袍",
+        "meaning_zh": "象征深度、宁静与神秘的水元素。",
+        "traditional_note_zh": "袍子蓝得近乎水波，下摆顺势化为脚边的水流——它不是衣物，是「她身上流动的潜意识」。在 RWS 中，水从她的下半身延伸到牌的下沿，意味她本身就是水的源头。",
+        "bbox": { "x": 0.22, "y": 0.54, "w": 0.56, "h": 0.28 },
+        "anchor": { "x": 0.62, "y": 0.66 },
+        "note": { "side": "right", "order": 3 }
+      }
+    ],
+    "image": "/cards/major/02_the_high_priestess.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_02_High_Priestess.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg",
+      "downloaded_at": "2026-05-23T12:27:26+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "0e87b5a22187a299334188c2e8fd178125151f9015c122f6946367489cfd252a",
+      "size_bytes": 884438
+    }
+  },
+  {
+    "id": "the_empress",
+    "name": "The Empress",
+    "zh_name": "皇后",
+    "arcana": "major",
+    "number": 3,
+    "core_symbols": [
+      "丰盛",
+      "滋养",
+      "创造力",
+      "母性",
+      "自然生长"
+    ],
+    "upright": {
+      "keywords": [
+        "丰盛",
+        "滋养",
+        "创造力",
+        "感官享受",
+        "成长"
+      ],
+      "meaning": "皇后正位象征丰盛与创造力正在你生命中绽放。这是一个适合滋养自己和他人的阶段，让事物自然生长，不要强求。"
+    },
+    "reversed": {
+      "keywords": [
+        "创造阻滞",
+        "匮乏感",
+        "忽视自我",
+        "过度依赖",
+        "荒废"
+      ],
+      "meaning": "皇后逆位可能表示你感到创造力的枯竭，或者过度关注他人而忽略了对自己的滋养。内在的丰盛感正在流失。"
+    },
+    "domains": {
+      "love": "感情中适合用温柔和关怀来滋养关系，给予彼此成长的空间。逆位时提醒不要过度付出而忽略自己的需求。",
+      "career": "职业上适合在现有基础上深耕和培养，而非急于扩张。创造性的工作会有好的产出。",
+      "study": "学习上适合慢下来深度吸收知识，像培育花园一样耐心培养理解力，而非速成。",
+      "project": "项目处于需要耐心浇灌的阶段，给它时间和资源去自然成长，不要拔苗助长。",
+      "money": "财务上有增长的趋势，适合稳健投资和长期规划。学会享受劳动成果，不要过度节俭。",
+      "self": "你需要好好照顾自己的身体和情绪。真正的丰盛不是拥有更多，而是感受到已经拥有的足够。"
+    },
+    "visual_motifs": [
+      "坐在丰饶的自然中",
+      "头戴皇冠与金星",
+      "手持权杖",
+      "身着华丽长袍",
+      "森林和麦田环绕"
+    ],
+    "risk": [
+      "过度追求完美而错失自然生长的机会",
+      "在应该深耕时却急于扩张",
+      "忽视自我照顾导致创造力枯竭",
+      "过度依赖他人的认可来获得价值感"
+    ],
+    "advice": [
+      "给自己一段不追求效率的时光",
+      "专注于当下正在成长的事物",
+      "像照顾花园一样照顾你的项目或关系",
+      "享受过程，不要只看结果",
+      "允许自己接受生活的丰盛"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "坐在丰饶的自然中",
+        "meaning": "承载着「丰盛」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "头戴皇冠与金星",
+        "meaning": "承载着「滋养」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "手持权杖",
+        "meaning": "承载着「创造力」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "身着华丽长袍",
+        "meaning": "承载着「母性」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "森林和麦田环绕",
+        "meaning": "承载着「自然生长」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/03_the_empress.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_03_Empress.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg",
+      "downloaded_at": "2026-05-23T12:27:28+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "2f0a9885c4f4e68bbca4cb40d3d5f42d4c7559f914bb5b3765ee429c74c142df",
+      "size_bytes": 949129
+    }
+  },
+  {
+    "id": "the_emperor",
+    "name": "The Emperor",
+    "zh_name": "皇帝",
+    "arcana": "major",
+    "number": 4,
+    "core_symbols": [
+      "权威",
+      "秩序",
+      "结构",
+      "掌控",
+      "规则"
+    ],
+    "upright": {
+      "keywords": [
+        "权威",
+        "结构",
+        "纪律",
+        "领导力",
+        "稳定"
+      ],
+      "meaning": "皇帝正位要求你以秩序和纪律来掌控局面。现在是建立规则、设立边界、承担责任的时候。需要一个清晰的架构来支撑你的目标。"
+    },
+    "reversed": {
+      "keywords": [
+        "专制",
+        "缺乏纪律",
+        "结构崩塌",
+        "滥用权力",
+        "僵化"
+      ],
+      "meaning": "皇帝逆位可能意味着结构过于僵化而失去灵活性，或者相反——缺乏必要的秩序和纪律。权力可能被滥用或正在流失。"
+    },
+    "domains": {
+      "love": "感情中需要建立健康的边界和规则，稳定的关系需要明确的承诺和责任感。",
+      "career": "职业上适合承担领导角色，用清晰的框架和目标来引导团队。建立系统化的工作方法。",
+      "study": "学习上需要建立纪律性的学习计划和结构化的知识体系，散乱的方法不会有好的效果。",
+      "project": "项目需要一个更清晰的管理结构和执行纪律。松散的管理方式是当前最大的隐患。",
+      "money": "财务上需要建立严格的预算和规划体系。稳定和纪律比追求高回报更重要。",
+      "self": "你需要为自己建立一套生活秩序。自律不是自我限制，而是给自己一个稳固的根基。"
+    },
+    "visual_motifs": [
+      "坐在石雕宝座上",
+      "身着盔甲和红袍",
+      "手持权杖和宝球",
+      "远处的山脉",
+      "公羊图案的装饰"
+    ],
+    "risk": [
+      "过度控制导致系统僵化、失去弹性",
+      "缺乏必要的纪律让一切陷入混乱",
+      "独断专行忽略他人的意见",
+      "把权威建立在恐惧而非尊重之上"
+    ],
+    "advice": [
+      "建立清晰的目标、流程和时间节点",
+      "承担起你应有的责任",
+      "在秩序和灵活之间找到平衡",
+      "让规则为你服务，而不是束缚你",
+      "以行动证明你的领导力，而非言语"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "坐在石雕宝座上",
+        "meaning": "承载着「权威」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "身着盔甲和红袍",
+        "meaning": "承载着「秩序」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "手持权杖和宝球",
+        "meaning": "承载着「结构」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "远处的山脉",
+        "meaning": "承载着「掌控」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "公羊图案的装饰",
+        "meaning": "承载着「规则」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/04_the_emperor.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_04_Emperor.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg",
+      "downloaded_at": "2026-05-23T12:27:31+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "7a800b57c5b7da7b493e6968da31325327134e98083e95ee75b3db6eaef7e868",
+      "size_bytes": 938373
+    }
+  },
+  {
+    "id": "the_hierophant",
+    "name": "The Hierophant",
+    "zh_name": "教皇",
+    "arcana": "major",
+    "number": 5,
+    "core_symbols": [
+      "传统",
+      "知识传承",
+      "精神导师",
+      "规范",
+      "信仰系统"
+    ],
+    "upright": {
+      "keywords": [
+        "传统",
+        "教育",
+        "精神指引",
+        "规范",
+        "仪式"
+      ],
+      "meaning": "教皇正位鼓励你从传统和已有的知识体系中寻找答案。现在适合寻求导师的指引，或者遵循已被验证的方法和流程。"
+    },
+    "reversed": {
+      "keywords": [
+        "打破传统",
+        "质疑权威",
+        "非正统方法",
+        "教条主义",
+        "缺乏指导"
+      ],
+      "meaning": "教皇逆位提示你可能需要跳出传统框架，用非正统的方式来解决问题。也可能你在抗拒必要的规范和指导。"
+    },
+    "domains": {
+      "love": "感情上可能需要考虑传统价值观的影响，或者在关系中找到共同的精神信念和仪式感。",
+      "career": "职业上适合寻求前辈或导师的指导，遵循行业规范会比标新立异更有效。",
+      "study": "学习上适合跟随成熟的课程体系，找到好的老师比自学更高效。打好基础很重要。",
+      "project": "项目不需要从零创造一切，借鉴已有的最佳实践和成熟方案更为明智。",
+      "money": "财务上遵循既定的理财原则和稳健策略，不要追求过于新颖的投资方式。",
+      "self": "你需要一个精神锚点——不一定来自宗教，但需要一套你相信的价值体系来指引你的决策。"
+    },
+    "visual_motifs": [
+      "身着长袍的教皇",
+      "手中的三重十字架",
+      "两位跪拜的学徒",
+      "金色与白色的仪式服饰",
+      "脚下的两把钥匙"
+    ],
+    "risk": [
+      "盲目遵循传统而失去独立思考",
+      "过度依赖他人指导而放弃自主权",
+      "把教条当成真理",
+      "因为抗拒权威而拒绝一切有益的建议"
+    ],
+    "advice": [
+      "找到值得信赖的导师或知识来源",
+      "在遵循规范的同时保留独立判断",
+      "加入一个能支持你成长的社群",
+      "先掌握规则，再决定是否打破它们",
+      "传承好的经验，但不要固步自封"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "身着长袍的教皇",
+        "meaning": "承载着「传统」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "手中的三重十字架",
+        "meaning": "承载着「知识传承」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "两位跪拜的学徒",
+        "meaning": "承载着「精神导师」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "金色与白色的仪式服饰",
+        "meaning": "承载着「规范」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "脚下的两把钥匙",
+        "meaning": "承载着「信仰系统」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/05_the_hierophant.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_05_Hierophant.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_Hierophant.jpg",
+      "downloaded_at": "2026-05-23T12:27:33+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "68faba7f016b2d76b2fc2200f834279a0b08b7228767ae744fcdc70f9402699d",
+      "size_bytes": 900561
+    }
+  },
+  {
+    "id": "the_lovers",
+    "name": "The Lovers",
+    "zh_name": "恋人",
+    "arcana": "major",
+    "number": 6,
+    "core_symbols": [
+      "选择",
+      "爱",
+      "价值观",
+      "和谐",
+      "关系"
+    ],
+    "upright": {
+      "keywords": [
+        "爱",
+        "和谐",
+        "价值观",
+        "重要选择",
+        "结合"
+      ],
+      "meaning": "恋人正位不仅关于爱情，更关于人生中的关键选择。你需要在两种路径中做出与内心价值一致的决定。选择本身比结果更重要。"
+    },
+    "reversed": {
+      "keywords": [
+        "价值冲突",
+        "分离",
+        "错误选择",
+        "不和谐",
+        "逃避决定"
+      ],
+      "meaning": "恋人逆位可能表示你正面临价值冲突，或者在做选择时背离了自己的真实想法。关系中的不和谐正在浮现。"
+    },
+    "domains": {
+      "love": "感情中面临深层选择——不仅是选谁，更是选择成为什么样的伴侣。真诚的沟通和价值观的契合是关键。",
+      "career": "职业上可能在两条路径之间抉择。选择一个与你的核心价值观一致的方向，不要只考虑短期利益。",
+      "study": "学习上面临专业或方向的选择，你需要问自己真正热爱什么，而非什么有前途。",
+      "project": "项目处于关键决策点，两个方向都有合理性，但你需要选择与你初心一致的那个。",
+      "money": "财务决策需要与你的价值观一致。追求短期利润可能会让你偏离真正重要的目标。",
+      "self": "这是一次关于'你想成为谁'的重要选择。每个决定都在定义你的身份和价值观。"
+    },
+    "visual_motifs": [
+      "亚当与夏娃",
+      "天使拉斐尔在上方",
+      "伊甸园中的智慧树",
+      "燃烧的火焰之路",
+      "远处的山脉"
+    ],
+    "risk": [
+      "为了维持和谐而回避必要的冲突和选择",
+      "被短期诱惑引导做出违背价值观的决定",
+      "过度分析选项导致决策瘫痪",
+      "在选择后不断怀疑和后悔"
+    ],
+    "advice": [
+      "列出每个选项与你核心价值观的匹配度",
+      "不要因为害怕选错而不做选择",
+      "选择之后全力投入，而非观望",
+      "倾听内心，不要只依赖理性计算",
+      "在重大决定前，和信任的人深入讨论"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "亚当与夏娃",
+        "meaning": "承载着「选择」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "天使拉斐尔在上方",
+        "meaning": "承载着「爱」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "伊甸园中的智慧树",
+        "meaning": "承载着「价值观」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "燃烧的火焰之路",
+        "meaning": "承载着「和谐」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "远处的山脉",
+        "meaning": "承载着「关系」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/06_the_lovers.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_06_Lovers.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_06_Lovers.jpg",
+      "downloaded_at": "2026-05-23T12:27:37+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "5a24e337a146568ebbbfa9783fa451d22c02bccd3cb7fe518afdb3ff396487fe",
+      "size_bytes": 995290
+    }
+  },
+  {
+    "id": "the_chariot",
+    "name": "The Chariot",
+    "zh_name": "战车",
+    "arcana": "major",
+    "number": 7,
+    "core_symbols": [
+      "意志力",
+      "胜利",
+      "掌控",
+      "前进",
+      "对立力量的统一"
+    ],
+    "upright": {
+      "keywords": [
+        "意志力",
+        "决心",
+        "胜利",
+        "掌控",
+        "前进"
+      ],
+      "meaning": "战车正位宣告你拥有足够的意志力去克服障碍，取得成功。但前提是你必须驾驭内在的矛盾力量，让它们朝同一方向前进。"
+    },
+    "reversed": {
+      "keywords": [
+        "失控",
+        "方向迷失",
+        "意志薄弱",
+        "被情绪驱使",
+        "攻击性"
+      ],
+      "meaning": "战车逆位表示你可能已经失去了对局面的掌控，或者被内在的矛盾力量撕扯。方向感模糊，前进的力量被分散了。"
+    },
+    "domains": {
+      "love": "感情中需要明确的决心和方向。如果你确定这是你想要的，就坚定地前进。不要被外部干扰动摇。",
+      "career": "职业上你已经具备成功的条件，关键是集中意志力、不被分心。保持专注和对目标的清晰认知。",
+      "study": "学习上需要强大的自律和专注力。排除干扰，像战车一样坚定不移地向目标推进。",
+      "project": "项目推进需要你驾驭好资源、时间和人力的平衡。不要让不同方向的力量相互抵消。",
+      "money": "财务上需要果断的决策和坚定的执行力。犹豫不决和反复变动会消耗你的资源和机会。",
+      "self": "你内心可能有多种声音在拉扯，但战车提醒你：胜利来自统合而非压制。驾驭你的内在力量。"
+    },
+    "visual_motifs": [
+      "驾驭战车的勇士",
+      "一黑一白两只斯芬克斯",
+      "头顶星空华盖",
+      "铠甲与盾牌",
+      "战车上的城市背景"
+    ],
+    "risk": [
+      "过度用力导致精疲力竭",
+      "忽视内在矛盾而强行推进",
+      "在应该调整方向时固执前行",
+      "把攻击性误解为意志力"
+    ],
+    "advice": [
+      "明确你的核心目标，其他一切暂时放下",
+      "统一内在矛盾——让理性和感性朝同一方向",
+      "保持前进的动力，但也要适时调整方向",
+      "控制你能控制的，接受你不能控制的",
+      "庆祝每一个小的胜利来维持动力"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "驾驭战车的勇士",
+        "meaning": "承载着「意志力」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "一黑一白两只斯芬克斯",
+        "meaning": "承载着「胜利」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "头顶星空华盖",
+        "meaning": "承载着「掌控」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "铠甲与盾牌",
+        "meaning": "承载着「前进」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "战车上的城市背景",
+        "meaning": "承载着「对立力量的统一」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/07_the_chariot.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_07_Chariot.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_Chariot.jpg",
+      "downloaded_at": "2026-05-23T12:27:39+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "3906e01a159d3b7f1696e9094080e0a4ae95b2f4d4ca8b084131aba6ad133dd8",
+      "size_bytes": 859575
+    }
+  },
+  {
+    "id": "strength",
+    "name": "Strength",
+    "zh_name": "力量",
+    "arcana": "major",
+    "number": 8,
+    "core_symbols": [
+      "内在力量",
+      "耐心",
+      "温柔征服",
+      "勇气",
+      "自我掌控"
+    ],
+    "upright": {
+      "keywords": [
+        "内在力量",
+        "勇气",
+        "耐心",
+        "温柔的力量",
+        "自我掌控"
+      ],
+      "meaning": "力量正位不是关于蛮力，而是关于温柔的坚持和内在的韧性。真正的力量来自于耐心、同理心和不动摇的自我信念。"
+    },
+    "reversed": {
+      "keywords": [
+        "自我怀疑",
+        "内在脆弱",
+        "失控",
+        "恐惧主导",
+        "力量流失"
+      ],
+      "meaning": "力量逆位可能表示你感到内在力量的流失，正在被恐惧和自我怀疑主导。或者你在用错误的方式使用力量——可能是过度控制或情绪爆发。"
+    },
+    "domains": {
+      "love": "感情中真正的力量是温柔和包容。不是征服对方，而是用耐心和理解来化解冲突。",
+      "career": "职业上的力量不在于大声或强势，而在于稳定的专业能力和情绪智慧。用实力而非声量证明自己。",
+      "study": "学习上需要的是持久的韧性，而非一时的爆发力。真正的进步来自每天一点点的不间断努力。",
+      "project": "项目面对困难时，需要的不是强力推进，而是耐心解构问题、逐个击破。用韧性和智慧而非蛮力。",
+      "money": "财务上的力量来自于长期的纪律和耐心，而非短期的高风险操作。稳健积累胜过冒险冲刺。",
+      "self": "你已经比你想象的更强大。这份力量不是要去战胜别人，而是去温柔地面对自己的恐惧和脆弱。"
+    },
+    "visual_motifs": [
+      "女性温柔地抚慰狮子",
+      "头顶的无限符号",
+      "狮子顺从的姿态",
+      "白色长袍",
+      "远处的蓝天与山脉"
+    ],
+    "risk": [
+      "把温柔误解为软弱而改用强硬手段",
+      "在压力下丧失内在平衡",
+      "长期压抑情绪导致突然爆发",
+      "因自我怀疑而放弃了本可以做到的事"
+    ],
+    "advice": [
+      "用耐心替代愤怒——温柔的坚持更持久",
+      "每天做一件需要勇气的小事来锻炼内在力量",
+      "接受自己的脆弱——真正的力量包括承认不完美",
+      "用同理心化解冲突，而非对抗",
+      "相信你已经足够强大，不需要向任何人证明"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "女性温柔地抚慰狮子",
+        "meaning": "承载着「内在力量」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "头顶的无限符号",
+        "meaning": "承载着「耐心」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "狮子顺从的姿态",
+        "meaning": "承载着「温柔征服」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "白色长袍",
+        "meaning": "承载着「勇气」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "远处的蓝天与山脉",
+        "meaning": "承载着「自我掌控」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/08_strength.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_08_Strength.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg",
+      "downloaded_at": "2026-05-23T12:27:42+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "b222f1799b8dc46944d28f6079b1551011691dc439740371126e874fcf0c768f",
+      "size_bytes": 806480
+    }
+  },
+  {
+    "id": "the_hermit",
+    "name": "The Hermit",
+    "zh_name": "隐士",
+    "arcana": "major",
+    "number": 9,
+    "core_symbols": [
+      "内省",
+      "独处",
+      "智慧",
+      "指引",
+      "退隐"
+    ],
+    "upright": {
+      "keywords": [
+        "内省",
+        "独处",
+        "智慧",
+        "寻求真理",
+        "精神探索"
+      ],
+      "meaning": "隐士正位说明你需要一段独处和内省的时光。外在的喧嚣无法给你答案，真相需要你在安静中自己发现。"
+    },
+    "reversed": {
+      "keywords": [
+        "孤僻",
+        "逃避现实",
+        "拒绝帮助",
+        "迷失方向",
+        "过度孤立"
+      ],
+      "meaning": "隐士逆位可能表示你正在用独处来逃避现实，或者因为过度孤立而失去了与他人的连接。智慧的灯已经暗淡。"
+    },
+    "domains": {
+      "love": "感情中可能需要一段独处来理清自己的感受。有时距离能让你更清晰地看到关系的本质。",
+      "career": "职业上不是向外争取的时候，而是静下来反思：你现在走的方向真的是你想要的吗？",
+      "study": "学习上需要深度专注和内化，而非追求表面的进度。独处的时间是最有效的学习时间。",
+      "project": "项目可能遇到瓶颈，需要退一步审视全局。暂时从日常忙碌中抽离，才能看到问题的本质。",
+      "money": "财务决策需要在冷静和理性的状态下做出，不要在焦虑或兴奋时做出重大财务决定。",
+      "self": "你需要给自己一段不被打扰的时间。不是逃避，而是回归自己的内在罗盘。"
+    },
+    "visual_motifs": [
+      "手持明灯的老人",
+      "站在雪山之巅",
+      "灰色的长袍与斗篷",
+      "手中的拐杖",
+      "脚下的雪地"
+    ],
+    "risk": [
+      "用独处来逃避需要面对的问题",
+      "过度孤立导致视角变得狭隘",
+      "在应该行动时陷入无限反思",
+      "拒绝他人善意的建议和帮助"
+    ],
+    "advice": [
+      "每周安排一段不被打扰的独处时间",
+      "用写日记或冥想来梳理思绪",
+      "退一步看全局——你离问题太近了",
+      "不要害怕暂时慢下来——内省是前进的一部分",
+      "向内寻找答案，但保持与世界的连接"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "手持明灯的老人",
+        "meaning": "承载着「内省」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "站在雪山之巅",
+        "meaning": "承载着「独处」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "灰色的长袍与斗篷",
+        "meaning": "承载着「智慧」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "手中的拐杖",
+        "meaning": "承载着「指引」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "脚下的雪地",
+        "meaning": "承载着「退隐」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/09_the_hermit.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_09_Hermit.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg",
+      "downloaded_at": "2026-05-23T12:27:45+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "0f86ac4560e598ced039665e21023d329e7a7e58872c46b3e9a9d85bb6cb2a50",
+      "size_bytes": 735989
+    }
+  },
+  {
+    "id": "wheel_of_fortune",
+    "name": "Wheel of Fortune",
+    "zh_name": "命运之轮",
+    "arcana": "major",
+    "number": 10,
+    "core_symbols": [
+      "命运",
+      "周期",
+      "转折点",
+      "机遇",
+      "变化"
+    ],
+    "upright": {
+      "keywords": [
+        "转变",
+        "命运",
+        "周期",
+        "机遇",
+        "转折点"
+      ],
+      "meaning": "命运之轮正位意味着一个关键的转折点——运气正在向你倾斜，外部环境的变化将为你打开新的机会之门。"
+    },
+    "reversed": {
+      "keywords": [
+        "厄运",
+        "抗拒变化",
+        "坏周期",
+        "错失机会",
+        "失控"
+      ],
+      "meaning": "命运之轮逆位可能表示你正处于一个下行的周期中，或者正在抗拒不可避免的变化。时机未到，需要耐心等待。"
+    },
+    "domains": {
+      "love": "感情中命运正在推动一些变化，可能是遇见新人或关系进入新阶段。顺其自然比强行控制更有力量。",
+      "career": "职业上正处于一个重要的拐点，机会可能来自意想不到的方向。保持开放和警觉，运气偏爱有准备的人。",
+      "study": "学习上可能突然开窍或遇到关键的启发。之前看似无关的知识点会突然串联起来。",
+      "project": "项目的外部环境正在变化，可能带来新的机遇或挑战。不要固守原有计划，灵活调整才能借势。",
+      "money": "财务上可能有意外的收入或支出，做好充分准备。财运有周期，不要在低谷时恐慌。",
+      "self": "你正处于人生节奏的转换点。有些事不在你的控制范围内，但你可以选择如何回应命运的安排。"
+    },
+    "visual_motifs": [
+      "旋转的命运之轮",
+      "四个角落的天使和神兽",
+      "轮上的斯芬克斯",
+      "蛇形的神秘符号",
+      "轮缘上的铭文"
+    ],
+    "risk": [
+      "在好运时过度膨胀、冒险投资",
+      "在低谷时放弃，错过即将到来的转机",
+      "把一切归咎于命运而放弃主动行动",
+      "抗拒必然的变化导致更大的损失"
+    ],
+    "advice": [
+      "识别你当前所处的周期阶段——上升还是下降",
+      "在好运来临时尽情发挥，但留好退路",
+      "在低谷时积蓄力量，等待时机",
+      "不要和趋势对抗——顺势而为",
+      "机会往往伪装成困难出现"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "旋转的命运之轮",
+        "meaning": "承载着「命运」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "四个角落的天使和神兽",
+        "meaning": "承载着「周期」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "轮上的斯芬克斯",
+        "meaning": "承载着「转折点」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "蛇形的神秘符号",
+        "meaning": "承载着「机遇」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "轮缘上的铭文",
+        "meaning": "承载着「变化」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/10_wheel_of_fortune.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_10_Wheel_of_Fortune.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg",
+      "downloaded_at": "2026-05-23T12:27:47+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "2979bea7530572f408739757c87200772f6171a5249684cc9ee2a379108b3657",
+      "size_bytes": 1155837
+    }
+  },
+  {
+    "id": "justice",
+    "name": "Justice",
+    "zh_name": "正义",
+    "arcana": "major",
+    "number": 11,
+    "core_symbols": [
+      "公平",
+      "因果",
+      "真相",
+      "平衡",
+      "责任"
+    ],
+    "upright": {
+      "keywords": [
+        "公平",
+        "真相",
+        "因果",
+        "平衡",
+        "责任"
+      ],
+      "meaning": "正义正位提醒你一切皆有因果。你现在的处境是过去选择的结果，而现在的选择将决定未来的走向。做出与真相一致的决定。"
+    },
+    "reversed": {
+      "keywords": [
+        "不公平",
+        "逃避责任",
+        "偏见",
+        "失衡",
+        "回避真相"
+      ],
+      "meaning": "正义逆位可能表示你正在逃避某种责任，或者在面对不公时选择沉默。也可能是外部环境对你不公，但你仍可以做出正直的选择。"
+    },
+    "domains": {
+      "love": "感情中需要诚实和公平。隐藏的真相终将浮出水面，坦荡面对比回避更有力量。",
+      "career": "职业上你的付出将得到公正的回报——或者你需要审视自己的投入是否真的配得上期望的回报。",
+      "study": "学习上没有捷径，你的投入和产出成正比。诚实地评估自己的努力程度。",
+      "project": "项目需要客观评估：当前的投入和产出是否匹配？不要用主观愿望替代冷静分析。",
+      "money": "财务上需要公平交易和诚实核算。任何试图走捷径或取巧的行为最终都会反弹。",
+      "self": "对自己诚实是最重要的正义。你目前的处境，有多少是自己选择的结果？"
+    },
+    "visual_motifs": [
+      "手持天秤和宝剑的女神",
+      "红色与绿色的长袍",
+      "高高的王座",
+      "石柱之间的审判场景",
+      "平衡的天秤"
+    ],
+    "risk": [
+      "为了维护和谐而回避说出真相",
+      "把责任全部归咎于外部环境",
+      "用双重标准评价自己和他人",
+      "在需要做判断时选择了和稀泥"
+    ],
+    "advice": [
+      "诚实地评估你当前的投入产出比",
+      "做出与你价值观一致的选择",
+      "承担你应负的责任——这让你更有力量",
+      "不要在信息不充分时急于下判断",
+      "公正不仅是对别人，也是对自己"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "手持天秤和宝剑的女神",
+        "meaning": "承载着「公平」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "红色与绿色的长袍",
+        "meaning": "承载着「因果」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "高高的王座",
+        "meaning": "承载着「真相」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "石柱之间的审判场景",
+        "meaning": "承载着「平衡」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "平衡的天秤",
+        "meaning": "承载着「责任」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/11_justice.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_11_Justice.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg",
+      "downloaded_at": "2026-05-23T12:27:51+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "028645f4ed40a82035c410f4b7b5b00adbdcdf1c21ffd706cddeaf9227e0151d",
+      "size_bytes": 893399
+    }
+  },
+  {
+    "id": "the_hanged_man",
+    "name": "The Hanged Man",
+    "zh_name": "倒吊人",
+    "arcana": "major",
+    "number": 12,
+    "core_symbols": [
+      "牺牲",
+      "暂停",
+      "换位思考",
+      "放手",
+      "全新的视角"
+    ],
+    "upright": {
+      "keywords": [
+        "暂停",
+        "牺牲",
+        "新的视角",
+        "放手",
+        "精神成长"
+      ],
+      "meaning": "倒吊人正位要求你暂停前行，换一个角度审视问题。有时候最大的进步不是向前冲，而是停下来看到之前忽略的东西。"
+    },
+    "reversed": {
+      "keywords": [
+        "停滞",
+        "抗拒改变",
+        "无意义的牺牲",
+        "固执己见",
+        "内耗"
+      ],
+      "meaning": "倒吊人逆位可能表示你已经停滞太久，或者在做无意义的牺牲。也可能你在抗拒必要的视角转换，固执地坚持旧有的看待事物的方式。"
+    },
+    "domains": {
+      "love": "感情中可能需要暂停争执、换位思考。放下想要赢的冲动，试着从对方的角度感受这段关系。",
+      "career": "职业上你可能需要暂时退一步，重新审视你的职业方向。有时候退让比硬闯更能带来突破。",
+      "study": "学习上如果卡住了，不是不够努力，而是需要换个学习方法或视角。停下来重新审视比盲目用力更有效。",
+      "project": "项目推进遇到阻力时，与其强行突破，不如暂停、倒过来看问题。关键的突破常常来自视角的转换。",
+      "money": "财务上可能需要做出某种短期的牺牲来换取长期的稳定。不要只盯着眼前的数字。",
+      "self": "你需要暂时放下'必须向前'的执念。有时候真正的成长来自暂停、反思和重新定位。"
+    },
+    "visual_motifs": [
+      "倒吊在树上的男子",
+      "交叉的双腿形成三角形",
+      "头顶的光环",
+      "平静的面容",
+      "身后是十字形木架"
+    ],
+    "risk": [
+      "过度停滞变成了逃避行动的借口",
+      "做出不必要的自我牺牲",
+      "在需要坚持时选择了放弃",
+      "用'换位思考'来回避直面问题的责任"
+    ],
+    "advice": [
+      "暂停——但不是停止。给自己一个观察期",
+      "试着从完全相反的角度重新审视问题",
+      "区分'需要放下的'和'需要坚持的'",
+      "暂时的让步可能是最大的进步",
+      "在这个阶段，思考比行动更有价值"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "倒吊在树上的男子",
+        "meaning": "承载着「牺牲」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "交叉的双腿形成三角形",
+        "meaning": "承载着「暂停」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "头顶的光环",
+        "meaning": "承载着「换位思考」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "平静的面容",
+        "meaning": "承载着「放手」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "身后是十字形木架",
+        "meaning": "承载着「全新的视角」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/12_the_hanged_man.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_12_Hanged_Man.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg",
+      "downloaded_at": "2026-05-23T12:27:53+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "0eacf7afe48e4b51c5405a8354ecb867a4d8868151137434ef84621e4d56359c",
+      "size_bytes": 1138974
+    }
+  },
+  {
+    "id": "death",
+    "name": "Death",
+    "zh_name": "死神",
+    "arcana": "major",
+    "number": 13,
+    "core_symbols": [
+      "结束",
+      "转变",
+      "新生",
+      "放手",
+      "自然循环"
+    ],
+    "upright": {
+      "keywords": [
+        "结束",
+        "转变",
+        "放手",
+        "新生",
+        "蜕变"
+      ],
+      "meaning": "死神正位不代表肉体的死亡，而是象征一个旧阶段的彻底结束。只有放下不再服务于你的事物，新的生机才会到来。"
+    },
+    "reversed": {
+      "keywords": [
+        "抗拒改变",
+        "停滞不前",
+        "害怕结束",
+        "僵化",
+        "阴魂不散"
+      ],
+      "meaning": "死神逆位可能表示你正在拼命抓住已经结束的事物，拒绝让某些东西死去。这种抗拒反而延长了痛苦。"
+    },
+    "domains": {
+      "love": "感情中有些关系需要结束或彻底转变形式。不是所有结束都是失败，有些是双方都需要自由。",
+      "career": "职业上可能到了必须离开舒适区的时候。一个阶段的结束是下个阶段的种子。",
+      "study": "学习上旧的思维模式可能需要被彻底放弃，才能容纳新的知识结构。",
+      "project": "项目中有些部分已经过时或失效，继续维持只会拖累整体。果断结束有问题的部分，为新方案留出空间。",
+      "money": "财务上需要接受某些投资的损失或收入的减少，这为新的财务结构创造了空间。",
+      "self": "你正在经历一次内在的蜕变。旧版本的你需要退场，新的你正在成形。这个过程虽然痛苦，但是必要的。"
+    },
+    "visual_motifs": [
+      "身披铠甲的骷髅骑士",
+      "跪地迎接的各阶层人物",
+      "远处的太阳升起",
+      "黑马与白骨",
+      "旗帜上的白色玫瑰"
+    ],
+    "risk": [
+      "紧紧抓住已经死亡的事物不放",
+      "因为害怕结束而不敢开始新阶段",
+      "把暂时的困难误判为彻底的终结",
+      "在应该保留的部分也一并丢弃"
+    ],
+    "advice": [
+      "诚实面对：什么已经不再服务于你了",
+      "感谢过去阶段的贡献，然后放手",
+      "不要把'结束'和'失败'划等号",
+      "在新旧交替期间给自己足够的过渡时间",
+      "关注正在萌芽的新机会——它们藏在结束的阴影中"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "身披铠甲的骷髅骑士",
+        "meaning": "承载着「结束」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "跪地迎接的各阶层人物",
+        "meaning": "承载着「转变」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "远处的太阳升起",
+        "meaning": "承载着「新生」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "黑马与白骨",
+        "meaning": "承载着「放手」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "旗帜上的白色玫瑰",
+        "meaning": "承载着「自然循环」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/13_death.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_13_Death.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg",
+      "downloaded_at": "2026-05-23T12:27:56+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "9e9cdd41a4d975691e79acc2358b45f4f2c58661431c3113a5ccf27477356a66",
+      "size_bytes": 922316
+    }
+  },
+  {
+    "id": "temperance",
+    "name": "Temperance",
+    "zh_name": "节制",
+    "arcana": "major",
+    "number": 14,
+    "core_symbols": [
+      "平衡",
+      "调和",
+      "适度",
+      "耐心",
+      "融合"
+    ],
+    "upright": {
+      "keywords": [
+        "平衡",
+        "适度",
+        "耐心",
+        "调和",
+        "整合"
+      ],
+      "meaning": "节制正位鼓励你寻找中间道路——不走极端，而是把不同的力量和资源调和在一起。这是一个需要耐心和精细调配的过程。"
+    },
+    "reversed": {
+      "keywords": [
+        "失衡",
+        "过度",
+        "缺乏节制",
+        "不协调",
+        "仓促"
+      ],
+      "meaning": "节制逆位提示你的生活或工作中出现了失衡。可能是过度投入某个方面而忽略了其他，或者急于求成而失去了节奏。"
+    },
+    "domains": {
+      "love": "感情中需要在给予和索取之间找到平衡。健康的爱不是自我牺牲，也不是自我中心，而是持续的调和。",
+      "career": "职业上需要在进取和休息之间找到节奏。持续高压只会降低长期产出。",
+      "study": "学习上需要在广度和深度之间找平衡。什么都学可能等于什么都学不精。",
+      "project": "项目需要精细的资源调配——资金、时间、人力的配比至关重要。不要在某一个方面过度投入。",
+      "money": "财务上需要在储蓄和消费、投资和保守之间找到适合自己的平衡点。",
+      "self": "你正在学习如何把人生中看似矛盾的元素调和在一起。真正的智慧在于均衡，而非极端。"
+    },
+    "visual_motifs": [
+      "天使在倒水调和",
+      "手中的两个杯子",
+      "一只脚在水里一只在陆地",
+      "头顶的光环",
+      "胸前的三角形图案"
+    ],
+    "risk": [
+      "在追求平衡的过程中失去了果断",
+      "试图调和本质上不可调和的事物",
+      "用'平衡'为借口回避必要的取舍",
+      "过度追求完美配比导致行动迟缓"
+    ],
+    "advice": [
+      "检视你的精力分配——哪些方面被过度投入或忽略",
+      "尝试把看似对立的需求融合成新方案",
+      "放慢节奏，找到适合自己的速度",
+      "不要在情绪极端时做决定",
+      "每天留一些空白时间来做缓冲和调整"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "天使在倒水调和",
+        "meaning": "承载着「平衡」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "手中的两个杯子",
+        "meaning": "承载着「调和」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "一只脚在水里一只在陆地",
+        "meaning": "承载着「适度」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "头顶的光环",
+        "meaning": "承载着「耐心」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "胸前的三角形图案",
+        "meaning": "承载着「融合」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/14_temperance.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_14_Temperance.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg",
+      "downloaded_at": "2026-05-23T12:27:58+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "a306b373f8ff18270a2daabe3d89967eadd428e460c39ed717bda7bd38a1f009",
+      "size_bytes": 957655
+    }
+  },
+  {
+    "id": "the_devil",
+    "name": "The Devil",
+    "zh_name": "恶魔",
+    "arcana": "major",
+    "number": 15,
+    "core_symbols": [
+      "束缚",
+      "欲望",
+      "物质主义",
+      "成瘾",
+      "恐惧"
+    ],
+    "upright": {
+      "keywords": [
+        "束缚",
+        "欲望",
+        "物质主义",
+        "成瘾",
+        "恐惧控制"
+      ],
+      "meaning": "恶魔正位揭示你可能被某种欲望、习惯或恐惧所束缚——但锁链其实并不紧，你随时可以选择挣脱。看清束缚是自由的第一步。"
+    },
+    "reversed": {
+      "keywords": [
+        "挣脱束缚",
+        "觉醒",
+        "打破成瘾",
+        "重获自由",
+        "看清真相"
+      ],
+      "meaning": "恶魔逆位是强烈的解脱信号——你正在看清那些控制你的事物，并且开始挣脱。这是觉醒和重获自由的关键时刻。"
+    },
+    "domains": {
+      "love": "感情中可能存在不健康的关系模式——依赖、控制或是基于恐惧而非爱的选择。是时候审视这段关系的本质了。",
+      "career": "职业上你可能为了安全感或金钱而被困在一份消耗你的工作中。真正的安全感来自能力而非恐惧。",
+      "study": "学习上可能被功利主义或他人期望所驱动，而非真正的求知欲。找到学习的意义才能摆脱苦役感。",
+      "project": "项目中可能有某些因素在暗中控制着你的决策——比如对失败的恐惧、对认可的渴求、或是已经过时的承诺。",
+      "money": "财务上需要警惕被物质欲望驱使的状态。问自己：你是在赚钱，还是在被金钱驱使？",
+      "self": "你感觉被困住了，但那些锁链可能并没有你想象的那么紧。看清让你感到无力的真正来源。"
+    },
+    "visual_motifs": [
+      "半人半兽的恶魔",
+      "被锁链拴住的男女",
+      "倒置的五角星",
+      "恶魔的翅膀和角",
+      "黑暗的地下场景"
+    ],
+    "risk": [
+      "因为熟悉而停留在不健康的状态中",
+      "把恐惧误认为是现实的必然",
+      "用物质或成瘾行为来麻痹真实感受",
+      "在看到束缚时仍然选择不挣脱"
+    ],
+    "advice": [
+      "诚实问自己：是什么让你感到被困住了",
+      "识别那些你误以为'必须如此'的束缚",
+      "切断一个消耗你最深的依赖——从小处开始",
+      "不要让对未知的恐惧超过对现状的不满",
+      "自由不是一切都变好，而是你有选择的权利"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "半人半兽的恶魔",
+        "meaning": "承载着「束缚」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "被锁链拴住的男女",
+        "meaning": "承载着「欲望」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "倒置的五角星",
+        "meaning": "承载着「物质主义」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "恶魔的翅膀和角",
+        "meaning": "承载着「成瘾」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "黑暗的地下场景",
+        "meaning": "承载着「恐惧」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/15_the_devil.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_15_Devil.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg",
+      "downloaded_at": "2026-05-23T12:28:01+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "f8e37102cbf2120270c0ed8c3e193b260d2f79dd5908bc9acbd48e8335083cf8",
+      "size_bytes": 779014
+    }
+  },
+  {
+    "id": "the_tower",
+    "name": "The Tower",
+    "zh_name": "高塔",
+    "arcana": "major",
+    "number": 16,
+    "core_symbols": [
+      "崩塌",
+      "突变",
+      "真相暴露",
+      "旧结构失效",
+      "解放"
+    ],
+    "upright": {
+      "keywords": [
+        "突然的变化",
+        "崩塌",
+        "真相暴露",
+        "旧结构瓦解",
+        "解放"
+      ],
+      "meaning": "高塔正位代表旧有结构被突然击穿，一些被你压制或忽视的问题会以剧烈的方式暴露出来。虽然过程痛苦，但坍塌的往往是早已不稳固的结构。"
+    },
+    "reversed": {
+      "keywords": [
+        "延迟崩塌",
+        "抗拒变化",
+        "内部压力积累",
+        "逃避重建",
+        "勉强维持"
+      ],
+      "meaning": "高塔逆位不是灾难已经消失，而是变化被推迟或内部化。表面的平静下是累积的压力，你可能在用最后的力量维持着已经开裂的结构。"
+    },
+    "domains": {
+      "love": "关系中积累的矛盾可能即将爆发。这不是坏事——暴露问题才有机会真正修复，而不是继续粉饰。",
+      "career": "职业中一些旧的架构或模式可能突然失效。与其勉强修补，不如接受旧结构的瓦解，为新的方向腾出空间。",
+      "study": "学习上你一直依赖的某个方法或认知框架可能已经不再适用。接受这种'崩塌'，它会带来新的理解。",
+      "project": "项目的底层逻辑可能存在问题，不适合只做表面修补。越早直面结构问题，损失越小。",
+      "money": "财务结构中可能有隐藏风险，尤其是过度依赖单一来源。剧烈的市场波动可能暴露这些弱点。",
+      "self": "你一直在维持的某个'人设'或'旧信念'可能已经撑不住了。崩塌不是你的失败，它本身就是解决方案的一部分。"
+    },
+    "visual_motifs": [
+      "雷电击中高塔",
+      "人物从塔上坠落",
+      "皇冠脱落",
+      "火焰燃烧",
+      "黑夜中的突然光亮"
+    ],
+    "risk": [
+      "把结构性问题当成短期波动来处理",
+      "为了维持旧秩序而拖延必要的重建",
+      "忽视已经出现的裂缝和警告信号",
+      "在崩塌后急于重建而不反思根源"
+    ],
+    "advice": [
+      "先确认真正失效的部分——不是所有东西都需要推倒",
+      "不要急着补救表面问题，追查根本原因",
+      "把崩塌视为重新设计结构的机会",
+      "接受必要的损失，保全可以留存的核心",
+      "在重建之前，先消化崩塌带来的洞察"
+    ],
+    "motifs": [
+      {
+        "id": "lightning",
+        "label": "雷电",
+        "meaning": "外部冲击、突然揭露、现实击穿旧结构。",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.03,
+          "w": 0.2,
+          "h": 0.16
+        }
+      },
+      {
+        "id": "crown",
+        "label": "皇冠",
+        "meaning": "权威、控制幻觉、旧中心的失效。",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.17,
+          "w": 0.2,
+          "h": 0.1
+        }
+      },
+      {
+        "id": "tower_body",
+        "label": "塔身",
+        "meaning": "旧秩序、封闭结构、看似稳固却脆弱的系统。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.27,
+          "w": 0.4,
+          "h": 0.42
+        }
+      },
+      {
+        "id": "falling_figures",
+        "label": "坠落人物",
+        "meaning": "失控、位置丧失、旧身份被迫脱离。",
+        "bbox": {
+          "x": 0.08,
+          "y": 0.55,
+          "w": 0.84,
+          "h": 0.28
+        }
+      },
+      {
+        "id": "fire",
+        "label": "火焰",
+        "meaning": "破坏、净化、无法继续隐藏的压力。",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.78,
+          "w": 0.6,
+          "h": 0.18
+        }
+      }
+    ],
+    "image": "/cards/major/16_the_tower.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_16_Tower.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg",
+      "downloaded_at": "2026-05-23T12:28:03+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "ab5ce9bf29f32b9cf61720b375fe35f23ce7e116ee1c648a9bf6832e17241163",
+      "size_bytes": 758728
+    }
+  },
+  {
+    "id": "the_star",
+    "name": "The Star",
+    "zh_name": "星星",
+    "arcana": "major",
+    "number": 17,
+    "core_symbols": [
+      "希望",
+      "治愈",
+      "灵感",
+      "信念",
+      "平静"
+    ],
+    "upright": {
+      "keywords": [
+        "希望",
+        "治愈",
+        "灵感",
+        "信念",
+        "平静"
+      ],
+      "meaning": "星星正位是在风暴之后出现的第一道光。它带来了希望、治愈和重新相信的勇气。你已经度过了最难的时刻，现在是重新开始的时刻。"
+    },
+    "reversed": {
+      "keywords": [
+        "失去信念",
+        "绝望",
+        "缺乏灵感",
+        "自我否定",
+        "看不到希望"
+      ],
+      "meaning": "星星逆位可能表示你暂时看不到前方的光。但星星从来没有消失——只是云层暂时遮住了它。不要在这个时候放弃。"
+    },
+    "domains": {
+      "love": "感情中愈合正在发生，过去的伤痛正在慢慢消解。新的希望正在悄然生长。",
+      "career": "职业上最困难的时期已经过去，新的灵感和机会正在浮现。保持信心，继续前行。",
+      "study": "学习上之前的困惑正在消散，新的理解方式正在浮现。给自己一些安静的时间来接收灵感。",
+      "project": "项目经历了动荡后迎来了平静的修复期。现在适合重建、调整和注入新的灵感。",
+      "money": "财务状况在慢慢好转，虽然可能不是爆发式的增长，但趋势是向上的。保持耐心。",
+      "self": "你已经走过了最难的那段路。现在你需要的是休息、疗愈和重新连接那个让你心动的目标。"
+    },
+    "visual_motifs": [
+      "少女向水面倒水",
+      "夜空中的大星和七颗小星",
+      "树上的鸟儿",
+      "宁静的水池",
+      "远处的山脉"
+    ],
+    "risk": [
+      "在希望来临时过度乐观而失去警觉",
+      "因为过去的创伤而不敢再次相信",
+      "把'治愈'误解为'不需要改变了'",
+      "在平静期变得懒散而错失重建的窗口"
+    ],
+    "advice": [
+      "允许自己感受希望——这不是天真，而是力量",
+      "为未来做具体的规划，而不只是空想",
+      "每天做一件让自己感到治愈的小事",
+      "与那些让你感到平静和受启发的人在一起",
+      "相信你已经具备了重新开始所需的一切"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "少女向水面倒水",
+        "meaning": "承载着「希望」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "夜空中的大星和七颗小星",
+        "meaning": "承载着「治愈」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "树上的鸟儿",
+        "meaning": "承载着「灵感」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "宁静的水池",
+        "meaning": "承载着「信念」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "远处的山脉",
+        "meaning": "承载着「平静」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/17_the_star.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_17_Star.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg",
+      "downloaded_at": "2026-05-23T12:28:06+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "20bb3e04c1655cc318031d94a024d84199cfeae2ca55e80d2d341c2d30435ac7",
+      "size_bytes": 852520
+    }
+  },
+  {
+    "id": "the_moon",
+    "name": "The Moon",
+    "zh_name": "月亮",
+    "arcana": "major",
+    "number": 18,
+    "core_symbols": [
+      "潜意识",
+      "幻觉",
+      "恐惧",
+      "不确定性",
+      "直觉"
+    ],
+    "upright": {
+      "keywords": [
+        "幻觉",
+        "恐惧",
+        "潜意识",
+        "不确定性",
+        "直觉"
+      ],
+      "meaning": "月亮正位表示你正走在一条能见度很低的路上了。很多事情并不像表面看起来那样，恐惧可能被放大了，而真相隐藏在潜意识深处。"
+    },
+    "reversed": {
+      "keywords": [
+        "恐惧消散",
+        "真相浮现",
+        "走出迷雾",
+        "释放焦虑",
+        "幻觉消退"
+      ],
+      "meaning": "月亮逆位是一个积极的信号——迷雾正在散去，你开始看清之前困扰你的事物的真实面目。恐惧在真相面前失去了力量。"
+    },
+    "domains": {
+      "love": "感情中可能有很多不确定和猜疑。你和对方的真实感受可能没有被充分表达，需要更多的坦诚对话。",
+      "career": "职业上前方有些模糊，信息不够透明。不要在信息不足的情况下做重大决定，先努力收集更多信号。",
+      "study": "学习上可能感到迷茫和不确定，这是正常的。困惑往往是突破的前兆，不要急着找答案。",
+      "project": "项目中可能存在你还没有意识到的风险或误解。先停下来审视——有时候最大的问题是你以为没有问题的部分。",
+      "money": "财务上不要被表面的数字或他人的承诺所迷惑。有些信息被隐藏了，深入调查再做决定。",
+      "self": "你正在经历一段内在的迷茫期。这不是退步——月亮只是在照亮你平时看不见的潜意识层面。"
+    },
+    "visual_motifs": [
+      "月光下的路径",
+      "两只犬对月嚎叫",
+      "水中的龙虾",
+      "远处的两座塔",
+      "水面的倒影"
+    ],
+    "risk": [
+      "把想象出来的恐惧当成真实威胁",
+      "在信息不足的情况下仓促决策",
+      "被表面现象迷惑而忽略深层真相",
+      "在迷茫期中瘫痪不动"
+    ],
+    "advice": [
+      "区分事实和你的恐惧——把它们写下来对比",
+      "不要在晚上或情绪低落时做重大决定",
+      "寻求更多信息来驱散不确定性",
+      "接受'暂时不知道'的状态——不是所有事都需要立即有答案",
+      "关注你的梦境和直觉——它们在给你信号"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "月光下的路径",
+        "meaning": "承载着「潜意识」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "两只犬对月嚎叫",
+        "meaning": "承载着「幻觉」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "水中的龙虾",
+        "meaning": "承载着「恐惧」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "远处的两座塔",
+        "meaning": "承载着「不确定性」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "水面的倒影",
+        "meaning": "承载着「直觉」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/18_the_moon.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_18_Moon.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg",
+      "downloaded_at": "2026-05-23T12:28:08+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "866474dc3de02bf3817495fd75d254dac2b9f36470f2f29ecb54de572f9dc70e",
+      "size_bytes": 859000
+    }
+  },
+  {
+    "id": "the_sun",
+    "name": "The Sun",
+    "zh_name": "太阳",
+    "arcana": "major",
+    "number": 19,
+    "core_symbols": [
+      "喜悦",
+      "成功",
+      "活力",
+      "清晰",
+      "生命力"
+    ],
+    "upright": {
+      "keywords": [
+        "喜悦",
+        "成功",
+        "活力",
+        "清晰",
+        "自信"
+      ],
+      "meaning": "太阳正位是塔罗中最正向的牌之一。它代表清晰的认知、充沛的能量和即将到来的成功。享受这一刻，你值得这份喜悦。"
+    },
+    "reversed": {
+      "keywords": [
+        "暂时阴霾",
+        "自信不足",
+        "能量低迷",
+        "成功延迟",
+        "看不清"
+      ],
+      "meaning": "太阳逆位并不否定成功——只是暂时被乌云遮住了。你的内在光依然在，只是此刻需要更多的耐心和自信来穿透阴霾。"
+    },
+    "domains": {
+      "love": "感情中阳光正在照耀——或者很快会。表达你的爱、享受被爱，不再需要躲藏或犹豫。",
+      "career": "职业上你的努力即将被看见和认可。保持自信和积极的状态，好运会被你的能量吸引。",
+      "study": "学习上你正处于理解和吸收能力最强的时期。利用这段清晰的状态攻克难题。",
+      "project": "项目的方向非常清晰，团队的能量也很充足。现在是大步前进的阶段，不要犹豫。",
+      "money": "财务上趋势乐观，之前的努力正在转化为实际的回报。合理享受成果，同时为未来做储备。",
+      "self": "你现在处于能量和信心的高峰。这份光和热不仅照亮你自己，也能温暖周围的人。"
+    },
+    "visual_motifs": [
+      "明亮的太阳",
+      "向日葵花田",
+      "骑在马上的孩子",
+      "红色的旗帜",
+      "花园围墙"
+    ],
+    "risk": [
+      "在阳光明媚时忽视潜在的阴影",
+      "过度自信导致轻率决策",
+      "因为一切太顺利而忘记了成长来自挑战",
+      "把短期的顺利当成长期的保障"
+    ],
+    "advice": [
+      "充分享受这份能量——它是真实的",
+      "利用清晰的状态来规划和布局未来",
+      "分享你的成功和喜悦给身边的人",
+      "记录下现在的状态——在阴天时回看会有力量",
+      "保持谦逊——太阳也会下山，但这不影响它的光芒"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "明亮的太阳",
+        "meaning": "承载着「喜悦」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "向日葵花田",
+        "meaning": "承载着「成功」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "骑在马上的孩子",
+        "meaning": "承载着「活力」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "红色的旗帜",
+        "meaning": "承载着「清晰」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "花园围墙",
+        "meaning": "承载着「生命力」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/19_the_sun.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_19_Sun.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg",
+      "downloaded_at": "2026-05-23T12:28:11+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "6c21ef99fef3807bafb26cd467464c8efc59e7312a688ae66285968e364c6450",
+      "size_bytes": 935619
+    }
+  },
+  {
+    "id": "judgement",
+    "name": "Judgement",
+    "zh_name": "审判",
+    "arcana": "major",
+    "number": 20,
+    "core_symbols": [
+      "觉醒",
+      "重估",
+      "召唤",
+      "清算",
+      "重生"
+    ],
+    "upright": {
+      "keywords": [
+        "觉醒",
+        "重估",
+        "召唤",
+        "释怀",
+        "新阶段"
+      ],
+      "meaning": "审判正位是一个内在觉醒的召唤。是时候重新审视你的过去，做出客观的判断和清算，然后回应内心的召唤，进入人生的新阶段。"
+    },
+    "reversed": {
+      "keywords": [
+        "拒绝觉醒",
+        "自我批判",
+        "逃避清算",
+        "固守旧我",
+        "错过召唤"
+      ],
+      "meaning": "审判逆位可能表示你在逃避必要的自我审视，或者陷入了过度的自我批判中无法前进。内在的觉醒召唤被忽视了。"
+    },
+    "domains": {
+      "love": "感情中到了需要面对和清算过去的时候。不管是原谅、放手还是重新承诺——需要做出清晰的决定。",
+      "career": "职业上你可能听到了内在的召唤——一个让你感到有意义的方向正在呼唤你。别忽视这个声音。",
+      "study": "学习上你之前所学的一切正在被整合和重新评估。现在适合总结和融会贯通。",
+      "project": "项目到了一个需要复盘和重新评估的阶段。客观评价之前的得失，这将决定下一步的方向。",
+      "money": "财务上到了清算的时候——整理债务、评估资产、做出新的规划。诚实面对数字。",
+      "self": "你正在经历一次重要的自我审判——不是惩罚，而是诚实地面对自己是谁、做过什么、想去哪里。"
+    },
+    "visual_motifs": [
+      "天使吹响号角",
+      "棺木中站起的人们",
+      "海面上的人物",
+      "远处的雪山",
+      "十字旗帜"
+    ],
+    "risk": [
+      "过度自我批判变成自我攻击",
+      "逃避自我审视导致问题不断重复",
+      "在应该前行的阶段沉溺于回顾过去",
+      "忽视内在召唤而继续走旧路"
+    ],
+    "advice": [
+      "诚实复盘——但不自我惩罚",
+      "倾听那个一直存在但你一直忽视的内在声音",
+      "做出明确的决定：保留什么，放下什么",
+      "不要等到'完美时机'才回应内心的召唤",
+      "原谅过去的自己——那时候的你已经尽力了"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "天使吹响号角",
+        "meaning": "承载着「觉醒」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "棺木中站起的人们",
+        "meaning": "承载着「重估」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "海面上的人物",
+        "meaning": "承载着「召唤」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "远处的雪山",
+        "meaning": "承载着「清算」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "十字旗帜",
+        "meaning": "承载着「重生」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/20_judgement.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_20_Judgement.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/RWS_Tarot_20_Judgement.jpg",
+      "downloaded_at": "2026-05-23T12:28:13+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "1d670d30e651554051f1a04708a11c57583a92a2cc370b8c0fc54fb82f2ffbd3",
+      "size_bytes": 934640
+    }
+  },
+  {
+    "id": "the_world",
+    "name": "The World",
+    "zh_name": "世界",
+    "arcana": "major",
+    "number": 21,
+    "core_symbols": [
+      "完成",
+      "圆满",
+      "整合",
+      "成就",
+      "新的循环"
+    ],
+    "upright": {
+      "keywords": [
+        "完成",
+        "圆满",
+        "整合",
+        "成就",
+        "新的开始"
+      ],
+      "meaning": "世界正位代表一个重大周期的圆满完成。你经历了愚者之旅的全部阶段，现在站在一个循环的终点——同时也是一个新循环的起点。"
+    },
+    "reversed": {
+      "keywords": [
+        "未完成",
+        "不圆满",
+        "封闭",
+        "卡在最后一步",
+        "延迟满足"
+      ],
+      "meaning": "世界逆位可能表示你接近完成却卡在了最后一步。有些东西还没有被整合进来，或者你在抗拒这个阶段的结束。"
+    },
+    "domains": {
+      "love": "感情中一段关系可能达到了一个新的圆满阶段。不管是关系的深化还是自然的结束，都是一种完成。",
+      "career": "职业上一个重要目标或阶段即将完成。庆祝你的成就，然后准备好迎接下一个挑战。",
+      "study": "学习上一个阶段的知识体系已经形成闭环。你可以准备迎接更高级别的学习了。",
+      "project": "项目接近一个重要的里程碑或最终交付。不要在工作完成之前松劲，最后的细节决定品质。",
+      "money": "财务上一个周期的目标即将达成。回顾你在这个过程中的成长，为下一个周期做规划。",
+      "self": "你已经走完了一段完整的旅程。回头看看你走了多远——这本身就是一种力量。下一个循环在等你。"
+    },
+    "visual_motifs": [
+      "花环中的舞者",
+      "四个角落的天使和神兽",
+      "手中的两根魔杖",
+      "紫色的丝带",
+      "圆满的月桂花环"
+    ],
+    "risk": [
+      "因为接近完成而放松懈怠",
+      "害怕完成后的空虚而拖延",
+      "在应该结束的时候继续画蛇添足",
+      "急于开始新循环而没庆祝旧的完成"
+    ],
+    "advice": [
+      "完成那些差最后一步的事情",
+      "给自己一个仪式来庆祝这个阶段的完成",
+      "总结这个旅程中学到的最重要的一课",
+      "不要急着跳入下一个目标——先享受完成的满足",
+      "带着这一轮积累的智慧，开启新的循环"
+    ],
+    "motifs": [
+      {
+        "id": "motif_1",
+        "label": "花环中的舞者",
+        "meaning": "承载着「完成」这一层象征。",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.04,
+          "w": 0.4,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_2",
+        "label": "四个角落的天使和神兽",
+        "meaning": "承载着「圆满」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.22,
+          "w": 0.64,
+          "h": 0.18
+        }
+      },
+      {
+        "id": "motif_3",
+        "label": "手中的两根魔杖",
+        "meaning": "承载着「整合」这一层象征。",
+        "bbox": {
+          "x": 0.12,
+          "y": 0.4,
+          "w": 0.76,
+          "h": 0.22
+        }
+      },
+      {
+        "id": "motif_4",
+        "label": "紫色的丝带",
+        "meaning": "承载着「成就」这一层象征。",
+        "bbox": {
+          "x": 0.18,
+          "y": 0.62,
+          "w": 0.64,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "motif_5",
+        "label": "圆满的月桂花环",
+        "meaning": "承载着「新的循环」这一层象征。",
+        "bbox": {
+          "x": 0.28,
+          "y": 0.82,
+          "w": 0.44,
+          "h": 0.14
+        }
+      }
+    ],
+    "image": "/cards/major/21_the_world.jpg",
+    "image_meta": {
+      "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_21_World.jpg",
+      "direct_url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg",
+      "downloaded_at": "2026-05-23T12:28:16+00:00",
+      "license_note": "Public domain (PD-old-100 worldwide; PD-US-expired in the United States). Original artwork by Pamela Colman Smith, published 1909 by Rider & Co., London. Smith died 1951. Scan hosted on Wikimedia Commons.",
+      "sha256": "f866b87a3c4422f96074080024860f46b5b3f456fcad74ca7aefdb5263bf0e69",
+      "size_bytes": 1171390
+    }
+  }
+]

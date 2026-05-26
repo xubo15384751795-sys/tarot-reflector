@@ -1,0 +1,18 @@
+{
+  "major_arcana": {
+    "name_zh": "大阿尔卡那",
+    "name_en": "Major Arcana",
+    "count": 22,
+    "meaning_zh": "代表人生阶段、心理原型、关键转折、重大主题与结构性变化。",
+    "interpretation_weight": "high",
+    "description_zh": "大阿尔卡那描绘灵魂旅程的主要阶段，每张牌对应一个深层原型或人生主题。当牌阵中出现多张大阿尔卡那，说明问题触及深层结构而非日常细节。"
+  },
+  "minor_arcana": {
+    "name_zh": "小阿尔卡那",
+    "name_en": "Minor Arcana",
+    "count": 56,
+    "meaning_zh": "代表日常事件、情绪状态、行动方式、现实资源与具体处境。",
+    "interpretation_weight": "contextual",
+    "description_zh": "小阿尔卡那通过四个花色和数字/宫廷牌的组合，描绘日常生活中具体的行动、感受和处境。它们是大阿尔卡那主题在现实层面的映射。"
+  }
+}

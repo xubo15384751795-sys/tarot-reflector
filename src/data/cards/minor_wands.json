@@ -1,0 +1,1101 @@
+[
+  {
+    "id": "wands_ace",
+    "name_zh": "权杖王牌",
+    "name_en": "Ace of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": 1,
+    "court_rank": null,
+    "image": "/cards/wands/wands_ace.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "新开始",
+          "灵感",
+          "创造力",
+          "热情",
+          "机会"
+        ],
+        "meaning_zh": "新的创造力机会正在萌芽，充满热情和行动力。这是开始新项目或追求新目标的最佳时机，宇宙给予你原初的能量和动力。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "延迟",
+          "缺乏方向",
+          "创意受阻",
+          "能量分散"
+        ],
+        "meaning_zh": "新开始被延迟或阻碍，热情难以转化为行动。内在的创造力被压抑，需要找到释放的出口，避免能量在无目标的状态下消耗。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": "数字I代表种子、开始、机会、原初能量。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "火元素的原初种子，象征创造力的觉醒和行动的开端，充满无限潜能。"
+    },
+    "domain_mapping": {
+      "感情": "新恋情的萌芽或关系进入充满激情的新阶段",
+      "工作": "创业机会或新项目的启动，充满干劲",
+      "项目": "项目启动的最佳时机，创意和执行力兼备",
+      "学习": "新技能学习的黄金期，热情高涨",
+      "自我": "个人成长的新起点，发现新的热情所在",
+      "财务": "新的收入来源或投资机会出现"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "从云中伸出的手",
+        "meaning": "火元素的原初能量，创造力的觉醒",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.05,
+          "w": 0.3,
+          "h": 0.15
+        }
+      },
+      {
+        "id": "m2",
+        "label": "权杖/树枝",
+        "meaning": "行动的工具，生命力的象征",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.15,
+          "w": 0.2,
+          "h": 0.4
+        }
+      },
+      {
+        "id": "m3",
+        "label": "嫩叶新芽",
+        "meaning": "新的开始，成长的潜力",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.15
+        }
+      },
+      {
+        "id": "m4",
+        "label": "远山与城堡",
+        "meaning": "目标与愿景，未来的可能性",
+        "bbox": {
+          "x": 0.1,
+          "y": 0.65,
+          "w": 0.8,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_2",
+    "name_zh": "权杖二",
+    "name_en": "Two of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": 2,
+    "court_rank": null,
+    "image": "/cards/wands/wands_2.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "规划",
+          "决策",
+          "探索",
+          "掌控",
+          "远见"
+        ],
+        "meaning_zh": "站在选择的十字路口，需要做出重要决策。你拥有掌控局面的能力，但必须在不同的道路之间做出选择，展望未来的可能性。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "犹豫不决",
+          "恐惧未知",
+          "保守",
+          "缺乏规划"
+        ],
+        "meaning_zh": "面对选择时犹豫不决，害怕踏出舒适区。过度谨慎导致错失机会，需要克服对未知的恐惧，勇敢做出决定。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": "数字II代表选择、平衡、关系、二元张力。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "火元素的二元张力，在不同行动方向之间权衡，需要运用意志力做出选择。"
+    },
+    "domain_mapping": {
+      "感情": "在两个追求者之间选择，或考虑关系的未来方向",
+      "工作": "面临职业转型或跳槽的抉择",
+      "项目": "项目规划阶段，需要确定战略方向",
+      "学习": "选择专业方向或学习路径",
+      "自我": "人生道路的抉择，探索新的可能性",
+      "财务": "在不同的投资方向之间权衡"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "手持地球仪",
+        "meaning": "掌控全局的视野与权力",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.25,
+          "w": 0.3,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "m2",
+        "label": "城墙上的权杖",
+        "meaning": "已建立的基础与力量",
+        "bbox": {
+          "x": 0.1,
+          "y": 0.15,
+          "w": 0.25,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m3",
+        "label": "远方的海洋",
+        "meaning": "未知的可能性与探索",
+        "bbox": {
+          "x": 0.5,
+          "y": 0.5,
+          "w": 0.4,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_3",
+    "name_zh": "权杖三",
+    "name_en": "Three of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": 3,
+    "court_rank": null,
+    "image": "/cards/wands/wands_3.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "展望",
+          "扩张",
+          "进展",
+          "领导力",
+          "商机"
+        ],
+        "meaning_zh": "你的计划正在顺利推进，开始看到成果的曙光。站在高处远眺，视野开阔，准备好迎接即将到来的成功和机遇。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "延迟",
+          "挫折",
+          "视野受限",
+          "缺乏进展"
+        ],
+        "meaning_zh": "计划进展受阻，预期的成果迟迟未到。视野变得狭窄，看不到远处的机会，需要调整策略或耐心等待时机。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": "数字III代表成长、表达、初步成果、互动。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "火元素的初步成果，行动开始显现成效，展望更广阔的未来。"
+    },
+    "domain_mapping": {
+      "感情": "关系发展顺利，开始规划共同的未来",
+      "工作": "事业进展顺利，准备拓展新的领域",
+      "项目": "项目初见成效，准备下一阶段的扩张",
+      "学习": "学习成果开始显现，视野更加开阔",
+      "自我": "个人成长进入新阶段，对未来充满信心",
+      "财务": "投资开始回报，准备进行更大的布局"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "三根权杖",
+        "meaning": "扩展与展望，三重力量",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.1,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "等待的商人",
+        "meaning": "耐心等待成果，商业远见",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.4
+        }
+      },
+      {
+        "id": "m3",
+        "label": "远航的船只",
+        "meaning": "贸易与进展，行动的成果",
+        "bbox": {
+          "x": 0.5,
+          "y": 0.55,
+          "w": 0.35,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_4",
+    "name_zh": "权杖四",
+    "name_en": "Four of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": 4,
+    "court_rank": null,
+    "image": "/cards/wands/wands_4.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "庆祝",
+          "和谐",
+          "稳定",
+          "归属",
+          "里程碑"
+        ],
+        "meaning_zh": "迎来值得庆祝的时刻，获得成就感和归属感。家庭和谐，人际关系融洽，享受稳定带来的幸福和满足。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "过渡期",
+          "不稳定",
+          "缺乏归属",
+          "庆典延迟"
+        ],
+        "meaning_zh": "处于人生的过渡阶段，稳定性受到挑战。可能感到缺乏归属感或家庭不和，需要重建内心的稳定基础。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": "数字IV代表稳定、结构、停滞、边界。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "火元素的稳定结构，热情和行动带来稳定的成果和归属感。"
+    },
+    "domain_mapping": {
+      "感情": "关系稳定和谐，可能有婚礼或同居等喜事",
+      "工作": "工作环境和谐，获得同事和上级的认可",
+      "项目": "项目达到重要里程碑，团队庆祝成功",
+      "学习": "学业有成，获得学位或证书",
+      "自我": "内心充实，找到归属感和生活重心",
+      "财务": "财务状况稳定，享受物质带来的安全感"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "庆祝的人群",
+        "meaning": "胜利与欢乐，社区的祝福",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.3
+        }
+      },
+      {
+        "id": "m2",
+        "label": "四根权杖拱门",
+        "meaning": "稳固的基础与庆典",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.1,
+          "w": 0.5,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m3",
+        "label": "城堡背景",
+        "meaning": "安全的归宿与家园",
+        "bbox": {
+          "x": 0.1,
+          "y": 0.05,
+          "w": 0.8,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_5",
+    "name_zh": "权杖五",
+    "name_en": "Five of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": 5,
+    "court_rank": null,
+    "image": "/cards/wands/wands_5.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "冲突",
+          "竞争",
+          "挑战",
+          "混乱",
+          "对抗"
+        ],
+        "meaning_zh": "面临竞争和冲突，多方势力角力。虽然局面混乱，但这种竞争也能激发潜能，关键是如何在混乱中找到自己的立场。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "和解",
+          "避免冲突",
+          "内化竞争",
+          "妥协"
+        ],
+        "meaning_zh": "选择避免正面冲突，寻求和解的方式。竞争内化为自我提升的动力，或通过妥协来化解外部矛盾。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": "数字V代表冲突、变化、损失、扰动。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "火元素的冲突状态，多方热情碰撞产生混乱，需要在竞争中保持清醒。"
+    },
+    "domain_mapping": {
+      "感情": "关系中存在竞争或争吵，需要沟通化解",
+      "工作": "职场竞争激烈，需要提升自身竞争力",
+      "项目": "项目团队意见分歧，需要协调统一",
+      "学习": "学业竞争压力大，需要找到自己的节奏",
+      "自我": "内心冲突，不同欲望之间的角力",
+      "财务": "财务竞争或纠纷，需要谨慎处理"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "争执的人群",
+        "meaning": "冲突与竞争，多元观点",
+        "bbox": {
+          "x": 0.15,
+          "y": 0.2,
+          "w": 0.7,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "交叉的权杖",
+        "meaning": "对立与挑战，需要决断",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.4
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_6",
+    "name_zh": "权杖六",
+    "name_en": "Six of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": 6,
+    "court_rank": null,
+    "image": "/cards/wands/wands_6.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "胜利",
+          "成功",
+          "认可",
+          "荣誉",
+          "自信"
+        ],
+        "meaning_zh": "获得胜利和认可，享受成功的喜悦。你的努力得到他人的肯定，自信心高涨，继续保持这股势头向前迈进。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "失败",
+          "自负",
+          "缺乏认可",
+          "挫折"
+        ],
+        "meaning_zh": "胜利未能如期而至，或成功后变得自负。可能遭遇挫折或得不到应有的认可，需要调整心态重新出发。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": "数字VI代表调整、恢复、流动、重新平衡。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "火元素的胜利流动，行动带来认可和荣誉，热情获得回报。"
+    },
+    "domain_mapping": {
+      "感情": "在感情中获得主动权，受到伴侣的欣赏",
+      "工作": "工作表现出色，获得晋升或奖励",
+      "项目": "项目成功完成，获得客户或上级认可",
+      "学习": "学业成绩优异，获得奖学金或荣誉",
+      "自我": "自我价值感提升，充满自信",
+      "财务": "投资获利或获得意外收入"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "骑马的胜者",
+        "meaning": "胜利与荣耀，领导力",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "六根权杖",
+        "meaning": "公众认可与成就",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.1,
+          "w": 0.3,
+          "h": 0.3
+        }
+      },
+      {
+        "id": "m3",
+        "label": "欢呼的群众",
+        "meaning": "社会支持与赞美",
+        "bbox": {
+          "x": 0.1,
+          "y": 0.55,
+          "w": 0.8,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_7",
+    "name_zh": "权杖七",
+    "name_en": "Seven of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": 7,
+    "court_rank": null,
+    "image": "/cards/wands/wands_7.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "防御",
+          "坚持",
+          "挑战",
+          "竞争",
+          "勇气"
+        ],
+        "meaning_zh": "面临多方挑战，需要坚守立场。虽然压力很大，但你有能力捍卫自己的成果，保持勇气和决心就能度过难关。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "放弃",
+          "退缩",
+          "力不从心",
+          "被压倒"
+        ],
+        "meaning_zh": "面对挑战感到力不从心，想要放弃或退缩。外部压力超过承受能力，需要重新评估是否值得继续坚守。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": "数字VII代表挑战、策略、试炼、防守。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "火元素的防守姿态，面对多方挑战需要运用策略坚守阵地。"
+    },
+    "domain_mapping": {
+      "感情": "维护感情中的立场，抵抗外界诱惑或干扰",
+      "工作": "面对职场竞争或质疑，需要证明自己的价值",
+      "项目": "项目遇到阻力，需要克服困难继续推进",
+      "学习": "学业面临挑战，需要坚持努力",
+      "自我": "坚持自己的信念，不被他人动摇",
+      "财务": "财务压力增大，需要谨慎应对"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "防御的战士",
+        "meaning": "坚守立场，保卫成果",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.2,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "七根权杖",
+        "meaning": "多重挑战，需要勇气",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.1,
+          "w": 0.5,
+          "h": 0.4
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_8",
+    "name_zh": "权杖八",
+    "name_en": "Eight of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": 8,
+    "court_rank": null,
+    "image": "/cards/wands/wands_8.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "迅速",
+          "行动",
+          "进展",
+          "消息",
+          "冲刺"
+        ],
+        "meaning_zh": "事情进展迅速，好消息接踵而至。行动力极强，适合快速推进项目或做出决定，把握这股势头向前冲刺。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "延迟",
+          "缓慢",
+          "受阻",
+          "失去动力"
+        ],
+        "meaning_zh": "进展速度放缓或受阻，预期的消息迟迟未到。行动力被削弱，需要耐心等待或寻找新的突破口。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": "数字VIII代表行动、重复、推进、力量积累。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "火元素的快速推进，力量积累到一定程度后爆发，行动势不可挡。"
+    },
+    "domain_mapping": {
+      "感情": "感情发展迅速，可能有快速进展或表白",
+      "工作": "工作项目快速推进，效率极高",
+      "项目": "项目进入快速执行阶段，进展神速",
+      "学习": "学习效率提升，快速掌握新知识",
+      "自我": "个人成长加速，快速突破瓶颈",
+      "财务": "财务状况快速改善，资金流动顺畅"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "疾驰的信使",
+        "meaning": "快速行动，消息传递",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.15,
+          "w": 0.5,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "八根权杖",
+        "meaning": "迅速的进展，势不可挡",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.1,
+          "w": 0.4,
+          "h": 0.3
+        }
+      },
+      {
+        "id": "m3",
+        "label": "远方的风景",
+        "meaning": "目标即将到达",
+        "bbox": {
+          "x": 0.05,
+          "y": 0.6,
+          "w": 0.9,
+          "h": 0.25
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_9",
+    "name_zh": "权杖九",
+    "name_en": "Nine of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": 9,
+    "court_rank": null,
+    "image": "/cards/wands/wands_9.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "坚韧",
+          "毅力",
+          "警觉",
+          "最后关头",
+          "疲惫"
+        ],
+        "meaning_zh": "虽然已经疲惫不堪，但仍保持警惕和坚韧。胜利就在眼前，需要再坚持一下，但也要注意休息恢复精力。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "放弃",
+          "筋疲力尽",
+          "过度防御",
+          "偏执"
+        ],
+        "meaning_zh": "体力或精神已经到达极限，难以继续坚持。过度防御导致偏执，需要学会放下或寻求帮助。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": "数字IX代表接近完成、个人状态、积累结果。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "火元素的最后坚持，接近完成但体力消耗巨大，需要意志力支撑到最后。"
+    },
+    "domain_mapping": {
+      "感情": "感情即将修成正果，但需要克服最后的障碍",
+      "工作": "项目接近完成，但感到疲惫需要休息",
+      "项目": "项目进入收尾阶段，需要保持专注",
+      "学习": "学业即将完成，但压力达到顶峰",
+      "自我": "个人成长接近突破点，需要再坚持一下",
+      "财务": "财务目标即将达成，但需要谨慎最后一步"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "疲惫的战士",
+        "meaning": "毅力与坚韧，最后的考验",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "九根权杖",
+        "meaning": "即将完成，需要坚持",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.4
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_10",
+    "name_zh": "权杖十",
+    "name_en": "Ten of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": 10,
+    "court_rank": null,
+    "image": "/cards/wands/wands_10.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "负担",
+          "责任",
+          "压力",
+          "过度劳累",
+          "完成"
+        ],
+        "meaning_zh": "承担过多的责任和负担，感到压力巨大。虽然已经接近完成，但沉重的负担让你难以喘息，需要学会释放或寻求帮助。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "释放",
+          "减负",
+          "委派",
+          "放弃责任"
+        ],
+        "meaning_zh": "学会放下不必要的负担，将责任分担给他人。重新评估优先级，释放压力，找回生活的平衡。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": "数字X代表完成、负担、周期结束、转入下一阶段。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "火元素的完成与负担，一个周期即将结束，但沉重的责任需要处理。"
+    },
+    "domain_mapping": {
+      "感情": "感情关系中承担过多责任，需要平衡",
+      "工作": "工作压力过大，需要学会说不",
+      "项目": "项目负担过重，需要重新分配资源",
+      "学习": "学业压力达到顶峰，需要减压",
+      "自我": "个人责任过多，需要重新定义边界",
+      "财务": "财务负担沉重，需要调整支出结构"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "负重前行的人",
+        "meaning": "责任与负担，压力过重",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.2,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "十根权杖",
+        "meaning": "沉重的负担，需要释放",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.1,
+          "w": 0.3,
+          "h": 0.5
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_page",
+    "name_zh": "权杖侍从",
+    "name_en": "Page of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": null,
+    "court_rank": "page",
+    "image": "/cards/wands/wands_page.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "探索",
+          "热情",
+          "好奇心",
+          "新消息",
+          "灵感"
+        ],
+        "meaning_zh": "充满好奇心和探索欲，对新事物保持热情。可能带来新的消息或机会，适合开始学习新技能或探索新领域。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "缺乏方向",
+          "冲动",
+          "幼稚",
+          "能量分散"
+        ],
+        "meaning_zh": "热情缺乏方向，容易冲动行事或半途而废。需要将能量集中在具体目标上，避免幼稚的冒险行为。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": null,
+      "court_rule_zh": "Page代表初学者、信使、观察、学习、试探。",
+      "combined_rule_zh": "火元素的初学者，以热情和好奇心探索新领域，充满潜力但需要指引。"
+    },
+    "domain_mapping": {
+      "感情": "对感情充满好奇，可能收到追求或表白",
+      "工作": "新工作或新项目带来学习机会",
+      "项目": "项目启动阶段，充满创意和热情",
+      "学习": "开始学习新技能，兴趣浓厚",
+      "自我": "探索新的兴趣爱好，保持开放心态",
+      "财务": "新的理财机会出现，需要谨慎评估"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "年轻的信使",
+        "meaning": "新消息，探索的开始",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的权杖",
+        "meaning": "热情与潜力，创造的种子",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.2,
+          "w": 0.2,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_knight",
+    "name_zh": "权杖骑士",
+    "name_en": "Knight of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": null,
+    "court_rank": "knight",
+    "image": "/cards/wands/wands_knight.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "行动",
+          "冒险",
+          "热情",
+          "追求",
+          "冲动"
+        ],
+        "meaning_zh": "充满行动力和冒险精神，勇于追求目标。热情高涨但可能过于冲动，需要平衡勇气与谨慎。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "鲁莽",
+          "缺乏计划",
+          "能量浪费",
+          "追逐幻想"
+        ],
+        "meaning_zh": "行动缺乏计划，鲁莽行事导致能量浪费。追逐不切实际的目标，需要冷静评估现实可行性。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": null,
+      "court_rule_zh": "Knight代表行动者、追求者、推进、追逐、冲刺。",
+      "combined_rule_zh": "火元素的行动者，以强大的推动力追求目标，充满能量但需要方向。"
+    },
+    "domain_mapping": {
+      "感情": "主动追求心仪对象，充满激情",
+      "工作": "积极争取新机会，勇于接受挑战",
+      "项目": "项目快速推进，执行力强",
+      "学习": "主动学习新知识，行动力强",
+      "自我": "勇于突破自我，追求个人成长",
+      "财务": "积极寻找新的投资机会"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "骑马的骑士",
+        "meaning": "行动与冒险，冲劲十足",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.1,
+          "w": 0.5,
+          "h": 0.6
+        }
+      },
+      {
+        "id": "m2",
+        "label": "飞扬的鬃毛",
+        "meaning": "激情与自由，不羁的精神",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_queen",
+    "name_zh": "权杖王后",
+    "name_en": "Queen of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": null,
+    "court_rank": "queen",
+    "image": "/cards/wands/wands_queen.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "自信",
+          "魅力",
+          "独立",
+          "温暖",
+          "领导力"
+        ],
+        "meaning_zh": "自信优雅，充满个人魅力和领导力。能够温暖他人，激励团队，同时保持独立自主的个性。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "嫉妒",
+          "自私",
+          "依赖",
+          "缺乏自信"
+        ],
+        "meaning_zh": "自信变成自负或嫉妒，温暖变成控制欲。需要找回内在的平衡，学会真正地关爱他人而非控制。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": null,
+      "court_rule_zh": "Queen代表内在掌握、滋养、感受、照料、吸收。",
+      "combined_rule_zh": "火元素的内在掌握，将热情和行动力转化为个人魅力和领导力。"
+    },
+    "domain_mapping": {
+      "感情": "在关系中展现魅力和自信，吸引追求者",
+      "工作": "展现领导才能，获得团队信任",
+      "项目": "以热情和魅力推动项目进展",
+      "学习": "自信地展示学习成果，激励他人",
+      "自我": "内在力量觉醒，展现真实的自我",
+      "财务": "自信地管理财务，获得稳定收益"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "自信的女王",
+        "meaning": "魅力与领导力，温暖的力量",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的权杖",
+        "meaning": "创造力的掌控",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.2,
+          "w": 0.2,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "wands_king",
+    "name_zh": "权杖国王",
+    "name_en": "King of Wands",
+    "arcana": "minor",
+    "suit": "wands",
+    "number": null,
+    "court_rank": "king",
+    "image": "/cards/wands/wands_king.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "领导力",
+          "远见",
+          "决断",
+          "创业",
+          "影响力"
+        ],
+        "meaning_zh": "拥有卓越的领导力和远见卓识，能够做出果断的决策。在事业上具有创业精神，能够激励和影响他人。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "专制",
+          "冲动",
+          "缺乏耐心",
+          "过度控制"
+        ],
+        "meaning_zh": "领导力变成专制，果断变成冲动。缺乏耐心，过度控制他人，需要学会倾听和合作。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "权杖对应火元素，代表行动、热情、创造力和意志。",
+      "number_rule_zh": null,
+      "court_rule_zh": "King代表外在掌握、管理、决策、管理、定规则。",
+      "combined_rule_zh": "火元素的外在掌握，将热情和行动力转化为管理能力和决策智慧。"
+    },
+    "domain_mapping": {
+      "感情": "在关系中扮演领导角色，给予方向和安全感",
+      "工作": "展现卓越的领导才能，推动事业发展",
+      "项目": "以远见卓识指导项目方向",
+      "学习": "成为学习领域的专家，指导他人",
+      "自我": "达到个人成长的高峰，成为自己的主宰",
+      "财务": "具有商业头脑，能够做出明智的财务决策"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "威严的国王",
+        "meaning": "权威与远见，成熟的领导",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.1,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的权杖",
+        "meaning": "意志力的体现",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.15,
+          "w": 0.2,
+          "h": 0.35
+        }
+      }
+    ]
+  }
+]

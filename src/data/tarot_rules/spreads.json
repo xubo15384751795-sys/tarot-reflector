@@ -1,0 +1,247 @@
+{
+  "spreads": [
+    {
+      "id": "single_card",
+      "name_zh": "单牌解读",
+      "name_en": "Single Card",
+      "card_count": 1,
+      "difficulty": "beginner",
+      "description_zh": "最简洁的牌阵，适合每日一牌、快速提问或当前状态概览。一张牌承载整个问题的核心象征。",
+      "positions": [
+        {
+          "index": 1,
+          "name_zh": "核心象征",
+          "name_en": "Core Symbol",
+          "meaning_zh": "代表当前问题最需要被看见的主题。"
+        }
+      ]
+    },
+    {
+      "id": "past_present_trend",
+      "name_zh": "过去 / 现在 / 趋势",
+      "name_en": "Past / Present / Trend",
+      "card_count": 3,
+      "difficulty": "beginner",
+      "description_zh": "经典三牌阵，呈现时间线上的移动。注意：趋势不是命运，而是当前模式的自然延伸。",
+      "positions": [
+        {
+          "index": 1,
+          "name_zh": "过去影响",
+          "name_en": "Past Influence",
+          "meaning_zh": "影响当前问题的过去因素。"
+        },
+        {
+          "index": 2,
+          "name_zh": "当前状态",
+          "name_en": "Present State",
+          "meaning_zh": "当前问题呈现出的核心状态。"
+        },
+        {
+          "index": 3,
+          "name_zh": "未来趋势",
+          "name_en": "Future Trend",
+          "meaning_zh": "如果当前模式延续，可能形成的趋势。不是确定命运。"
+        }
+      ],
+      "relationship_rules": [
+        "三张牌形成时间线叙事，需要解释从过去到现在的移动逻辑",
+        "第三张牌是趋势不是结果，措辞必须留有余地"
+      ]
+    },
+    {
+      "id": "situation_obstacle_advice",
+      "name_zh": "情况 / 阻碍 / 建议",
+      "name_en": "Situation / Obstacle / Advice",
+      "card_count": 3,
+      "difficulty": "beginner",
+      "description_zh": "结构化三牌阵，帮助用户看清问题的三个维度：正在发生什么、什么在阻挡、可以怎么做。",
+      "positions": [
+        {
+          "index": 1,
+          "name_zh": "当前情况",
+          "name_en": "Current Situation",
+          "meaning_zh": "问题当前最主要的状态。"
+        },
+        {
+          "index": 2,
+          "name_zh": "主要阻碍",
+          "name_en": "Key Obstacle",
+          "meaning_zh": "阻止事情顺畅发展的因素。"
+        },
+        {
+          "index": 3,
+          "name_zh": "行动建议",
+          "name_en": "Action Advice",
+          "meaning_zh": "用户接下来可以关注或调整的方向。"
+        }
+      ],
+      "relationship_rules": [
+        "第二张牌（阻碍）需要与第一张牌（情况）形成因果关系",
+        "第三张牌（建议）需要回应前两张牌揭示的问题"
+      ]
+    },
+    {
+      "id": "structural_three",
+      "name_zh": "结构三牌阵",
+      "name_en": "Structural Three",
+      "card_count": 3,
+      "difficulty": "intermediate",
+      "description_zh": "阈牌特色牌阵。表层信号是用户最容易感受到的，深层张力是背后被忽略的结构性矛盾，下一步是最务实的行动方向。",
+      "positions": [
+        {
+          "index": 1,
+          "name_zh": "表层信号",
+          "name_en": "Surface Signal",
+          "meaning_zh": "用户当前最容易感受到的问题表层。"
+        },
+        {
+          "index": 2,
+          "name_zh": "深层张力",
+          "name_en": "Deep Tension",
+          "meaning_zh": "问题背后更深的结构性矛盾。"
+        },
+        {
+          "index": 3,
+          "name_zh": "下一步",
+          "name_en": "Next Step",
+          "meaning_zh": "接下来最适合关注的行动方向。"
+        }
+      ],
+      "relationship_rules": [
+        "第二张牌需要揭示第一张牌表面之下的隐藏动力",
+        "第三张牌需要基于前两张的洞察给出可操作的方向"
+      ]
+    },
+    {
+      "id": "relationship_mirror",
+      "name_zh": "关系镜像牌阵",
+      "name_en": "Relationship Mirror",
+      "card_count": 5,
+      "difficulty": "intermediate",
+      "description_zh": "专门用于关系问题的牌阵。注意：这张牌阵不能替对方下确定判断，只能描述牌面呈现的关系动态。",
+      "protection_rules": [
+        "不能说'他一定爱你/不爱你'",
+        "不能替对方内心下确定判断",
+        "只能说'牌面呈现出的关系动态'",
+        "对方呈现的牌描述的是表现，不是内心真相"
+      ],
+      "positions": [
+        {
+          "index": 1,
+          "name_zh": "你的状态",
+          "name_en": "Your State",
+          "meaning_zh": "你在这段关系中的感受、需求或位置。"
+        },
+        {
+          "index": 2,
+          "name_zh": "对方呈现",
+          "name_en": "Other's Presentation",
+          "meaning_zh": "对方在关系中表现出来的状态。不能解释为对方真实内心的确定答案。",
+          "warning": "这只描述外在呈现，不描述内心真相"
+        },
+        {
+          "index": 3,
+          "name_zh": "关系张力",
+          "name_en": "Relational Tension",
+          "meaning_zh": "两人之间最明显的互动模式或矛盾。"
+        },
+        {
+          "index": 4,
+          "name_zh": "你的边界",
+          "name_en": "Your Boundary",
+          "meaning_zh": "你需要保护或重新确认的边界。"
+        },
+        {
+          "index": 5,
+          "name_zh": "下一步建议",
+          "name_en": "Next Step Advice",
+          "meaning_zh": "更稳妥的行动或观察方向。"
+        }
+      ],
+      "relationship_rules": [
+        "第一张和第二张牌形成镜像对比，需要解释各自的位置",
+        "第三张牌（张力）是前两张牌互动的产物",
+        "第四张牌（边界）需要回应用户在第一张牌中呈现的状态",
+        "第五张牌（建议）需要综合所有牌的洞察"
+      ]
+    },
+    {
+      "id": "celtic_cross",
+      "name_zh": "凯尔特十字",
+      "name_en": "Celtic Cross",
+      "card_count": 10,
+      "difficulty": "advanced",
+      "description_zh": "最经典的完整牌阵，适合复杂问题的深度分析。默认不放在入口页，作为高级模式提供。",
+      "positions": [
+        {
+          "index": 1,
+          "name_zh": "当前处境",
+          "name_en": "Present Situation",
+          "meaning_zh": "问题的核心状态。"
+        },
+        {
+          "index": 2,
+          "name_zh": "当前挑战",
+          "name_en": "Current Challenge",
+          "meaning_zh": "横在问题面前的阻力或课题。"
+        },
+        {
+          "index": 3,
+          "name_zh": "潜意识基础",
+          "name_en": "Unconscious Foundation",
+          "meaning_zh": "用户未必完全意识到的深层基础。"
+        },
+        {
+          "index": 4,
+          "name_zh": "过去影响",
+          "name_en": "Recent Past",
+          "meaning_zh": "影响当前处境的过去因素。"
+        },
+        {
+          "index": 5,
+          "name_zh": "显意识目标",
+          "name_en": "Conscious Goal",
+          "meaning_zh": "用户以为自己正在追求的方向。"
+        },
+        {
+          "index": 6,
+          "name_zh": "近期趋势",
+          "name_en": "Near Future",
+          "meaning_zh": "短期内可能出现的趋势，不是确定命运。"
+        },
+        {
+          "index": 7,
+          "name_zh": "自我状态",
+          "name_en": "Self Position",
+          "meaning_zh": "用户在问题中的自我位置。"
+        },
+        {
+          "index": 8,
+          "name_zh": "外部环境",
+          "name_en": "External Environment",
+          "meaning_zh": "环境、他人或外部条件。"
+        },
+        {
+          "index": 9,
+          "name_zh": "希望与恐惧",
+          "name_en": "Hopes and Fears",
+          "meaning_zh": "用户同时期待和害怕的部分。"
+        },
+        {
+          "index": 10,
+          "name_zh": "综合趋势",
+          "name_en": "Final Outcome",
+          "meaning_zh": "如果当前模式延续，可能形成的综合走向。不是确定结果。"
+        }
+      ],
+      "relationship_rules": [
+        "位置1和2形成十字交叉，是核心张力",
+        "位置3（潜意识）和5（显意识）形成内在对比",
+        "位置4（过去）和6（趋势）形成时间轴",
+        "位置7（自我）和8（环境）形成内外对比",
+        "位置9（希望与恐惧）揭示用户的内在矛盾",
+        "位置10是综合判断，必须回应前面所有牌"
+      ]
+    }
+  ]
+}

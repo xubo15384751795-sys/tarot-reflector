@@ -1,0 +1,39 @@
+以下是本次解读的任务上下文（规则块已在前文注入，请遵守）：
+
+用户问题：{{question}}
+领域：{{domain}}
+补充背景：{{context}}
+抽到的牌：{{card_name}}（{{zh_name}}）
+正逆位：{{orientation}}
+该牌核心象征：{{core_symbols}}
+该牌在此领域的传统含义：{{domain_meaning}}
+风险面向：{{risk}}
+建议方向：{{advice}}
+视觉元素：{{visual_motifs}}
+
+请生成一次符合上述规则块的中文解读，结构必须是 7 幕（整体 → 元素一 → 元素二 → 元素三 → 元素四 → 综合 → 建议）。
+
+每一幕必须包含：
+  - scene_id：1..7
+  - type：opening / motif_focus / mapping / closing
+  - step_label：与 # 对应，分别是「整体」「元素一」「元素二」「元素三」「元素四」「综合」「建议」
+  - headline：≤ 12 个中文字
+  - subtitle：≤ 18 个中文字（可选）
+  - insight：≤ 32 个中文字（可选；建议在「整体 / 综合」中给出）
+  - body：单段 ≤ 80 个中文字，总段数 ≤ 3
+  - connection：≤ 50 个中文字（可选；点题回到用户的问题）
+  - focus_motif：仅 type=motif_focus 时必填，必须是该牌 motifs[] 中存在的 id
+  - annotation_label：仅 type=motif_focus 时建议填，对应 motif 在牌面上的简短标签
+  - duration：4..8 之间的整数（用于动画节奏）
+
+返回 JSON 字段：
+
+{
+  "title": "<牌的中文名 + 正/逆位>",
+  "thesis": "<一句不超过 22 字、克制有记忆点的核心观察>",
+  "scenes": [ ... 上述 7 幕 ... ],
+  "closing_line": "<一句不超过 22 字，与 thesis 呼应>",
+  "disclaimer": "象征性反思，不是命运预测。"
+}
+
+只输出 JSON 主体，不要加 markdown 代码块、注释、解释。

@@ -1,0 +1,1021 @@
+[
+  {
+    "id": "pentacles_ace",
+    "name_zh": "星币Ace",
+    "name_en": "Ace of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": 1,
+    "court_rank": null,
+    "image": "/cards/pentacles/pentacles_ace.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "丰盛",
+          "机遇",
+          "开端",
+          "物质"
+        ],
+        "meaning_zh": "一只手从云中伸出，托着一枚闪闪发光的星币。这是物质世界的种子——新的财务机遇、事业起点或身体健康的好兆头。大地丰饶，你正处于物质丰盛的门槛前。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "错失",
+          "空虚",
+          "延迟",
+          "贪婪"
+        ],
+        "meaning_zh": "机遇被错过或延迟，你可能过于追求物质而忽视了精神需求。逆位也可能意味着财务上的损失或空虚感——拥有了物质却失去了意义。需要重新审视什么才是真正重要的。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": "数字I代表种子、开始、机会、原初能量。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "土元素的原初能量——物质的诞生，财富的种子，身体和现实世界的新开始。"
+    },
+    "domain_mapping": {
+      "感情": "新的感情机会出现，可能是物质基础稳定的伴侣",
+      "工作": "新的工作机会或事业起点，带来物质回报",
+      "项目": "项目启动，有充足的资源和资金支持",
+      "学习": "学习新技能可以带来实际的职业回报",
+      "自我": "开始关注身体健康和物质生活的改善",
+      "财务": "新的收入来源或投资机会出现"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "从云中伸出的手",
+        "meaning": "物质的馈赠，财富的机会",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.05,
+          "w": 0.3,
+          "h": 0.15
+        }
+      },
+      {
+        "id": "m2",
+        "label": "星币",
+        "meaning": "财富与价值，物质的基础",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.15,
+          "w": 0.3,
+          "h": 0.2
+        }
+      },
+      {
+        "id": "m3",
+        "label": "花园与泉水",
+        "meaning": "丰盛与滋养，物质的繁荣",
+        "bbox": {
+          "x": 0.1,
+          "y": 0.5,
+          "w": 0.8,
+          "h": 0.35
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_two",
+    "name_zh": "星币二",
+    "name_en": "Two of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": 2,
+    "court_rank": null,
+    "image": "/cards/pentacles/pentacles_two.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "平衡",
+          "灵活性",
+          "多任务",
+          "适应"
+        ],
+        "meaning_zh": "一人在抛接两枚星币，背后是汹涌的海面。这代表在多个责任之间保持平衡——你可能同时处理多项事务，需要灵活应对变化。虽然忙碌，但你有能力驾驭这种节奏。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "失衡",
+          "过载",
+          "混乱",
+          "取舍"
+        ],
+        "meaning_zh": "平衡被打破，你可能承担了过多的责任而感到不堪重负。逆位提醒你需要做出取舍，不可能同时兼顾所有事情。放下一些才能更好地管理剩余的事务。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": "数字II代表选择、平衡、关系、二元张力。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "土元素的二元张力——物质资源的平衡分配，在多个现实需求之间寻找弹性。"
+    },
+    "domain_mapping": {
+      "感情": "在感情和个人生活之间寻找平衡",
+      "工作": "同时处理多项工作任务，需要灵活应对",
+      "项目": "项目资源在多个方向间分配",
+      "学习": "学习与工作或生活责任之间的平衡",
+      "自我": "身体健康与工作压力的平衡",
+      "财务": "收支平衡，管理多条财务线"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "杂耍的人物",
+        "meaning": "平衡与适应，灵活应对",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "两个星币",
+        "meaning": "双重关注，物质与精神的平衡",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.2,
+          "w": 0.4,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_three",
+    "name_zh": "星币三",
+    "name_en": "Three of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": 3,
+    "court_rank": null,
+    "image": "/cards/pentacles/pentacles_three.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "协作",
+          "技艺",
+          "团队",
+          "专业"
+        ],
+        "meaning_zh": "石匠在教堂工地上工作，三位星币悬浮在拱门上。这是专业技能与团队协作的结合——你的才能正在被认可，与他人合作能创造更大的成果。工匠精神带来物质回报。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "平庸",
+          "缺乏协作",
+          "技能不足",
+          "孤军奋战"
+        ],
+        "meaning_zh": "团队协作出现问题，或者你的技能尚未达到要求。逆位可能意味着你拒绝接受帮助，独自承担所有工作。承认不足并寻求合作才能突破瓶颈。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": "数字III代表成长、表达、初步成果、互动。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "土元素的互动与表达——专业技能的成长，团队协作的初步成果，物质世界的创造性表达。"
+    },
+    "domain_mapping": {
+      "感情": "感情关系中双方共同努力经营",
+      "工作": "专业技能得到认可，团队合作出色",
+      "项目": "项目需要多方协作才能推进",
+      "学习": "通过学习获得专业认证或技能",
+      "自我": "通过实践不断提升专业能力",
+      "财务": "通过专业技能或合作获得收入"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "工匠与学徒",
+        "meaning": "学习与精进，技能的培养",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "三个星币",
+        "meaning": "合作与建设，团队的成果",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.2,
+          "w": 0.4,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_four",
+    "name_zh": "星币四",
+    "name_en": "Four of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": 4,
+    "court_rank": null,
+    "image": "/cards/pentacles/pentacles_four.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "保守",
+          "控制",
+          "囤积",
+          "安全感"
+        ],
+        "meaning_zh": "一人紧紧抱着一枚星币，脚下各踩一枚，头顶一枚。这是对物质的强烈控制欲——你可能在囤积资源，害怕失去已有的东西。适度的保守是谨慎，过度的控制则是贪婪。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "释放",
+          "慷慨",
+          "恐惧",
+          "僵化"
+        ],
+        "meaning_zh": "你开始学会放手，或者因为过于恐惧而更加紧握。逆位可能是释放对物质的执着，也可能是对失去的恐惧达到极端。需要找到安全与自由之间的平衡。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": "数字IV代表稳定、结构、停滞、边界。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "土元素的稳定与边界——物质的固化，资源的保守，安全感与控制欲的边界。"
+    },
+    "domain_mapping": {
+      "感情": "在感情中过于占有欲强，不愿付出",
+      "工作": "在工作中保守固执，拒绝改变",
+      "项目": "项目资源被锁死，缺乏流动性",
+      "学习": "学习方法僵化，不愿尝试新方式",
+      "自我": "过度保护自己，拒绝开放和成长",
+      "财务": "过于保守的理财策略，害怕损失"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "紧握星币的人",
+        "meaning": "守财与固执，物质的执念",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "四个星币",
+        "meaning": "稳固的基础，物质的安全",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.25,
+          "w": 0.5,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_five",
+    "name_zh": "星币五",
+    "name_en": "Five of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": 5,
+    "court_rank": null,
+    "image": "/cards/pentacles/pentacles_five.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "匮乏",
+          "困境",
+          "孤立",
+          "损失"
+        ],
+        "meaning_zh": "两个衣衫褴褛的人在雪地中蹒跚，走过一扇透出灯光的窗户。这是物质上的匮乏和困境——贫困、失业、健康问题。但窗户里的灯光提醒你，帮助就在身边，只是你可能没有看到。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "恢复",
+          "好转",
+          "拒绝帮助",
+          "内在丰富"
+        ],
+        "meaning_zh": "困境开始缓解，你正在从物质损失中恢复。逆位也可能意味着你拒绝接受帮助，宁愿独自承受。也可能是物质虽匮乏但内心找到了平静和力量。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": "数字V代表冲突、变化、损失、扰动。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "土元素的冲突与损失——物质资源的匮乏，现实世界的困境，资源分配的扰动。"
+    },
+    "domain_mapping": {
+      "感情": "感情中感到被忽视或缺乏物质基础",
+      "工作": "失业、降薪或工作环境恶劣",
+      "项目": "项目资源严重不足，面临困境",
+      "学习": "学习资源匮乏或经济困难影响学业",
+      "自我": "身体健康出现问题或精神匮乏",
+      "财务": "财务困难，需要寻求帮助或改变策略"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "贫困的景象",
+        "meaning": "物质的匮乏，困境中的坚韧",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "五个星币",
+        "meaning": "失去与挑战，需要帮助",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.3,
+          "w": 0.5,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_six",
+    "name_zh": "星币六",
+    "name_en": "Six of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": 6,
+    "court_rank": null,
+    "image": "/cards/pentacles/pentacles_six.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "慷慨",
+          "给予",
+          "分享",
+          "公平"
+        ],
+        "meaning_zh": "富人手持天平，将星币分给穷人。这是物质上的慷慨与公平——你有能力给予，也愿意分享。天平象征着公平的分配，给予者和接受者之间是平等的关系。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "自私",
+          "剥削",
+          "依赖",
+          "不平等"
+        ],
+        "meaning_zh": "给予变成控制，接受变成依赖。逆位可能意味着你给予时带有条件，或者你拒绝接受本该得到的帮助。也可能是资源分配不公，存在剥削关系。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": "数字VI代表调整、恢复、流动、重新平衡。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "土元素的流动与重新平衡——物质资源的合理分配，给予与接受的良性循环。"
+    },
+    "domain_mapping": {
+      "感情": "感情中双方平等付出和接受",
+      "工作": "职场中的公平报酬和资源共享",
+      "项目": "项目资源合理分配，团队利益均衡",
+      "学习": "分享知识和资源，互相帮助成长",
+      "自我": "在给予和接受之间找到平衡",
+      "财务": "合理的财务分配，支持他人也照顾自己"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "慷慨的给予",
+        "meaning": "分享与互助，物质的流通",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.15,
+          "w": 0.5,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "六个星币",
+        "meaning": "公平与平衡，物质的交换",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.2,
+          "w": 0.4,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_seven",
+    "name_zh": "星币七",
+    "name_en": "Seven of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": 7,
+    "court_rank": null,
+    "image": "/cards/pentacles/pentacles_seven.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "耐心",
+          "耕耘",
+          "等待",
+          "评估"
+        ],
+        "meaning_zh": "农夫倚锄看着生长中的星币作物。你已经播种并付出了努力，现在是等待收获的时刻。这不是消极的等待，而是有耐心的观察和评估——看看哪些值得继续投入，哪些需要调整。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "急躁",
+          "无果",
+          "方向错误",
+          "放弃"
+        ],
+        "meaning_zh": "你可能过于急躁想要看到结果，或者发现努力没有得到预期的回报。逆位提醒你重新评估方向——可能需要改变策略，或者承认某些投入确实不会有收获。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": "数字VII代表挑战、策略、试炼、防守。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "土元素的挑战与策略——耕耘过程中的考验，需要耐心和策略来守护已有的成果。"
+    },
+    "domain_mapping": {
+      "感情": "感情需要时间培育，不要急于求成",
+      "工作": "职业发展需要长期积累，保持耐心",
+      "项目": "项目进展缓慢，需要评估是否继续投入",
+      "学习": "学习成果需要时间显现，保持努力",
+      "自我": "个人成长是长期过程，需要持续耕耘",
+      "财务": "投资需要耐心等待回报，评估风险"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "等待收获的人",
+        "meaning": "耐心与坚持，长期的投入",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "七个星币",
+        "meaning": "已付出的努力，等待结果",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.35,
+          "w": 0.6,
+          "h": 0.25
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_eight",
+    "name_zh": "星币八",
+    "name_en": "Eight of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": 8,
+    "court_rank": null,
+    "image": "/cards/pentacles/pentacles_eight.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "勤奋",
+          "专注",
+          "精进",
+          "手艺"
+        ],
+        "meaning_zh": "工匠专心致志地雕刻每一枚星币。这是对技艺的专注和精益求精——你正在通过重复练习提升技能，每一枚完成的星币都代表进步。勤奋和专注是通往精通的必经之路。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "敷衍",
+          "厌倦",
+          "缺乏动力",
+          "方向偏移"
+        ],
+        "meaning_zh": "专注力下降，你可能对重复的工作感到厌倦。逆位也可能意味着你没有全力以赴，敷衍了事。需要重新找回对工作的热情，或者考虑是否需要改变方向。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": "数字VIII代表行动、重复、推进、力量积累。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "土元素的行动与重复——通过持续的实践积累力量，将技能打磨到极致。"
+    },
+    "domain_mapping": {
+      "感情": "用心经营感情，投入时间和精力",
+      "工作": "专注于提升专业技能，精益求精",
+      "项目": "项目进入精细化执行阶段",
+      "学习": "通过反复练习掌握技能，学术精进",
+      "自我": "持续的自我提升和技能修炼",
+      "财务": "通过努力工作和技能提升增加收入"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "专注的工匠",
+        "meaning": "精益求精，技艺的打磨",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "八个星币",
+        "meaning": "持续的产出，质量的保证",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.25,
+          "w": 0.5,
+          "h": 0.25
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_nine",
+    "name_zh": "星币九",
+    "name_en": "Nine of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": 9,
+    "court_rank": null,
+    "image": "/cards/pentacles/pentacles_nine.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "富足",
+          "独立",
+          "优雅",
+          "享受"
+        ],
+        "meaning_zh": "优雅女子在丰收的花园中，手臂上停着猎鹰。这是通过自身努力获得的富足——你已经积累了足够的资源，现在可以独立自主地享受生活。物质上的成功带来精神上的满足。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "过度消费",
+          "虚荣",
+          "依赖",
+          "空虚"
+        ],
+        "meaning_zh": "富足变成过度消费或虚荣，或者你依赖他人的财富而非自己的努力。逆位也可能意味着物质丰盛但内心空虚。真正的富足不仅是物质的，更是精神的。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": "数字IX代表接近完成、个人状态、积累结果。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "土元素的个人状态——物质积累的个人成就，独立的经济能力和品味。"
+    },
+    "domain_mapping": {
+      "感情": "感情关系成熟稳定，双方独立又亲密",
+      "工作": "事业达到独立自主的阶段",
+      "项目": "项目成果丰硕，收获回报",
+      "学习": "学习成果显著，知识带来独立",
+      "自我": "个人能力和经济独立，享受自由",
+      "财务": "财务独立，有足够的资源享受生活"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "满足的女性",
+        "meaning": "物质的丰盛，独立的满足",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "九个星币",
+        "meaning": "个人成就，物质的回报",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.2,
+          "w": 0.6,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_ten",
+    "name_zh": "星币十",
+    "name_en": "Ten of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": 10,
+    "court_rank": null,
+    "image": "/cards/pentacles/pentacles_ten.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "传承",
+          "家族",
+          "遗产",
+          "根基"
+        ],
+        "meaning_zh": "老人在拱门下，星币排列成生命之树的图案，家人围坐身边。这是物质世界的圆满——财富的传承，家族的根基，长久积累带来的安全感。你为后代打下了坚实的基础。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "家族争端",
+          "遗产纠纷",
+          "失去根基",
+          "家庭矛盾"
+        ],
+        "meaning_zh": "家族财富或传承出现问题，可能是遗产纠纷或家庭矛盾。逆位也可能意味着你失去了物质基础的支撑，需要重新建立根基。家族的责任和期望可能成为负担。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": "数字X代表完成、负担、周期结束、转入下一阶段。",
+      "court_rule_zh": null,
+      "combined_rule_zh": "土元素的完成与传承——物质积累的圆满，财富的代际传递，长期建设的最终成果。"
+    },
+    "domain_mapping": {
+      "感情": "感情关系稳定长久，建立家庭基础",
+      "工作": "事业达到稳定期，为未来打好基础",
+      "项目": "项目圆满完成，成果可以传承",
+      "学习": "学术积累深厚，知识传承给后人",
+      "自我": "人生根基稳固，物质和精神都有保障",
+      "财务": "财务状况圆满，有遗产或长期保障"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "家族的传承",
+        "meaning": "家族的财富，世代的积累",
+        "bbox": {
+          "x": 0.2,
+          "y": 0.15,
+          "w": 0.6,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "十个星币",
+        "meaning": "物质的圆满，家族的荣耀",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.2,
+          "w": 0.5,
+          "h": 0.3
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_page",
+    "name_zh": "星币侍从",
+    "name_en": "Page of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": null,
+    "court_rank": "page",
+    "image": "/cards/pentacles/pentacles_page.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "学习",
+          "务实",
+          "计划",
+          "潜力"
+        ],
+        "meaning_zh": "年轻侍从专注地凝视手中的星币。他是土元素的初学者——对物质世界充满好奇，愿意从基础开始学习。这是一个制定计划、探索物质世界规则的阶段。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "懒惰",
+          "不切实际",
+          "拖延",
+          "缺乏根基"
+        ],
+        "meaning_zh": "学习态度不端正，或者计划停留在纸面上没有行动。逆位可能意味着你对物质事务缺乏兴趣，或者想法不切实际。需要从实际出发，脚踏实地。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": null,
+      "court_rule_zh": "侍从代表初学者、信使、观察、学习、试探。",
+      "combined_rule_zh": "土元素的初学者——对物质世界的初步探索，学习现实世界的规则，培养务实精神。"
+    },
+    "domain_mapping": {
+      "感情": "对感情关系认真，学习如何经营",
+      "工作": "职场新人，学习实际工作技能",
+      "项目": "项目启动阶段，制定详细计划",
+      "学习": "学习实用技能，打下扎实基础",
+      "自我": "开始关注物质生活和身体健康",
+      "财务": "开始学习理财，建立财务规划"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "凝视星币的青年",
+        "meaning": "物质的探索，学习的开始",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的星币",
+        "meaning": "物质的礼物，机会的种子",
+        "bbox": {
+          "x": 0.35,
+          "y": 0.2,
+          "w": 0.3,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_knight",
+    "name_zh": "星币骑士",
+    "name_en": "Knight of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": null,
+    "court_rank": "knight",
+    "image": "/cards/pentacles/pentacles_knight.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "勤奋",
+          "稳重",
+          "可靠",
+          "推进"
+        ],
+        "meaning_zh": "骑士骑着稳重的马，手持星币。他是土元素的行动者——虽然速度不快，但每一步都踏实可靠。他用勤奋和毅力推进目标，不求速成但求稳健。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "懒散",
+          "停滞",
+          "固执",
+          "缺乏进展"
+        ],
+        "meaning_zh": "稳重变成懒散，可靠变成停滞。你可能过于保守而错过机会，或者固执地坚持低效的方法。逆位提醒你，稳健不等于停滞，踏实也需要适时推进。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": null,
+      "court_rule_zh": "骑士代表行动者、追求者、推进、追逐、冲刺。",
+      "combined_rule_zh": "土元素的行动者——将务实转化为行动，用稳重和毅力推进物质目标。"
+    },
+    "domain_mapping": {
+      "感情": "用稳重和真诚追求感情，不急不躁",
+      "工作": "踏实推进工作任务，注重质量和细节",
+      "项目": "项目稳步推进，注重执行和交付",
+      "学习": "勤奋学习，注重基础知识的积累",
+      "自我": "通过持续努力实现个人目标",
+      "财务": "稳健的理财策略，注重长期收益"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "稳重的骑士",
+        "meaning": "踏实与勤奋，稳步前进",
+        "bbox": {
+          "x": 0.25,
+          "y": 0.1,
+          "w": 0.5,
+          "h": 0.6
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的星币",
+        "meaning": "物质的追求",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.15,
+          "w": 0.2,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_queen",
+    "name_zh": "星币王后",
+    "name_en": "Queen of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": null,
+    "court_rank": "queen",
+    "image": "/cards/pentacles/pentacles_queen.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "富足",
+          "滋养",
+          "务实",
+          "温暖"
+        ],
+        "meaning_zh": "王后坐在花园中，怀抱一枚巨大的星币。她是土元素的内在掌握者——她懂得如何创造和享受物质富足，同时用温暖和滋养照顾身边的人。务实与温情并存。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "过度付出",
+          "忽视自我",
+          "物质主义",
+          "控制"
+        ],
+        "meaning_zh": "你可能为了照顾他人而忽略了自己的需求，或者将物质给予变成控制的手段。逆位提醒你，滋养他人之前要先照顾好自己，物质的给予不应带有条件。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": null,
+      "court_rule_zh": "王后代表内在掌握、滋养、感受、照料、吸收。",
+      "combined_rule_zh": "土元素的内在掌握者——将物质能力内化为滋养力量，用富足和温暖照顾自己和他人。"
+    },
+    "domain_mapping": {
+      "感情": "在感情中给予温暖和安全感",
+      "工作": "创造富足的工作环境，照顾团队成员",
+      "项目": "项目资源充足，注重可持续发展",
+      "学习": "分享知识和资源，帮助他人成长",
+      "自我": "身心健康，享受生活的同时照顾他人",
+      "财务": "善于管理家庭财务，创造富足生活"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "丰饶的女王",
+        "meaning": "物质的滋养，实际的关怀",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.15,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的星币",
+        "meaning": "财富的掌控",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.2,
+          "w": 0.2,
+          "h": 0.2
+        }
+      }
+    ]
+  },
+  {
+    "id": "pentacles_king",
+    "name_zh": "星币国王",
+    "name_en": "King of Pentacles",
+    "arcana": "minor",
+    "suit": "pentacles",
+    "number": null,
+    "court_rank": "king",
+    "image": "/cards/pentacles/pentacles_king.jpg",
+    "traditional": {
+      "upright": {
+        "keywords_zh": [
+          "成功",
+          "财富",
+          "领导力",
+          "稳定"
+        ],
+        "meaning_zh": "国王端坐宝座，手持星币，周围是丰收的景象。他是土元素的外在掌握者——通过自身努力获得了巨大的物质成功，拥有领导力和决策力。他的财富不仅是金钱，更是智慧和经验的积累。"
+      },
+      "reversed": {
+        "keywords_zh": [
+          "贪婪",
+          "僵化",
+          "过度控制",
+          "物质主义"
+        ],
+        "meaning_zh": "成功变成贪婪，稳定变成僵化。你可能过度追求物质财富，或者用财富控制他人。逆位提醒你，真正的成功不仅是物质的积累，更是如何使用财富造福他人。"
+      }
+    },
+    "symbolic_components": {
+      "suit_rule_zh": "星币对应土元素，代表现实、金钱、身体、工作、资源、长期积累。",
+      "number_rule_zh": null,
+      "court_rule_zh": "国王代表外在掌握、管理、决策、管理、定规则。",
+      "combined_rule_zh": "土元素的外在掌握者——将物质能力外化为领导力和管理能力，用财富和智慧制定规则。"
+    },
+    "domain_mapping": {
+      "感情": "在感情中提供稳定和物质保障",
+      "工作": "事业成功，拥有强大的领导力",
+      "项目": "项目资源充足，由经验丰富的人掌控",
+      "学习": "学术成就卓越，知识渊博",
+      "自我": "物质和精神都达到成熟稳定的境界",
+      "财务": "财务状况极其稳健，拥有大量财富"
+    },
+    "source": {
+      "deck": "Rider-Waite-Smith",
+      "image_source": "Wikimedia Commons"
+    },
+    "motifs": [
+      {
+        "id": "m1",
+        "label": "富有的国王",
+        "meaning": "物质的成功，实际的智慧",
+        "bbox": {
+          "x": 0.3,
+          "y": 0.1,
+          "w": 0.4,
+          "h": 0.5
+        }
+      },
+      {
+        "id": "m2",
+        "label": "手中的星币",
+        "meaning": "财富的权威",
+        "bbox": {
+          "x": 0.4,
+          "y": 0.15,
+          "w": 0.2,
+          "h": 0.3
+        }
+      }
+    ]
+  }
+]

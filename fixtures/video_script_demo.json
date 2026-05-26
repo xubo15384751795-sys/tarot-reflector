@@ -1,0 +1,12 @@
+{
+  "title_zh": "愚者：新的开始",
+  "scenes": [
+    {
+      "scene_id": 1,
+      "duration": 4,
+      "subtitle_zh": "你站在一个新的边界前。",
+      "card_id": "major_00_fool",
+      "focus_motif": "cliff_youth"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "wands": {
+    "name_zh": "权杖",
+    "name_en": "Wands",
+    "symbol": "🪄",
+    "element_zh": "火",
+    "element_en": "Fire",
+    "core_zh": "行动、热情、创造力、意志、推进、竞争",
+    "domains": ["项目", "事业", "行动", "创造", "动力"],
+    "shadow_zh": "冲动、急躁、燃尽、缺乏持续性",
+    "body_zh": "脊柱、神经系统、肌肉",
+    "season_zh": "夏季",
+    "direction_zh": "南方",
+    "timeframe_zh": "快速、短期推进",
+    "question_types": ["要不要做", "怎么推进", "动力在哪里"]
+  },
+  "cups": {
+    "name_zh": "圣杯",
+    "name_en": "Cups",
+    "symbol": "🏆",
+    "element_zh": "水",
+    "element_en": "Water",
+    "core_zh": "情感、关系、直觉、内在感受、疗愈、亲密",
+    "domains": ["感情", "关系", "情绪", "自我照顾"],
+    "shadow_zh": "情绪化、依赖、逃避现实、沉溺幻想",
+    "body_zh": "心脏、血液、体液",
+    "season_zh": "秋季",
+    "direction_zh": "西方",
+    "timeframe_zh": "流动、情感周期",
+    "question_types": ["感受是什么", "关系怎么样", "内心想要什么"]
+  },
+  "swords": {
+    "name_zh": "宝剑",
+    "name_en": "Swords",
+    "symbol": "⚔️",
+    "element_zh": "风",
+    "element_en": "Air",
+    "core_zh": "理性、冲突、判断、语言、真相、焦虑",
+    "domains": ["决策", "沟通", "冲突", "认知", "学习"],
+    "shadow_zh": "过度分析、冷漠、刺痛、精神消耗",
+    "body_zh": "大脑、肺、神经系统",
+    "season_zh": "冬季",
+    "direction_zh": "东方",
+    "timeframe_zh": "快速但可能反复",
+    "question_types": ["该怎么想", "真相是什么", "怎么决定"]
+  },
+  "pentacles": {
+    "name_zh": "星币",
+    "name_en": "Pentacles",
+    "symbol": "🪙",
+    "element_zh": "土",
+    "element_en": "Earth",
+    "core_zh": "现实、金钱、身体、工作、资源、长期积累",
+    "domains": ["财务", "工作", "身体", "学业基础", "长期建设"],
+    "shadow_zh": "停滞、物质焦虑、保守、过度依赖稳定",
+    "body_zh": "骨骼、消化系统、身体",
+    "season_zh": "春季",
+    "direction_zh": "北方",
+    "timeframe_zh": "缓慢、长期",
+    "question_types": ["值不值得", "怎么落地", "基础稳不稳"]
+  }
+}

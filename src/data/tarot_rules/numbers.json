@@ -1,0 +1,72 @@
+{
+  "ace": {
+    "name_zh": "一",
+    "name_en": "Ace",
+    "number": 1,
+    "core_zh": "种子、开始、机会、原初能量",
+    "description_zh": "纯粹的花色能量刚刚萌芽，蕴含无限可能。它是邀请，不是结果。"
+  },
+  "two": {
+    "name_zh": "二",
+    "name_en": "Two",
+    "number": 2,
+    "core_zh": "选择、平衡、关系、二元张力",
+    "description_zh": "能量进入双重性，需要在对立面之间找到位置。"
+  },
+  "three": {
+    "name_zh": "三",
+    "name_en": "Three",
+    "number": 3,
+    "core_zh": "成长、表达、初步成果、互动",
+    "description_zh": "种子开始生长，能量外显，形成可感知的初步形态。"
+  },
+  "four": {
+    "name_zh": "四",
+    "name_en": "Four",
+    "number": 4,
+    "core_zh": "稳定、结构、停滞、边界",
+    "description_zh": "能量寻求稳固，建立框架，但也可能陷入僵化。"
+  },
+  "five": {
+    "name_zh": "五",
+    "name_en": "Five",
+    "number": 5,
+    "core_zh": "冲突、变化、损失、扰动",
+    "description_zh": "稳定被打破，张力出现。五是考验的数字，迫使成长。"
+  },
+  "six": {
+    "name_zh": "六",
+    "name_en": "Six",
+    "number": 6,
+    "core_zh": "调整、恢复、流动、重新平衡",
+    "description_zh": "经历五的扰动后，能量开始回流，寻求新的和谐。"
+  },
+  "seven": {
+    "name_zh": "七",
+    "name_en": "Seven",
+    "number": 7,
+    "core_zh": "挑战、策略、试炼、防守",
+    "description_zh": "需要面对考验，评估策略，决定是坚持还是调整。"
+  },
+  "eight": {
+    "name_zh": "八",
+    "name_en": "Eight",
+    "number": 8,
+    "core_zh": "行动、重复、推进、力量积累",
+    "description_zh": "能量加速运转，通过持续行动积累势能。"
+  },
+  "nine": {
+    "name_zh": "九",
+    "name_en": "Nine",
+    "number": 9,
+    "core_zh": "接近完成、个人状态、积累结果",
+    "description_zh": "花色能量接近成熟，呈现个人化的积累结果。"
+  },
+  "ten": {
+    "name_zh": "十",
+    "name_en": "Ten",
+    "number": 10,
+    "core_zh": "完成、负担、周期结束、转入下一阶段",
+    "description_zh": "花色能量达到顶点，既是完成也是负担，即将进入新的循环。"
+  }
+}
