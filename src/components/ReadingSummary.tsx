@@ -216,7 +216,7 @@ export default function ReadingSummary({
 
       {/* ── Coda-style 行动 ── */}
       <div className="flex flex-col gap-2.5">
-        <button onClick={onWriteNote} className="coda-action coda-primary">
+        <button onClick={onWriteNote} className="coda-action">
           <span className="coda-glyph">✎</span>
           <span>写下我的感受</span>
         </button>
@@ -224,8 +224,13 @@ export default function ReadingSummary({
           <span className="coda-glyph">↻</span>
           <span>重新看一遍</span>
         </button>
-        <button onClick={onClose} className="coda-action coda-quiet">
-          <span className="coda-glyph">·</span>
+        <button onClick={onClose} className="coda-action">
+          <span className="coda-glyph">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.6">
+              <path d="M2 6h7l2-2h9v16H2z" />
+              <path d="M2 6v14" />
+            </svg>
+          </span>
           <span>合上档案</span>
         </button>
       </div>

@@ -174,7 +174,7 @@ export default function ReadingPanel({
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {onReplay && (
-              <button onClick={onReplay} className="coda-action coda-primary">
+              <button onClick={onReplay} className="coda-action">
                 <span className="coda-glyph">↻</span>
                 <span>继续看这个问题</span>
               </button>
@@ -192,8 +192,13 @@ export default function ReadingPanel({
               </button>
             )}
             {onSoftClose && (
-              <button onClick={onSoftClose} className="coda-action coda-quiet">
-                <span className="coda-glyph">·</span>
+              <button onClick={onSoftClose} className="coda-action">
+                <span className="coda-glyph">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.6">
+                    <path d="M2 6h7l2-2h9v16H2z" />
+                    <path d="M2 6v14" />
+                  </svg>
+                </span>
                 <span>到这里就好</span>
               </button>
             )}
