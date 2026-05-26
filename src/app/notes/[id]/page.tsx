@@ -51,8 +51,11 @@ export default function SnapshotDetailPage() {
   const [followUpText, setFollowUpText] = useState("");
   const [confirmDeleteNote, setConfirmDeleteNote] = useState<string | null>(null);
 
-  // Random review prompt (stable across re-renders via lazy initializer)
-  const [reviewPrompt] = useState(() => REVIEW_PROMPTS[Math.floor(Math.random() * REVIEW_PROMPTS.length)]);
+  // Deterministic review prompt based on snapshot ID (avoids hydration mismatch)
+  const reviewPrompt = useMemo(() => {
+    const hash = id.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+    return REVIEW_PROMPTS[hash % REVIEW_PROMPTS.length];
+  }, [id]);
 
   const handleSaveFollowUp = () => {
     if (!followUpText.trim()) return;
