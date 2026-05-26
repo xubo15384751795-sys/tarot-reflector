@@ -16,6 +16,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import AppShell from "@/components/AppShell";
 import { AlchemicalRing } from "@/components/ArchiveEmblems";
+import SavePanel from "@/components/SavePanel";
 import { useReadingSession } from "@/features/reading/hooks/useReadingSession";
 import { useReadingApi } from "@/features/reading/hooks/useReadingApi";
 import { useReadingPageActions } from "@/features/reading/hooks/useReadingPageActions";
@@ -37,7 +38,11 @@ function ReadingContent() {
   const api = useReadingApi();
   const actions = useReadingPageActions({
     script: session.state.script,
+    drawn: session.state.drawn,
     question,
+    reframe: session.state.reframe?.reframed ?? null,
+    domain,
+    mode,
     api,
     navigateHome: useCallback(() => router.push("/"), [router]),
   });
@@ -51,6 +56,7 @@ function ReadingContent() {
   // 分享按钮仅 summary 阶段露出，避免在用户还在读的过程中诱导社交分享
   const canShare = stage === "summary";
 
+  // Summary 阶段：显示保存面板
   return (
     <AppShell
       onRedraw={showActions ? () => router.push("/") : undefined}
@@ -98,7 +104,7 @@ function ReadingContent() {
               onRelationshipsNext={session.goSummary}
               onSummary={session.goSummary}
               onReplay={session.replay}
-              onWriteNote={actions.openNote}
+              onWriteNote={actions.openSavePanel}
               onClose={actions.startSoftClose}
               onErrorBack={() => router.push("/")}
             />
@@ -106,12 +112,59 @@ function ReadingContent() {
         </AnimatePresence>
       </div>
 
+      {/* 保存面板 */}
+      <AnimatePresence>
+        {actions.showSavePanel && (
+          <SavePanel
+            visible={actions.showSavePanel}
+            onSaveSnapshot={actions.saveSnapshotWithNote}
+            onSaveNoteOnly={actions.saveNoteOnly}
+            onSkip={actions.closeSavePanel}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* 旧版笔记浮层（保留兼容） */}
       <AnimatePresence>
         <ReflectionStage
           visible={actions.showNote}
           onSave={actions.saveNote}
           onSkip={actions.closeNote}
         />
+      </AnimatePresence>
+
+      {/* 同牌提醒 */}
+      <AnimatePresence>
+        {actions.sameCardReminder && (
+          <motion.div
+            key="same-card-reminder"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 max-w-[400px] w-[calc(100%-2rem)] rounded-2xl px-5 py-4"
+            style={{
+              background: "var(--bg-glass)",
+              backdropFilter: "blur(14px)",
+              border: "1px solid rgba(214,178,109,0.28)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+            }}
+          >
+            <p className="text-[13px] leading-[1.6]" style={{ color: "var(--text-secondary)", fontFamily: "var(--font-serif-like)" }}>
+              {actions.sameCardReminder.message}
+            </p>
+            <div className="flex justify-end gap-2 mt-3">
+              <button onClick={actions.dismissSameCardReminder} className="action-pill">
+                <span>不用了</span>
+              </button>
+              <button
+                onClick={() => { router.push(`/notes/${actions.sameCardReminder!.snapshots[0].reading_id}`); actions.dismissSameCardReminder(); }}
+                className="coda-action coda-primary"
+              >
+                <span>回看</span>
+              </button>
+            </div>
+          </motion.div>
+        )}
       </AnimatePresence>
 
       <ReadingOverlays

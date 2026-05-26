@@ -1,19 +1,43 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+// metadataBase 用于 Next.js 把相对 og:image 路径解析为绝对 URL；
+// 部署时通过 NEXT_PUBLIC_SITE_URL 注入，本地 fallback 到 localhost。
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
-  title: "阈牌｜中文动态塔罗解读",
-  description: "基于 Rider–Waite–Smith 传统牌义的中文动态塔罗反思工具。",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "阈牌｜中文动态塔罗解读",
+    template: "%s · 阈牌",
+  },
+  description: "基于 Rider–Waite–Smith 传统牌义的中文动态塔罗反思工具——象征性反思，不是命运预测。",
+  keywords: [
+    "塔罗",
+    "塔罗牌",
+    "Rider-Waite-Smith",
+    "韦特塔罗",
+    "心理反思",
+    "象征解读",
+    "阈牌",
+  ],
+  authors: [{ name: "阈牌" }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "阈牌｜中文动态塔罗解读",
-    description: "翻开一页档案，看见你问题的结构。",
+    description: "翻开一页档案，看见你问题的结构。象征性反思，不是命运预测。",
     type: "website" as const,
+    locale: "zh_CN",
+    siteName: "阈牌",
     images: [
       {
-        url: "/og/default.png",
+        url: "/og/default.svg",
         width: 1200,
         height: 630,
-        alt: "阈牌",
+        alt: "阈牌 · 中文动态塔罗解读",
       },
     ],
   },
@@ -21,7 +45,17 @@ export const metadata: Metadata = {
     card: "summary_large_image" as const,
     title: "阈牌",
     description: "翻开一页档案，看见你问题的结构。",
-    images: ["/og/default.png"],
+    images: ["/og/default.svg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

@@ -10,10 +10,20 @@ import { useCallback, useState } from "react";
 import type { ReadingScript } from "../types/reading";
 import type { ReadingScript as VideoReadingScript } from "@/types/readingScript";
 import type { ReadingApi } from "./useReadingApi";
+import type { SpreadSnapshot } from "../types/reading";
+import type { Domain, ReadingMode } from "@/lib/schema";
+import { getNotesRepository } from "@/features/notes/repository";
+import { createSnapshotFromReading, createNote } from "@/features/notes/utils";
+import { checkSameCard } from "@/features/notes/sameCardReminder";
+import type { SameCardReminder } from "@/features/notes/sameCardReminder";
 
 type Args = {
   script: ReadingScript | null;
+  drawn: SpreadSnapshot | null;
   question: string;
+  reframe: string | null;
+  domain: Domain;
+  mode: ReadingMode;
   api: ReadingApi;
   navigateHome: () => void;
 };
@@ -21,66 +31,173 @@ type Args = {
 export type ReadingPageActions = {
   // UI state
   showNote: boolean;
+  showSavePanel: boolean;
   noteSaved: boolean;
   softClose: boolean;
   shareHint: string | null;
   demoMode: boolean;
   videoScript: VideoReadingScript | null;
+  sameCardReminder: SameCardReminder | null;
   // setters / handlers
   openNote: () => void;
   closeNote: () => void;
   saveNote: (text: string) => void;
+  openSavePanel: () => void;
+  closeSavePanel: () => void;
+  saveSnapshotWithNote: (noteText: string) => void;
+  saveNoteOnly: (noteText: string) => void;
   share: () => Promise<void>;
   triggerDemo: () => Promise<void>;
   closeDemo: () => void;
   startSoftClose: () => void;
+  dismissSameCardReminder: () => void;
+  checkForSameCard: (cardIds: string[]) => void;
 };
 
 export function useReadingPageActions({
   script,
+  drawn,
   question,
+  reframe,
+  domain,
+  mode,
   api,
   navigateHome,
 }: Args): ReadingPageActions {
   const [showNote, setShowNote] = useState(false);
+  const [showSavePanel, setShowSavePanel] = useState(false);
   const [noteSaved, setNoteSaved] = useState(false);
   const [softClose, setSoftClose] = useState(false);
   const [shareHint, setShareHint] = useState<string | null>(null);
   const [demoMode, setDemoMode] = useState(false);
   const [videoScript, setVideoScript] = useState<VideoReadingScript | null>(null);
+  const [sameCardReminder, setSameCardReminder] = useState<SameCardReminder | null>(null);
 
   const openNote = useCallback(() => setShowNote(true), []);
   const closeNote = useCallback(() => setShowNote(false), []);
+  const openSavePanel = useCallback(() => setShowSavePanel(true), []);
+  const closeSavePanel = useCallback(() => setShowSavePanel(false), []);
 
   const saveNote = useCallback(
     (text: string) => {
-      if (!text.trim() || !script) {
+      if (!text.trim() || !script || !drawn) {
         setShowNote(false);
         return;
       }
-      try {
-        const key = "tarot:notes";
-        const existing = JSON.parse(
-          localStorage.getItem(key) ?? "[]",
-        ) as Array<unknown>;
-        existing.unshift({
-          savedAt: new Date().toISOString(),
-          card_id: script.card_id,
-          zh_name: script.zh_name,
-          orientation: script.orientation,
+      const repo = getNotesRepository();
+      // Check if snapshot already exists
+      let snapshot = repo.getSnapshot(drawn.reading_id);
+      if (!snapshot) {
+        snapshot = createSnapshotFromReading({
+          reading_id: drawn.reading_id,
+          mode,
           question,
-          note: text.trim(),
+          reframe,
+          domain,
+          spread_id: drawn.spread_id,
+          spread_name_zh: drawn.spread_name_zh,
+          drawn_cards: drawn.drawn_cards,
+          script,
         });
-        localStorage.setItem(key, JSON.stringify(existing.slice(0, 50)));
-      } catch {
-        /* silent */
+        repo.saveSnapshot(snapshot);
       }
+      const note = createNote({
+        snapshot_id: drawn.reading_id,
+        content: text.trim(),
+        type: "initial",
+      });
+      repo.saveNote(note);
       setNoteSaved(true);
       setShowNote(false);
       setTimeout(() => setNoteSaved(false), 2400);
     },
-    [script, question],
+    [script, drawn, question, reframe, domain, mode],
   );
+
+  const saveSnapshotWithNote = useCallback(
+    (noteText: string) => {
+      if (!script || !drawn) {
+        setShowSavePanel(false);
+        return;
+      }
+      const repo = getNotesRepository();
+      const snapshot = createSnapshotFromReading({
+        reading_id: drawn.reading_id,
+        mode,
+        question,
+        reframe,
+        domain,
+        spread_id: drawn.spread_id,
+        spread_name_zh: drawn.spread_name_zh,
+        drawn_cards: drawn.drawn_cards,
+        script,
+      });
+      repo.saveSnapshot(snapshot);
+      if (noteText.trim()) {
+        const note = createNote({
+          snapshot_id: drawn.reading_id,
+          content: noteText.trim(),
+          type: "initial",
+        });
+        repo.saveNote(note);
+      }
+      setNoteSaved(true);
+      setShowSavePanel(false);
+      setTimeout(() => setNoteSaved(false), 2400);
+    },
+    [script, drawn, question, reframe, domain, mode],
+  );
+
+  const saveNoteOnly = useCallback(
+    (noteText: string) => {
+      if (!noteText.trim() || !script || !drawn) {
+        setShowSavePanel(false);
+        return;
+      }
+      const repo = getNotesRepository();
+      // Still create a snapshot but don't pin it
+      let snapshot = repo.getSnapshot(drawn.reading_id);
+      if (!snapshot) {
+        snapshot = createSnapshotFromReading({
+          reading_id: drawn.reading_id,
+          mode,
+          question,
+          reframe,
+          domain,
+          spread_id: drawn.spread_id,
+          spread_name_zh: drawn.spread_name_zh,
+          drawn_cards: drawn.drawn_cards,
+          script,
+        });
+        snapshot.pinned = false;
+        snapshot.saved_as_snapshot = false;
+        repo.saveSnapshot(snapshot);
+      }
+      const note = createNote({
+        snapshot_id: drawn.reading_id,
+        content: noteText.trim(),
+        type: "initial",
+      });
+      repo.saveNote(note);
+      setNoteSaved(true);
+      setShowSavePanel(false);
+      setTimeout(() => setNoteSaved(false), 2400);
+    },
+    [script, drawn, question, reframe, domain, mode],
+  );
+
+  const checkForSameCard = useCallback(
+    (cardIds: string[]) => {
+      const repo = getNotesRepository();
+      const reminder = checkSameCard(repo, cardIds);
+      setSameCardReminder(reminder.hasPrevious ? reminder : null);
+    },
+    [],
+  );
+
+  const dismissSameCardReminder = useCallback(() => {
+    setSameCardReminder(null);
+  }, []);
 
   const share = useCallback(async () => {
     if (!script) return;
@@ -121,17 +238,25 @@ export function useReadingPageActions({
 
   return {
     showNote,
+    showSavePanel,
     noteSaved,
     softClose,
     shareHint,
     demoMode,
     videoScript,
+    sameCardReminder,
     openNote,
     closeNote,
     saveNote,
+    openSavePanel,
+    closeSavePanel,
+    saveSnapshotWithNote,
+    saveNoteOnly,
     share,
     triggerDemo,
     closeDemo,
     startSoftClose,
+    dismissSameCardReminder,
+    checkForSameCard,
   };
 }

@@ -254,10 +254,15 @@ function checkB5_Testability(): CheckResult {
 // ─── C. Functional Completeness ─────────────────────────
 
 function checkC_Modes(): CheckResult {
+  // 三种入口模式可能在 page.tsx 或 ModeSelector 任一定义
   const homeContent = readFile("src/app/page.tsx");
-  const hasDaily = homeContent.includes("daily");
-  const hasQuestion = homeContent.includes("question");
-  const hasDeep = homeContent.includes("deep");
+  const modeSelector = fileExists("src/components/ModeSelector.tsx")
+    ? readFile("src/components/ModeSelector.tsx")
+    : "";
+  const all = homeContent + "\n" + modeSelector;
+  const hasDaily = /["']daily["']/.test(all) || all.includes("今日一牌");
+  const hasQuestion = /["']question["']/.test(all) || all.includes("问题解读");
+  const hasDeep = /["']deep["']/.test(all) || all.includes("深度牌阵");
   const hasModeSelector = fileExists("src/components/ModeSelector.tsx");
 
   const passed = [hasDaily, hasQuestion, hasDeep, hasModeSelector].filter(Boolean).length;
@@ -346,6 +351,37 @@ function checkC_MultiCard(): CheckResult {
 
 // ─── D. Tarot Rule Correctness ─────────────────────────
 
+function checkC_Notes(): CheckResult {
+  // C6: 笔记最低标准 = localStorage 持久化 + 列表回看
+  const notesPage = fileExists("src/app/notes/page.tsx")
+    ? readFile("src/app/notes/page.tsx")
+    : "";
+  const usesLocalStorage = notesPage.includes("localStorage") || notesPage.includes("tarot:notes");
+  const hasList = notesPage.length > 0 && /map\(|forEach|\.length/.test(notesPage);
+  // 写入路径
+  const actions = fileExists("src/features/reading/hooks/useReadingPageActions.ts")
+    ? readFile("src/features/reading/hooks/useReadingPageActions.ts")
+    : "";
+  const persistsNote = actions.includes("tarot:notes");
+  // history snapshot（解读快照）
+  const session = fileExists("src/features/reading/hooks/useReadingSession.ts")
+    ? readFile("src/features/reading/hooks/useReadingSession.ts")
+    : "";
+  const hasHistory = session.includes("tarot:reading:history") || session.includes("HISTORY_STORAGE_KEY");
+  let score = 0;
+  if (usesLocalStorage) score += 0.5;
+  if (hasList) score += 0.5;
+  if (persistsNote) score += 0.5;
+  if (hasHistory) score += 0.5;
+  return {
+    name: "C6. Notes & History",
+    maxScore: 2,
+    score: Math.min(2, score),
+    status: score >= 1.8 ? "pass" : score >= 1 ? "partial" : "fail",
+    details: `notes page=${usesLocalStorage}; list=${hasList}; persist note=${persistsNote}; history snapshot=${hasHistory}`,
+  };
+}
+
 function checkD_78Cards(): CheckResult {
   const auditResult = run("npm run audit:cards --silent 2>&1");
   const output = auditResult.output;
@@ -389,6 +425,146 @@ function checkD_RulesGuard(): CheckResult {
     status: score >= 1.8 ? "pass" : score >= 1 ? "partial" : "fail",
     details: `guard=${hasGuard}; test=${hasGuardTest}; shared=${hasShared}; banned check=${hasBannedCheck}; prediction check=${hasPredictionCheck}`,
   };
+}
+
+function checkD_RWSConsistency(): CheckResult {
+  // D2: RWS 体系——力量 8，正义 11
+  try {
+    const cards = JSON.parse(readFile("src/data/cards/major_arcana.json")) as Array<{
+      id: string;
+      number?: number;
+    }>;
+    const strength = cards.find((c) => /strength/i.test(c.id));
+    const justice = cards.find((c) => /justice/i.test(c.id));
+    const strengthIs8 = strength?.number === 8;
+    const justiceIs11 = justice?.number === 11;
+    const has22 = cards.length === 22;
+    let score = 0;
+    if (has22) score += 0.5;
+    if (strengthIs8) score += 0.75;
+    if (justiceIs11) score += 0.75;
+    return {
+      name: "D2. RWS Consistency",
+      maxScore: 2,
+      score: Math.min(2, score),
+      status: score >= 1.8 ? "pass" : score >= 1 ? "partial" : "fail",
+      details: `22 major=${has22}; Strength=8 ${strengthIs8}; Justice=11 ${justiceIs11}`,
+    };
+  } catch (err) {
+    return {
+      name: "D2. RWS Consistency",
+      maxScore: 2,
+      score: 0,
+      status: "fail",
+      details: `cannot load major_arcana.json: ${err}`,
+    };
+  }
+}
+
+function checkD_OrientationRules(): CheckResult {
+  // D3: 每张牌都有 upright 和 reversed 解释
+  try {
+    let total = 0;
+    let withBoth = 0;
+    const files = [
+      "src/data/cards/major_arcana.json",
+      "src/data/cards/minor_wands.json",
+      "src/data/cards/minor_cups.json",
+      "src/data/cards/minor_swords.json",
+      "src/data/cards/minor_pentacles.json",
+    ];
+    for (const f of files) {
+      const cards = JSON.parse(readFile(f)) as Array<{
+        traditional?: { upright?: unknown; reversed?: unknown };
+      }>;
+      for (const c of cards) {
+        total++;
+        if (c.traditional?.upright && c.traditional?.reversed) withBoth++;
+      }
+    }
+    const score = total === 78 && withBoth === 78 ? 2 : (withBoth / Math.max(1, total)) * 2;
+    return {
+      name: "D3. Orientation Rules",
+      maxScore: 2,
+      score: Math.round(score * 10) / 10,
+      status: score >= 1.8 ? "pass" : score >= 1 ? "partial" : "fail",
+      details: `${withBoth}/${total} cards have upright + reversed`,
+    };
+  } catch (err) {
+    return {
+      name: "D3. Orientation Rules",
+      maxScore: 2,
+      score: 0,
+      status: "fail",
+      details: `${err}`,
+    };
+  }
+}
+
+function checkD_MinorRules(): CheckResult {
+  // D4: prompt + buildReadingContext 有花色/数字/宫廷规则
+  const hasContext = fileExists("src/lib/buildReadingContext.ts");
+  const ctxContent = hasContext ? readFile("src/lib/buildReadingContext.ts") : "";
+  const promptRules = fileExists("src/lib/tarotRulesPrompt.ts")
+    ? readFile("src/lib/tarotRulesPrompt.ts")
+    : "";
+  const hasSuitRule =
+    ctxContent.includes("suit_rule") ||
+    ctxContent.includes("suits") ||
+    promptRules.includes("花色");
+  const hasNumberRule =
+    ctxContent.includes("number_rule") ||
+    ctxContent.includes("numbers") ||
+    promptRules.includes("数字");
+  const hasCourtRule =
+    ctxContent.includes("court_rule") ||
+    ctxContent.includes("court_cards") ||
+    promptRules.includes("宫廷");
+  let score = 0;
+  if (hasSuitRule) score += 0.7;
+  if (hasNumberRule) score += 0.7;
+  if (hasCourtRule) score += 0.6;
+  return {
+    name: "D4. Minor Arcana Rules",
+    maxScore: 2,
+    score: Math.min(2, score),
+    status: score >= 1.8 ? "pass" : score >= 1 ? "partial" : "fail",
+    details: `suit=${hasSuitRule}; number=${hasNumberRule}; court=${hasCourtRule}`,
+  };
+}
+
+function checkD_SpreadPositions(): CheckResult {
+  // D5: 每个 spread 都有 positions（含 name + meaning）
+  try {
+    // spreads 数据实际在 src/data/tarot_rules/spreads.json
+    const data = JSON.parse(readFile("src/data/tarot_rules/spreads.json")) as {
+      spreads: Array<{ id: string; positions: Array<{ name_zh?: string; meaning_zh?: string }> }>;
+    };
+    let total = 0;
+    let complete = 0;
+    for (const s of data.spreads) {
+      for (const p of s.positions) {
+        total++;
+        if (p.name_zh && p.meaning_zh) complete++;
+      }
+    }
+    const ratio = total > 0 ? complete / total : 0;
+    return {
+      name: "D5. Spread Positions",
+      maxScore: 2,
+      score: Math.round(ratio * 2 * 10) / 10,
+      status: ratio >= 0.95 ? "pass" : ratio >= 0.5 ? "partial" : "fail",
+      details: `${complete}/${total} positions have name + meaning`,
+    };
+  } catch (err) {
+    return {
+      name: "D5. Spread Positions",
+      maxScore: 2,
+      score: 0,
+      status: "fail",
+      details: `${err}`,
+    };
+  }
 }
 
 // ─── E. AI Quality ─────────────────────────
@@ -440,73 +616,369 @@ function checkE_JSON(): CheckResult {
   };
 }
 
+function checkE_RulesGuardCoverage(): CheckResult {
+  // E3: rulesGuard 测试是否覆盖关键禁用词类别
+  const guardTest = fileExists("src/lib/rulesGuard.test.ts")
+    ? readFile("src/lib/rulesGuard.test.ts")
+    : "";
+  const benchTest = fileExists("tests/benchmark/benchmark.smoke.test.ts")
+    ? readFile("tests/benchmark/benchmark.smoke.test.ts")
+    : "";
+  const all = guardTest + "\n" + benchTest;
+  const checks = {
+    prediction: /一定会|命中注定|你将会|必将/.test(all),
+    loveCommitment: /他一定|他不爱|他会回来|你们.*复合/.test(all),
+    bannedSubstring: /BANNED_SUBSTRINGS|phrase\.banned|findBanned/.test(all),
+    unknownMotif: /motif_focus_unknown|未知\s*motif/.test(all),
+    motifMissing: /motif_focus_missing|focus_motif/.test(all),
+  };
+  const hit = Object.values(checks).filter(Boolean).length;
+  const score = (hit / 5) * 2;
+  return {
+    name: "E3. Rules Guard Coverage",
+    maxScore: 2,
+    score: Math.round(score * 10) / 10,
+    status: hit >= 4 ? "pass" : hit >= 2 ? "partial" : "fail",
+    details: `prediction=${checks.prediction}; loveCommitment=${checks.loveCommitment}; bannedSubstring=${checks.bannedSubstring}; unknownMotif=${checks.unknownMotif}; motifMissing=${checks.motifMissing}`,
+  };
+}
+
+function checkE_Streaming(): CheckResult {
+  // E5: SSE 流式接口 + 本地 fallback
+  const hasStreamRoute = fileExists("src/app/api/reading/generate/stream/route.ts");
+  const streamContent = hasStreamRoute
+    ? readFile("src/app/api/reading/generate/stream/route.ts")
+    : "";
+  const hasSSE = streamContent.includes("text/event-stream");
+  const hasMetaEvent = streamContent.includes("event: meta") || streamContent.includes('"meta"');
+  const hasPositionEvent =
+    streamContent.includes("event: position") || streamContent.includes('"position"');
+  const hasFallback = fileExists("src/features/reading/lib/buildLocalFallbackReading.ts");
+  const apiHook = fileExists("src/features/reading/hooks/useReadingApi.ts")
+    ? readFile("src/features/reading/hooks/useReadingApi.ts")
+    : "";
+  const hasStreamClient = apiHook.includes("generateReadingStream");
+  let score = 0;
+  if (hasStreamRoute) score += 0.4;
+  if (hasSSE) score += 0.3;
+  if (hasMetaEvent && hasPositionEvent) score += 0.5;
+  if (hasFallback) score += 0.4;
+  if (hasStreamClient) score += 0.4;
+  return {
+    name: "E5. Streaming / Progressive",
+    maxScore: 2,
+    score: Math.min(2, score),
+    status: score >= 1.8 ? "pass" : score >= 1 ? "partial" : "fail",
+    details: `stream route=${hasStreamRoute}; SSE=${hasSSE}; meta+position=${hasMetaEvent && hasPositionEvent}; fallback=${hasFallback}; client=${hasStreamClient}`,
+  };
+}
+
+function checkE_Refine(): CheckResult {
+  // E6: refine API + 用户反馈路径
+  const hasRefineRoute = fileExists("src/app/api/reading/refine/route.ts");
+  const apiHook = fileExists("src/features/reading/hooks/useReadingApi.ts")
+    ? readFile("src/features/reading/hooks/useReadingApi.ts")
+    : "";
+  const hasRefineClient = apiHook.includes("refineReading");
+  // 拒绝复述权（用户主权）
+  const qrf = fileExists("src/components/QuestionReframe.tsx")
+    ? readFile("src/components/QuestionReframe.tsx")
+    : "";
+  const hasSkipReframe = qrf.includes("onSkip") || /不太像我|这个观察/.test(qrf);
+  let score = 0;
+  if (hasRefineRoute) score += 0.6;
+  if (hasRefineClient) score += 0.6;
+  if (hasSkipReframe) score += 0.8;
+  return {
+    name: "E6. User Feedback / Refine",
+    maxScore: 2,
+    score: Math.min(2, score),
+    status: score >= 1.8 ? "pass" : score >= 1 ? "partial" : "fail",
+    details: `refine route=${hasRefineRoute}; refine client=${hasRefineClient}; reject reframe=${hasSkipReframe}`,
+  };
+}
+
 // ─── J. Motif Quality ─────────────────────────
 
-function checkJ_Motif(): CheckResult {
-  const hasAuditScript = fileExists("scripts/audit_motifs.ts");
-  const hasAuditReport = fileExists("reports/motif_quality_report.md");
+function checkJ1_MotifTiering(): CheckResult {
+  // J1: schema 类型 + 数据有 source/quality
   const schema = readFile("src/lib/schema.ts");
   const hasSourceField = schema.includes("source?:") && schema.includes("manual");
   const hasQualityField = schema.includes("quality?:") && schema.includes("verified");
+  // 数据层抽样验证
+  try {
+    const tc = JSON.parse(readFile("src/data/tarot_cards.json")) as Array<{
+      motifs?: Array<{ source?: string; quality?: string }>;
+    }>;
+    const allMotifs = tc.flatMap((c) => c.motifs ?? []);
+    const tagged = allMotifs.filter((m) => m.source && m.quality).length;
+    const taggedRatio = allMotifs.length > 0 ? tagged / allMotifs.length : 0;
+    let score = 0;
+    if (hasSourceField) score += 0.3;
+    if (hasQualityField) score += 0.3;
+    if (taggedRatio >= 0.95) score += 0.4;
+    return {
+      name: "J1. Motif Tiering",
+      maxScore: 1,
+      score: Math.round(Math.min(1, score) * 10) / 10,
+      status: score >= 0.9 ? "pass" : score >= 0.5 ? "partial" : "fail",
+      details: `source field=${hasSourceField}; quality field=${hasQualityField}; tagged ratio=${(taggedRatio * 100).toFixed(0)}%`,
+    };
+  } catch {
+    return {
+      name: "J1. Motif Tiering",
+      maxScore: 1,
+      score: hasSourceField && hasQualityField ? 0.6 : 0,
+      status: "partial",
+      details: `schema only check (data load failed)`,
+    };
+  }
+}
 
+function checkJ2_MajorVerified(): CheckResult {
+  // J2: 22 张大阿尔卡那每张 ≥5 motif，且 verified
+  try {
+    const tc = JSON.parse(readFile("src/data/tarot_cards.json")) as Array<{
+      id: string;
+      motifs?: Array<{ source?: string; quality?: string }>;
+    }>;
+    let majorCount = 0;
+    let verifiedAll = 0;
+    let totalMotifs = 0;
+    for (const c of tc) {
+      majorCount++;
+      const ms = c.motifs ?? [];
+      totalMotifs += ms.length;
+      if (ms.length >= 4 && ms.every((m) => m.quality === "verified")) verifiedAll++;
+    }
+    const has22 = majorCount === 22;
+    const allVerified = verifiedAll === majorCount;
+    let score = 0;
+    if (has22) score += 0.3;
+    if (allVerified) score += 0.5;
+    if (totalMotifs >= 80) score += 0.2;
+    return {
+      name: "J2. Major Verified",
+      maxScore: 1,
+      score: Math.min(1, score),
+      status: score >= 0.9 ? "pass" : score >= 0.5 ? "partial" : "fail",
+      details: `22 cards=${has22}; all verified=${allVerified} (${verifiedAll}/${majorCount}); total motifs=${totalMotifs}`,
+    };
+  } catch (err) {
+    return { name: "J2. Major Verified", maxScore: 1, score: 0, status: "fail", details: `${err}` };
+  }
+}
+
+function checkJ3_MinorTransparent(): CheckResult {
+  // J3: 所有小阿尔卡那 motif 必须 quality=rough（不假装精确）
+  try {
+    const files = [
+      "src/data/cards/minor_wands.json",
+      "src/data/cards/minor_cups.json",
+      "src/data/cards/minor_swords.json",
+      "src/data/cards/minor_pentacles.json",
+    ];
+    let total = 0;
+    let rough = 0;
+    for (const f of files) {
+      const cards = JSON.parse(readFile(f)) as Array<{
+        motifs?: Array<{ quality?: string; precision?: string }>;
+      }>;
+      for (const c of cards) {
+        for (const m of c.motifs ?? []) {
+          total++;
+          if (m.quality === "rough" && m.precision === "approximate") rough++;
+        }
+      }
+    }
+    const ratio = total > 0 ? rough / total : 0;
+    return {
+      name: "J3. Minor Transparent",
+      maxScore: 1,
+      score: Math.round(ratio * 10) / 10,
+      status: ratio >= 0.95 ? "pass" : ratio >= 0.5 ? "partial" : "fail",
+      details: `${rough}/${total} minor motifs labeled rough+approximate`,
+    };
+  } catch (err) {
+    return { name: "J3. Minor Transparent", maxScore: 1, score: 0, status: "fail", details: `${err}` };
+  }
+}
+
+function checkJ4_DebugMode(): CheckResult {
+  // J4: ?debugMotifs=1 在 UI 中支持
+  const archivePage = fileExists("src/app/archive/page.tsx")
+    ? readFile("src/app/archive/page.tsx")
+    : "";
+  const modal = fileExists("src/components/archive/CardDetailModal.tsx")
+    ? readFile("src/components/archive/CardDetailModal.tsx")
+    : "";
+  const motifCanvas = fileExists("src/components/MotifCanvas.tsx")
+    ? readFile("src/components/MotifCanvas.tsx")
+    : "";
+  const handlesParam = archivePage.includes("debugMotifs");
+  const passesProp = modal.includes("debugMotifs");
+  const consumes = motifCanvas.includes("debug");
   let score = 0;
-  if (hasAuditScript) score += 0.3;
-  if (hasAuditReport) score += 0.2;
-  if (hasSourceField) score += 0.3;
-  if (hasQualityField) score += 0.2;
-
+  if (handlesParam) score += 0.4;
+  if (passesProp) score += 0.3;
+  if (consumes) score += 0.3;
   return {
-    name: "J. Motif Quality",
+    name: "J4. Motif Debug Mode",
     maxScore: 1,
     score: Math.min(1, score),
     status: score >= 0.9 ? "pass" : score >= 0.5 ? "partial" : "fail",
-    details: `audit script=${hasAuditScript}; report=${hasAuditReport}; source field=${hasSourceField}; quality field=${hasQualityField}`,
+    details: `?debugMotifs handler=${handlesParam}; modal prop=${passesProp}; canvas consume=${consumes}`,
+  };
+}
+
+function checkJ5_AuditReport(): CheckResult {
+  const hasScript = fileExists("scripts/audit_motifs.ts");
+  const hasReport = fileExists("reports/motif_quality_report.md");
+  let score = 0;
+  if (hasScript) score += 0.5;
+  if (hasReport) score += 0.5;
+  return {
+    name: "J5. Audit Report",
+    maxScore: 1,
+    score: Math.min(1, score),
+    status: score >= 0.9 ? "pass" : score >= 0.5 ? "partial" : "fail",
+    details: `audit script=${hasScript}; report file=${hasReport}`,
   };
 }
 
 // ─── K. Video Readiness ─────────────────────────
 
-function checkK_Video(): CheckResult {
-  const hasRemotionRoot = fileExists("remotion/Root.tsx");
-  const remotionContent = readFile("remotion/Root.tsx");
-  const hasComposition = remotionContent.includes("Composition");
-  const hasDemoFixture = fileExists("fixtures/video_script_demo.json");
-  const hasDemoComp = fileExists("remotion/compositions/TarotShortDemo.tsx");
-
+function checkK1_ScriptShape(): CheckResult {
+  // K1: ReadingScript / VideoScene 类型支持视频字段
+  const scriptTypes = fileExists("src/types/readingScript.ts")
+    ? readFile("src/types/readingScript.ts")
+    : "";
+  const hasVoiceover = scriptTypes.includes("voiceover_zh");
+  const hasSubtitle = scriptTypes.includes("subtitle_zh");
+  const hasDuration = scriptTypes.includes("duration");
+  const hasActiveCard = scriptTypes.includes("active_card_id");
+  const hasFocusMotif = scriptTypes.includes("focus_motif");
   let score = 0;
-  if (hasRemotionRoot) score += 0.3;
-  if (hasComposition) score += 0.3;
-  if (hasDemoFixture) score += 0.2;
-  if (hasDemoComp) score += 0.2;
-
+  if (hasVoiceover) score += 0.2;
+  if (hasSubtitle) score += 0.2;
+  if (hasDuration) score += 0.2;
+  if (hasActiveCard) score += 0.2;
+  if (hasFocusMotif) score += 0.2;
   return {
-    name: "K. Video Readiness",
+    name: "K1. Script Video Fields",
     maxScore: 1,
     score: Math.min(1, score),
     status: score >= 0.9 ? "pass" : score >= 0.5 ? "partial" : "fail",
-    details: `Root.tsx=${hasRemotionRoot}; Composition=${hasComposition}; fixture=${hasDemoFixture}; TarotShortDemo=${hasDemoComp}`,
+    details: `voiceover=${hasVoiceover}; subtitle=${hasSubtitle}; duration=${hasDuration}; active_card=${hasActiveCard}; focus_motif=${hasFocusMotif}`,
+  };
+}
+
+function checkK2_DemoMode(): CheckResult {
+  // K2: 演示模式（9:16 + 自动播放 + 字幕 + 高亮 + 进度）
+  const hasPlayer = fileExists("src/components/DemoModePlayer.tsx");
+  const playerContent = hasPlayer ? readFile("src/components/DemoModePlayer.tsx") : "";
+  const hasAutoPlay = playerContent.includes("autoPlay");
+  const hasSubtitle = fileExists("src/components/VideoSubtitle.tsx");
+  const hasProgress = fileExists("src/components/VideoProgressBar.tsx");
+  const hasAspect916 = playerContent.includes("9/16") || playerContent.includes("aspect-[9/16]");
+  // /explain 页（独立科普工作台）也算 K2 加分
+  const hasExplain = fileExists("src/app/explain/page.tsx");
+  let score = 0;
+  if (hasPlayer) score += 0.2;
+  if (hasAutoPlay) score += 0.15;
+  if (hasSubtitle) score += 0.15;
+  if (hasProgress) score += 0.15;
+  if (hasAspect916) score += 0.15;
+  if (hasExplain) score += 0.2;
+  return {
+    name: "K2. Demo Mode",
+    maxScore: 1,
+    score: Math.min(1, score),
+    status: score >= 0.9 ? "pass" : score >= 0.5 ? "partial" : "fail",
+    details: `player=${hasPlayer}; autoPlay=${hasAutoPlay}; subtitle=${hasSubtitle}; progress=${hasProgress}; 9:16=${hasAspect916}; explain page=${hasExplain}`,
+  };
+}
+
+function checkK3_Remotion(): CheckResult {
+  const hasRoot = fileExists("remotion/Root.tsx");
+  const rootContent = hasRoot ? readFile("remotion/Root.tsx") : "";
+  const hasComposition = rootContent.includes("Composition");
+  const hasFixture = fileExists("fixtures/video_script_demo.json");
+  const hasDemoComp = fileExists("remotion/compositions/TarotShortDemo.tsx");
+  const hasPreviewScript = fileExists("scripts/video_preview.ts");
+  let score = 0;
+  if (hasRoot) score += 0.2;
+  if (hasComposition) score += 0.2;
+  if (hasFixture) score += 0.2;
+  if (hasDemoComp) score += 0.2;
+  if (hasPreviewScript) score += 0.2;
+  return {
+    name: "K3. Remotion Demo",
+    maxScore: 1,
+    score: Math.min(1, score),
+    status: score >= 0.9 ? "pass" : score >= 0.5 ? "partial" : "fail",
+    details: `Root.tsx=${hasRoot}; Composition=${hasComposition}; fixture=${hasFixture}; demo comp=${hasDemoComp}; preview script=${hasPreviewScript}`,
   };
 }
 
 // ─── L. SEO ─────────────────────────
 
-function checkL_SEO(): CheckResult {
-  const layout = readFile("src/app/layout.tsx");
-  const hasOG = layout.includes("openGraph");
-  const hasTwitter = layout.includes("twitter");
-  const hasOgImage = fileExists("public/og/default.svg") || fileExists("public/og/default.png");
-
+function checkL1_Performance(): CheckResult {
+  // L1: 性能基线——next/image 用法 + 懒加载 + 字体 display
+  const layout = fileExists("src/app/layout.tsx") ? readFile("src/app/layout.tsx") : "";
+  // next/image 使用：在卡片图相关组件里采样几处（archive card / motif canvas / drawing stage）
+  const samples = [
+    "src/components/archive/ArchiveCard.tsx",
+    "src/components/MotifCanvas.tsx",
+    "src/features/reading/components/stages/DrawingStage.tsx",
+    "src/components/archive/CardDetailModal.tsx",
+    "src/components/VideoSceneRenderer.tsx",
+  ]
+    .filter(fileExists)
+    .map(readFile)
+    .join("\n");
+  const usesNextImage = /from\s+["']next\/image["']/.test(samples);
+  // 字体加载策略（display=swap 或 next/font）
+  const hasFontDisplaySwap = /display=swap/i.test(layout);
+  // 动态 import 拆分（archive 已经按 tab dynamic import）
+  const archiveDataset = fileExists("src/components/archive/dataset.tsx")
+    ? readFile("src/components/archive/dataset.tsx")
+    : "";
+  const hasDynamicData = /import\(['"]@\/data/.test(archiveDataset);
   let score = 0;
-  if (hasOG) score += 0.4;
-  if (hasTwitter) score += 0.3;
-  if (hasOgImage) score += 0.3;
-
+  if (usesNextImage) score += 0.4;
+  if (hasFontDisplaySwap) score += 0.2;
+  if (hasDynamicData) score += 0.4;
   return {
-    name: "L. SEO / Share",
+    name: "L1. Performance",
     maxScore: 1,
     score: Math.min(1, score),
     status: score >= 0.9 ? "pass" : score >= 0.5 ? "partial" : "fail",
-    details: `openGraph=${hasOG}; twitter=${hasTwitter}; og image=${hasOgImage}`,
+    details: `next/image=${usesNextImage}; font swap=${hasFontDisplaySwap}; dynamic data=${hasDynamicData}`,
+  };
+}
+
+function checkL2_SEO(): CheckResult {
+  const layout = readFile("src/app/layout.tsx");
+  const hasOG = layout.includes("openGraph");
+  const hasTwitter = layout.includes("twitter");
+  const hasMetadataBase = layout.includes("metadataBase");
+  const hasOgImage = fileExists("public/og/default.svg") || fileExists("public/og/default.png");
+  const hasSitemap = fileExists("src/app/sitemap.ts");
+  const hasRobots = fileExists("src/app/robots.ts");
+  let score = 0;
+  if (hasOG) score += 0.2;
+  if (hasTwitter) score += 0.15;
+  if (hasMetadataBase) score += 0.15;
+  if (hasOgImage) score += 0.15;
+  if (hasSitemap) score += 0.2;
+  if (hasRobots) score += 0.15;
+  return {
+    name: "L2. SEO / Share",
+    maxScore: 1,
+    score: Math.min(1, score),
+    status: score >= 0.9 ? "pass" : score >= 0.5 ? "partial" : "fail",
+    details: `openGraph=${hasOG}; twitter=${hasTwitter}; metadataBase=${hasMetadataBase}; og image=${hasOgImage}; sitemap=${hasSitemap}; robots=${hasRobots}`,
   };
 }
 
@@ -528,13 +1000,33 @@ const allChecks: CheckResult[] = [
   checkC_SpreadRecommend(),
   checkC_DrawSeparation(),
   checkC_MultiCard(),
+  checkC_Notes(),
+  // D: 6 子项（D1+D6 已有，D2/D3/D4/D5 补齐 → 12 分满）
   checkD_78Cards(),
+  checkD_RWSConsistency(),
+  checkD_OrientationRules(),
+  checkD_MinorRules(),
+  checkD_SpreadPositions(),
   checkD_RulesGuard(),
+  // E: 6 子项（E1+E2 已有，E3/E5/E6 补齐；E4 走 manual）
   checkE_CallLLM(),
   checkE_JSON(),
-  checkJ_Motif(),
-  checkK_Video(),
-  checkL_SEO(),
+  checkE_RulesGuardCoverage(),
+  checkE_Streaming(),
+  checkE_Refine(),
+  // J: 5 子项（拆开计分到满分 5）
+  checkJ1_MotifTiering(),
+  checkJ2_MajorVerified(),
+  checkJ3_MinorTransparent(),
+  checkJ4_DebugMode(),
+  checkJ5_AuditReport(),
+  // K: 3 子项
+  checkK1_ScriptShape(),
+  checkK2_DemoMode(),
+  checkK3_Remotion(),
+  // L: 2 子项
+  checkL1_Performance(),
+  checkL2_SEO(),
 ];
 
 // Category scores

@@ -188,4 +188,35 @@ describe("Benchmark: Motif Data Governance", () => {
     expect(motif.source).toBe("manual");
     expect(motif.quality).toBe("verified");
   });
+
+  it("大阿尔卡那 motif 都有 verified 标记", async () => {
+    const data = (await import("@/data/tarot_cards.json")).default as Array<{
+      motifs?: Array<{ source?: string; quality?: string; precision?: string }>;
+    }>;
+    const allMotifs = data.flatMap((c) => c.motifs ?? []);
+    expect(allMotifs.length).toBeGreaterThan(0);
+    for (const m of allMotifs) {
+      expect(m.source).toBe("manual");
+      expect(m.quality).toBe("verified");
+      expect(m.precision).toBe("precise");
+    }
+  });
+
+  it("小阿尔卡那 motif 都标记为 rough/approximate（不假装精确）", async () => {
+    const suits = await Promise.all([
+      import("@/data/cards/minor_wands.json"),
+      import("@/data/cards/minor_cups.json"),
+      import("@/data/cards/minor_swords.json"),
+      import("@/data/cards/minor_pentacles.json"),
+    ]);
+    type MinorCard = { motifs?: Array<{ source?: string; quality?: string; precision?: string }> };
+    const allMotifs = suits.flatMap(
+      (mod) => (mod.default as MinorCard[]).flatMap((c) => c.motifs ?? []),
+    );
+    expect(allMotifs.length).toBeGreaterThan(0);
+    for (const m of allMotifs) {
+      expect(m.quality).toBe("rough");
+      expect(m.precision).toBe("approximate");
+    }
+  });
 });

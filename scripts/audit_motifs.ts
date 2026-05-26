@@ -36,8 +36,10 @@ function loadJson<T>(relPath: string): T {
   return JSON.parse(readFileSync(join(ROOT, relPath), "utf-8")) as T;
 }
 
+// 注意：大阿尔卡那的 motif 不在 src/data/cards/major_arcana.json，
+// 而在 src/data/tarot_cards.json（早期数据布局遗留）。审计要读对地方。
 const SUIT_FILES = [
-  "src/data/cards/major_arcana.json",
+  "src/data/tarot_cards.json",
   "src/data/cards/minor_wands.json",
   "src/data/cards/minor_cups.json",
   "src/data/cards/minor_swords.json",

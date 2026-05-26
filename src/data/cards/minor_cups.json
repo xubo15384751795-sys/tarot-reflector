@@ -57,7 +57,10 @@
           "y": 0.05,
           "w": 0.3,
           "h": 0.15
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -68,7 +71,10 @@
           "y": 0.15,
           "w": 0.3,
           "h": 0.2
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m3",
@@ -79,7 +85,10 @@
           "y": 0.3,
           "w": 0.4,
           "h": 0.2
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m4",
@@ -90,7 +99,10 @@
           "y": 0.55,
           "w": 0.8,
           "h": 0.3
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -152,7 +164,10 @@
           "y": 0.15,
           "w": 0.4,
           "h": 0.3
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -163,7 +178,10 @@
           "y": 0.2,
           "w": 0.4,
           "h": 0.4
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m3",
@@ -174,7 +192,10 @@
           "y": 0.05,
           "w": 0.8,
           "h": 0.15
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -236,7 +257,10 @@
           "y": 0.15,
           "w": 0.6,
           "h": 0.5
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -247,7 +271,10 @@
           "y": 0.2,
           "w": 0.3,
           "h": 0.2
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -309,7 +336,10 @@
           "y": 0.2,
           "w": 0.3,
           "h": 0.5
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -320,7 +350,10 @@
           "y": 0.55,
           "w": 0.7,
           "h": 0.2
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -382,7 +415,10 @@
           "y": 0.2,
           "w": 0.3,
           "h": 0.5
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -393,7 +429,10 @@
           "y": 0.4,
           "w": 0.6,
           "h": 0.2
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -455,7 +494,10 @@
           "y": 0.15,
           "w": 0.6,
           "h": 0.5
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -466,7 +508,10 @@
           "y": 0.3,
           "w": 0.5,
           "h": 0.3
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -528,7 +573,10 @@
           "y": 0.1,
           "w": 0.7,
           "h": 0.5
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -539,7 +587,10 @@
           "y": 0.15,
           "w": 0.6,
           "h": 0.4
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -601,7 +652,10 @@
           "y": 0.2,
           "w": 0.3,
           "h": 0.5
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -612,7 +666,10 @@
           "y": 0.35,
           "w": 0.6,
           "h": 0.3
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -674,7 +731,10 @@
           "y": 0.15,
           "w": 0.4,
           "h": 0.5
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -685,7 +745,10 @@
           "y": 0.2,
           "w": 0.6,
           "h": 0.4
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -747,7 +810,10 @@
           "y": 0.15,
           "w": 0.6,
           "h": 0.5
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -758,7 +824,10 @@
           "y": 0.05,
           "w": 0.7,
           "h": 0.3
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -820,7 +889,10 @@
           "y": 0.15,
           "w": 0.4,
           "h": 0.5
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -831,7 +903,10 @@
           "y": 0.2,
           "w": 0.3,
           "h": 0.2
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -893,7 +968,10 @@
           "y": 0.1,
           "w": 0.5,
           "h": 0.6
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -904,7 +982,10 @@
           "y": 0.15,
           "w": 0.2,
           "h": 0.2
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -966,7 +1047,10 @@
           "y": 0.15,
           "w": 0.4,
           "h": 0.5
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -977,7 +1061,10 @@
           "y": 0.2,
           "w": 0.2,
           "h": 0.2
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   },
@@ -1039,7 +1126,10 @@
           "y": 0.1,
           "w": 0.4,
           "h": 0.5
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       },
       {
         "id": "m2",
@@ -1050,7 +1140,10 @@
           "y": 0.15,
           "w": 0.2,
           "h": 0.3
-        }
+        },
+        "source": "script_generated",
+        "quality": "rough",
+        "precision": "approximate"
       }
     ]
   }

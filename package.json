@@ -20,6 +20,7 @@
     "audit:motifs": "tsx scripts/audit_motifs.ts",
     "audit:cards": "tsx scripts/audit_cards.ts",
     "benchmark": "tsx scripts/run_benchmark.ts",
+    "video:preview": "tsx scripts/video_preview.ts",
     "prepare": "husky"
   },
   "lint-staged": {
