@@ -6,7 +6,7 @@
 
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getNotesRepository } from "./repository";
 import type {
   ReadingSnapshot,
@@ -15,7 +15,18 @@ import type {
 
 export function useNotes() {
   const repo = getNotesRepository();
-  const [snapshots, setSnapshots] = useState<ReadingSnapshot[]>(() => repo.listSnapshots());
+  const [snapshots, setSnapshots] = useState<ReadingSnapshot[]>([]);
+  const [loaded, setLoaded] = useState(false);
+  const initRef = useRef(false);
+
+  // Load on mount (client-only, avoids hydration mismatch)
+  useEffect(() => {
+    if (initRef.current) return;
+    initRef.current = true;
+    setSnapshots(repo.listSnapshots());
+    setLoaded(true);
+     
+  }, [repo]);
 
   const refresh = useCallback(() => {
     setSnapshots(repo.listSnapshots());
@@ -47,7 +58,7 @@ export function useNotes() {
 
   return {
     snapshots,
-    loaded: true,
+    loaded,
     repo,
     saveSnapshot,
     deleteSnapshot,
@@ -58,8 +69,19 @@ export function useNotes() {
 
 export function useSnapshotDetail(reading_id: string) {
   const repo = getNotesRepository();
-  const [snapshot, setSnapshot] = useState<ReadingSnapshot | null>(() => repo.getSnapshot(reading_id));
-  const [notes, setNotes] = useState<ReflectionNote[]>(() => repo.getNotesForSnapshot(reading_id));
+  const [snapshot, setSnapshot] = useState<ReadingSnapshot | null>(null);
+  const [notes, setNotes] = useState<ReflectionNote[]>([]);
+  const [loaded, setLoaded] = useState(false);
+  const initRef = useRef(false);
+
+  useEffect(() => {
+    if (initRef.current) return;
+    initRef.current = true;
+    setSnapshot(repo.getSnapshot(reading_id));
+    setNotes(repo.getNotesForSnapshot(reading_id));
+    setLoaded(true);
+     
+  }, [repo, reading_id]);
 
   const refresh = useCallback(() => {
     setSnapshot(repo.getSnapshot(reading_id));
@@ -85,7 +107,7 @@ export function useSnapshotDetail(reading_id: string) {
   return {
     snapshot,
     notes,
-    loaded: true,
+    loaded,
     saveNote,
     deleteNote,
     refresh,
