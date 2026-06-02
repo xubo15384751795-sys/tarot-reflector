@@ -31,26 +31,20 @@ export function bindGuideSectionReveals(
   const mobile = options?.mobile ?? false;
 
   if (!isGuideMotionFlagEnabled("sectionReveal") || reduced) {
-    root.querySelectorAll("[data-reveal], .guide-section").forEach((el) => {
-      gsap.set(el, { autoAlpha: 1, y: 0, filter: "blur(0px)" });
-    });
+    // Disabled motion must not mutate DOM. CSS defaults are correct.
     return () => {};
   }
 
   if (!ensureScrollTrigger()) {
-    root.querySelectorAll("[data-reveal]").forEach((el) => {
-      gsap.set(el, { autoAlpha: 1, y: 0, filter: "blur(0px)" });
-    });
+    // ScrollTrigger unavailable → CSS defaults are correct.
     return () => {};
   }
   const sections = gsap.utils.toArray<HTMLElement>(
     root.querySelectorAll(".guide-section"),
   );
 
-  if (reduced || sections.length === 0) {
-    root.querySelectorAll("[data-reveal]").forEach((el) => {
-      gsap.set(el, { autoAlpha: 1, y: 0, filter: "blur(0px)" });
-    });
+  if (sections.length === 0) {
+    // No sections → CSS defaults are correct.
     return () => {};
   }
 
