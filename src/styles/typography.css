@@ -1,6 +1,6 @@
 /* ── 字体三层系统 ── */
 
-/* 2. 标题字体：Logo、大标题、幕标题、收束句 — 仅限定场景使用 */
+/* 2. 标题字体：大标题、幕标题、收束句 — LXGW WenKai 衬线 */
 .hero-title,
 .reading-headline,
 .scene-title,
@@ -8,24 +8,42 @@
 .closing-line {
   font-family: var(--font-serif-like);
   font-weight: 400;
+  letter-spacing: 0.03em;
 }
 
-/* 1. UI 字体：正文、按钮、标签、说明 — 默认已由 body 继承 */
+/* 1. UI 字体：正文、按钮、标签、说明 — PingFang SC */
 .scene-body,
 .annotation,
-.scene-subtitle {
+.scene-subtitle,
+.guide-section-body,
+.guide-section-lead,
+.guide-section-tip {
   font-family: var(--font-sans);
   font-weight: 400;
+  line-height: 1.85;
 }
 
-/* 3. 数字与进度字体：编号、进度、日期、状态 */
+/* 小标题：section title / card title */
+.guide-section-title,
+.archive-preview__heading,
+.section-title {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.015em;
+}
+
+/* 3. Meta / 编号字体：COD.ARCH / ARCH.01 / 英文名 */
 .progress-number,
 .step-count,
 .card-number,
 .date-label,
-.status-label {
-  font-family: var(--font-mono);
+.status-label,
+.archive-label,
+.guide-kicker,
+.guide-section-index {
+  font-family: var(--font-meta);
   font-weight: 500;
+  letter-spacing: 0.14em;
 }
 
 /* 全局纸张噪点（极淡，只有凑近能看到） */
@@ -44,17 +62,4 @@ body::after {
 :root[data-theme="light"] body::after {
   opacity: 0.035;
   mix-blend-mode: multiply;
-}
-
-/* Title fonts: LXGW WenKai for headlines, system for body */
-.hero-title,
-.reading-headline,
-.scene-title,
-.page-title {
-  font-family: var(--font-serif-like);
-}
-.scene-body,
-.scene-subtitle,
-.annotation {
-  font-family: var(--font-sans);
 }
