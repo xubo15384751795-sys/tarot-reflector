@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { isArchiveMotionFlagEnabled } from "@/features/motion";
 import { cn } from "./cn";
 
 type Props = {
@@ -27,7 +28,8 @@ export function TarotThumbCard({
       type={onClick ? "button" : undefined}
       onClick={onClick}
       className={cn(
-        "archive-thumb archive-thumb-card physical-card group relative text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)] w-full",
+        "archive-thumb archive-thumb-card group relative text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)] w-full",
+        isArchiveMotionFlagEnabled("thumbHover") && "physical-card",
         className,
       )}
       aria-label={`${nameZh} · ${nameEn}`}

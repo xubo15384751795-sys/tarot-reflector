@@ -3,7 +3,7 @@
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { useClientMounted } from "@/features/motion";
+import { useClientMounted, isArchiveMotionFlagEnabled } from "@/features/motion";
 import { DividerLine, ArchiveLabel } from "@/components/ArchiveEmblems";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ArchiveCard } from "@/components/archive/ArchiveCard";
@@ -70,12 +70,19 @@ function ArchivePageContent() {
   const activeCards = tabData?.tab === activeTab ? tabData.cards : null;
   const mounted = useClientMounted();
   const captionTab = hoverTab ?? activeTab;
+  const thumbEntrance = isArchiveMotionFlagEnabled("thumbEntrance");
+  const heroEntrance = isArchiveMotionFlagEnabled("heroEntrance");
 
   return (
     <AppShell showActions={false}>
       <div className="relative min-h-[calc(100vh-60px)] w-full archive-page parchment-noise">
         <main className="relative z-[1] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 archive-page-main">
-          <header className="archive-page-hero archive-hero">
+          <motion.header
+            className="archive-page-hero archive-hero"
+            initial={heroEntrance && mounted ? { opacity: 0, y: 10 } : false}
+            animate={heroEntrance && mounted ? { opacity: 1, y: 0 } : false}
+            transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="flex items-center justify-center gap-3 mb-4">
               <DividerLine width={32} />
               <ArchiveLabel code="COD.ARCH" />
@@ -86,7 +93,7 @@ function ArchivePageContent() {
               subtitle="Rider–Waite–Smith 完整牌组 · 78 张图像档案"
               className="archive-page-hero__head"
             />
-          </header>
+          </motion.header>
 
           <nav aria-label="牌组入口">
             <ArchiveDeckEntrance
@@ -122,8 +129,8 @@ function ArchivePageContent() {
             ) : (
               <motion.div
                 key={activeTab}
-                initial={mounted ? { opacity: 0, y: 12 } : false}
-                animate={mounted ? { opacity: 1, y: 0 } : false}
+                initial={thumbEntrance && mounted ? { opacity: 0, y: 12 } : false}
+                animate={thumbEntrance && mounted ? { opacity: 1, y: 0 } : false}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
                 className="cards-grid"
@@ -131,8 +138,8 @@ function ArchivePageContent() {
                 {activeCards.map((card, i) => (
                   <motion.div
                     key={card.id}
-                    initial={mounted ? { opacity: 0, y: 8 } : false}
-                    animate={mounted ? { opacity: 1, y: 0 } : false}
+                    initial={thumbEntrance && mounted ? { opacity: 0, y: 8 } : false}
+                    animate={thumbEntrance && mounted ? { opacity: 1, y: 0 } : false}
                     transition={{
                       duration: 0.28,
                       delay: Math.min(i * 0.015, 0.25),

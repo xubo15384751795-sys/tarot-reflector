@@ -64,6 +64,11 @@ export {
 export type { SpreadFlipState } from "./spreadFlip.gsap";
 export { REGRESSION_STATIC_LAYOUT } from "./layoutStatic";
 export {
+  ARCHIVE_MOTION_FLAGS,
+  isArchiveMotionFlagEnabled,
+} from "./archiveMotionFlags";
+export type { ArchiveMotionFlag } from "./archiveMotionFlags";
+export {
   animateArchiveTabIndicator,
   measureTabIndicator,
 } from "./archiveTabBar.gsap";

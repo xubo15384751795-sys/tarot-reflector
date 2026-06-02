@@ -16,14 +16,16 @@ type QuickPair = {
 export function useCursorGlowOnScope(
   scopeRef: RefObject<HTMLElement | null>,
   selector = ".interactive-glow",
+  options?: { enabled?: boolean },
 ): void {
   const reducedMotion = useReducedMotion();
   const isTouch = useIsTouchDevice();
+  const enabled = options?.enabled ?? true;
 
   useEffect(() => {
     const root = scopeRef.current;
     if (!root || typeof window === "undefined") return;
-    if (reducedMotion || isTouch) return;
+    if (!enabled || reducedMotion || isTouch) return;
     if (!window.matchMedia("(pointer: fine)").matches) return;
 
     const quickMap = new WeakMap<HTMLElement, QuickPair>();
@@ -59,7 +61,7 @@ export function useCursorGlowOnScope(
 
     root.addEventListener("pointermove", onMove, { passive: true });
     return () => root.removeEventListener("pointermove", onMove);
-  }, [scopeRef, selector, reducedMotion, isTouch]);
+  }, [scopeRef, selector, reducedMotion, isTouch, enabled]);
 }
 
 /**

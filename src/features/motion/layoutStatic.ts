@@ -1,5 +1,5 @@
 /**
- * Regression debug: skip GSAP / ScrollTrigger layout animations while verifying
- * static CSS layout. Set to false once visual regression passes.
+ * Global regression gate (non-archive routes). Archive motion uses
+ * `archiveMotionFlags.ts` — do not re-enable all archive GSAP via this switch.
  */
 export const REGRESSION_STATIC_LAYOUT = true;

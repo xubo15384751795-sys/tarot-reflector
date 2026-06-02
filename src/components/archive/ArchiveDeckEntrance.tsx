@@ -7,7 +7,7 @@ import { ArchiveGroupCard } from "@/components/ui/ArchiveGroupCard";
 import {
   useReducedMotion,
   useCursorGlowOnScope,
-  REGRESSION_STATIC_LAYOUT,
+  isArchiveMotionFlagEnabled,
 } from "@/features/motion";
 import type { ArchiveTabId, ArchiveTabItem } from "./types";
 
@@ -75,14 +75,23 @@ export function ArchiveDeckEntrance({
   const reducedMotion = useReducedMotion();
   const scopeRef = useRef<HTMLDivElement>(null);
 
-  useCursorGlowOnScope(scopeRef, ".interactive-glow");
+  useCursorGlowOnScope(scopeRef, ".interactive-glow", {
+    enabled: isArchiveMotionFlagEnabled("cursorGlow"),
+  });
 
   const majorTab = findTab(tabs, "major");
   const majorMeta = DECK_META.major;
+  const groupCardsEntrance = isArchiveMotionFlagEnabled("groupCardsEntrance");
 
   useGSAP(
     () => {
-      if (REGRESSION_STATIC_LAYOUT || reducedMotion || !scopeRef.current) return;
+      if (
+        reducedMotion ||
+        !groupCardsEntrance ||
+        !scopeRef.current
+      ) {
+        return;
+      }
       const major = scopeRef.current.querySelector(".major-arcana-card");
       const minor = scopeRef.current.querySelectorAll(".minor-grid__card");
       if (major) {
@@ -105,7 +114,10 @@ export function ArchiveDeckEntrance({
         });
       }
     },
-    { scope: scopeRef, dependencies: [reducedMotion] },
+    {
+      scope: scopeRef,
+      dependencies: [reducedMotion, groupCardsEntrance],
+    },
   );
 
   const handleSelect = useCallback(
