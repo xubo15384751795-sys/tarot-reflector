@@ -51,10 +51,41 @@ Radix 仅作 headless 基础（Dialog / Popover / Tabs / Switch / Accordion）�
 
 ---
 
+## 本轮变更声明（每次改前端前必填）
+
+在动手改代码前，在 PR / checkpoint 中写明：
+
+| 字段 | 说明 | 示例 |
+|------|------|------|
+| **touched layer** | 只改一层：`surface` \| `layout` \| `motion` \| `data` | `surface` |
+| **touched pages** | 影响路由 | `/archive` |
+| **do-not-touch** | 本轮禁止动的层/页/文件 | `guideScrollReveal`, `/reading`, 全局 `img` 规则 |
+| **guards to run** | 合并前必跑 | `npm run typecheck` + `npm run test:frontend-regression` |
+| **rollback criteria** | 任一命中即回滚 | archive thumb 高宽比 &lt; 1.2；`/guide` 出现 `0102030405060708+`；`typecheck` 失败 |
+
+**Motion 分层（禁止用总开关代替）：**
+
+- Archive：`ARCHIVE_MOTION_FLAGS`（`src/features/motion/archiveMotionFlags.ts`），单 flag 用 `?archiveMotion=<key>`
+- Guide：`GUIDE_MOTION_FLAGS`（`guideMotionFlags.ts`），`bindGuideSectionReveals` 仅受 `sectionReveal` 控制
+- 全局：`REGRESSION_STATIC_LAYOUT` 默认 **`true`**；禁止在 surface/layout PR 中改为 `false`
+
+---
+
 ## 验收清单
 
 - [ ] 读过上述三份核心文档
+- [ ] 已填写「本轮变更声明」五字段
 - [ ] 新 UI 在 Storybook 有 light / dark / hover / active / mobile story
 - [ ] `npm run typecheck` 通过
 - [ ] 未在同一元素混用 GSAP + Motion transform
 - [ ] 未引入第三套动画库
+- [ ] 若动 `/archive` `/guide` `/`：本地或 CI 跑 `npm run test:frontend-regression`（需 Chromium，见下）
+
+**Playwright 回归（本地）：**
+
+```bash
+npx playwright install chromium
+npm run build
+npm run start -- -p 3025
+npm run test:frontend-regression
+```
