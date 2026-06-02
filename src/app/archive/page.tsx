@@ -76,6 +76,7 @@ function ArchivePageContent() {
   return (
     <AppShell showActions={false}>
       <div className="relative min-h-[calc(100vh-60px)] w-full archive-page parchment-noise">
+        <div className="archive-page-ambient" aria-hidden="true" />
         <main className="relative z-[1] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 archive-page-main">
           <motion.header
             className="archive-page-hero archive-hero"
