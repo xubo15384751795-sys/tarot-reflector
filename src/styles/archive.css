@@ -77,12 +77,13 @@
 }
 
 .archive-page-hero {
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .archive-page-hero__head .section-header__subtitle {
   font-size: clamp(12px, 2.2vw, 14px);
   line-height: 1.5;
+  opacity: 0.72;
 }
 
 .archive-groups {
@@ -196,11 +197,12 @@
 
 .major-arcana-card__count {
   font-family: var(--font-meta);
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 500;
   line-height: 1.05;
   margin-top: 2px;
   color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 .minor-grid__card .major-arcana-card__count {
@@ -246,6 +248,15 @@
   border-radius: 18px;
 }
 
+.minor-grid__card:hover,
+.minor-grid__card.is-active {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 42%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--gold-deep) 8%, transparent),
+    0 8px 24px color-mix(in srgb, var(--gold-deep) 10%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--accent) 10%, transparent) inset;
+}
+
 .minor-grid__card-inner {
   position: relative;
   z-index: 2;
@@ -259,24 +270,26 @@
   display: flex;
   margin-bottom: 6px;
   color: var(--text-faint);
+  opacity: 0.7;
   transform: scale(0.88);
   transform-origin: left center;
-  transition: color 0.28s ease, filter 0.32s ease;
+  transition: color 0.28s ease, filter 0.32s ease, opacity 0.28s ease;
 }
 
 .minor-grid__card:hover .minor-grid__icon,
 .minor-grid__card.is-active .minor-grid__icon {
   color: var(--accent);
+  opacity: 1;
   filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 30%, transparent));
 }
 
 .minor-grid__count {
   font-family: var(--font-meta);
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 500;
   line-height: 1.05;
   margin-top: 2px;
-  color: var(--text-primary);
+  color: var(--text-tertiary);
 }
 
 /* —— 卡片内文字层级 —— */
@@ -324,7 +337,7 @@
   padding-top: 8px;
   font-family: var(--font-ui);
   font-size: 12px;
-  line-height: 1.55;
+  line-height: 1.7;
   color: var(--text-muted);
 }
 
@@ -340,23 +353,23 @@
 /* —— 当前浏览 —— */
 .archive-preview {
   max-width: 980px;
-  margin: 0 auto 14px;
-  padding: 12px 20px 14px;
+  margin: 0 auto 12px;
+  padding: 10px 20px 12px;
   text-align: center;
   border-radius: 16px;
   background:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--surface-strong) 88%, transparent),
-      color-mix(in srgb, var(--surface) 82%, transparent)
+      color-mix(in srgb, var(--surface-strong) 78%, transparent),
+      color-mix(in srgb, var(--surface) 72%, transparent)
     );
-  border: 1px solid color-mix(in srgb, var(--border) 90%, var(--accent) 10%);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, var(--accent) 8%);
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, #fff 34%, transparent),
-    inset 0 -1px 0 color-mix(in srgb, var(--gold-deep) 6%, transparent),
-    0 10px 32px color-mix(in srgb, var(--bg-base) 50%, transparent);
-  backdrop-filter: blur(14px) saturate(1.08);
-  -webkit-backdrop-filter: blur(14px) saturate(1.08);
+    inset 0 1px 0 color-mix(in srgb, #fff 28%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--gold-deep) 4%, transparent),
+    0 8px 24px color-mix(in srgb, var(--bg-base) 55%, transparent);
+  backdrop-filter: blur(14px) saturate(1.06);
+  -webkit-backdrop-filter: blur(14px) saturate(1.06);
 }
 
 .archive-preview:focus-within {
@@ -367,13 +380,14 @@
 }
 
 .archive-preview__heading {
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-faint);
+  opacity: 0.8;
 }
 
 .archive-preview__caption {
@@ -611,8 +625,8 @@
 }
 
 .archive-page-footer {
-  margin-top: 40px;
-  padding-bottom: 28px;
+  margin-top: 48px;
+  padding-bottom: 48px;
 }
 
 .archive-page-footer p {
