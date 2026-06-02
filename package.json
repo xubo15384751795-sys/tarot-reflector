@@ -22,7 +22,7 @@
     "benchmark": "tsx scripts/run_benchmark.ts",
     "benchmark:frontend": "tsx scripts/run_frontend_benchmark.ts",
     "karpathy:audit": "tsx scripts/karpathy_audit.ts",
-    "test:visual": "playwright test tests/e2e/visual.spec.ts",
+    "test:visual": "playwright test tests/e2e/visual.spec.ts --config=playwright.visual.config.ts",
     "test:karpathy-visual": "playwright test tests/e2e/reference-visual.spec.ts --config=playwright.visual.config.ts",
     "test:visual:update": "playwright test tests/e2e/visual.spec.ts --update-snapshots",
     "test:a11y": "playwright test tests/e2e/visual.spec.ts --grep Accessibility",
