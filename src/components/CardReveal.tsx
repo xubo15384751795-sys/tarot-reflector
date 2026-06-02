@@ -1,10 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useCallback, useEffect, useState } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import type { Motif, Orientation } from "@/lib/schema";
 import CardImage from "./CardImage";
 import CardBackImage from "./CardBackImage";
 import { CornerOrnament, ArchiveLabel } from "./ArchiveEmblems";
+import {
+  useReducedMotion,
+  createCardRevealTimeline,
+  preloadImage,
+} from "@/features/motion";
 
 type Props = {
   image: string;
@@ -16,14 +23,9 @@ type Props = {
   onComplete: () => void;
 };
 
-/** 纸牌物理感 spring */
-const cardSpring = {
-  type: "spring" as const,
-  stiffness: 95,
-  damping: 18,
-  mass: 0.85,
-};
-
+/**
+ * Card Reveal — GSAP timeline（DrawSVG 无关；翻牌 + CustomBounce 落定）
+ */
 export default function CardReveal({
   image,
   cardName,
@@ -33,94 +35,114 @@ export default function CardReveal({
   number: _number,
   onComplete,
 }: Props) {
+  const reducedMotion = useReducedMotion();
   const oLabel = orientation === "upright" ? "正位" : "逆位";
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardBackRef = useRef<HTMLDivElement>(null);
+  const cardFrontRef = useRef<HTMLDivElement>(null);
+  const cardNameRef = useRef<HTMLDivElement>(null);
+  const cardNameZhRef = useRef<HTMLDivElement>(null);
+  const warmGlowRef = useRef<HTMLDivElement>(null);
+  const groundShadowRef = useRef<HTMLDivElement>(null);
+  const tlRef = useRef<ReturnType<typeof createCardRevealTimeline> | null>(null);
+  const [imageReady, setImageReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    preloadImage(image).then(
+      () => {
+        if (!cancelled) setImageReady(true);
+      },
+      () => {
+        if (!cancelled) setImageReady(true);
+      },
+    );
+    return () => {
+      cancelled = true;
+    };
+  }, [image]);
+
+  const animate = useCallback(() => {
+    const cardBack = cardBackRef.current;
+    const cardFront = cardFrontRef.current;
+    const cardName = cardNameRef.current;
+    if (!cardBack || !cardFront || !cardName) return;
+
+    tlRef.current?.kill();
+
+    const tl = createCardRevealTimeline(cardFront, cardBack, cardName, {
+      reducedMotion,
+      onComplete,
+      cardNameZhEl: cardNameZhRef.current,
+      warmGlow: warmGlowRef.current,
+      groundShadow: groundShadowRef.current,
+    });
+    tlRef.current = tl;
+  }, [reducedMotion, onComplete]);
+
+  useGSAP(
+    () => {
+      if (!imageReady) return;
+      animate();
+      return () => {
+        const tl = tlRef.current as
+          | (gsap.core.Timeline & { splitRevert?: () => void })
+          | null;
+        tl?.splitRevert?.();
+        tl?.kill();
+        tlRef.current = null;
+      };
+    },
+    { scope: containerRef, dependencies: [animate, imageReady] },
+  );
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-[480px] gap-8">
-      {/* 档案编号 */}
+    <div ref={containerRef} className="flex flex-col items-center justify-center min-h-[480px] gap-8">
       <ArchiveLabel code={`COD.${zhName.replace(/[^一-龥]/g, "").slice(0, 2).toUpperCase()}`} />
 
-      {/* 三层阴影系统 + 纸质 frame */}
-      <div className="relative" style={{ width: "min(280px, 64vw)" }}>
-        {/* 暖金光晕 */}
+      <div className="relative" style={{ width: "min(280px, 64vw)", perspective: 1400 }}>
         <div
+          ref={warmGlowRef}
           aria-hidden
-          className="absolute pointer-events-none"
-          style={{
-            inset: "-18%",
-            borderRadius: 32,
-            background:
-              "radial-gradient(circle at 50% 48%, rgba(214,178,109,0.18) 0%, rgba(214,178,109,0.08) 34%, rgba(214,178,109,0.02) 58%, transparent 72%)",
-            filter: "blur(18px)",
-            transform: "translateY(10px)",
-          }}
+          className="card-glow absolute pointer-events-none"
         />
-        {/* 落地椭圆阴影 */}
         <div
+          ref={groundShadowRef}
           aria-hidden
-          className="absolute pointer-events-none"
-          style={{
-            bottom: -18,
-            left: "14%",
-            width: "72%",
-            height: 32,
-            borderRadius: 999,
-            background: "rgba(72, 54, 34, 0.16)",
-            filter: "blur(18px)",
-            transform: "scaleX(1.05)",
-          }}
+          className="card-ground-shadow absolute pointer-events-none"
         />
 
-        {/* 四角饰 */}
         <CornerOrnament size={28} position="tl" className="absolute -top-3 -left-3 z-10" />
         <CornerOrnament size={28} position="tr" className="absolute -top-3 -right-3 z-10" />
         <CornerOrnament size={28} position="bl" className="absolute -bottom-3 -left-3 z-10" />
         <CornerOrnament size={28} position="br" className="absolute -bottom-3 -right-3 z-10" />
 
-        {/* 纸质 frame */}
-        <div
-          className="relative z-[1]"
-          style={{
-            padding: 8,
-            borderRadius: 18,
-            background: "rgba(255, 252, 244, 0.62)",
-            border: "1px solid rgba(92, 66, 38, 0.16)",
-            boxShadow:
-              "0 10px 18px rgba(72, 54, 34, 0.14), 0 32px 80px rgba(82, 62, 40, 0.12)",
-          }}
-        >
-          {/* 翻牌动画 — 改善 ease 曲线，不要硬翻 */}
-          <motion.div
-            initial={{ rotateY: 0, scale: 0.96 }}
-            animate={{ rotateY: 180, scale: 1 }}
-            transition={{
-              rotateY: { duration: 1.05, ease: [0.22, 1, 0.36, 1] },
-              scale: cardSpring,
-            }}
-            onAnimationComplete={onComplete}
+        <div className="card-frame relative z-[1]">
+          <div
             className="relative"
             style={{
-              transformStyle: "preserve-3d",
-              perspective: 1400,
               width: "100%",
               aspectRatio: "600 / 1050",
+              transformStyle: "preserve-3d",
             }}
           >
-            {/* 牌背 — 三层阴影 + 纸感 */}
             <div
+              ref={cardBackRef}
               className="absolute inset-0 rounded-[11px] overflow-hidden"
               style={{
                 backfaceVisibility: "hidden",
                 border: "1px solid rgba(78, 60, 40, 0.18)",
                 boxShadow:
                   "inset 0 1px 0 rgba(255,255,255,0.5), 0 10px 18px rgba(72, 54, 34, 0.16), 0 28px 70px rgba(82, 62, 40, 0.13)",
+                opacity: 0,
               }}
             >
               <CardBackImage eager />
             </div>
 
-            {/* 牌面 — 三层阴影 + 纸感 */}
             <div
+              ref={cardFrontRef}
               className="absolute inset-0 rounded-[11px] overflow-hidden"
               style={{
                 backfaceVisibility: "hidden",
@@ -128,6 +150,7 @@ export default function CardReveal({
                 border: "1px solid rgba(78, 60, 40, 0.18)",
                 boxShadow:
                   "inset 0 1px 0 rgba(255,255,255,0.5), 0 10px 18px rgba(72, 54, 34, 0.16), 0 28px 70px rgba(82, 62, 40, 0.13)",
+                opacity: 0,
               }}
             >
               <CardImage
@@ -138,30 +161,33 @@ export default function CardReveal({
                 eager
               />
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* 牌名 — 柔和浮现 */}
-      <motion.div
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9, duration: 0.7 }}
-        className="text-center"
-      >
-        <div className="text-[18px] font-light tracking-[0.06em] mb-1" style={{ color: "var(--text-primary)" }}>
+      <div ref={cardNameRef} className="text-center" style={{ opacity: 0 }}>
+        <div
+          ref={cardNameZhRef}
+          className="text-[18px] font-light tracking-[0.06em] mb-1"
+          style={{ color: "var(--text-primary)" }}
+        >
           {zhName}
         </div>
-        <div className="text-[11px] tracking-[0.08em] mb-0.5" style={{ color: "var(--text-tertiary)" }}>
+        <div
+          data-card-meta
+          className="text-[11px] tracking-[0.08em] mb-0.5"
+          style={{ color: "var(--text-tertiary)" }}
+        >
           {cardName}
         </div>
         <div
+          data-card-meta
           className="text-[10px] tracking-[0.12em] annotation-ink"
           style={{ color: orientation === "upright" ? "var(--accent)" : "var(--text-tertiary)" }}
         >
           {oLabel}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

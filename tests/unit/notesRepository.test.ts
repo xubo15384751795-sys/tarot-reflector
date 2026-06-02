@@ -87,7 +87,7 @@ describe("NotesRepository", () => {
   beforeEach(async () => {
     storage.clear();
     vi.resetModules();
-    const mod = await import("@/features/notes/repository");
+    const mod = await import("@/features/notes/localRepository");
     repo = mod.createLocalNotesRepository();
   });
 

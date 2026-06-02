@@ -2,6 +2,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsapEase } from "./motionTokens";
 import { ensureGsapPlugins } from "./gsapRegister";
+import { REGRESSION_STATIC_LAYOUT } from "./layoutStatic";
 
 let scrollTriggerReady = false;
 
@@ -28,6 +29,13 @@ export function bindGuideSectionReveals(
 ): GuideRevealCleanup {
   const reduced = options?.reducedMotion ?? false;
   const mobile = options?.mobile ?? false;
+
+  if (REGRESSION_STATIC_LAYOUT || reduced) {
+    root.querySelectorAll("[data-reveal], .guide-section").forEach((el) => {
+      gsap.set(el, { autoAlpha: 1, y: 0, filter: "blur(0px)" });
+    });
+    return () => {};
+  }
 
   if (!ensureScrollTrigger()) {
     root.querySelectorAll("[data-reveal]").forEach((el) => {
@@ -79,7 +87,7 @@ export function bindGuideAmbientScroll(
   glowEl: HTMLElement | null,
   options?: { reducedMotion?: boolean },
 ): GuideRevealCleanup {
-  if (!glowEl || options?.reducedMotion || !ensureScrollTrigger()) return () => {};
+  if (!glowEl || options?.reducedMotion || REGRESSION_STATIC_LAYOUT || !ensureScrollTrigger()) return () => {};
 
   const tween = gsap.to(glowEl, {
     y: 48,

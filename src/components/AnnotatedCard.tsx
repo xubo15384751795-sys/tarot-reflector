@@ -1,94 +1,22 @@
 "use client";
 
+import { useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { MotifNote } from "@/components/MotifNote";
 import type { Motif, Orientation } from "@/lib/schema";
+import { partitionArchiveMotifs } from "@/lib/motifNormalize";
 import CardImage from "./CardImage";
 import { CornerOrnament } from "./ArchiveEmblems";
 
 type Props = {
-  /** Path under /public to the real RWS card image. Required. */
   image: string;
   cardName: string;
   zhName: string;
   orientation: Orientation;
   motifs: Motif[];
-  number?: number;
   activeMotifId?: string | null;
-  /** When true, hide all annotations so the user can see the whole card face. */
   bare?: boolean;
-  /** Captions shown next to each motif label, keyed by motif id. */
-  captionMap?: Record<string, string>;
 };
-
-// Where each motif's label sits relative to the card. We split motifs into
-// left and right columns, ordered top-to-bottom by bbox.y.
-function partitionMotifs(motifs: Motif[]) {
-  // Sort by vertical position.
-  const sorted = [...motifs].sort((a, b) => a.bbox.y - b.bbox.y);
-
-  let left: Motif[] = [];
-  let right: Motif[] = [];
-  sorted.forEach((m) => {
-    const cx = m.bbox.x + m.bbox.w / 2;
-    if (cx < 0.5) left.push(m);
-    else right.push(m);
-  });
-
-  // If everything ended up on one side (common when bboxes are centered),
-  // discard that split and alternate top-to-bottom instead.
-  if (left.length === 0 || right.length === 0) {
-    left = [];
-    right = [];
-    sorted.forEach((m, i) => {
-      (i % 2 === 0 ? left : right).push(m);
-    });
-  }
-
-  left.sort((a, b) => a.bbox.y - b.bbox.y);
-  right.sort((a, b) => a.bbox.y - b.bbox.y);
-  return { left, right };
-}
-
-function MotifLabel({
-  motif,
-  active,
-  caption,
-  side,
-}: {
-  motif: Motif;
-  active: boolean;
-  caption?: string;
-  side: "left" | "right";
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: side === "left" ? -8 : 8 }}
-      animate={{
-        opacity: 1,
-        x: 0,
-      }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`flex flex-col ${
-        side === "left" ? "items-end text-right" : "items-start text-left"
-      } gap-0.5`}
-    >
-      <span
-          className={`text-[12px] tracking-[0.02em] font-normal transition-colors duration-500 ${!active ? "annotation-ink" : ""}`}
-          style={{ color: active ? "var(--accent)" : undefined }}
-        >
-          {motif.label}
-        </span>
-        {caption && (
-          <span
-            className="text-[10px] tracking-[0.02em] leading-[1.4] transition-colors duration-500"
-            style={{ color: active ? "var(--accent)" : "var(--ink-cool)", opacity: active ? 0.7 : 1 }}
-          >
-            {caption}
-          </span>
-        )}
-    </motion.div>
-  );
-}
 
 export default function AnnotatedCard({
   image,
@@ -96,39 +24,36 @@ export default function AnnotatedCard({
   zhName,
   orientation,
   motifs,
-  number: _number,
   activeMotifId,
   bare = false,
-  captionMap,
 }: Props) {
-  const { left, right } = partitionMotifs(motifs);
+  const { left, right, all } = useMemo(
+    () => partitionArchiveMotifs(motifs),
+    [motifs],
+  );
 
-  // The card occupies a fixed central column; labels sit in left/right
-  // columns that match the card's vertical extent.
+  const isReversed = orientation === "reversed";
+
   return (
-    <div className="relative w-full annotated-card-grid">
-      {/* Left labels column — 仅在 ≥md 展示；移动端隐藏，把空间让给牌面本身 */}
-      <div className="annotated-card-labels flex flex-col justify-between py-2">
+    <div className="relative w-full annotated-card-grid archive-layout archive-layout--reading">
+      <div className="note-column note-column--left annotated-card-labels">
         {!bare &&
           left.map((m) => (
-            <div
+            <MotifNote
               key={m.id}
-              className="flex justify-end"
-              style={{ flex: "1 1 0" }}
-            >
-              <MotifLabel
-                motif={m}
-                active={m.id === activeMotifId}
-                caption={captionMap?.[m.id]}
-                side="left"
-              />
-            </div>
+              id={m.id}
+              label_zh={m.label_zh}
+              meaning_zh={m.meaning_zh}
+              side="left"
+              active={m.id === activeMotifId}
+              dimmed={
+                !!activeMotifId && m.id !== activeMotifId
+              }
+            />
           ))}
       </div>
 
-      {/* Card column */}
-      <div className="relative flex items-center justify-center">
-        {/* Outer warm gold glow */}
+      <div className="relative flex items-center justify-center annotated-card-stage-wrap">
         <div
           aria-hidden
           className="absolute pointer-events-none"
@@ -139,8 +64,6 @@ export default function AnnotatedCard({
             filter: "blur(8px)",
           }}
         />
-
-        {/* Brass archive frame */}
         <div
           aria-hidden
           className="absolute pointer-events-none"
@@ -157,14 +80,7 @@ export default function AnnotatedCard({
         <CornerOrnament size={22} position="bl" className="absolute -bottom-0.5 -left-0.5 z-10" style={{ opacity: 0.5 }} />
         <CornerOrnament size={22} position="br" className="absolute -bottom-0.5 -right-0.5 z-10" style={{ opacity: 0.5 }} />
 
-        <div
-          className="relative card-stage"
-          style={{
-            aspectRatio: "600 / 1050",
-            width: "100%",
-          }}
-        >
-          {/* The real card image */}
+        <div className="card-stage card-stage--reading">
           <div className="absolute inset-0 rounded-[18px] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.6),0_0_0_1px_rgba(255,255,255,0.05)_inset]">
             <CardImage
               image={image}
@@ -174,61 +90,29 @@ export default function AnnotatedCard({
             />
           </div>
 
-          {/* Motif dots — small ring at the centre of every bbox.
-              Positioned in % so they track the card under any aspect ratio. */}
           {!bare &&
-            motifs.map((m) => {
-              const isReversed = orientation === "reversed";
-              const cx = m.bbox.x + m.bbox.w / 2;
-              const cy = m.bbox.y + m.bbox.h / 2;
-              const x = isReversed ? 1 - cx : cx;
-              const y = isReversed ? 1 - cy : cy;
+            all.map((m) => {
+              const ax = isReversed ? 1 - m.anchor.x : m.anchor.x;
+              const ay = isReversed ? 1 - m.anchor.y : m.anchor.y;
               const active = m.id === activeMotifId;
               return (
-                <div
+                <span
                   key={m.id}
-                  className="absolute pointer-events-none -translate-x-1/2 -translate-y-1/2"
-                  style={{
-                    left: `${x * 100}%`,
-                    top: `${y * 100}%`,
-                    width: active ? 18 : 12,
-                    height: active ? 18 : 12,
-                    borderRadius: 999,
-                    border: `1px solid ${
-                      active ? "rgba(206,185,138,1)" : "rgba(206,185,138,0.45)"
-                    }`,
-                    boxShadow: active
-                      ? "0 0 14px rgba(206,185,138,0.55)"
-                      : undefined,
-                    transition: "all 0.5s cubic-bezier(0.4,0,0.2,1)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span
-                    style={{
-                      width: active ? 6 : 3,
-                      height: active ? 6 : 3,
-                      borderRadius: 999,
-                      background: active
-                        ? "rgba(206,185,138,1)"
-                        : "rgba(206,185,138,0.55)",
-                      transition: "all 0.5s cubic-bezier(0.4,0,0.2,1)",
-                    }}
-                  />
-                </div>
+                  className={`motif-anchor motif-anchor--readonly ${active ? "is-lit" : ""} ${
+                    activeMotifId && !active ? "is-dim" : ""
+                  }`}
+                  style={{ left: `${ax * 100}%`, top: `${ay * 100}%` }}
+                  aria-hidden
+                />
               );
             })}
 
-          {/* Active motif glow band — soft glow over the active region */}
           <AnimatePresence>
             {!bare && activeMotifId && (() => {
-              const m = motifs.find((x) => x.id === activeMotifId);
+              const m = all.find((x) => x.id === activeMotifId);
               if (!m) return null;
-              const isReversed = orientation === "reversed";
-              const bx = isReversed ? 1 - m.bbox.x - m.bbox.w : m.bbox.x;
-              const by = isReversed ? 1 - m.bbox.y - m.bbox.h : m.bbox.y;
+              const bx = isReversed ? 1 - m.highlight.x - m.highlight.w : m.highlight.x;
+              const by = isReversed ? 1 - m.highlight.y - m.highlight.h : m.highlight.y;
               return (
                 <motion.div
                   key={m.id}
@@ -238,8 +122,8 @@ export default function AnnotatedCard({
                     opacity: 1,
                     left: `${bx * 100}%`,
                     top: `${by * 100}%`,
-                    width: `${m.bbox.w * 100}%`,
-                    height: `${m.bbox.h * 100}%`,
+                    width: `${m.highlight.w * 100}%`,
+                    height: `${m.highlight.h * 100}%`,
                   }}
                   exit={{ opacity: 0 }}
                   transition={{
@@ -260,22 +144,18 @@ export default function AnnotatedCard({
         </div>
       </div>
 
-      {/* Right labels column — 同样在移动端隐藏 */}
-      <div className="annotated-card-labels flex flex-col justify-between py-2">
+      <div className="note-column note-column--right annotated-card-labels">
         {!bare &&
           right.map((m) => (
-            <div
+            <MotifNote
               key={m.id}
-              className="flex justify-start"
-              style={{ flex: "1 1 0" }}
-            >
-              <MotifLabel
-                motif={m}
-                active={m.id === activeMotifId}
-                caption={captionMap?.[m.id]}
-                side="right"
-              />
-            </div>
+              id={m.id}
+              label_zh={m.label_zh}
+              meaning_zh={m.meaning_zh}
+              side="right"
+              active={m.id === activeMotifId}
+              dimmed={!!activeMotifId && m.id !== activeMotifId}
+            />
           ))}
       </div>
     </div>

@@ -55,7 +55,7 @@ describe("checkSameCard", () => {
   });
 
   it("无历史记录时返回 hasPrevious=false", async () => {
-    const { createLocalNotesRepository } = await import("@/features/notes/repository");
+    const { createLocalNotesRepository } = await import("@/features/notes/localRepository");
     const repo = createLocalNotesRepository();
     const result = checkSameCard(repo, ["the_fool"]);
     expect(result.hasPrevious).toBe(false);
@@ -63,7 +63,7 @@ describe("checkSameCard", () => {
   });
 
   it("有历史记录时返回匹配快照", async () => {
-    const { createLocalNotesRepository } = await import("@/features/notes/repository");
+    const { createLocalNotesRepository } = await import("@/features/notes/localRepository");
     const repo = createLocalNotesRepository();
     repo.saveSnapshot(makeSnapshot("the_fool", "r1"));
     const result = checkSameCard(repo, ["the_fool"]);
@@ -73,7 +73,7 @@ describe("checkSameCard", () => {
   });
 
   it("多条记录时消息包含次数", async () => {
-    const { createLocalNotesRepository } = await import("@/features/notes/repository");
+    const { createLocalNotesRepository } = await import("@/features/notes/localRepository");
     const repo = createLocalNotesRepository();
     repo.saveSnapshot(makeSnapshot("the_fool", "r1"));
     repo.saveSnapshot(makeSnapshot("the_fool", "r2"));
@@ -84,7 +84,7 @@ describe("checkSameCard", () => {
   });
 
   it("不匹配的牌返回 false", async () => {
-    const { createLocalNotesRepository } = await import("@/features/notes/repository");
+    const { createLocalNotesRepository } = await import("@/features/notes/localRepository");
     const repo = createLocalNotesRepository();
     repo.saveSnapshot(makeSnapshot("the_fool", "r1"));
     const result = checkSameCard(repo, ["the_star"]);

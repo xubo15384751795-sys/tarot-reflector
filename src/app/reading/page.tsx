@@ -15,6 +15,7 @@ import { Suspense, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import AppShell from "@/components/AppShell";
+import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
 import { AlchemicalRing } from "@/components/ArchiveEmblems";
 import SavePanel from "@/components/SavePanel";
 import { useReadingSession } from "@/features/reading/hooks/useReadingSession";
@@ -23,6 +24,7 @@ import { useReadingPageActions } from "@/features/reading/hooks/useReadingPageAc
 import ReadingStageRouter from "@/features/reading/components/ReadingStageRouter";
 import ReadingFlowProgress from "@/features/reading/components/ReadingFlowProgress";
 import ReadingOverlays from "@/features/reading/components/ReadingOverlays";
+import { pageTransition } from "@/features/motion";
 import ReflectionStage from "@/features/reading/components/stages/ReflectionStage";
 import type { Domain, ReadingMode, SpreadId } from "@/lib/schema";
 
@@ -77,10 +79,10 @@ function ReadingContent() {
         <AnimatePresence mode="wait">
           <motion.div
             key={stage}
-            initial={{ opacity: 0, filter: "blur(8px)", y: 6 }}
-            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-            exit={{ opacity: 0, filter: "blur(6px)", y: -6 }}
-            transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+            initial={pageTransition.initial}
+            animate={pageTransition.animate}
+            exit={pageTransition.exit}
+            transition={pageTransition.transition}
             className="relative z-[1]"
           >
             <ReadingStageRouter
@@ -185,13 +187,7 @@ export default function ReadingPage() {
       fallback={
         <AppShell showActions={false}>
           <main className="flex-1 flex items-center justify-center p-8 min-h-[60vh]">
-            <div
-              className="w-5 h-5 rounded-full animate-spin"
-              style={{
-                border: "1px solid var(--border-glass)",
-                borderTopColor: "var(--text-tertiary)",
-              }}
-            />
+            <ReadingStatusIndicator status="question_reframing" />
           </main>
         </AppShell>
       }

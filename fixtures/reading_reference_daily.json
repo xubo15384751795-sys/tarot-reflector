@@ -1,0 +1,13 @@
+{
+  "mode": "daily",
+  "statusLabel": "今日一牌 · 参考态",
+  "card": {
+    "id": "the_star",
+    "name_zh": "星星",
+    "name_en": "The Star",
+    "image": "/cards/major/major_17_star.jpg",
+    "orientation": "upright",
+    "keywords_zh": ["希望", "疗愈", "方向"],
+    "meaning_zh": "星星正位像夜空中缓慢亮起的一盏灯——不必立刻看清全貌，但你知道该往哪里走。"
+  }
+}

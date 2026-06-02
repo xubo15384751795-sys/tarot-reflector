@@ -55,19 +55,27 @@ export function mergeApiReading(input: MergeApiReadingInput): ReadingScript {
       ];
     }
 
-    return sceneList.map((s, si) => ({
-      scene_id: si + 1,
-      type: s.type ?? "card_analysis",
-      step_label: pr.position_name_zh ?? `位置${pr.position_index}`,
-      headline: s.headline_zh ?? pr.headline_zh ?? "",
-      body: s.body_zh ?? pr.body_zh ?? "",
-      insight: s.annotation_label_zh ?? undefined,
-      connection: undefined,
-      visual_direction: "",
-      duration: s.duration ?? 6,
-      focus_motif: s.focus_motif ?? null,
-      annotation_label: s.annotation_label_zh ?? null,
-    }));
+    return sceneList.map((s, si) => {
+      // 子场景的 step_label 优先取 headline（截短），避免同位置多场景标签重复
+      const headline = s.headline_zh ?? pr.headline_zh ?? "";
+      const label =
+        headline && sceneList.length > 1
+          ? headline.replace(/[：:·。!?,.]/g, "").slice(0, 6)
+          : pr.position_name_zh ?? `位置${pr.position_index}`;
+      return {
+        scene_id: si + 1,
+        type: s.type ?? "card_analysis",
+        step_label: label,
+        headline,
+        body: s.body_zh ?? pr.body_zh ?? "",
+        insight: s.annotation_label_zh ?? undefined,
+        connection: undefined,
+        visual_direction: "",
+        duration: s.duration ?? 6,
+        focus_motif: s.focus_motif ?? null,
+        annotation_label: s.annotation_label_zh ?? null,
+      };
+    });
   });
 
   return {

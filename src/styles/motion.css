@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+/* ── View Transitions · 跨断点过渡 ──
+ *
+ * 单纯 cross-fade 看起来不自然——两层布局在中间同时半透明叠加，
+ * 像幽灵影。真正想要的是"卡片从右边滑到上方、文字从左边浮到下方"
+ * 这种空间位移。
+ *
+ * 解法：给 hero-text / hero-card 两个区域各取一个 view-transition-name。
+ * 浏览器会用 FLIP 自动计算它们在旧/新布局里的位置和尺寸差，
+ * 通过 ::view-transition-group(name) 做 transform + 尺寸形变。
+ *
+ * 时长分工：
+ *   - group（位置/尺寸形变）：520ms 长缓动，决定滑动观感
+ *   - old/new（淡入淡出）：220ms 快速十字溶解，把"幽灵双影"时间压短
+ *   - root：280ms，处理那些没命名的零碎装饰
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 280ms;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+::view-transition-group(hero-text),
+::view-transition-group(hero-card) {
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+::view-transition-old(hero-text),
+::view-transition-new(hero-text),
+::view-transition-old(hero-card),
+::view-transition-new(hero-card) {
+  animation-duration: 220ms;
+  animation-timing-function: ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(hero-text),
+  ::view-transition-group(hero-card),
+  ::view-transition-old(hero-text),
+  ::view-transition-new(hero-text),
+  ::view-transition-old(hero-card),
+  ::view-transition-new(hero-card) {
+    animation-duration: 0.001ms;
+  }
+}
+/* ── 烛光呼吸动画 ── */
+@keyframes candle-breathe {
+  0%, 100% { opacity: 0.6; }
+  25% { opacity: 0.75; }
+  50% { opacity: 0.55; }
+  75% { opacity: 0.7; }
+}
+.candle-glow {
+  animation: candle-breathe 6s ease-in-out infinite;
+}
+
+/* ── 星图微光 ── */
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.3); }
+}
+.star-twinkle-1 { animation: star-twinkle 4s ease-in-out infinite; }
+.star-twinkle-2 { animation: star-twinkle 5.5s ease-in-out infinite 1.2s; }
+.star-twinkle-3 { animation: star-twinkle 3.8s ease-in-out infinite 2.5s; }
+/* ═══════════════════════════════════════════════
+ * 微光层 · 金粉漂浮 / 鼠标追光 / hotspot 呼吸
+ *
+ * 全部用 CSS 实现：
+ *   - radial-gradient + transform 漂移（不动 width/height/top/left）
+ *   - --mx / --my 由 useFoilSpotlight 在 pointermove 时 setProperty
+ *     不触发 React re-render
+ *   - prefers-reduced-motion + pointer: coarse 时降级
+ * ═══════════════════════════════════════════════ */
+
+/* ── 1. LuminousLayer · 金粉漂浮 ── */
+.luminous {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.luminous__layer {
+  position: absolute;
+  inset: -8%;
+  will-change: transform;
+}
+
+.luminous__layer--a {
+  background-image:
+    radial-gradient(circle at 18% 32%, rgba(198, 161, 92, 0.05) 0%, transparent 22%),
+    radial-gradient(circle at 78% 22%, rgba(198, 161, 92, 0.04) 0%, transparent 18%),
+    radial-gradient(circle at 30% 76%, rgba(198, 161, 92, 0.045) 0%, transparent 20%),
+    radial-gradient(circle at 86% 68%, rgba(198, 161, 92, 0.035) 0%, transparent 18%),
+    radial-gradient(circle at 50% 50%, rgba(255, 232, 190, 0.025) 0%, transparent 30%);
+  animation: luminous-drift-a 32s ease-in-out infinite alternate;
+}
+
+.luminous__layer--b {
+  background-image:
+    radial-gradient(circle at 42% 14%, rgba(198, 161, 92, 0.03) 0%, transparent 16%),
+    radial-gradient(circle at 12% 56%, rgba(198, 161, 92, 0.025) 0%, transparent 16%),
+    radial-gradient(circle at 72% 88%, rgba(198, 161, 92, 0.028) 0%, transparent 18%);
+  animation: luminous-drift-b 52s ease-in-out infinite alternate;
+}
+
+@keyframes luminous-drift-a {
+  0%   { transform: translate3d(-0.6%, -0.4%, 0); }
+  100% { transform: translate3d(0.8%, 0.7%, 0); }
+}
+
+@keyframes luminous-drift-b {
+  0%   { transform: translate3d(0.7%, 0.5%, 0); }
+  100% { transform: translate3d(-0.6%, -0.4%, 0); }
+}
+
+/* 强度（暗色更明显，浅色更哑光） */
+.luminous--low .luminous__layer { opacity: 0.45; }
+.luminous--medium .luminous__layer { opacity: 0.85; }
+
+:root[data-theme="light"] .luminous--medium .luminous__layer { opacity: 0.50; }
+:root[data-theme="light"] .luminous--low .luminous__layer { opacity: 0.32; }
+
+@media (prefers-reduced-motion: reduce) {
+  .luminous__layer { animation: none !important; }
+}
+
+/* ── 2. Mode card · 鼠标追光（cursor spotlight） ── */
+.mode-card {
+  --mx: 50%;
+  --my: 50%;
+}
+
+.mode-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    220px circle at var(--mx) var(--my),
+    rgba(198, 161, 92, 0.14) 0%,
+    rgba(198, 161, 92, 0.05) 38%,
+    transparent 72%
+  );
+  opacity: 0;
+  transition: opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mode-card:hover::after { opacity: 1; }
+
+:root[data-theme="light"] .mode-card::after {
+  background: radial-gradient(
+    220px circle at var(--mx) var(--my),
+    rgba(185, 149, 82, 0.18) 0%,
+    rgba(185, 149, 82, 0.06) 40%,
+    transparent 74%
+  );
+}
+
+@media (hover: none), (pointer: coarse) {
+  .mode-card::after { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-card::after { transition: none; }
+}
+
+/* ── 3. motif hotspot · 极淡呼吸（foil breath） ── */
+@keyframes hotspot-breathe {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.06);
+    filter: brightness(1.15);
+  }
+}
+
+.motif-hotspot__dot {
+  animation: hotspot-breathe 5.5s ease-in-out infinite;
+}
+
+.motif-hotspot.is-lit .motif-hotspot__dot,
+.motif-hotspot.is-dim .motif-hotspot__dot {
+  /* lit 状态由专属 hover/active 样式接管；dim 状态停下呼吸保持安静 */
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motif-hotspot__dot { animation: none; }
+}
+
+/* ── Physical motion · 牌面 / 卡片 / 光标光 ── */
+.tarot-card-stage,
+.card-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-glow {
+  position: absolute;
+  inset: -18%;
+  border-radius: 32px;
+  z-index: 0;
+  background: radial-gradient(
+    circle at 50% 48%,
+    var(--card-warm-glow) 0%,
+    rgba(214, 178, 109, 0.06) 40%,
+    transparent 72%
+  );
+  filter: blur(18px);
+  transform: translateY(10px);
+}
+
+.card-ground-shadow {
+  position: absolute;
+  bottom: -18px;
+  left: 14%;
+  width: 72%;
+  height: 32px;
+  border-radius: 999px;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(72, 54, 34, 0.2) 0%,
+    rgba(72, 54, 34, 0.08) 40%,
+    transparent 75%
+  );
+  filter: blur(16px);
+  transform: scaleX(1.05);
+  will-change: transform, opacity;
+}
+
+.card-frame {
+  padding: 8px;
+  border-radius: 18px;
+  background: rgba(255, 252, 244, 0.62);
+  border: 1px solid rgba(92, 66, 38, 0.16);
+  box-shadow: var(--card-contact-shadow), var(--card-ambient-shadow);
+}
+
+:root[data-theme="dark"] .card-frame {
+  background: rgba(22, 18, 14, 0.55);
+  border-color: rgba(198, 161, 92, 0.14);
+}
+
+.physical-card {
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+  will-change: transform;
+}
+
+.physical-card:hover {
+  transform: translateY(-2px) scale(1.008);
+}
+
+.physical-card:active {
+  transform: scale(0.985);
+  transition-duration: 0.14s;
+}
+
+.interactive-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.interactive-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  border-radius: inherit;
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 50%),
+    var(--glow-gold),
+    rgba(214, 178, 109, 0.06) 38%,
+    transparent 68%
+  );
+}
+
+.interactive-glow:hover::before {
+  opacity: 1;
+}
+
+@media (pointer: coarse) {
+  .interactive-glow::before {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .physical-card,
+  .physical-card:hover,
+  .physical-card:active {
+    transform: none !important;
+    transition: none !important;
+  }
+  .interactive-glow::before {
+    display: none;
+  }
+  .card-glow,
+  .motif-hotspot__dot {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-glow {
+    opacity: 0.65;
+  }
+  .card-ground-shadow {
+    filter: blur(12px);
+    opacity: 0.75;
+  }
+}
+
+/* ── 4. motif popover · 加一层极淡内嵌金光 ── */
+.motif-popover {
+  box-shadow:
+    0 16px 40px rgba(92, 66, 38, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 0 28px rgba(198, 161, 92, 0.06);
+}

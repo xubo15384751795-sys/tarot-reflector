@@ -73,7 +73,7 @@ export function TabBar({
 
   return (
     <div className="flex justify-center">
-      <div ref={containerRef} className="archive-tab-bar inline-flex items-center gap-0 rounded-full px-1.5 py-1 relative">
+      <div ref={containerRef} className="archive-tab-bar inline-flex items-center gap-0 rounded-full px-1.5 py-1 relative" role="tablist" aria-label="档案分类">
         <div ref={indicatorRef} className="archive-tab-indicator" aria-hidden />
 
         {tabs.map((tab) => {
@@ -86,6 +86,8 @@ export function TabBar({
                 else buttonRefs.current.delete(tab.id);
               }}
               type="button"
+              role="tab"
+              aria-selected={isActive}
               onClick={() => handleTabClick(tab.id)}
               className={`archive-tab-btn relative flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-full shrink-0 z-10 ${
                 isActive ? "is-active" : ""

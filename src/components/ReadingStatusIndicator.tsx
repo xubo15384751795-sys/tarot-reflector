@@ -4,6 +4,7 @@ import {
   readingStatusText,
   type ReadingStatusKey,
 } from "@/lib/readingStatusCopy";
+import { StatusPill } from "@/components/ui/StatusPill";
 
 type Props = {
   status: ReadingStatusKey;
@@ -26,12 +27,7 @@ export default function ReadingStatusIndicator({ status, className }: Props) {
         }}
         aria-hidden
       />
-      <p
-        className="text-[12px] tracking-[0.18em]"
-        style={{ color: "var(--text-tertiary)" }}
-      >
-        {readingStatusText(status)}
-      </p>
+      <StatusPill variant="status">{readingStatusText(status)}</StatusPill>
     </div>
   );
 }

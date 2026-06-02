@@ -163,13 +163,15 @@ export type ReadingSessionState = {
   currentPosition: number;
   errorMessage: string | null;
   /**
-   * 后台 AI 解读尚未返回。
-   *   - true：UI 已经展示了本地兜底 script，可以提示「正在润色…」
-   *   - false：要么 AI 已返回并合并、要么彻底失败已用本地兜底
-   * 这种「先展示后润色」的两段式让用户在 1.2s 内就能看到牌面，
-   * 不需要为 AI 慢响应整段空等。
+   * 牌面解读尚在展开中（本地兜底已先展示）。
+   *   - true：UI 已展示本地 script，可提示「正在把牌面与你的问题连起来……」
+   *   - false：解读已收束，或已回退到本地兜底
    */
   aiPending: boolean;
+  /**
+   * 解读请求超时时的柔和提示（不称失败，引导用户先看牌面）。
+   */
+  readingSlowHint: boolean;
 };
 
 // ─── 工具 re-export，方便消费方只看 feature ──────────

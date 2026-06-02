@@ -19,6 +19,11 @@ vi.mock("@/lib/useFoilSpotlight", () => ({
   useFoilSpotlight: () => {},
 }));
 
+vi.mock("@/features/motion/modeFlip.gsap", () => ({
+  captureModeFlipState: vi.fn(() => ({})),
+  playModeSelectionFlip: vi.fn(),
+}));
+
 describe("ModeSelector", () => {
   it("渲染三种模式卡片", () => {
     const onSelect = vi.fn();

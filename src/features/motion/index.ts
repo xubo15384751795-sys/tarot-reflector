@@ -36,14 +36,19 @@ export {
 // ScrollTrigger registered via gsapRegister side-effect import in guideScrollReveal
 export type { GuideRevealCleanup } from "./guideScrollReveal.gsap";
 export { showMotifHighlight, hideMotifHighlight } from "./motifHighlight.gsap";
-export { staggerHotspots, animateHotspotHover, activateHotspot, resetHotspots } from "./motifHotspot.gsap";
-export type { HotspotConfig } from "./motifHotspot.gsap";
+export {
+  staggerHotspots,
+  animateHotspotHover,
+  activateHotspot,
+  resetHotspots,
+} from "./motifHotspotTimeline";
+export type { HotspotConfig } from "./motifHotspotTimeline";
 export {
   createHandwrittenPath,
   animateHandwrittenLine,
   animateHandwrittenLines,
   eraseHandwrittenLine,
-} from "./handwrittenLine.gsap";
+} from "./handwrittenLine";
 export { initLuminousLayer, setupLuminousMotion } from "./luminousLayer";
 export type { LuminousLayerConfig } from "./luminousLayer";
 export { animateSplitReveal } from "./splitText.gsap";
@@ -57,6 +62,7 @@ export {
   playSpreadSelectionFlip,
 } from "./spreadFlip.gsap";
 export type { SpreadFlipState } from "./spreadFlip.gsap";
+export { REGRESSION_STATIC_LAYOUT } from "./layoutStatic";
 export {
   animateArchiveTabIndicator,
   measureTabIndicator,

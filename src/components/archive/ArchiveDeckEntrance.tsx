@@ -3,9 +3,11 @@
 import { useCallback, useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ArchiveGroupCard } from "@/components/ui/ArchiveGroupCard";
 import {
   useReducedMotion,
   useCursorGlowOnScope,
+  REGRESSION_STATIC_LAYOUT,
 } from "@/features/motion";
 import type { ArchiveTabId, ArchiveTabItem } from "./types";
 
@@ -80,26 +82,26 @@ export function ArchiveDeckEntrance({
 
   useGSAP(
     () => {
-      if (reducedMotion || !scopeRef.current) return;
+      if (REGRESSION_STATIC_LAYOUT || reducedMotion || !scopeRef.current) return;
       const major = scopeRef.current.querySelector(".major-arcana-card");
       const minor = scopeRef.current.querySelectorAll(".minor-grid__card");
       if (major) {
         gsap.from(major, {
           autoAlpha: 0,
-          y: 16,
-          duration: 0.55,
+          y: 12,
+          duration: 0.45,
           ease: "power2.out",
-          delay: 0.12,
+          delay: 0.08,
         });
       }
       if (minor.length) {
         gsap.from(minor, {
           autoAlpha: 0,
-          y: 12,
-          duration: 0.48,
+          y: 10,
+          duration: 0.4,
           ease: "power2.out",
-          stagger: 0.07,
-          delay: 0.32,
+          stagger: 0.05,
+          delay: 0.2,
         });
       }
     },
@@ -107,81 +109,50 @@ export function ArchiveDeckEntrance({
   );
 
   const handleSelect = useCallback(
-    (id: ArchiveTabId, el: HTMLButtonElement | null) => {
-      if (el && !reducedMotion) {
-        gsap.fromTo(
-          el,
-          { scale: 0.992 },
-          { scale: 1, duration: 0.28, ease: "power2.out" },
-        );
-      }
+    (id: ArchiveTabId) => {
       onTabChange(id);
     },
-    [onTabChange, reducedMotion],
+    [onTabChange],
   );
-
-  const handlePointerEnter = useCallback(
-    (id: ArchiveTabId) => {
-      onPreviewHover?.(id);
-    },
-    [onPreviewHover],
-  );
-
-  const handlePointerLeave = useCallback(() => {
-    onPreviewLeave?.();
-  }, [onPreviewLeave]);
 
   return (
     <div ref={scopeRef} className="archive-groups">
-      <button
-        type="button"
-        role="tab"
-        aria-selected={activeTab === "major"}
-        className={`major-arcana-card archive-glass-card interactive-glow physical-card${activeTab === "major" ? " is-active" : ""}`}
-        onClick={(e) => handleSelect("major", e.currentTarget)}
-        onPointerEnter={() => handlePointerEnter("major")}
-        onPointerLeave={handlePointerLeave}
-      >
-        <span className="major-arcana-card__inner">
-          <span className="archive-card__label">{majorTab.label}</span>
-          <span className="major-arcana-card__count">{majorTab.count}</span>
-          <span className="archive-card__theme">{majorMeta.theme}</span>
-          <span className="archive-card__desc">{majorMeta.desc}</span>
-        </span>
-      </button>
+      <ArchiveGroupCard
+        title={majorTab.label}
+        subtitle={`${majorMeta.theme} · ${majorMeta.desc}`}
+        count={majorTab.count}
+        active={activeTab === "major"}
+        onClick={() => handleSelect("major")}
+        onPointerEnter={() => onPreviewHover?.("major")}
+        onPointerLeave={onPreviewLeave}
+        className="major-arcana-card major-card interactive-glow physical-card"
+      />
 
       <div className="minor-section">
         <h3 className="minor-section__title">小阿尔卡那 · 四种现实维度</h3>
-        <div className="minor-grid" role="tablist" aria-label="小阿尔卡那花色">
+        <div className="minor-grid" role="group" aria-label="小阿尔卡那花色">
           {MINOR_TAB_IDS.map((id) => {
             const tab = findTab(tabs, id);
             const meta = DECK_META[id];
             const isActive = activeTab === id;
             return (
-              <button
+              <ArchiveGroupCard
                 key={id}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                className={`minor-grid__card archive-glass-card interactive-glow physical-card${isActive ? " is-active" : ""}`}
-                onClick={(e) => handleSelect(id, e.currentTarget)}
-                onPointerEnter={() => handlePointerEnter(id)}
-                onPointerLeave={handlePointerLeave}
+                title={tab.label}
+                subtitle={meta.desc}
+                meta={`${tab.count} · ${meta.element} / ${meta.theme}`}
+                active={isActive}
+                onClick={() => handleSelect(id)}
+                onPointerEnter={() => onPreviewHover?.(id)}
+                onPointerLeave={onPreviewLeave}
+                className="minor-grid__card interactive-glow physical-card"
               >
-                <span className="minor-grid__card-inner">
-                  {tab.icon && (
-                    <span className="minor-grid__icon" aria-hidden>
-                      {tab.icon}
-                    </span>
-                  )}
-                  <span className="archive-card__label">{tab.label}</span>
-                  <span className="minor-grid__count">{tab.count}</span>
-                  <span className="archive-card__element">
-                    {meta.element} / {meta.theme}
+                {tab.icon && (
+                  <span className="minor-grid__icon" aria-hidden>
+                    {tab.icon}
                   </span>
-                  <span className="archive-card__desc">{meta.desc}</span>
-                </span>
-              </button>
+                )}
+              </ArchiveGroupCard>
             );
           })}
         </div>

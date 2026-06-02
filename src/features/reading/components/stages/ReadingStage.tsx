@@ -15,12 +15,14 @@ import { AnimatePresence } from "framer-motion";
 import AnnotatedCard from "@/components/AnnotatedCard";
 import ReadingPanel from "@/components/ReadingPanel";
 import CardReveal from "@/components/CardReveal";
+import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
 import SpreadOverview from "@/components/SpreadOverview";
 import CardPositionReading from "@/components/CardPositionReading";
 import RelationshipAnalysis from "@/components/RelationshipAnalysis";
 import ReadingSummary from "@/components/ReadingSummary";
 import tarotCards from "@/data/tarot_cards.json";
 import type { DrawnCard } from "@/lib/schema";
+import { readingStatusText } from "@/lib/readingStatusCopy";
 import { getSpreadDef } from "../../lib/spreads";
 import type { ReadingScript, ReadingStage as Stage } from "../../types/reading";
 
@@ -32,8 +34,10 @@ type Props = {
   script: ReadingScript;
   currentPosition: number;
   domain: string;
-  /** 后台 AI 解读尚未返回（用本地兜底先撑住 UI） */
+  /** 牌面解读尚在展开（本地兜底已先展示） */
   aiPending: boolean;
+  /** 解读超时时的柔和提示 */
+  readingSlowHint: boolean;
   onBeginReadings: () => void;
   onNextPosition: () => void;
   onRelationshipsNext: () => void;
@@ -50,6 +54,7 @@ export default function ReadingStage(props: Props) {
     currentPosition,
     domain,
     aiPending,
+    readingSlowHint,
     onBeginReadings,
     onNextPosition,
     onRelationshipsNext,
@@ -61,17 +66,6 @@ export default function ReadingStage(props: Props) {
 
   const cardCount = script.cards.length;
   const spreadDef = useMemo(() => getSpreadDef(script.spread_id), [script.spread_id]);
-
-  // 单牌模式下的 motif caption（同一张牌内的小注释）
-  const captionMap = useMemo<Record<string, string>>(() => {
-    const map: Record<string, string> = {};
-    script.motifs.forEach((m) => {
-      const meaning = m.meaning ?? "";
-      const trimmed = meaning.replace(/。$/, "").split(/[，·]/).filter(Boolean);
-      map[m.id] = trimmed.slice(0, 2).join("\n") || meaning;
-    });
-    return map;
-  }, [script.motifs]);
 
   // relationships 阶段：本地模板路径无 analysis 时，下一帧自动跳到 summary
   useEffect(() => {
@@ -89,7 +83,7 @@ export default function ReadingStage(props: Props) {
               className="text-[14px] mb-4"
               style={{ color: "var(--text-secondary)" }}
             >
-              牌阵信息加载中……
+              {readingStatusText("spread_recommending")}
             </p>
             <button onClick={onBeginReadings} className="btn-primary">
               继续解读
@@ -140,7 +134,12 @@ export default function ReadingStage(props: Props) {
     if (!card) return null;
     return (
       <div className="flex-1 flex items-center justify-center min-h-[60vh] px-6 py-12 relative">
-        {aiPending && <AiPolishingHint />}
+        {(aiPending || readingSlowHint) && (
+          <ReadingPendingHint
+            aiPending={aiPending}
+            readingSlowHint={readingSlowHint}
+          />
+        )}
         <AnimatePresence mode="wait">
           <CardPositionReading
             key={currentPosition}
@@ -174,7 +173,12 @@ export default function ReadingStage(props: Props) {
 
     return (
       <div className="flex flex-col relative">
-        {aiPending && <AiPolishingHint />}
+        {(aiPending || readingSlowHint) && (
+          <ReadingPendingHint
+            aiPending={aiPending}
+            readingSlowHint={readingSlowHint}
+          />
+        )}
         <div className="flex-1 flex items-center justify-center min-h-[60vh]">
           <CardReveal
             image={script.image}
@@ -196,10 +200,8 @@ export default function ReadingStage(props: Props) {
                   zhName={script.zh_name}
                   orientation={script.orientation}
                   motifs={script.motifs}
-                  number={cardNumber}
                   activeMotifId={script.scenes[0]?.focus_motif ?? null}
                   bare={false}
-                  captionMap={captionMap}
                 />
               </div>
             </section>
@@ -225,14 +227,8 @@ export default function ReadingStage(props: Props) {
     if (!script.analysis) {
       // useEffect 会把它推到 summary，这里给一个柔和过渡
       return (
-        <div className="flex-1 flex items-center justify-center min-h-[60vh]">
-          <div
-            className="w-5 h-5 rounded-full animate-spin"
-            style={{
-              border: "1px solid var(--border-glass)",
-              borderTopColor: "var(--accent)",
-            }}
-          />
+        <div className="flex-1 flex items-center justify-center min-h-[60vh] px-6">
+          <ReadingStatusIndicator status="synthesizing" />
         </div>
       );
     }
@@ -315,14 +311,26 @@ export default function ReadingStage(props: Props) {
 }
 
 /**
- * 安静的状态条：本地兜底已经在屏，AI 还在后台撰写。
- * 不阻挡交互；仅在 aiPending 期间出现，AI 落地或失败后由父级收回。
+ * 安静的状态条：本地兜底已在屏，解读仍在展开时显示。
+ * 不阻挡交互；超时时不称失败，只提示用户先看牌面。
  */
-function AiPolishingHint() {
+function ReadingPendingHint({
+  aiPending,
+  readingSlowHint,
+}: {
+  aiPending: boolean;
+  readingSlowHint: boolean;
+}) {
+  const text = aiPending
+    ? readingStatusText("linking_context")
+    : readingStatusText("reading_slow");
+
+  if (!aiPending && !readingSlowHint) return null;
+
   return (
-    <div className="ai-polishing-hint" role="status" aria-live="polite">
-      <span className="ai-polishing-hint__dot" aria-hidden />
-      <span className="ai-polishing-hint__text">正在为你润色这段解读……</span>
+    <div className="reading-pending-hint" role="status" aria-live="polite">
+      <span className="reading-pending-hint__dot" aria-hidden />
+      <span className="reading-pending-hint__text">{text}</span>
     </div>
   );
 }

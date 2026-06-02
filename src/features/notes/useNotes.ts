@@ -7,14 +7,13 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { getNotesRepository } from "./repository";
+import { ensureNotesRepository, getNotesRepository } from "./repository";
 import type {
   ReadingSnapshot,
   ReflectionNote,
 } from "./types";
 
 export function useNotes() {
-  const repo = getNotesRepository();
   const [snapshots, setSnapshots] = useState<ReadingSnapshot[]>([]);
   const [loaded, setLoaded] = useState(false);
   const initRef = useRef(false);
@@ -23,43 +22,44 @@ export function useNotes() {
   useEffect(() => {
     if (initRef.current) return;
     initRef.current = true;
-    setSnapshots(repo.listSnapshots());
-    setLoaded(true);
-     
-  }, [repo]);
+    void ensureNotesRepository().then((hydrated) => {
+      setSnapshots(hydrated.listSnapshots());
+      setLoaded(true);
+    });
+  }, []);
 
   const refresh = useCallback(() => {
-    setSnapshots(repo.listSnapshots());
-  }, [repo]);
+    setSnapshots(getNotesRepository().listSnapshots());
+  }, []);
 
   const saveSnapshot = useCallback(
     (snapshot: ReadingSnapshot) => {
-      repo.saveSnapshot(snapshot);
+      getNotesRepository().saveSnapshot(snapshot);
       refresh();
     },
-    [repo, refresh],
+    [refresh],
   );
 
   const deleteSnapshot = useCallback(
     (reading_id: string) => {
-      repo.deleteSnapshot(reading_id);
+      getNotesRepository().deleteSnapshot(reading_id);
       refresh();
     },
-    [repo, refresh],
+    [refresh],
   );
 
   const togglePin = useCallback(
     (reading_id: string) => {
-      repo.togglePinSnapshot(reading_id);
+      getNotesRepository().togglePinSnapshot(reading_id);
       refresh();
     },
-    [repo, refresh],
+    [refresh],
   );
 
   return {
     snapshots,
     loaded,
-    repo,
+    repo: getNotesRepository(),
     saveSnapshot,
     deleteSnapshot,
     togglePin,
@@ -68,7 +68,6 @@ export function useNotes() {
 }
 
 export function useSnapshotDetail(reading_id: string) {
-  const repo = getNotesRepository();
   const [snapshot, setSnapshot] = useState<ReadingSnapshot | null>(null);
   const [notes, setNotes] = useState<ReflectionNote[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -77,31 +76,33 @@ export function useSnapshotDetail(reading_id: string) {
   useEffect(() => {
     if (initRef.current) return;
     initRef.current = true;
-    setSnapshot(repo.getSnapshot(reading_id));
-    setNotes(repo.getNotesForSnapshot(reading_id));
-    setLoaded(true);
-     
-  }, [repo, reading_id]);
+    void ensureNotesRepository().then((hydrated) => {
+      setSnapshot(hydrated.getSnapshot(reading_id));
+      setNotes(hydrated.getNotesForSnapshot(reading_id));
+      setLoaded(true);
+    });
+  }, [reading_id]);
 
   const refresh = useCallback(() => {
+    const repo = getNotesRepository();
     setSnapshot(repo.getSnapshot(reading_id));
     setNotes(repo.getNotesForSnapshot(reading_id));
-  }, [repo, reading_id]);
+  }, [reading_id]);
 
   const saveNote = useCallback(
     (note: ReflectionNote) => {
-      repo.saveNote(note);
+      getNotesRepository().saveNote(note);
       refresh();
     },
-    [repo, refresh],
+    [refresh],
   );
 
   const deleteNote = useCallback(
     (note_id: string) => {
-      repo.deleteNote(note_id);
+      getNotesRepository().deleteNote(note_id);
       refresh();
     },
-    [repo, refresh],
+    [refresh],
   );
 
   return {

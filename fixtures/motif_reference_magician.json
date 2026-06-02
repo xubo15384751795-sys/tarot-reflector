@@ -1,0 +1,40 @@
+{
+  "card": {
+    "id": "the_magician",
+    "name_zh": "魔术师",
+    "name_en": "The Magician",
+    "image": "/cards/major/major_01_magician.jpg"
+  },
+  "motifs": [
+    {
+      "id": "motif_wand",
+      "label_zh": "魔杖指向天地",
+      "meaning_zh": "意志连接上方灵感与下方行动。",
+      "anchor": { "x": 0.5, "y": 0.12 }
+    },
+    {
+      "id": "motif_table",
+      "label_zh": "四元素法器",
+      "meaning_zh": "桌上四件器物象征可调配的资源。",
+      "anchor": { "x": 0.5, "y": 0.32 }
+    },
+    {
+      "id": "motif_infinity",
+      "label_zh": "无限符号",
+      "meaning_zh": "头顶 ∞ 暗示潜能尚未封顶。",
+      "anchor": { "x": 0.5, "y": 0.08 }
+    },
+    {
+      "id": "motif_serpent",
+      "label_zh": "衔尾蛇腰带",
+      "meaning_zh": "循环与自我更新的炼金意象。",
+      "anchor": { "x": 0.5, "y": 0.55 }
+    },
+    {
+      "id": "motif_garden",
+      "label_zh": "红白玫瑰",
+      "meaning_zh": "花园象征可培育的关系与创造。",
+      "anchor": { "x": 0.5, "y": 0.88 }
+    }
+  ]
+}

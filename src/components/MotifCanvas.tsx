@@ -1,8 +1,21 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, type Transition, type Variants } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import { MotifNote } from "@/components/MotifNote";
+import { MotifHotspot } from "@/components/ui/MotifHotspot";
+import { SymbolPopover } from "@/components/ui/SymbolPopover";
+import { TarotCardFrame } from "@/components/ui/TarotCardFrame";
+import { useMotifConnector } from "@/hooks/useMotifConnector";
+import {
+  useReducedMotion,
+  animateMotifConnector,
+  hideMotifConnector,
+  staggerHotspots,
+  showMotifHighlight,
+  hideMotifHighlight,
+} from "@/features/motion";
 import { partitionArchiveMotifs, type ArchiveMotif } from "@/lib/motifNormalize";
 import type { Motif } from "@/lib/schema";
 
@@ -14,51 +27,268 @@ type Props = {
   debug?: boolean;
 };
 
-// Motion tokens
-const EASE_SOFT: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const SPRING_SMALL: Transition = {
-  type: "spring",
-  stiffness: 160,
-  damping: 20,
-  mass: 0.7,
-};
+function MotifAnchor({
+  motif,
+  active,
+  dimmed,
+  debug,
+  popover,
+  onHover,
+  onHoverEnd,
+  onToggle,
+}: {
+  motif: ArchiveMotif;
+  active: boolean;
+  dimmed: boolean;
+  debug: boolean;
+  popover: boolean;
+  onHover: () => void;
+  onHoverEnd: () => void;
+  onToggle: () => void;
+}) {
+  const hotspot = (
+    <MotifHotspot
+      id={motif.id}
+      label={motif.label_zh}
+      x={motif.anchor.x}
+      y={motif.anchor.y}
+      active={active}
+      dimmed={dimmed}
+      debug={debug}
+      onHover={onHover}
+      onHoverEnd={onHoverEnd}
+      onToggle={onToggle}
+    />
+  );
 
-// 桌面端固定像素布局：保证 anchor / popover / connector 三者坐标稳定
-const CANVAS_W = 740;
-const CARD_W = 320;
-const CARD_H = Math.round((CARD_W * 1050) / 600); // 560
-const POPOVER_W = 192;
-const POPOVER_INSET = 8;
-const CARD_LEFT = (CANVAS_W - CARD_W) / 2; // 210
-const CARD_TOP = 0;
+  if (!popover) return hotspot;
 
-type PopoverPos = { x: number; y: number; side: "left" | "right" };
-
-function derivePopover(m: ArchiveMotif): PopoverPos {
-  const side: "left" | "right" =
-    m.popoverSide === "left" || m.popoverSide === "right"
-      ? m.popoverSide
-      : m.anchor.x < 0.5
-        ? "left"
-        : "right";
-  const x = side === "left" ? POPOVER_INSET : CANVAS_W - POPOVER_INSET - POPOVER_W;
-  const anchorY = m.anchor.y * CARD_H;
-  const y = Math.max(8, Math.min(CARD_H - 150, anchorY - 32));
-  return { x, y, side };
+  return (
+    <SymbolPopover
+      open={active}
+      onOpenChange={(open) => {
+        if (!open) onHoverEnd();
+      }}
+      side="top"
+      align="center"
+      trigger={hotspot}
+    >
+      <p className="motif-popover__title">{motif.label_zh}</p>
+      <p className="motif-popover__body">{motif.meaning_zh}</p>
+    </SymbolPopover>
+  );
 }
 
-function getAnchorPx(m: ArchiveMotif) {
-  return { x: CARD_LEFT + m.anchor.x * CARD_W, y: CARD_TOP + m.anchor.y * CARD_H };
+function CardStage({
+  cardImage,
+  cardName,
+  items,
+  visibleId,
+  debug,
+  popoverHotspots = false,
+  onHover,
+  onHoverEnd,
+  onToggle,
+}: {
+  cardImage: string;
+  cardName: string;
+  items: ArchiveMotif[];
+  visibleId: string | null;
+  debug: boolean;
+  popoverHotspots?: boolean;
+  onHover: (id: string) => void;
+  onHoverEnd: () => void;
+  onToggle: (id: string) => void;
+}) {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const highlightRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const spotRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const reducedMotion = useReducedMotion();
+
+  useGSAP(
+    () => {
+      const anchors = stageRef.current?.querySelectorAll<HTMLElement>(
+        ".motif-anchor",
+      );
+      if (anchors?.length && !reducedMotion) {
+        staggerHotspots(Array.from(anchors), { from: "center", delay: 0.12 });
+      }
+    },
+    { scope: stageRef, dependencies: [items.length, reducedMotion] },
+  );
+
+  useEffect(() => {
+    items.forEach((m) => {
+      const hl = highlightRefs.current[m.id];
+      const spot = spotRefs.current[m.id];
+      if (m.precision === "precise" && hl) {
+        if (visibleId === m.id) showMotifHighlight(hl);
+        else hideMotifHighlight(hl);
+      }
+      if (m.precision === "approximate" && spot) {
+        if (visibleId === m.id) showMotifHighlight(spot);
+        else hideMotifHighlight(spot);
+      }
+    });
+  }, [visibleId, items]);
+
+  return (
+    <div ref={stageRef}>
+      {debug && (
+        <div className="motif-debug-crosshair" aria-hidden>
+          <span className="motif-debug-crosshair__v" />
+          <span className="motif-debug-crosshair__h" />
+        </div>
+      )}
+      <TarotCardFrame variant="archive">
+        <Image
+          src={cardImage}
+          alt={cardName}
+          fill
+          sizes="(max-width: 768px) 78vw, 360px"
+          className="motif-canvas__image tarot-card-image"
+          priority
+        />
+        {items.map((m) => {
+          if (m.precision === "precise") {
+            return (
+              <div
+                key={`hl-${m.id}`}
+                ref={(el) => {
+                  highlightRefs.current[m.id] = el;
+                }}
+                className={`motif-highlight motif-highlight--${m.highlight.shape}`}
+                style={{
+                  left: `${m.highlight.x * 100}%`,
+                  top: `${m.highlight.y * 100}%`,
+                  width: `${m.highlight.w * 100}%`,
+                  height: `${m.highlight.h * 100}%`,
+                }}
+                aria-hidden
+              />
+            );
+          }
+          return (
+            <div
+              key={`spot-${m.id}`}
+              ref={(el) => {
+                spotRefs.current[m.id] = el;
+              }}
+              className="motif-spot"
+              style={{
+                left: `${m.anchor.x * 100}%`,
+                top: `${m.anchor.y * 100}%`,
+              }}
+              aria-hidden
+            />
+          );
+        })}
+        {items.map((m) => {
+          const isLit = m.id === visibleId;
+          const isDim = visibleId !== null && m.id !== visibleId;
+          return (
+            <MotifAnchor
+              key={m.id}
+              motif={m}
+              active={isLit}
+              dimmed={isDim}
+              debug={debug}
+              popover={popoverHotspots}
+              onHover={() => onHover(m.id)}
+              onHoverEnd={onHoverEnd}
+              onToggle={() => onToggle(m.id)}
+            />
+          );
+        })}
+      </TarotCardFrame>
+    </div>
+  );
 }
 
-/** 手写感弧线：从 anchor 长到 popover 顶部 24px 处的连接点 */
-function buildConnectorPath(m: ArchiveMotif): string {
-  const a = getAnchorPx(m);
-  const p = derivePopover(m);
-  const popX = p.side === "left" ? p.x + POPOVER_W - 6 : p.x + 6;
-  const popY = p.y + 24;
-  const midX = (a.x + popX) / 2;
-  return `M ${a.x} ${a.y} C ${midX} ${a.y} ${midX} ${popY} ${popX} ${popY}`;
+function NoteColumn({
+  items,
+  side,
+  visibleId,
+  debug,
+  onHover,
+  onHoverEnd,
+  onToggle,
+}: {
+  items: ArchiveMotif[];
+  side: "left" | "right";
+  visibleId: string | null;
+  debug: boolean;
+  onHover: (id: string) => void;
+  onHoverEnd: () => void;
+  onToggle: (id: string) => void;
+}) {
+  if (items.length === 0) {
+    return <div className={`note-column note-column--${side} note-column--empty`} />;
+  }
+  return (
+    <div className={`note-column note-column--${side}`}>
+      {items.map((m) => {
+        const isActive = m.id === visibleId;
+        const isDim = visibleId !== null && m.id !== visibleId;
+        return (
+          <MotifNote
+            key={m.id}
+            id={m.id}
+            label_zh={m.label_zh}
+            meaning_zh={m.meaning_zh}
+            side={side}
+            active={isActive}
+            dimmed={isDim && visibleId !== null}
+            debug={debug}
+            onMouseEnter={() => onHover(m.id)}
+            onMouseLeave={onHoverEnd}
+            onFocus={() => onHover(m.id)}
+            onBlur={onHoverEnd}
+            onClick={() => onToggle(m.id)}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function MotifConnectorLayer({
+  pathD,
+  reducedMotion,
+}: {
+  pathD: string | null;
+  reducedMotion: boolean;
+}) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
+
+  useGSAP(
+    () => {
+      const path = pathRef.current;
+      if (!path) return;
+
+      if (!pathD) {
+        hideMotifConnector(path);
+        return;
+      }
+
+      path.setAttribute("d", pathD);
+      animateMotifConnector(path, { reducedMotion });
+    },
+    { scope: svgRef, dependencies: [pathD, reducedMotion], revertOnUpdate: true },
+  );
+
+  return (
+    <svg ref={svgRef} className="motif-canvas__connector-layer" aria-hidden>
+      <path
+        ref={pathRef}
+        d={pathD ?? ""}
+        fill="none"
+        className="motif-connector"
+        style={{ opacity: pathD ? undefined : 0 }}
+      />
+    </svg>
+  );
 }
 
 export default function MotifCanvas({
@@ -68,17 +298,34 @@ export default function MotifCanvas({
   maxMotifs = 6,
   debug = false,
 }: Props) {
-  const items: ArchiveMotif[] = useMemo(
-    () => partitionArchiveMotifs(motifs).all.slice(0, maxMotifs),
-    [motifs, maxMotifs],
-  );
+  const layoutRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
+
+  const { left, right, all } = useMemo(() => {
+    const p = partitionArchiveMotifs(motifs);
+    return {
+      left: p.left.slice(0, maxMotifs),
+      right: p.right.slice(0, maxMotifs),
+      all: p.all.slice(0, maxMotifs),
+    };
+  }, [motifs, maxMotifs]);
 
   const [activeId, setActiveId] = useState<string | null>(null);
   const [hoverId, setHoverId] = useState<string | null>(null);
   const visibleId = hoverId ?? activeId;
-  const visible = items.find((m) => m.id === visibleId) ?? null;
 
-  // 切换牌时重置（派生 state 模式）
+  const visibleMotif = visibleId
+    ? all.find((m) => m.id === visibleId) ?? null
+    : null;
+  const connectorSide = visibleMotif?.note.side ?? null;
+
+  const connectorPath = useMotifConnector(
+    layoutRef,
+    visibleId,
+    connectorSide,
+    !reducedMotion,
+  );
+
   const [prevCard, setPrevCard] = useState(cardImage);
   if (prevCard !== cardImage) {
     setPrevCard(cardImage);
@@ -86,314 +333,80 @@ export default function MotifCanvas({
     setHoverId(null);
   }
 
-  if (items.length === 0) {
+  const handleHover = (id: string) => setHoverId(id);
+  const handleHoverEnd = () => setHoverId(null);
+  const handleToggle = (id: string) =>
+    setActiveId((prev) => (prev === id ? null : id));
+
+  if (all.length === 0) {
     return (
       <div className="motif-canvas motif-canvas--empty">
-        <div className="motif-canvas__card-frame motif-canvas__card-frame--solo">
+        <TarotCardFrame variant="archive" solo>
           <Image
             src={cardImage}
             alt={cardName}
             fill
             sizes="320px"
-            className="motif-canvas__image"
+            className="motif-canvas__image tarot-card-image"
             priority
           />
-        </div>
+        </TarotCardFrame>
       </div>
     );
   }
 
-  const containerVariants: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08, delayChildren: 0.3 } },
+  const stageProps = {
+    cardImage,
+    cardName,
+    items: all,
+    visibleId,
+    debug,
+    onHover: handleHover,
+    onHoverEnd: handleHoverEnd,
+    onToggle: handleToggle,
   };
-  const dotVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.7 },
-    show: { opacity: 1, scale: 1, transition: SPRING_SMALL },
+
+  const columnProps = {
+    visibleId,
+    debug,
+    onHover: handleHover,
+    onHoverEnd: handleHoverEnd,
+    onToggle: handleToggle,
   };
 
   return (
     <>
-      {/* ── 桌面 / 平板 ── */}
-      <div className="motif-canvas">
-        <div
-          className="motif-canvas__inner"
-          style={{ width: `${CANVAS_W}px`, height: `${CARD_H}px` }}
-        >
-          {/* 牌面（含 image 与高亮 overlay） */}
-          <div
-            className="motif-canvas__card-frame"
-            style={{ left: `${CARD_LEFT}px`, top: `${CARD_TOP}px`, width: `${CARD_W}px`, height: `${CARD_H}px` }}
-          >
-            <Image
-              src={cardImage}
-              alt={cardName}
-              fill
-              sizes="320px"
-              className="motif-canvas__image"
-              priority
-            />
-          </div>
-
-          {/* 高亮层（与牌面同 bounding box，但不裁剪） */}
-          <div
-            className="motif-canvas__overlay"
-            style={{ left: `${CARD_LEFT}px`, top: `${CARD_TOP}px`, width: `${CARD_W}px`, height: `${CARD_H}px` }}
-          >
-            <AnimatePresence>
-              {visible && visible.precision === "precise" && (
-                <motion.div
-                  key={`hl-${visible.id}`}
-                  initial={{ opacity: 0, scale: 0.92 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.32, ease: EASE_SOFT }}
-                  className={`motif-highlight motif-highlight--${visible.highlight.shape}`}
-                  style={{
-                    left: `${visible.highlight.x * 100}%`,
-                    top: `${visible.highlight.y * 100}%`,
-                    width: `${visible.highlight.w * 100}%`,
-                    height: `${visible.highlight.h * 100}%`,
-                  }}
-                />
-              )}
-              {visible && visible.precision === "approximate" && (
-                // 近似坐标：放弃精确 bbox 框，改用以 anchor 为中心的柔光 spot
-                // —— 不假装"严格圈住这个符号"，但仍指明"大约在这里"
-                <motion.div
-                  key={`spot-${visible.id}`}
-                  initial={{ opacity: 0, scale: 0.6 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.7 }}
-                  transition={{ duration: 0.4, ease: EASE_SOFT }}
-                  className="motif-spot"
-                  style={{
-                    left: `${visible.anchor.x * 100}%`,
-                    top: `${visible.anchor.y * 100}%`,
-                  }}
-                />
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* SVG 手写感连接线 */}
-          <svg
-            className="motif-canvas__svg"
-            width={CANVAS_W}
-            height={CARD_H}
-            viewBox={`0 0 ${CANVAS_W} ${CARD_H}`}
-            preserveAspectRatio="xMidYMid meet"
-            aria-hidden
-          >
-            <AnimatePresence>
-              {visible && (
-                <motion.path
-                  key={`conn-${visible.id}`}
-                  d={buildConnectorPath(visible)}
-                  fill="none"
-                  className="motif-connector"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  exit={{ opacity: 0, transition: { duration: 0.18 } }}
-                  transition={{ duration: 0.55, ease: EASE_SOFT }}
-                />
-              )}
-            </AnimatePresence>
-          </svg>
-
-          {/* Hotspot 层（独立于牌面 frame 之外，所以连接线下方仍能看到 dot） */}
-          <motion.div
-            className="motif-canvas__hotspots"
-            style={{ left: `${CARD_LEFT}px`, top: `${CARD_TOP}px`, width: `${CARD_W}px`, height: `${CARD_H}px` }}
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-          >
-            {items.map((m) => {
-              const isLit = m.id === visibleId;
-              const isDim = activeId !== null && m.id !== activeId && m.id !== visibleId;
-              return (
-                <motion.button
-                  key={m.id}
-                  type="button"
-                  variants={dotVariants}
-                  whileHover={{ scale: 1.15 }}
-                  whileTap={{ scale: 0.92 }}
-                  transition={SPRING_SMALL}
-                  className={`motif-hotspot ${isLit ? "is-lit" : ""} ${isDim ? "is-dim" : ""}`}
-                  style={{ left: `${m.anchor.x * 100}%`, top: `${m.anchor.y * 100}%` }}
-                  onMouseEnter={() => setHoverId(m.id)}
-                  onMouseLeave={() => setHoverId(null)}
-                  onFocus={() => setHoverId(m.id)}
-                  onBlur={() => setHoverId(null)}
-                  onClick={() =>
-                    setActiveId((prev) => (prev === m.id ? null : m.id))
-                  }
-                  aria-label={m.label_zh}
-                >
-                  <span className="motif-hotspot__halo" aria-hidden />
-                  <span className="motif-hotspot__dot" />
-                </motion.button>
-              );
-            })}
-          </motion.div>
-
-          {/* 浮动注释卡 */}
-          <AnimatePresence>
-            {visible && (
-              <PopoverFloating key={`pop-${visible.id}`} m={visible} />
-            )}
-          </AnimatePresence>
-
-          {debug &&
-            items.map((m) => (
-              <div
-                key={`dbg-${m.id}`}
-                className="motif-canvas__dbg-label"
-                style={{
-                  left: `${CARD_LEFT + m.anchor.x * CARD_W}px`,
-                  top: `${CARD_TOP + m.anchor.y * CARD_H}px`,
-                }}
-              >
-                {m.id} · {m.anchor.x.toFixed(2)},{m.anchor.y.toFixed(2)}
-              </div>
-            ))}
-        </div>
+      <div
+        ref={layoutRef}
+        className="motif-canvas archive-layout motif-canvas--phase2"
+      >
+        <MotifConnectorLayer pathD={connectorPath} reducedMotion={reducedMotion} />
+        <NoteColumn items={left} side="left" {...columnProps} />
+        <CardStage {...stageProps} popoverHotspots={false} />
+        <NoteColumn items={right} side="right" {...columnProps} />
       </div>
 
-      {/* ── 移动端：牌面上 / popover 在下 ── */}
       <div className="motif-canvas-mobile">
-        <div className="motif-canvas-mobile__card">
-          <Image
-            src={cardImage}
-            alt={cardName}
-            fill
-            sizes="80vw"
-            className="motif-canvas__image"
-            priority
-          />
-          <AnimatePresence>
-            {visible && visible.precision === "precise" && (
-              <motion.div
-                key={`hlm-${visible.id}`}
-                initial={{ opacity: 0, scale: 0.94 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.3, ease: EASE_SOFT }}
-                className={`motif-highlight motif-highlight--${visible.highlight.shape}`}
-                style={{
-                  left: `${visible.highlight.x * 100}%`,
-                  top: `${visible.highlight.y * 100}%`,
-                  width: `${visible.highlight.w * 100}%`,
-                  height: `${visible.highlight.h * 100}%`,
-                }}
-              />
-            )}
-            {visible && visible.precision === "approximate" && (
-              <motion.div
-                key={`spotm-${visible.id}`}
-                initial={{ opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.7 }}
-                transition={{ duration: 0.36, ease: EASE_SOFT }}
-                className="motif-spot"
-                style={{
-                  left: `${visible.anchor.x * 100}%`,
-                  top: `${visible.anchor.y * 100}%`,
-                }}
-              />
-            )}
-          </AnimatePresence>
-
-          <motion.div
-            className="motif-canvas-mobile__hotspots"
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-          >
-            {items.map((m) => {
-              const isLit = m.id === visibleId;
-              const isDim = activeId !== null && m.id !== activeId && m.id !== visibleId;
-              return (
-                <motion.button
-                  key={m.id}
-                  type="button"
-                  variants={dotVariants}
-                  whileTap={{ scale: 0.92 }}
-                  transition={SPRING_SMALL}
-                  className={`motif-hotspot ${isLit ? "is-lit" : ""} ${isDim ? "is-dim" : ""}`}
-                  style={{ left: `${m.anchor.x * 100}%`, top: `${m.anchor.y * 100}%` }}
-                  onClick={() =>
-                    setActiveId((prev) => (prev === m.id ? null : m.id))
-                  }
-                  aria-label={m.label_zh}
-                >
-                  <span className="motif-hotspot__halo" aria-hidden />
-                  <span className="motif-hotspot__dot" />
-                </motion.button>
-              );
-            })}
-          </motion.div>
+        <CardStage {...stageProps} popoverHotspots />
+        <div className="motif-canvas-mobile__notes">
+          {all.map((m) => (
+            <MotifNote
+              key={m.id}
+              id={m.id}
+              label_zh={m.label_zh}
+              meaning_zh={m.meaning_zh}
+              side={m.note.side}
+              active={m.id === visibleId}
+              dimmed={visibleId !== null && m.id !== visibleId}
+              debug={debug}
+              onClick={() => handleToggle(m.id)}
+            />
+          ))}
         </div>
-
-        <AnimatePresence mode="wait">
-          {visible ? (
-            <motion.div
-              key={`popm-${visible.id}`}
-              className="motif-popover motif-popover--mobile"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.3, ease: EASE_SOFT }}
-            >
-              <PopoverBody m={visible} />
-            </motion.div>
-          ) : (
-            <motion.p
-              key="popm-empty"
-              className="motif-popover-hint"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            >
-              轻触牌面上的金色符号点。
-            </motion.p>
-          )}
-        </AnimatePresence>
+        {!visibleId && (
+          <p className="motif-popover-hint">轻触牌面金点或下方说明，查看符号含义。</p>
+        )}
       </div>
-    </>
-  );
-}
-
-function PopoverFloating({ m }: { m: ArchiveMotif }) {
-  const p = derivePopover(m);
-  return (
-    <motion.div
-      className={`motif-popover motif-popover--${p.side}`}
-      style={{ left: `${p.x}px`, top: `${p.y}px`, width: `${POPOVER_W}px` }}
-      initial={{ opacity: 0, y: 4 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -3 }}
-      transition={{ duration: 0.32, ease: EASE_SOFT }}
-    >
-      <PopoverBody m={m} />
-    </motion.div>
-  );
-}
-
-function PopoverBody({ m }: { m: ArchiveMotif }) {
-  const showSource = !!m.traditional_note_zh && m.traditional_note_zh !== m.meaning_zh;
-  return (
-    <>
-      <h3 className="motif-popover__title">{m.label_zh}</h3>
-      <p className="motif-popover__body">{m.meaning_zh}</p>
-      {showSource && (
-        <>
-          <div className="motif-popover__divider" />
-          <p className="motif-popover__source">{m.traditional_note_zh}</p>
-        </>
-      )}
     </>
   );
 }

@@ -11,7 +11,7 @@ import TarotCardStage from "./TarotCardStage";
  */
 export default function AstrolabeStarCard() {
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
+    <div className="relative w-full flex items-center justify-center">
       {/* 四角档案装饰 — 极淡 */}
       <CornerOrnament size={36} position="tl" className="absolute top-0 left-2 z-10" style={{ opacity: 0.18 }} />
       <CornerOrnament size={36} position="tr" className="absolute top-0 right-2 z-10" style={{ opacity: 0.18 }} />

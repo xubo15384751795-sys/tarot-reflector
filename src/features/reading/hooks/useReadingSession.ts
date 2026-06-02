@@ -67,8 +67,8 @@ function loadPersistedSession(
     if (parsed.key !== sessionKeyOf(input)) return null;
     // 1 天过期，避免刷出陈年旧 state
     if (Date.now() - parsed.savedAt > 24 * 60 * 60 * 1000) return null;
-    // rehydrate 时强制 aiPending=false（任何 inflight AI 都已经断了）
-    return { ...parsed.state, aiPending: false };
+    // rehydrate 时强制 pending 态清零（任何 inflight 解读都已经断了）
+    return { ...parsed.state, aiPending: false, readingSlowHint: false };
   } catch {
     return null;
   }
@@ -162,6 +162,7 @@ const initialState = (input: ReadingSessionInput): ReadingSessionState => {
     currentPosition: 0,
     errorMessage: null,
     aiPending: false,
+    readingSlowHint: false,
   };
 };
 
@@ -197,11 +198,17 @@ export type UseReadingSession = {
 
 export function useReadingSession(input: ReadingSessionInput): UseReadingSession {
   const api = useReadingApi();
-  const [state, setState] = useState<ReadingSessionState>(() => {
-    // 优先尝试 rehydrate；URL 不匹配或过期才走 initialState
+  const [state, setState] = useState<ReadingSessionState>(() =>
+    initialState(input),
+  );
+  // rehydrate 在 useEffect 里做，保证 server/client 首次渲染一致，避免 hydration mismatch
+  const rehydratedRef = useRef(false);
+  useEffect(() => {
+    if (rehydratedRef.current) return;
+    rehydratedRef.current = true;
     const restored = loadPersistedSession(input);
-    return restored ?? initialState(input);
-  });
+    if (restored) setState(restored);
+  }, [input]);
   /**
    * 当前正在进行的 AI 生成任务标识。
    *   - 用 Symbol 是因为字符串/数字会在 strict mode 下双次 invoke 时撞车
@@ -294,8 +301,8 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
    *   ① 抽牌 + 1.2s 洗牌动画 → 立刻用「本地兜底牌义」组装 script，
    *      切到 card_revealed/revealedStage，用户马上看到牌面。
    *   ② 同时 fire-and-forget 调 AI；返回后把 script 替换成 AI 版。
-   *      期间 state.aiPending = true，UI 可以放一个安静的「正在润色…」。
-   *   ③ 如果 AI 报错或返回 null，aiPending 翻回 false，保留本地兜底。
+   *      期间 state.aiPending = true，UI 提示「正在把牌面与你的问题连起来……」。
+   *   ③ 如果 AI 报错或返回 null，aiPending 翻回 false；超时则显示 readingSlowHint。
    *   ④ 如果用户中途 reset()，inflightAiRef 切换，旧 AI 回调会丢弃自己。
    */
   const runDrawAndGenerate = useCallback(
@@ -315,6 +322,7 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
         stage: "shuffling",
         errorMessage: null,
         aiPending: false,
+        readingSlowHint: false,
       }));
       try {
         // 1) 本地抽牌（瞬时）
@@ -368,8 +376,12 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
           .then((genData) => {
             if (inflightAiRef.current !== ticket) return; // 已被 reset 或新一轮替换
             if (!genData) {
-              // AI 报错走兜底；保留本地 script，关掉 pending
-              setState((s) => ({ ...s, aiPending: false }));
+              // 超时或失败：保留本地 script，提示用户先看牌面
+              setState((s) => ({
+                ...s,
+                aiPending: false,
+                readingSlowHint: true,
+              }));
               return;
             }
             const merged: ReadingScript = normalizeReading({
@@ -380,12 +392,21 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
               domain: genCtx.domain,
               spreadNameOverride: opts.spreadNameOverride,
             });
-            setState((s) => ({ ...s, script: merged, aiPending: false }));
+            setState((s) => ({
+              ...s,
+              script: merged,
+              aiPending: false,
+              readingSlowHint: false,
+            }));
           })
           .catch((err) => {
             if (inflightAiRef.current !== ticket) return;
             console.error("AI generation failed:", err);
-            setState((s) => ({ ...s, aiPending: false }));
+            setState((s) => ({
+              ...s,
+              aiPending: false,
+              readingSlowHint: true,
+            }));
           });
       } catch (err) {
         console.error("Draw failed:", err);
@@ -395,6 +416,7 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
           stage: "error",
           errorMessage: err instanceof Error ? err.message : "抽牌失败",
           aiPending: false,
+          readingSlowHint: false,
         }));
       }
     },

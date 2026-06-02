@@ -1,163 +1,43 @@
 /**
- * LocalNotesRepository — 基于 localStorage 的笔记存储实现
+ * Notes Repository 入口
  *
- * 接口抽象为 NotesRepository，方便未来换 IndexedDB / Dexie / 数据库。
- * 存储键：tarot:snapshots / tarot:reflection_notes
+ * 浏览器端：Dexie IndexedDB（ensureNotesRepository 后可用）
+ * SSR / 测试：createLocalNotesRepository()
  */
 
-import type {
-  NotesRepository,
-  ReadingSnapshot,
-  ReflectionNote,
-  SnapshotFilter,
-} from "./types";
+import { createDexieNotesRepository } from "./dexieRepository";
+import { createLocalNotesRepository } from "./localRepository";
+import type { NotesRepository } from "./types";
 
-const SNAPSHOTS_KEY = "tarot:snapshots";
-const NOTES_KEY = "tarot:reflection_notes";
+export { createLocalNotesRepository } from "./localRepository";
+export { createDexieNotesRepository, clearLegacyLocalStorage } from "./dexieRepository";
 
-function loadArray<T>(key: string): T[] {
-  if (typeof window === "undefined") return [];
-  try {
-    const raw = localStorage.getItem(key);
-    const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveArray<T>(key: string, data: T[]): void {
-  try {
-    localStorage.setItem(key, JSON.stringify(data));
-  } catch {
-    /* silent */
-  }
-}
-
-export function createLocalNotesRepository(): NotesRepository {
-  return {
-    // ─── Snapshots ─────────────────────────────
-
-    saveSnapshot(snapshot: ReadingSnapshot): void {
-      const all = loadArray<ReadingSnapshot>(SNAPSHOTS_KEY);
-      const existing = all.findIndex((s) => s.reading_id === snapshot.reading_id);
-      if (existing >= 0) {
-        all[existing] = snapshot;
-      } else {
-        all.unshift(snapshot);
-      }
-      saveArray(SNAPSHOTS_KEY, all);
-    },
-
-    getSnapshot(reading_id: string): ReadingSnapshot | null {
-      const all = loadArray<ReadingSnapshot>(SNAPSHOTS_KEY);
-      return all.find((s) => s.reading_id === reading_id) ?? null;
-    },
-
-    listSnapshots(filter?: SnapshotFilter): ReadingSnapshot[] {
-      let all = loadArray<ReadingSnapshot>(SNAPSHOTS_KEY);
-      if (filter?.mode) all = all.filter((s) => s.mode === filter.mode);
-      if (filter?.card_id) all = all.filter((s) => s.drawn_cards.some((c) => c.card_id === filter.card_id));
-      if (filter?.pinned_only) all = all.filter((s) => s.pinned);
-      if (filter?.domain) all = all.filter((s) => s.domain === filter.domain);
-      return all;
-    },
-
-    deleteSnapshot(reading_id: string): void {
-      const all = loadArray<ReadingSnapshot>(SNAPSHOTS_KEY);
-      saveArray(
-        SNAPSHOTS_KEY,
-        all.filter((s) => s.reading_id !== reading_id),
-      );
-      // Also delete associated notes
-      const notes = loadArray<ReflectionNote>(NOTES_KEY);
-      saveArray(
-        NOTES_KEY,
-        notes.filter((n) => n.snapshot_id !== reading_id),
-      );
-    },
-
-    togglePinSnapshot(reading_id: string): void {
-      const all = loadArray<ReadingSnapshot>(SNAPSHOTS_KEY);
-      const snap = all.find((s) => s.reading_id === reading_id);
-      if (snap) {
-        snap.pinned = !snap.pinned;
-        saveArray(SNAPSHOTS_KEY, all);
-      }
-    },
-
-    // ─── Notes ─────────────────────────────────
-
-    saveNote(note: ReflectionNote): void {
-      const all = loadArray<ReflectionNote>(NOTES_KEY);
-      const existing = all.findIndex((n) => n.note_id === note.note_id);
-      if (existing >= 0) {
-        all[existing] = note;
-      } else {
-        all.unshift(note);
-      }
-      saveArray(NOTES_KEY, all);
-    },
-
-    getNote(note_id: string): ReflectionNote | null {
-      const all = loadArray<ReflectionNote>(NOTES_KEY);
-      return all.find((n) => n.note_id === note_id) ?? null;
-    },
-
-    getNotesForSnapshot(snapshot_id: string): ReflectionNote[] {
-      const all = loadArray<ReflectionNote>(NOTES_KEY);
-      return all
-        .filter((n) => n.snapshot_id === snapshot_id)
-        .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
-    },
-
-    getAllNotes(): ReflectionNote[] {
-      return loadArray<ReflectionNote>(NOTES_KEY);
-    },
-
-    deleteNote(note_id: string): void {
-      const all = loadArray<ReflectionNote>(NOTES_KEY);
-      saveArray(
-        NOTES_KEY,
-        all.filter((n) => n.note_id !== note_id),
-      );
-    },
-
-    updateNote(note_id: string, content: string): void {
-      const all = loadArray<ReflectionNote>(NOTES_KEY);
-      const note = all.find((n) => n.note_id === note_id);
-      if (note) {
-        note.content = content;
-        note.updated_at = new Date().toISOString();
-        saveArray(NOTES_KEY, all);
-      }
-    },
-
-    // ─── Queries ────────────────────────────────
-
-    hasCardBeenSaved(card_id: string): boolean {
-      const all = loadArray<ReadingSnapshot>(SNAPSHOTS_KEY);
-      return all.some((s) => s.drawn_cards.some((c) => c.card_id === card_id));
-    },
-
-    getSnapshotsForCard(card_id: string): ReadingSnapshot[] {
-      const all = loadArray<ReadingSnapshot>(SNAPSHOTS_KEY);
-      return all.filter((s) => s.drawn_cards.some((c) => c.card_id === card_id));
-    },
-
-    getSnapshotCount(): number {
-      return loadArray<ReadingSnapshot>(SNAPSHOTS_KEY).length;
-    },
-
-    getNoteCount(): number {
-      return loadArray<ReflectionNote>(NOTES_KEY).length;
-    },
-  };
-}
-
-// Singleton for client-side usage
 let _repo: NotesRepository | null = null;
+let _initPromise: Promise<NotesRepository> | null = null;
+
+/** 应用启动时调用，hydrate Dexie 并完成 localStorage 迁移 */
+export function ensureNotesRepository(): Promise<NotesRepository> {
+  if (typeof window === "undefined") {
+    return Promise.resolve(createLocalNotesRepository());
+  }
+  if (_repo) return Promise.resolve(_repo);
+  if (!_initPromise) {
+    _initPromise = createDexieNotesRepository().then((repo) => {
+      _repo = repo;
+      return repo;
+    });
+  }
+  return _initPromise;
+}
+
+/** 同步获取；Dexie 未 hydrate 前回退 localStorage */
 export function getNotesRepository(): NotesRepository {
-  if (!_repo) _repo = createLocalNotesRepository();
-  return _repo;
+  if (_repo) return _repo;
+  return createLocalNotesRepository();
+}
+
+/** 测试用：重置 singleton */
+export function resetNotesRepository(): void {
+  _repo = null;
+  _initPromise = null;
 }

@@ -2,8 +2,10 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import { motion, type Transition, type Variants } from "framer-motion";
-import { CornerOrnament, DividerLine } from "./ArchiveEmblems";
+import { DividerLine } from "./ArchiveEmblems";
+import { ModeCard } from "@/components/ui/ModeCard";
 import { useFoilSpotlight } from "@/lib/useFoilSpotlight";
+import { REGRESSION_STATIC_LAYOUT } from "@/features/motion";
 import {
   captureModeFlipState,
   playModeSelectionFlip,
@@ -65,11 +67,17 @@ export default function ModeSelector({ onSelect }: Props) {
 
   const handleClick = (mode: Mode) => {
     if (chosen || !listRef.current) return;
+    if (REGRESSION_STATIC_LAYOUT) {
+      setChosen(mode);
+      onSelectRef.current(mode);
+      return;
+    }
     flipStateRef.current = captureModeFlipState(listRef.current);
     setChosen(mode);
   };
 
   useLayoutEffect(() => {
+    if (REGRESSION_STATIC_LAYOUT) return;
     if (!chosen || !listRef.current || !flipStateRef.current) return;
 
     const state = flipStateRef.current;
@@ -94,7 +102,7 @@ export default function ModeSelector({ onSelect }: Props) {
   };
 
   return (
-    <div className="w-full max-w-[480px] mx-auto flex flex-col gap-4">
+    <div className="mode-selector w-full max-w-[480px] mx-auto flex flex-col gap-4">
       <div className="flex items-center justify-center gap-3 mb-4">
         <DividerLine width={32} />
         <span
@@ -108,77 +116,26 @@ export default function ModeSelector({ onSelect }: Props) {
 
       <motion.div
         ref={listRef}
-        className="flex flex-col gap-4"
+        className="mode-card-grid flex flex-col gap-4"
         variants={listVariants}
         initial="hidden"
         animate="show"
       >
-        {MODES.map((mode, i) => {
-          const isChosen = chosen === mode.value;
-
-          return (
-            <motion.div
-              key={mode.value}
-              variants={itemVariants}
-              className="w-full"
-            >
-              <button
-                type="button"
-                data-mode={mode.value}
-                onClick={() => handleClick(mode.value)}
-                disabled={chosen !== null}
-                className={`relative w-full text-left mode-card interactive-glow physical-card rounded-2xl px-5 py-5 ${
-                  isChosen ? "is-chosen" : ""
-                } ${mode.recommended ? "is-recommended" : ""}`}
-                aria-label={`${mode.title} — ${mode.tagline}`}
-              >
-                {mode.recommended && !isChosen && (
-                  <span className="mode-card__badge">推荐</span>
-                )}
-
-                {isChosen && (
-                  <>
-                    <CornerOrnament
-                      size={16}
-                      position="tl"
-                      className="absolute top-1 left-1"
-                      style={{ opacity: 0.6 }}
-                    />
-                    <CornerOrnament
-                      size={16}
-                      position="tr"
-                      className="absolute top-1 right-1"
-                      style={{ opacity: 0.6 }}
-                    />
-                    <CornerOrnament
-                      size={16}
-                      position="bl"
-                      className="absolute bottom-1 left-1"
-                      style={{ opacity: 0.6 }}
-                    />
-                    <CornerOrnament
-                      size={16}
-                      position="br"
-                      className="absolute bottom-1 right-1"
-                      style={{ opacity: 0.6 }}
-                    />
-                  </>
-                )}
-
-                <div className="flex items-center gap-4">
-                  <span className="mode-card__num shrink-0">{i + 1}</span>
-                  <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-                    <span className="mode-card__title">{mode.title}</span>
-                    <span className="mode-card__tagline">{mode.tagline}</span>
-                    <span className="mode-card__description">
-                      {mode.description}
-                    </span>
-                  </div>
-                </div>
-              </button>
-            </motion.div>
-          );
-        })}
+        {MODES.map((mode, i) => (
+          <motion.div key={mode.value} variants={itemVariants} className="w-full">
+            <ModeCard
+              index={i + 1}
+              mode={mode.value}
+              title={mode.title}
+              tagline={mode.tagline}
+              description={mode.description}
+              recommended={mode.recommended}
+              chosen={chosen === mode.value}
+              disabled={chosen !== null}
+              onSelect={() => handleClick(mode.value)}
+            />
+          </motion.div>
+        ))}
       </motion.div>
 
       <div className="flex justify-center mt-2">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 // metadataBase 用于 Next.js 把相对 og:image 路径解析为绝对 URL；
@@ -59,13 +60,7 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * 首屏注入主题：在 React 水合之前直接读 localStorage 并设置 data-theme，
- * 避免页面加载时先闪一下默认深色再切到浅色。
- *
- * 不依赖 next/script 因为我们需要 beforeInteractive 时机，
- * 直接用 dangerouslySetInnerHTML 写在 <head> 里。
- */
+/** 首屏主题：beforeInteractive，在水合前读 localStorage，避免主题闪烁 */
 const THEME_INIT_SCRIPT = `
 try {
   var saved = localStorage.getItem('tarot:theme');
@@ -95,9 +90,13 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
         />
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
-      <body className="min-h-full flex flex-col relative">{children}</body>
+      <body className="min-h-full flex flex-col relative">
+        <Script id="tarot-theme-init" strategy="beforeInteractive">
+          {THEME_INIT_SCRIPT}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }

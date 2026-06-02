@@ -1,7 +1,13 @@
 "use client";
 
+import { useLayoutEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { CornerOrnament, DividerLine } from "./ArchiveEmblems";
+import {
+  captureSpreadFlipState,
+  playSpreadSelectionFlip,
+  type SpreadFlipState,
+} from "@/features/motion/spreadFlip.gsap";
 
 type SpreadItem = {
   spread_id: string;
@@ -57,6 +63,22 @@ export default function SpreadSelector({
   onConfirm,
   onBack,
 }: Props) {
+  const gridRef = useRef<HTMLDivElement>(null);
+  const flipStateRef = useRef<SpreadFlipState | null>(null);
+
+  const handleSelect = (spreadId: string) => {
+    if (!gridRef.current || spreadId === selected) return;
+    flipStateRef.current = captureSpreadFlipState(gridRef.current);
+    onSelect(spreadId);
+  };
+
+  useLayoutEffect(() => {
+    if (!selected || !gridRef.current || !flipStateRef.current) return;
+    const state = flipStateRef.current;
+    flipStateRef.current = null;
+    playSpreadSelectionFlip(state, gridRef.current, selected);
+  }, [selected]);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -72,58 +94,60 @@ export default function SpreadSelector({
         <DividerLine width={28} />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {spreads.map((spread, i) => {
           const active = selected === spread.spread_id;
           return (
-            <motion.button
+            <motion.div
               key={spread.spread_id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.06 }}
-              onClick={() => onSelect(spread.spread_id)}
-              className="relative text-left archive-border-thin"
-              style={{
-                padding: "18px 20px",
-                background: active
-                  ? "var(--accent-dim)"
-                  : "var(--bg-glass)",
-                borderColor: active
-                  ? "var(--accent)"
-                  : "var(--ink-filigree)",
-                transition: "all 0.3s ease",
-              }}
             >
-              {active && (
-                <>
-                  <CornerOrnament size={14} position="tl" className="absolute top-1 left-1" style={{ opacity: 0.5 }} />
-                  <CornerOrnament size={14} position="tr" className="absolute top-1 right-1" style={{ opacity: 0.5 }} />
-                  <CornerOrnament size={14} position="bl" className="absolute bottom-1 left-1" style={{ opacity: 0.5 }} />
-                  <CornerOrnament size={14} position="br" className="absolute bottom-1 right-1" style={{ opacity: 0.5 }} />
-                </>
-              )}
+              <button
+                type="button"
+                data-spread={spread.spread_id}
+                onClick={() => handleSelect(spread.spread_id)}
+                className={`spread-card relative w-full text-left archive-border-thin ${
+                  active ? "is-active" : ""
+                }`}
+                style={{
+                  padding: "18px 20px",
+                  background: active ? "var(--accent-dim)" : "var(--bg-glass)",
+                  borderColor: active ? "var(--accent)" : "var(--ink-filigree)",
+                }}
+              >
+                {active && (
+                  <>
+                    <CornerOrnament size={14} position="tl" className="absolute top-1 left-1" style={{ opacity: 0.5 }} />
+                    <CornerOrnament size={14} position="tr" className="absolute top-1 right-1" style={{ opacity: 0.5 }} />
+                    <CornerOrnament size={14} position="bl" className="absolute bottom-1 left-1" style={{ opacity: 0.5 }} />
+                    <CornerOrnament size={14} position="br" className="absolute bottom-1 right-1" style={{ opacity: 0.5 }} />
+                  </>
+                )}
 
-              <div className="flex items-center gap-2 mb-2">
-                <CardCountDots count={spread.card_count} />
-                <span
-                  className="text-[9px] tracking-[0.06em] px-1.5 py-0.5 rounded-full ml-auto"
-                  style={{
-                    color: difficultyColor(spread.difficulty),
-                    border: `1px solid ${difficultyColor(spread.difficulty)}33`,
-                    background: `${difficultyColor(spread.difficulty)}11`,
-                  }}
-                >
-                  {difficultyLabel(spread.difficulty)}
-                </span>
-              </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <CardCountDots count={spread.card_count} />
+                  <span
+                    className="text-[9px] tracking-[0.06em] px-1.5 py-0.5 rounded-full ml-auto"
+                    style={{
+                      color: difficultyColor(spread.difficulty),
+                      border: `1px solid ${difficultyColor(spread.difficulty)}33`,
+                      background: `${difficultyColor(spread.difficulty)}11`,
+                    }}
+                  >
+                    {difficultyLabel(spread.difficulty)}
+                  </span>
+                </div>
 
-              <h4 className="text-[15px] font-light tracking-[-0.005em] mb-1" style={{ color: "var(--text-primary)" }}>
-                {spread.name_zh}
-              </h4>
-              <p className="text-[11px] leading-[1.6]" style={{ color: "var(--text-tertiary)" }}>
-                {spread.description_zh}
-              </p>
-            </motion.button>
+                <h4 className="text-[15px] font-light tracking-[-0.005em] mb-1" style={{ color: "var(--text-primary)" }}>
+                  {spread.name_zh}
+                </h4>
+                <p className="text-[11px] leading-[1.6]" style={{ color: "var(--text-tertiary)" }}>
+                  {spread.description_zh}
+                </p>
+              </button>
+            </motion.div>
           );
         })}
       </div>

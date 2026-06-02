@@ -6,6 +6,7 @@
  * 主页面只需关心：把 session 和 callbacks 喂进来，剩下的展示由 router 决定。
  */
 
+import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
 import SafetyExit from "@/components/SafetyExit";
 import type { ReadingMode, SpreadId } from "@/lib/schema";
 import type { ReadingSessionState } from "../types/reading";
@@ -78,13 +79,7 @@ export default function ReadingStageRouter(props: Props) {
     if (!session.reframe) {
       return (
         <div className="flex-1 flex items-center justify-center min-h-[60vh]">
-          <div
-            className="w-5 h-5 rounded-full animate-spin"
-            style={{
-              border: "1px solid var(--border-glass)",
-              borderTopColor: "var(--text-tertiary)",
-            }}
-          />
+          <ReadingStatusIndicator status="question_reframing" />
         </div>
       );
     }
@@ -137,6 +132,7 @@ export default function ReadingStageRouter(props: Props) {
         currentPosition={session.currentPosition}
         domain={props.domain}
         aiPending={session.aiPending}
+        readingSlowHint={session.readingSlowHint}
         onBeginReadings={props.onBeginReadings}
         onNextPosition={props.onNextPosition}
         onRelationshipsNext={props.onRelationshipsNext}

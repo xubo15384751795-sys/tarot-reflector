@@ -119,13 +119,13 @@
         "meaning_zh": "象征本能提醒，在冒险中保持警觉。",
         "traditional_note_zh": "白狗象征忠实本能与未驯化的直觉。他既是同伴，也是警报：欢快地跳跃，但同时提醒愚人脚下的边缘。RWS 中狗朝上、朝前，与青年保持同一节奏。",
         "bbox": {
-          "x": 0.18,
-          "y": 0.62,
-          "w": 0.22,
-          "h": 0.16
+          "x": 0.52,
+          "y": 0.58,
+          "w": 0.2,
+          "h": 0.18
         },
         "anchor": {
-          "x": 0.28,
+          "x": 0.62,
           "y": 0.7
         },
         "note": {
@@ -212,7 +212,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/00_the_fool.jpg",
+    "image": "/cards/major/major_00_fool.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_00_Fool.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg",
@@ -355,7 +355,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/01_the_magician.jpg",
+    "image": "/cards/major/major_01_magician.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magician.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg",
@@ -553,7 +553,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/02_the_high_priestess.jpg",
+    "image": "/cards/major/major_02_high_priestess.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_02_High_Priestess.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg",
@@ -696,7 +696,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/03_the_empress.jpg",
+    "image": "/cards/major/major_03_empress.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_03_Empress.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg",
@@ -839,7 +839,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/04_the_emperor.jpg",
+    "image": "/cards/major/major_04_emperor.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_04_Emperor.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg",
@@ -982,7 +982,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/05_the_hierophant.jpg",
+    "image": "/cards/major/major_05_hierophant.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_05_Hierophant.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_Hierophant.jpg",
@@ -1125,7 +1125,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/06_the_lovers.jpg",
+    "image": "/cards/major/major_06_lovers.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_06_Lovers.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_06_Lovers.jpg",
@@ -1268,7 +1268,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/07_the_chariot.jpg",
+    "image": "/cards/major/major_07_chariot.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_07_Chariot.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_Chariot.jpg",
@@ -1411,7 +1411,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/08_strength.jpg",
+    "image": "/cards/major/major_08_strength.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_08_Strength.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg",
@@ -1554,7 +1554,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/09_the_hermit.jpg",
+    "image": "/cards/major/major_09_hermit.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_09_Hermit.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg",
@@ -1697,7 +1697,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/10_wheel_of_fortune.jpg",
+    "image": "/cards/major/major_10_wheel_of_fortune.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_10_Wheel_of_Fortune.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg",
@@ -1840,7 +1840,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/11_justice.jpg",
+    "image": "/cards/major/major_11_justice.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_11_Justice.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg",
@@ -1983,7 +1983,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/12_the_hanged_man.jpg",
+    "image": "/cards/major/major_12_hanged_man.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_12_Hanged_Man.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg",
@@ -2126,7 +2126,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/13_death.jpg",
+    "image": "/cards/major/major_13_death.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_13_Death.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg",
@@ -2269,7 +2269,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/14_temperance.jpg",
+    "image": "/cards/major/major_14_temperance.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_14_Temperance.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg",
@@ -2412,7 +2412,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/15_the_devil.jpg",
+    "image": "/cards/major/major_15_devil.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_15_Devil.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg",
@@ -2555,7 +2555,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/16_the_tower.jpg",
+    "image": "/cards/major/major_16_tower.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_16_Tower.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg",
@@ -2698,7 +2698,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/17_the_star.jpg",
+    "image": "/cards/major/major_17_star.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_17_Star.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg",
@@ -2841,7 +2841,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/18_the_moon.jpg",
+    "image": "/cards/major/major_18_moon.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_18_Moon.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg",
@@ -2984,7 +2984,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/19_the_sun.jpg",
+    "image": "/cards/major/major_19_sun.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_19_Sun.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg",
@@ -3127,7 +3127,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/20_judgement.jpg",
+    "image": "/cards/major/major_20_judgement.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_20_Judgement.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/RWS_Tarot_20_Judgement.jpg",
@@ -3270,7 +3270,7 @@
         "precision": "precise"
       }
     ],
-    "image": "/cards/major/21_the_world.jpg",
+    "image": "/cards/major/major_21_world.jpg",
     "image_meta": {
       "source_url": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_21_World.jpg",
       "direct_url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg",

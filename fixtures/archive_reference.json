@@ -1,0 +1,97 @@
+{
+  "caption": "大阿尔卡那 · 22 · 愚者之旅",
+  "activeTab": "major",
+  "tabs": [
+    { "id": "major", "label": "大阿尔卡那", "count": 22, "theme": "愚者之旅", "desc": "从启程到整合的原型弧线。" },
+    { "id": "wands", "label": "权杖", "count": 14, "element": "火", "theme": "行动", "desc": "意志、创造与推进" },
+    { "id": "cups", "label": "圣杯", "count": 14, "element": "水", "theme": "情感", "desc": "关系、感受与承接" },
+    { "id": "swords", "label": "宝剑", "count": 14, "element": "风", "theme": "判断", "desc": "思考、冲突与切割" },
+    { "id": "pentacles", "label": "星币", "count": 14, "element": "土", "theme": "现实", "desc": "资源、身体与秩序" }
+  ],
+  "cards": [
+    {
+      "id": "the_fool",
+      "name_zh": "愚者",
+      "name_en": "The Fool",
+      "arcana": "major",
+      "number": 0,
+      "image": "/cards/major/major_00_fool.jpg",
+      "traditional": {
+        "upright": { "keywords_zh": ["新开始", "冒险"], "meaning_zh": "愚者正位代表全新旅程。" },
+        "reversed": { "keywords_zh": ["鲁莽"], "meaning_zh": "逆位提示审视冲动。" }
+      }
+    },
+    {
+      "id": "the_magician",
+      "name_zh": "魔术师",
+      "name_en": "The Magician",
+      "arcana": "major",
+      "number": 1,
+      "image": "/cards/major/major_01_magician.jpg",
+      "traditional": {
+        "upright": { "keywords_zh": ["创造力", "意志"], "meaning_zh": "魔术师正位象征将想法变为现实。" },
+        "reversed": { "keywords_zh": ["散乱"], "meaning_zh": "逆位提示精力分散。" }
+      }
+    },
+    {
+      "id": "the_high_priestess",
+      "name_zh": "女祭司",
+      "name_en": "The High Priestess",
+      "arcana": "major",
+      "number": 2,
+      "image": "/cards/major/major_02_high_priestess.jpg",
+      "traditional": {
+        "upright": { "keywords_zh": ["直觉", "内在"], "meaning_zh": "女祭司正位邀请向内倾听。" },
+        "reversed": { "keywords_zh": ["压抑"], "meaning_zh": "逆位提示忽视直觉。" }
+      }
+    },
+    {
+      "id": "the_empress",
+      "name_zh": "皇后",
+      "name_en": "The Empress",
+      "arcana": "major",
+      "number": 3,
+      "image": "/cards/major/major_03_empress.jpg",
+      "traditional": {
+        "upright": { "keywords_zh": ["滋养", "丰盛"], "meaning_zh": "皇后正位象征生长与照料。" },
+        "reversed": { "keywords_zh": ["依赖"], "meaning_zh": "逆位提示过度依赖外部认可。" }
+      }
+    },
+    {
+      "id": "the_emperor",
+      "name_zh": "皇帝",
+      "name_en": "The Emperor",
+      "arcana": "major",
+      "number": 4,
+      "image": "/cards/major/major_04_emperor.jpg",
+      "traditional": {
+        "upright": { "keywords_zh": ["结构", "边界"], "meaning_zh": "皇帝正位代表秩序与担当。" },
+        "reversed": { "keywords_zh": ["僵化"], "meaning_zh": "逆位提示控制欲过强。" }
+      }
+    },
+    {
+      "id": "the_hierophant",
+      "name_zh": "教皇",
+      "name_en": "The Hierophant",
+      "arcana": "major",
+      "number": 5,
+      "image": "/cards/major/major_05_hierophant.jpg",
+      "traditional": {
+        "upright": { "keywords_zh": ["传统", "传承"], "meaning_zh": "教皇正位象征学习与规范。" },
+        "reversed": { "keywords_zh": ["反叛"], "meaning_zh": "逆位提示质疑旧有框架。" }
+      }
+    },
+    {
+      "id": "the_lovers",
+      "name_zh": "恋人",
+      "name_en": "The Lovers",
+      "arcana": "major",
+      "number": 6,
+      "image": "/cards/major/major_06_lovers.jpg",
+      "traditional": {
+        "upright": { "keywords_zh": ["选择", "连结"], "meaning_zh": "恋人正位关乎价值对齐的选择。" },
+        "reversed": { "keywords_zh": ["失衡"], "meaning_zh": "逆位提示关系或价值冲突。" }
+      }
+    }
+  ]
+}

@@ -18,6 +18,7 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import AppShell from "@/components/AppShell";
+import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
 import { CornerOrnament, DividerLine, ArchiveLabel } from "@/components/ArchiveEmblems";
 import { useSnapshotDetail } from "@/features/notes/useNotes";
 import { createNote, formatRelativeTime, getModeLabel } from "@/features/notes/utils";
@@ -73,7 +74,7 @@ export default function SnapshotDetailPage() {
     return (
       <AppShell showActions={false}>
         <div className="flex justify-center py-20">
-          <div className="w-5 h-5 rounded-full animate-spin" style={{ border: "1px solid var(--border-glass)", borderTopColor: "var(--text-tertiary)" }} />
+          <ReadingStatusIndicator status="archive_browsing" />
         </div>
       </AppShell>
     );

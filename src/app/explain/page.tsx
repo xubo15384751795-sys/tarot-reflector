@@ -25,6 +25,8 @@ import AppShell from "@/components/AppShell";
 import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
 import { ExplainMotifLabel } from "@/components/ExplainMotifLabel";
 import { CornerOrnament, DividerLine } from "@/components/ArchiveEmblems";
+import { GlassCard } from "@/components/ui/GlassCard";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useMotifStepObserver } from "@/features/motion";
 import {
   EXPLAIN_TABS,
@@ -226,28 +228,11 @@ function ExplainContent() {
         <div className="relative z-[1] w-full max-w-[920px] px-5 md:px-8 py-6 md:py-8 flex flex-col gap-6">
           {/* 顶部 archive 标题 + 工具栏 */}
           <div className="flex flex-col items-center gap-3">
-            <div className="flex items-center justify-center gap-3">
-              <DividerLine width={32} />
-              <span
-                className="text-[10px] tracking-[0.24em]"
-                style={{ color: "var(--accent)", opacity: 0.85, fontFamily: "var(--font-serif-like)" }}
-              >
-                COD · EXP
-              </span>
-              <DividerLine width={32} />
-            </div>
-            <h1
-              className="hero-title text-[22px] md:text-[28px] font-light tracking-[-0.012em]"
-              style={{ color: "var(--text-primary)" }}
-            >
-              科普工作台
-            </h1>
-            <p
-              className="text-[11px] tracking-[0.14em] text-center"
-              style={{ color: "var(--text-faint)", fontFamily: "var(--font-serif-like)" }}
-            >
-              挑 一 张 牌 · 逐 个 元 素 讲 解 · 录 屏 友 好
-            </p>
+            <SectionHeader
+              kicker="COD · EXP"
+              title="科普工作台"
+              subtitle="挑一张牌 · 逐个元素讲解 · 录屏友好"
+            />
           </div>
 
           {/* 工具栏：比例 + 节奏 + 纯净 */}
@@ -277,6 +262,7 @@ function ExplainContent() {
               <select
                 value={perMotifSec}
                 onChange={(e) => setPerMotifSec(Number(e.target.value))}
+                aria-label="每幕停留秒数"
                 className="bg-transparent outline-none text-[12px] tracking-[0.04em]"
                 style={{ color: "var(--text-primary)" }}
               >
@@ -374,7 +360,7 @@ function ExplainContent() {
           </div>
 
           {/* 牌组切换 + 选择器 */}
-          <div className="flex flex-col gap-3 pt-2">
+          <GlassCard padding="md" glow className="flex flex-col gap-3">
             <div className="flex flex-wrap items-center justify-center gap-2">
               {EXPLAIN_TABS.map((t) => (
                 <button
@@ -450,7 +436,7 @@ function ExplainContent() {
                 );
               })}
             </div>
-          </div>
+          </GlassCard>
 
           {/* 退路：返回主站 */}
           <div className="flex justify-center pt-4 pb-8">
@@ -608,23 +594,7 @@ function ExplainStage({
             transition={{ duration: 0.4 }}
             className="absolute left-0 right-0 bottom-6 z-[3] flex justify-center px-5"
           >
-            <div
-              className="relative px-4 py-3 rounded-lg max-w-[88%] text-center"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(20,16,12,0.72) 0%, rgba(16,12,8,0.62) 100%)",
-                backdropFilter: "blur(14px) saturate(1.2)",
-                WebkitBackdropFilter: "blur(14px) saturate(1.2)",
-                border: "1px solid rgba(214,178,109,0.32)",
-                boxShadow:
-                  "inset 0 1px 0 rgba(255,247,225,0.12), 0 6px 18px rgba(0,0,0,0.42)",
-              }}
-            >
-              <span
-                aria-hidden
-                className="absolute left-1/2 -translate-x-1/2 -top-[1px] w-6 h-px"
-                style={{ background: "var(--accent)", opacity: 0.5 }}
-              />
+            <GlassCard padding="sm" className="relative max-w-[88%] text-center">
               <ExplainMotifLabel
                 text={activeMotif.label_zh ?? activeMotif.label}
                 className="text-[14px] md:text-[15px] leading-[1.55] tracking-[0.02em] mb-1"
@@ -637,7 +607,7 @@ function ExplainStage({
               <p
                 className="text-[12px] md:text-[12.5px] leading-[1.6]"
                 style={{
-                  color: "rgba(245,236,218,0.92)",
+                  color: "var(--text-secondary)",
                   fontFamily: "var(--font-serif-like)",
                 }}
               >
@@ -649,7 +619,7 @@ function ExplainStage({
               >
                 {activeMotifIdx + 1} / {card.motifs.length}
               </p>
-            </div>
+            </GlassCard>
           </motion.div>
         ) : (
           // 整张展示：底部显示牌名 + 关键词

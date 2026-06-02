@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 /**
  * SpreadStage —— 牌阵推荐 + 牌阵自选。
  *
@@ -10,6 +12,8 @@
 
 import SpreadRecommendation from "@/components/SpreadRecommendation";
 import SpreadSelector from "@/components/SpreadSelector";
+import SpreadStageLayout from "@/components/SpreadStageLayout";
+import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
 import { ALL_SPREADS, getSpreadMeta } from "../../lib/spreads";
 import type { ReadingStage } from "../../types/reading";
 import type { SpreadId, SpreadRecommendation as SpreadRecData } from "@/lib/schema";
@@ -33,9 +37,21 @@ export default function SpreadStage({
   onOpenManualSelect,
   onBack,
 }: Props) {
+  const focusId =
+    stage === "spread_select"
+      ? selectedSpread
+      : selectedSpread ?? spreadRec?.spread_id ?? null;
+
+  const guideHref = focusId ? `/guide?spread=${focusId}` : "/guide";
+
   if (stage === "spread_select") {
     return (
-      <div className="flex-1 flex items-center justify-center min-h-[60vh] px-6 py-12">
+      <SpreadStageLayout>
+        <p className="text-center mb-6">
+          <Link href={guideHref} className="spread-guide-inline-link">
+            查看牌阵规则 →
+          </Link>
+        </p>
         <SpreadSelector
           spreads={ALL_SPREADS}
           selected={selectedSpread}
@@ -43,20 +59,14 @@ export default function SpreadStage({
           onConfirm={onConfirmSpread}
           onBack={onBack}
         />
-      </div>
+      </SpreadStageLayout>
     );
   }
 
   if (!spreadRec) {
     return (
       <div className="flex-1 flex items-center justify-center min-h-[60vh]">
-        <div
-          className="w-5 h-5 rounded-full animate-spin"
-          style={{
-            border: "1px solid var(--border-glass)",
-            borderTopColor: "var(--text-tertiary)",
-          }}
-        />
+        <ReadingStatusIndicator status="spread_recommending" />
       </div>
     );
   }
@@ -64,8 +74,13 @@ export default function SpreadStage({
   const recommended = getSpreadMeta(spreadRec.spread_id);
 
   return (
-    <div className="flex-1 flex items-center justify-center min-h-[60vh] px-6 py-12">
+    <SpreadStageLayout>
       <div className="flex flex-col gap-8 w-full max-w-[560px]">
+        <p className="text-center">
+          <Link href={guideHref} className="spread-guide-inline-link">
+            查看牌阵规则 →
+          </Link>
+        </p>
         <SpreadRecommendation
           recommended={{
             spread_id: spreadRec.spread_id,
@@ -85,7 +100,6 @@ export default function SpreadStage({
           })}
           onSelect={(id) => {
             onPickSpread(id as SpreadId);
-            // 与原 UI 一致：选中即开始抽牌
             onConfirmSpread();
           }}
           onBack={onBack}
@@ -101,6 +115,6 @@ export default function SpreadStage({
           </button>
         </div>
       </div>
-    </div>
+    </SpreadStageLayout>
   );
 }

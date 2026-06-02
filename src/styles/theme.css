@@ -1,0 +1,358 @@
+:root[data-theme="light"] .parchment-noise::after {
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+}
+:root[data-theme="light"] body::after {
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+}
+:root[data-theme="light"] .theme-toggle-icon-circle {
+  background:
+    radial-gradient(ellipse at 30% 28%, rgba(255, 246, 215, 0.85) 0%, transparent 58%),
+    radial-gradient(ellipse at 72% 78%, rgba(214, 178, 109, 0.32) 0%, transparent 62%),
+    rgba(255, 252, 240, 0.55);
+  border-color: rgba(146, 100, 40, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 rgba(146, 100, 40, 0.10),
+    0 1px 2px rgba(92, 66, 38, 0.10),
+    0 4px 12px rgba(146, 100, 40, 0.10);
+}
+/* === Light theme component overrides === */
+:root[data-theme="light"] .glass {
+  background: var(--bg-glass);
+  border-color: var(--border-glass);
+}
+:root[data-theme="light"] .glass-active {
+  background: var(--bg-glass-hover);
+  border-color: var(--border-glass-active);
+}
+:root[data-theme="light"] .glass-card {
+  background: var(--surface);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow:
+    0 20px 60px rgba(92, 66, 38, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+:root[data-theme="light"] .pill-accent {
+  background: var(--accent-dim);
+  border-color: rgba(185, 149, 82, 0.2);
+  color: var(--accent);
+}
+:root[data-theme="light"] .progress-line {
+  background: rgba(92, 66, 38, 0.10);
+}
+:root[data-theme="light"] .progress-line-fill {
+  background: rgba(185, 149, 82, 0.5);
+}
+:root[data-theme="light"] .input-minimal {
+  border-bottom-color: rgba(92, 66, 38, 0.16);
+  color: var(--text-primary);
+}
+:root[data-theme="light"] .input-minimal:focus {
+  border-bottom-color: rgba(92, 66, 38, 0.35);
+}
+:root[data-theme="light"] .chip {
+  border-color: var(--border-glass);
+  color: var(--text-secondary);
+}
+:root[data-theme="light"] .chip:hover {
+  border-color: rgba(92, 66, 38, 0.22);
+  color: var(--text-primary);
+}
+:root[data-theme="light"] .chip-active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+:root[data-theme="light"] .btn-primary {
+  background: rgba(47, 42, 37, 0.92);
+  color: #F3EBDD;
+}
+:root[data-theme="light"] .btn-primary:hover {
+  background: rgba(47, 42, 37, 1);
+  box-shadow: 0 4px 20px rgba(92, 66, 38, 0.18);
+}
+:root[data-theme="light"] .btn-secondary {
+  border-color: var(--border-glass);
+  color: var(--text-secondary);
+}
+:root[data-theme="light"] .btn-secondary:hover {
+  border-color: rgba(92, 66, 38, 0.26);
+  color: var(--text-primary);
+}
+:root[data-theme="light"] .action-pill {
+  background: var(--bg-glass);
+  border-color: var(--border-glass);
+  color: var(--text-secondary);
+}
+:root[data-theme="light"] .action-pill:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--border-glass-active);
+  color: var(--text-primary);
+}
+:root[data-theme="light"] .step-dot {
+  background: rgba(92, 66, 38, 0.14);
+}
+:root[data-theme="light"] .step-dot.is-done {
+  background: rgba(185, 149, 82, 0.5);
+}
+:root[data-theme="light"] .step-dot.is-active {
+  background: rgba(185, 149, 82, 1);
+  box-shadow: 0 0 12px rgba(185, 149, 82, 0.45);
+}
+:root[data-theme="light"] .insight-card {
+  background: linear-gradient(
+    135deg,
+    rgba(185, 149, 82, 0.08) 0%,
+    rgba(185, 149, 82, 0.03) 100%
+  );
+  border: 1px solid rgba(185, 149, 82, 0.18);
+}
+:root[data-theme="light"] .insight-card::before {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+:root[data-theme="light"] .subcard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+:root[data-theme="light"] .coda-action {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+:root[data-theme="light"] .coda-action:hover {
+  border-color: rgba(185, 149, 82, 0.3);
+  color: var(--text-primary);
+  background: var(--surface-strong);
+}
+:root[data-theme="light"] .coda-action .coda-glyph {
+  background: var(--accent-dim);
+  border-color: rgba(185, 149, 82, 0.18);
+  color: var(--accent);
+}
+:root[data-theme="light"] .coda-primary {
+  background: linear-gradient(
+    140deg,
+    rgba(185, 149, 82, 0.12) 0%,
+    rgba(140, 106, 50, 0.06) 100%
+  );
+  border-color: rgba(185, 149, 82, 0.32);
+  color: var(--text-primary);
+}
+:root[data-theme="light"] .coda-primary:hover {
+  border-color: rgba(185, 149, 82, 0.5);
+  background: linear-gradient(
+    140deg,
+    rgba(185, 149, 82, 0.18) 0%,
+    rgba(140, 106, 50, 0.08) 100%
+  );
+}
+:root[data-theme="light"] .coda-quiet {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-tertiary);
+}
+:root[data-theme="light"] .coda-quiet:hover {
+  color: var(--text-primary);
+  border-color: rgba(185, 149, 82, 0.2);
+}
+:root[data-theme="light"] .hero-chip {
+  background: linear-gradient(155deg, rgba(255,255,255,0.78) 0%, rgba(248,240,220,0.62) 100%);
+  border-color: rgba(92, 66, 38, 0.22);
+  color: var(--text-secondary);
+  /* 浅色厚玻璃：顶部双层亮白 + 底部双层暖棕暗，外侧三层投影 */
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.95),
+    inset 0 5px 12px rgba(255, 255, 255, 0.50),
+    inset 0 -1.5px 0 rgba(92, 66, 38, 0.14),
+    inset 0 -5px 10px rgba(92, 66, 38, 0.06),
+    inset 1.5px 0 0 rgba(255, 255, 255, 0.45),
+    inset -1.5px 0 0 rgba(92, 66, 38, 0.06),
+    0 1px 1px rgba(92, 66, 38, 0.10),
+    0 3px 10px rgba(92, 66, 38, 0.10),
+    0 12px 24px rgba(92, 66, 38, 0.08);
+}
+/* 浅色背景下 sheen 用更纯的暖白，否则在暖米黄上几乎看不出 */
+:root[data-theme="light"] .hero-chip::before {
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 252, 240, 0) 28%,
+    rgba(255, 252, 240, 0.62) 50%,
+    rgba(255, 252, 240, 0) 72%,
+    transparent 100%
+  );
+}
+:root[data-theme="light"] .hero-chip:hover {
+  border-color: rgba(179, 136, 63, 0.45);
+  color: var(--text-primary);
+  background: linear-gradient(155deg, rgba(255,255,255,0.92) 0%, rgba(252,245,225,0.78) 100%);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 1),
+    inset 0 6px 14px rgba(255, 250, 230, 0.70),
+    inset 0 -1.5px 0 rgba(92, 66, 38, 0.14),
+    inset 0 -5px 10px rgba(92, 66, 38, 0.06),
+    inset 1.5px 0 0 rgba(255, 255, 255, 0.55),
+    inset -1.5px 0 0 rgba(92, 66, 38, 0.06),
+    0 2px 3px rgba(92, 66, 38, 0.12),
+    0 8px 20px rgba(179, 136, 63, 0.18),
+    0 22px 44px rgba(92, 66, 38, 0.12),
+    0 0 28px rgba(214, 178, 109, 0.24);
+}
+:root[data-theme="light"] .hero-chip.is-active {
+  background: linear-gradient(135deg, rgba(255,250,235,0.9) 0%, rgba(245,235,210,0.85) 100%);
+  border-color: var(--accent);
+  color: var(--text-primary);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(179, 136, 63, 0.1),
+    0 0 0 3px rgba(179, 136, 63, 0.08),
+    0 4px 16px rgba(179, 136, 63, 0.12);
+}
+:root[data-theme="light"] .hero-input {
+  background: linear-gradient(135deg, rgba(255,255,255,0.75) 0%, rgba(248,243,233,0.65) 100%);
+  border: 1px solid rgba(92, 66, 38, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(92, 66, 38, 0.03),
+    0 4px 16px rgba(92, 66, 38, 0.06);
+}
+:root[data-theme="light"] .hero-input:focus-within {
+  border-color: var(--accent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 6px 20px rgba(92, 66, 38, 0.08),
+    0 0 0 3px var(--accent-glow);
+}
+:root[data-theme="light"] .hero-cta {
+  /* champagne / 香槟金 — 比之前的 bronze 高了 25-40 亮度、降了一档饱和，
+     避免之前那种"金牌发奖"的土气铜感 */
+  background: linear-gradient(
+    155deg,
+    rgba(232, 215, 178, 0.88) 0%,
+    rgba(212, 188, 142, 0.88) 50%,
+    rgba(188, 162, 118, 0.88) 100%
+  );
+  color: #3a322a;
+  border: 1px solid rgba(255, 248, 225, 0.55);
+  /* 厚度阴影栈：保留厚度，但降低对比，柔和 */
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 252, 240, 0.85),
+    inset 0 6px 14px rgba(255, 248, 220, 0.28),
+    inset 0 -1.5px 0 rgba(120, 90, 50, 0.18),
+    inset 0 -7px 12px rgba(146, 110, 60, 0.10),
+    inset 2px 0 0 rgba(255, 248, 220, 0.22),
+    inset -2px 0 0 rgba(146, 110, 60, 0.12),
+    0 1px 2px rgba(92, 66, 38, 0.10),
+    0 6px 16px rgba(146, 110, 60, 0.16),
+    0 18px 36px rgba(146, 110, 60, 0.14);
+}
+:root[data-theme="light"] .hero-cta:hover {
+  /* hover 提亮但不要再深化对比，让 champagne 感保留 */
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 252, 245, 0.95),
+    inset 0 7px 16px rgba(255, 248, 220, 0.38),
+    inset 0 -1.5px 0 rgba(120, 90, 50, 0.22),
+    inset 0 -7px 12px rgba(146, 110, 60, 0.12),
+    inset 2px 0 0 rgba(255, 248, 220, 0.30),
+    inset -2px 0 0 rgba(146, 110, 60, 0.14),
+    0 2px 3px rgba(92, 66, 38, 0.14),
+    0 10px 22px rgba(146, 110, 60, 0.22),
+    0 24px 48px rgba(146, 110, 60, 0.18),
+    0 0 28px rgba(232, 200, 150, 0.30);
+}
+:root[data-theme="light"] .hero-cta.is-disabled,
+:root[data-theme="light"] .hero-cta:disabled {
+  box-shadow:
+    0 4px 14px rgba(92, 66, 38, 0.08),
+    inset 0 1px 0 rgba(255, 250, 230, 0.3);
+}
+
+/* Mode card — light variant · 厚玻璃 */
+:root[data-theme="light"] .mode-card {
+  background: linear-gradient(155deg, rgba(255,255,255,0.72) 0%, rgba(248,240,220,0.58) 100%) !important;
+  border-color: rgba(92, 66, 38, 0.20) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.95),
+    inset 0 6px 16px rgba(255, 255, 255, 0.55),
+    inset 0 -1.5px 0 rgba(92, 66, 38, 0.14),
+    inset 0 -8px 16px rgba(92, 66, 38, 0.06),
+    inset 2px 0 0 rgba(255, 255, 255, 0.50),
+    inset -2px 0 0 rgba(92, 66, 38, 0.06),
+    0 1px 2px rgba(92, 66, 38, 0.12),
+    0 8px 22px rgba(92, 66, 38, 0.10),
+    0 28px 60px rgba(92, 66, 38, 0.08) !important;
+}
+:root[data-theme="light"] .mode-card::before {
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 252, 240, 0) 28%,
+    rgba(255, 252, 240, 0.6) 50%,
+    rgba(255, 252, 240, 0) 72%,
+    transparent 100%
+  );
+}
+:root[data-theme="light"] .mode-card:hover {
+  border-color: rgba(179, 136, 63, 0.45) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 1),
+    inset 0 7px 18px rgba(255, 250, 230, 0.70),
+    inset 0 -1.5px 0 rgba(92, 66, 38, 0.16),
+    inset 0 -8px 16px rgba(92, 66, 38, 0.06),
+    inset 2px 0 0 rgba(255, 255, 255, 0.60),
+    inset -2px 0 0 rgba(92, 66, 38, 0.06),
+    0 2px 4px rgba(92, 66, 38, 0.14),
+    0 14px 32px rgba(179, 136, 63, 0.22),
+    0 36px 76px rgba(92, 66, 38, 0.14),
+    0 0 36px rgba(214, 178, 109, 0.24) !important;
+}
+
+/* Archive link — light variant · 厚玻璃幽灵 */
+:root[data-theme="light"] .archive-link {
+  background: linear-gradient(155deg, rgba(255,255,255,0.74) 0%, rgba(248,240,222,0.62) 100%);
+  border-color: rgba(92, 66, 38, 0.20);
+  color: var(--text-tertiary);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.90),
+    inset 0 4px 10px rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(92, 66, 38, 0.12),
+    inset 0 -4px 8px rgba(92, 66, 38, 0.05),
+    inset 1px 0 0 rgba(255, 255, 255, 0.35),
+    inset -1px 0 0 rgba(92, 66, 38, 0.05),
+    0 1px 1px rgba(92, 66, 38, 0.08),
+    0 3px 10px rgba(92, 66, 38, 0.08),
+    0 10px 22px rgba(92, 66, 38, 0.06);
+}
+:root[data-theme="light"] .archive-link::before {
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 252, 240, 0) 28%,
+    rgba(255, 252, 240, 0.55) 50%,
+    rgba(255, 252, 240, 0) 72%,
+    transparent 100%
+  );
+}
+:root[data-theme="light"] .archive-link:hover {
+  border-color: rgba(179, 136, 63, 0.45);
+  color: var(--text-primary);
+  background: linear-gradient(155deg, rgba(255,255,255,0.90) 0%, rgba(252,245,228,0.78) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 5px 12px rgba(255, 250, 230, 0.65),
+    inset 0 -1px 0 rgba(92, 66, 38, 0.14),
+    inset 0 -4px 8px rgba(92, 66, 38, 0.06),
+    inset 1px 0 0 rgba(255, 255, 255, 0.45),
+    inset -1px 0 0 rgba(92, 66, 38, 0.06),
+    0 2px 3px rgba(92, 66, 38, 0.12),
+    0 8px 20px rgba(179, 136, 63, 0.18),
+    0 18px 36px rgba(92, 66, 38, 0.12),
+    0 0 24px rgba(214, 178, 109, 0.22);
+}

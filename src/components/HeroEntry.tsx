@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, type ReactNode } from "react";
+import { motion } from "framer-motion";
 import type { Domain, UserInput } from "@/lib/schema";
 import AstrolabeStarCard from "./AstrolabeStarCard";
+import ScrambleReveal from "./ScrambleReveal";
 import { AlchemicalRing, CornerOrnament, ArchiveLabel, DividerLine } from "./ArchiveEmblems";
 
 type Props = {
   onSubmit: (input: UserInput) => void;
+  embedded?: boolean;
+  onBack?: () => void;
 };
 
 const domainTips: Record<Domain, string> = {
@@ -17,6 +20,15 @@ const domainTips: Record<Domain, string> = {
   study: "学习不只是为了结果，过程中的每一层理解都在改变你。",
   self: "向内看需要勇气，牌面只是一面镜子，答案始终在你那里。",
   money: "财务不只是数字，它反映的是你和资源之间的关系。",
+};
+
+const domainInputHints: Record<Domain, string> = {
+  love: "一段关系、一种感受，或一个你想说清的念头……",
+  career: "一个职业选择、团队处境，或工作上的卡点……",
+  project: "项目进展、协作摩擦，或下一步该怎么走……",
+  study: "考试、方向选择，或学习里反复出现的困惑……",
+  self: "情绪、习惯，或你此刻最想照见自己的那一面……",
+  money: "收入、支出习惯，或与金钱相关的决定……",
 };
 
 function IconHeart() {
@@ -93,37 +105,17 @@ const DOMAINS: { value: Domain; label: string; icon: ReactNode }[] = [
   { value: "money", label: "财务", icon: <IconDollar /> },
 ];
 
-export default function HeroEntry({ onSubmit }: Props) {
+function IconChevronLeft() {
+  return (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <polyline points="14,6 8,12 14,18" />
+    </svg>
+  );
+}
+
+export default function HeroEntry({ onSubmit, embedded = false, onBack }: Props) {
   const [question, setQuestion] = useState("");
   const [domain, setDomain] = useState<Domain>("self");
-  // 跨断点布局：把 lg: 媒体查询从 CSS 搬到 React state，这样 DOM 变更可以
-  // 被 View Transitions API 包住，浏览器自动 cross-fade 新旧布局，
-  // 把所有"瞬切"属性（grid 列、字号、padding、order）一起淡进淡出。
-  const [isSplit, setIsSplit] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    // 首次同步不走 VT（避免 SSR 桩到客户端的初始 cross-fade 闪烁）。
-    // 媒体查询匹配只能在 client 端知道，必须放在 effect 里；
-    // 一次性 sync，不会引发 cascading renders。
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsSplit(mq.matches);
-
-    const onChange = () => {
-      const next = mq.matches;
-      const apply = () => setIsSplit(next);
-      const doc = document as Document & {
-        startViewTransition?: (cb: () => void) => unknown;
-      };
-      if (typeof doc.startViewTransition === "function") {
-        doc.startViewTransition(apply);
-      } else {
-        apply();
-      }
-    };
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
 
   const canSubmit = question.trim().length > 0;
 
@@ -137,210 +129,165 @@ export default function HeroEntry({ onSubmit }: Props) {
   };
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden">
-      {/* Ambient lighting layers */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "var(--hero-bg)" }}
-      />
-      {/* 纸张肌理（极淡噪点） */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none opacity-[0.015]"
-        style={{
-          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")",
-          backgroundRepeat: "repeat",
-          backgroundSize: "180px 180px",
-          mixBlendMode: "overlay",
-        }}
-      />
-      {/* 烛光氛围（左上暖晕） */}
-      <div
-        aria-hidden
-        className="absolute pointer-events-none candle-glow"
-        style={{
-          top: "-8%",
-          left: "-5%",
-          width: "50%",
-          height: "50%",
-          background: "radial-gradient(ellipse 50% 45% at 25% 25%, var(--candlelight) 0%, transparent 70%)",
-        }}
-      />
-      {/* Sparkle dots scattered across background */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 22% 18%, rgba(255,255,255,0.45) 0.6px, transparent 1px)," +
-            "radial-gradient(circle at 78% 12%, rgba(255,247,225,0.5) 0.7px, transparent 1.2px)," +
-            "radial-gradient(circle at 90% 30%, rgba(255,255,255,0.35) 0.5px, transparent 1px)," +
-            "radial-gradient(circle at 86% 70%, rgba(255,247,225,0.4) 0.6px, transparent 1px)," +
-            "radial-gradient(circle at 8% 50%, rgba(255,255,255,0.3) 0.5px, transparent 1px)," +
-            "radial-gradient(circle at 35% 75%, rgba(255,247,225,0.32) 0.6px, transparent 1px)",
-          backgroundSize: "100% 100%",
-        }}
-      />
+    <div
+      className={
+        embedded
+          ? "hero-entry hero-entry--embedded"
+          : "hero-entry"
+      }
+    >
+      {!embedded && (
+        <>
+          <div
+            aria-hidden
+            className="hero-entry__bg"
+            style={{ background: "var(--hero-bg)" }}
+          />
+          <div
+            aria-hidden
+            className="hero-entry__noise"
+          />
+          <div aria-hidden className="hero-entry__candle" />
+          <div aria-hidden className="hero-entry-sparkles" />
+        </>
+      )}
 
-      {/* Main grid — 列、间距、padding 改成 isSplit state 驱动，
-          配合 useEffect 里的 startViewTransition，跨断点时浏览器整页 cross-fade。 */}
-      <main
-        className={
-          "relative z-[1] grid min-h-screen items-start " +
-          (isSplit
-            ? "grid-cols-[minmax(0,_1.15fr)_minmax(0,_1fr)] gap-16 px-20 pt-24 pb-24"
-            : "grid-cols-1 gap-6 px-5 md:px-12 pt-20 md:pt-24 pb-28")
-        }
-      >
-        {/* Hero column */}
-        <motion.section
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          style={{ viewTransitionName: "hero-text" }}
-          className={
-            "flex flex-col max-w-[640px] mx-auto " +
-            (isSplit
-              ? "items-start text-left lg:mx-0"
-              : "items-center text-center")
-          }
-        >
-          {/* 档案编号 */}
-          <div className="mb-8 flex items-center gap-4">
-            <ArchiveLabel code="COD.001" />
-            <DividerLine width={32} />
+      <main className="hero-entry__main">
+        {onBack && (
+          <div className="hero-entry__toolbar">
+            <button type="button" onClick={onBack} className="action-pill">
+              <IconChevronLeft />
+              <span>返回</span>
+            </button>
           </div>
+        )}
 
-          {/* Brand ornament */}
-          <div className="flex items-center gap-3 mb-8" style={{ color: "var(--accent)", opacity: 0.75 }}>
-            <span className="block w-8 h-px" style={{ background: "var(--accent)", opacity: 0.4 }} />
-            <span className="text-[14px] tracking-[0.42em]">阈&nbsp;牌</span>
-            <span className="block w-8 h-px" style={{ background: "var(--accent)", opacity: 0.4 }} />
-          </div>
-
-          {/* Subtitle as the main h1 */}
-          <h1
-            className={
-              "hero-title text-[26px] sm:text-[30px] md:text-[40px] leading-[1.28] font-light tracking-[-0.012em] " +
-              (isSplit ? "text-[50px] max-w-none" : "max-w-[15ch] sm:max-w-[18ch]")
-            }
-            style={{ color: "var(--text-primary)" }}
+        <div className="hero-entry__grid">
+          <motion.section
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="hero-entry__copy"
           >
-            翻开一页档案，
-            {isSplit && <br />}
-            看见你问题的结构。
-          </h1>
-
-          {/* 引导语 */}
-          <p className="mt-8 text-[14px] tracking-[0.02em] leading-[1.75] max-w-[460px] lg:mx-0 mx-auto" style={{ color: "var(--text-tertiary)" }}>
-            慢慢写下此刻最占据你的那件事。
-            <br className="hidden sm:inline" />
-            <span style={{ color: "var(--text-faint)" }}> 这张牌不是答案，是一面古老的镜子。</span>
-          </p>
-
-          {/* Input */}
-          <div className="mt-5 w-full max-w-[520px] hero-input">
-            <input
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              onKeyDown={handleKey}
-              placeholder="一个决定、一段关系、一个想看清楚的念头，或者就只是今天的心情……"
-              autoFocus
-            />
-            <span className="hero-input-spark" style={{ color: "var(--accent)", opacity: 0.7 }}>
-              <IconSparkSmall />
-            </span>
-          </div>
-          {/* Chips */}
-          <div className={"mt-7 flex flex-wrap gap-2.5 " + (isSplit ? "justify-start" : "justify-center")}>
-            {DOMAINS.map((d) => {
-              const active = domain === d.value;
-              return (
-                <button
-                  key={d.value}
-                  type="button"
-                  onClick={() => setDomain(d.value)}
-                  className={`hero-chip ${active ? "is-active" : ""}`}
-                >
-                  <span style={{ color: active ? "var(--accent)" : "var(--text-tertiary)" }}>
-                    {d.icon}
-                  </span>
-                  <span>{d.label}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* 领域提示 — 每个领域选中时柔和出现 */}
-          <AnimatePresence mode="wait">
-            {domainTips[domain] && (
-              <motion.div
-                key={`tip-${domain}`}
-                initial={{ opacity: 0, y: -4, height: 0 }}
-                animate={{ opacity: 1, y: 0, height: "auto" }}
-                exit={{ opacity: 0, y: -4, height: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="w-full max-w-[520px] overflow-hidden"
-              >
-                <p className={"mt-5 text-[12px] tracking-[0.02em] leading-[1.7] " + (isSplit ? "text-left" : "text-center")} style={{ color: "var(--text-faint)" }}>
-                  {domainTips[domain]}
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* CTA */}
-          <motion.button
-            type="button"
-            onClick={handleSubmit}
-            disabled={!canSubmit}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className={`hero-cta mt-10 ${canSubmit ? "" : "is-disabled"}`}
-          >
-            <IconSparkSmall />
-            <span className="ml-2 tracking-[0.18em]">看看这一页</span>
-          </motion.button>
-        </motion.section>
-
-        {/* Visual anchor: Star card with astrolabe.
-            结构性约束：牌区高度由 grid 单元格决定，不使用 vh 单位。
-            缩放时牌区被 grid cell 限制，永远不会溢出覆盖文字。 */}
-        <motion.section
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-          style={{ viewTransitionName: "hero-card" }}
-          className={"relative flex items-center justify-center max-h-full " + (isSplit ? "order-last" : "order-first")}
-        >
-          {/* 炼金术圆环背景 — 极淡 */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden" style={{ opacity: 0.2 }}>
-            <AlchemicalRing size={380} rings={4} />
-          </div>
-          {/* 月相 - 右上 */}
-          <div className="absolute top-4 right-4 pointer-events-none">
-            <div className="candle-glow" style={{ opacity: 0.3 }}>
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--brass)" strokeWidth="0.6">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M12 3 a9 9 0 0 1 0 18" fill="var(--candlelight)" opacity="0.3" />
-              </svg>
+            <div className="hero-entry__meta">
+              <ArchiveLabel code="COD.001" />
+              <DividerLine width={32} />
             </div>
-          </div>
-          {/* 角饰 */}
-          <CornerOrnament size={28} position="tl" className="absolute top-2 left-2" />
-          <CornerOrnament size={28} position="tr" className="absolute top-2 right-2" />
-          <CornerOrnament size={28} position="bl" className="absolute bottom-2 left-2" />
-          <CornerOrnament size={28} position="br" className="absolute bottom-2 right-2" />
-          <AstrolabeStarCard />
-        </motion.section>
+
+            <div className="hero-entry__brand">
+              <span className="hero-entry__brand-line" />
+              <span className="hero-entry__brand-text">阈&nbsp;牌</span>
+              <span className="hero-entry__brand-line" />
+            </div>
+
+            <h1 className="hero-entry__headline hero-title">
+              翻开一页档案，
+              <br />
+              看见你问题的结构。
+            </h1>
+
+            <p className="hero-entry__intro">
+              慢慢写下此刻最占据你的那件事。
+              <span className="hero-entry__intro-muted">
+                {" "}
+                这张牌不是答案，是一面古老的镜子。
+              </span>
+            </p>
+
+            <div className="hero-input">
+              <input
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                onKeyDown={handleKey}
+                placeholder={question.trim() ? "继续写下你想问的事……" : " "}
+                aria-describedby={!question.trim() ? "hero-domain-hint" : undefined}
+                autoFocus
+              />
+              <span className="hero-input-spark">
+                <IconSparkSmall />
+              </span>
+            </div>
+
+            {!question.trim() && (
+              <ScrambleReveal
+                id="hero-domain-hint"
+                as="p"
+                text={domainInputHints[domain]}
+                duration={0.75}
+                className="hero-entry__hint"
+              />
+            )}
+
+            <div className="hero-entry__chips">
+              {DOMAINS.map((d) => {
+                const active = domain === d.value;
+                return (
+                  <button
+                    key={d.value}
+                    type="button"
+                    onClick={() => setDomain(d.value)}
+                    className={`hero-chip ${active ? "is-active" : ""}`}
+                  >
+                    <span
+                      style={{
+                        color: active ? "var(--accent)" : "var(--text-tertiary)",
+                      }}
+                    >
+                      {d.icon}
+                    </span>
+                    <span>{d.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <ScrambleReveal
+              text={domainTips[domain]}
+              className="hero-entry__domain-tip"
+            />
+
+            <motion.button
+              type="button"
+              onClick={handleSubmit}
+              disabled={!canSubmit}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.35, duration: 0.5 }}
+              className={`hero-cta hero-entry__cta ${canSubmit ? "" : "is-disabled"}`}
+            >
+              <IconSparkSmall />
+              <span className="ml-2 tracking-[0.18em]">看看这一页</span>
+            </motion.button>
+          </motion.section>
+
+          <motion.section
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.12 }}
+            className="hero-entry__visual"
+            aria-hidden
+          >
+            <div className="hero-entry__visual-ring">
+              <AlchemicalRing size={360} rings={4} />
+            </div>
+            <CornerOrnament size={28} position="tl" className="hero-entry__corner hero-entry__corner--tl" />
+            <CornerOrnament size={28} position="tr" className="hero-entry__corner hero-entry__corner--tr" />
+            <CornerOrnament size={28} position="bl" className="hero-entry__corner hero-entry__corner--bl" />
+            <CornerOrnament size={28} position="br" className="hero-entry__corner hero-entry__corner--br" />
+            <div className="hero-entry__card-wrap">
+              <AstrolabeStarCard />
+            </div>
+          </motion.section>
+        </div>
       </main>
 
-      {/* Footer disclaimer */}
-      <footer className="absolute bottom-5 left-0 right-0 flex items-center justify-center gap-2 text-[11px] tracking-[0.04em] z-10 px-6 text-center" style={{ color: "var(--text-faint)" }}>
-        <span className="shrink-0" style={{ color: "var(--accent)", opacity: 0.55 }}><IconShield /></span>
-        <span>基于 Rider–Waite–Smith 传统牌义的图像档案 — 系统不会替你做决定，只照亮牌面上的符号。</span>
+      <footer className="hero-entry__footer">
+        <span className="hero-entry__footer-icon">
+          <IconShield />
+        </span>
+        <span>
+          基于 Rider–Waite–Smith 传统牌义的图像档案 — 系统不会替你做决定，只照亮牌面上的符号。
+        </span>
       </footer>
     </div>
   );

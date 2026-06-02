@@ -148,6 +148,7 @@ export default function AppShell({
       >
         <Link
           href="/"
+          aria-label="回到首页"
           className="flex items-center justify-center w-10 h-10 rounded-xl mb-10 transition-colors archive-border-thin"
           style={{ color: "var(--accent)" }}
         >
