@@ -1,9 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { motion, type Transition, type Variants } from "framer-motion";
 import { CornerOrnament, DividerLine } from "./ArchiveEmblems";
 import { useFoilSpotlight } from "@/lib/useFoilSpotlight";
+import {
+  captureModeFlipState,
+  playModeSelectionFlip,
+  type ModeFlipState,
+} from "@/features/motion/modeFlip.gsap";
 
 type Mode = "daily" | "question" | "deep";
 
@@ -11,7 +16,6 @@ type Props = {
   onSelect: (mode: Mode) => void;
 };
 
-const EASE_SOFT: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const SPRING_SMALL: Transition = {
   type: "spring",
   stiffness: 160,
@@ -30,7 +34,7 @@ const MODES: Array<{
     value: "daily",
     title: "今日一牌",
     tagline: "没有具体问题时使用。",
-    description: "抽一张牌，看看今天最值得留意的状态。",
+    description: "抽一张牌，看看今天有什么值得被轻轻看见。",
   },
   {
     value: "question",
@@ -42,22 +46,42 @@ const MODES: Array<{
   {
     value: "deep",
     title: "深度牌阵",
-    tagline: "适合复杂、反复、牵涉较多的问题。",
-    description: "使用多张牌，分析牌与牌之间的关系。",
+    tagline: "适合反复出现、暂时说不清的问题。",
+    description: "用多张牌，慢慢看见它的层次。",
   },
 ];
 
 export default function ModeSelector({ onSelect }: Props) {
   const [chosen, setChosen] = useState<Mode | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const flipStateRef = useRef<ModeFlipState | null>(null);
+  const onSelectRef = useRef(onSelect);
+
+  useLayoutEffect(() => {
+    onSelectRef.current = onSelect;
+  });
+
   useFoilSpotlight(listRef, ".mode-card");
 
   const handleClick = (mode: Mode) => {
-    if (chosen) return;
+    if (chosen || !listRef.current) return;
+    flipStateRef.current = captureModeFlipState(listRef.current);
     setChosen(mode);
-    // 让"被选中卡片放大、其他卡片淡出"先播完再切页
-    window.setTimeout(() => onSelect(mode), 420);
   };
+
+  useLayoutEffect(() => {
+    if (!chosen || !listRef.current || !flipStateRef.current) return;
+
+    const state = flipStateRef.current;
+    flipStateRef.current = null;
+    playModeSelectionFlip(state, listRef.current, chosen);
+
+    const timer = window.setTimeout(() => {
+      onSelectRef.current(chosen);
+    }, 480);
+
+    return () => window.clearTimeout(timer);
+  }, [chosen]);
 
   const listVariants: Variants = {
     hidden: {},
@@ -91,68 +115,68 @@ export default function ModeSelector({ onSelect }: Props) {
       >
         {MODES.map((mode, i) => {
           const isChosen = chosen === mode.value;
-          const isOther = chosen !== null && chosen !== mode.value;
 
           return (
-            <motion.button
+            <motion.div
               key={mode.value}
-              type="button"
               variants={itemVariants}
-              animate={{
-                opacity: isOther ? 0 : 1,
-                scale: isChosen ? 1.025 : 1,
-                y: 0,
-              }}
-              transition={{ duration: 0.4, ease: EASE_SOFT }}
-              onClick={() => handleClick(mode.value)}
-              disabled={chosen !== null}
-              className={`relative w-full text-left mode-card rounded-2xl px-5 py-5 ${
-                isChosen ? "is-chosen" : ""
-              } ${mode.recommended ? "is-recommended" : ""}`}
-              aria-label={`${mode.title} — ${mode.tagline}`}
+              className="w-full"
             >
-              {mode.recommended && !isChosen && (
-                <span className="mode-card__badge">推荐</span>
-              )}
+              <button
+                type="button"
+                data-mode={mode.value}
+                onClick={() => handleClick(mode.value)}
+                disabled={chosen !== null}
+                className={`relative w-full text-left mode-card interactive-glow physical-card rounded-2xl px-5 py-5 ${
+                  isChosen ? "is-chosen" : ""
+                } ${mode.recommended ? "is-recommended" : ""}`}
+                aria-label={`${mode.title} — ${mode.tagline}`}
+              >
+                {mode.recommended && !isChosen && (
+                  <span className="mode-card__badge">推荐</span>
+                )}
 
-              {isChosen && (
-                <>
-                  <CornerOrnament
-                    size={16}
-                    position="tl"
-                    className="absolute top-1 left-1"
-                    style={{ opacity: 0.6 }}
-                  />
-                  <CornerOrnament
-                    size={16}
-                    position="tr"
-                    className="absolute top-1 right-1"
-                    style={{ opacity: 0.6 }}
-                  />
-                  <CornerOrnament
-                    size={16}
-                    position="bl"
-                    className="absolute bottom-1 left-1"
-                    style={{ opacity: 0.6 }}
-                  />
-                  <CornerOrnament
-                    size={16}
-                    position="br"
-                    className="absolute bottom-1 right-1"
-                    style={{ opacity: 0.6 }}
-                  />
-                </>
-              )}
+                {isChosen && (
+                  <>
+                    <CornerOrnament
+                      size={16}
+                      position="tl"
+                      className="absolute top-1 left-1"
+                      style={{ opacity: 0.6 }}
+                    />
+                    <CornerOrnament
+                      size={16}
+                      position="tr"
+                      className="absolute top-1 right-1"
+                      style={{ opacity: 0.6 }}
+                    />
+                    <CornerOrnament
+                      size={16}
+                      position="bl"
+                      className="absolute bottom-1 left-1"
+                      style={{ opacity: 0.6 }}
+                    />
+                    <CornerOrnament
+                      size={16}
+                      position="br"
+                      className="absolute bottom-1 right-1"
+                      style={{ opacity: 0.6 }}
+                    />
+                  </>
+                )}
 
-              <div className="flex items-center gap-4">
-                <span className="mode-card__num shrink-0">{i + 1}</span>
-                <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-                  <span className="mode-card__title">{mode.title}</span>
-                  <span className="mode-card__tagline">{mode.tagline}</span>
-                  <span className="mode-card__description">{mode.description}</span>
+                <div className="flex items-center gap-4">
+                  <span className="mode-card__num shrink-0">{i + 1}</span>
+                  <div className="flex flex-col gap-0.5 flex-1 min-w-0">
+                    <span className="mode-card__title">{mode.title}</span>
+                    <span className="mode-card__tagline">{mode.tagline}</span>
+                    <span className="mode-card__description">
+                      {mode.description}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </motion.button>
+              </button>
+            </motion.div>
           );
         })}
       </motion.div>

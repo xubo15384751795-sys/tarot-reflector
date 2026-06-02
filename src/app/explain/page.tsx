@@ -13,38 +13,26 @@
  *   ?aspect=9:16        — 9:16 / 1:1 / 16:9
  *   ?pure=1             — 纯净模式（隐藏所有 UI 给录屏）
  *
- * 数据来源：src/data/tarot_cards.json（22 张 major arcana，含 motif bbox）
+ * 数据来源：78 张（大阿尔卡那 tarot_cards.json + 四花色 minor JSON）
  */
 
-import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import AppShell from "@/components/AppShell";
+import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
+import { ExplainMotifLabel } from "@/components/ExplainMotifLabel";
 import { CornerOrnament, DividerLine } from "@/components/ArchiveEmblems";
-import tarotCardsData from "@/data/tarot_cards.json";
-
-type Motif = {
-  id: string;
-  label: string;
-  meaning: string;
-  bbox: { x: number; y: number; w: number; h: number };
-};
-
-type ExplainCard = {
-  id: string;
-  zh_name: string;
-  name: string;
-  number?: number | null;
-  image: string;
-  core_symbols: string[];
-  upright: { keywords: string[]; meaning: string };
-  motifs: Motif[];
-};
-
-const CARDS = (tarotCardsData as ExplainCard[]).filter(
-  (c) => Array.isArray(c.motifs) && c.motifs.length > 0,
-);
+import { useMotifStepObserver } from "@/features/motion";
+import {
+  EXPLAIN_TABS,
+  loadExplainTab,
+  type ExplainCard,
+  type ExplainMotif,
+  type ExplainTabId,
+} from "@/lib/explainCards";
 
 type Aspect = "9:16" | "1:1" | "16:9";
 
@@ -63,25 +51,59 @@ function ExplainContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const initialCardId = searchParams.get("card") ?? CARDS[0]?.id;
+  const initialTab = (searchParams.get("tab") ?? "major") as ExplainTabId;
+  const initialCardId = searchParams.get("card") ?? "";
   const initialMotifIdx = (() => {
     const raw = Number(searchParams.get("motif"));
-    return Number.isFinite(raw) && raw > 0 ? raw - 1 : -1; // -1 = 整张展示
+    return Number.isFinite(raw) && raw > 0 ? raw - 1 : -1;
   })();
   const initialAspect = (searchParams.get("aspect") ?? "9:16") as Aspect;
   const initialPure = searchParams.get("pure") === "1";
 
+  const [activeTab, setActiveTab] = useState<ExplainTabId>(
+    EXPLAIN_TABS.some((t) => t.id === initialTab) ? initialTab : "major",
+  );
+  const [tabData, setTabData] = useState<{
+    tab: ExplainTabId;
+    cards: ExplainCard[];
+  } | null>(null);
   const [selectedCardId, setSelectedCardId] = useState<string>(initialCardId);
   const [activeMotifIdx, setActiveMotifIdx] = useState<number>(initialMotifIdx);
   const [aspect, setAspect] = useState<Aspect>(initialAspect);
   const [pure, setPure] = useState<boolean>(initialPure);
   const [playing, setPlaying] = useState(false);
-  /** 每个 motif 自动停留秒数 */
   const [perMotifSec, setPerMotifSec] = useState(4);
 
+  useEffect(() => {
+    let cancelled = false;
+    loadExplainTab(activeTab)
+      .then((list) => {
+        if (cancelled) return;
+        setTabData({ tab: activeTab, cards: list });
+        setSelectedCardId((prev) => {
+          if (prev && list.some((c) => c.id === prev)) return prev;
+          return list[0]?.id ?? "";
+        });
+        setActiveMotifIdx(-1);
+        setPlaying(false);
+      })
+      .catch(() => {
+        if (!cancelled) setTabData({ tab: activeTab, cards: [] });
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeTab]);
+
+  const loadingTab = !tabData || tabData.tab !== activeTab;
+  const cards = useMemo(
+    () => (tabData?.tab === activeTab ? tabData.cards : []),
+    [tabData, activeTab],
+  );
+
   const card = useMemo(
-    () => CARDS.find((c) => c.id === selectedCardId) ?? CARDS[0],
-    [selectedCardId],
+    () => cards.find((c) => c.id === selectedCardId) ?? cards[0],
+    [cards, selectedCardId],
   );
   const motifs = card?.motifs ?? [];
   const activeMotif = activeMotifIdx >= 0 ? motifs[activeMotifIdx] ?? null : null;
@@ -89,13 +111,14 @@ function ExplainContent() {
   // URL 同步（用 replaceState，不进 history 栈）
   useEffect(() => {
     const sp = new URLSearchParams();
-    sp.set("card", selectedCardId);
+    sp.set("tab", activeTab);
+    if (selectedCardId) sp.set("card", selectedCardId);
     if (activeMotifIdx >= 0) sp.set("motif", String(activeMotifIdx + 1));
     sp.set("aspect", aspect);
     if (pure) sp.set("pure", "1");
     const url = `/explain?${sp.toString()}`;
     window.history.replaceState(null, "", url);
-  }, [selectedCardId, activeMotifIdx, aspect, pure]);
+  }, [activeTab, selectedCardId, activeMotifIdx, aspect, pure]);
 
   // 自动播放：按 perMotifSec 推进
   useEffect(() => {
@@ -139,6 +162,27 @@ function ExplainContent() {
     setPlaying(true);
   }, []);
 
+  const stageGestureRef = useRef<HTMLDivElement>(null);
+  const gestureHandlers = useMemo(
+    () => ({ onPrev: handlePrev, onNext: handleNext }),
+    [handlePrev, handleNext],
+  );
+  useMotifStepObserver(
+    stageGestureRef,
+    gestureHandlers,
+    motifs.length > 0,
+  );
+
+  if (loadingTab) {
+    return (
+      <AppShell showActions={false}>
+        <div className="min-h-[50vh] flex items-center justify-center">
+          <ReadingStatusIndicator status="archive_browsing" />
+        </div>
+      </AppShell>
+    );
+  }
+
   if (!card) return null;
 
   const stage = (
@@ -157,7 +201,9 @@ function ExplainContent() {
         className="fixed inset-0 z-50 flex items-center justify-center"
         style={{ background: "var(--bg-base)" }}
       >
-        {stage}
+        <div ref={stageGestureRef} className="explain-stage-gesture flex justify-center">
+          {stage}
+        </div>
         <button
           onClick={() => setPure(false)}
           className="archive-link absolute top-5 right-5"
@@ -254,8 +300,19 @@ function ExplainContent() {
             </button>
           </div>
 
-          {/* 舞台 */}
-          <div className="flex justify-center">{stage}</div>
+          {/* 舞台（支持滑动手势切幕） */}
+          <div
+            ref={stageGestureRef}
+            className="explain-stage-gesture flex justify-center w-full touch-pan-y"
+          >
+            {stage}
+          </div>
+          <p
+            className="text-center text-[10px] tracking-[0.1em] -mt-2"
+            style={{ color: "var(--text-faint)" }}
+          >
+            在舞台上滑动可切换符号讲解
+          </p>
 
           {/* 控件 */}
           <div className="flex flex-col items-center gap-3">
@@ -310,26 +367,46 @@ function ExplainContent() {
               >
                 {activeMotifIdx < 0
                   ? `整 张 · ${card.zh_name}`
-                  : `${activeMotifIdx + 1} / ${motifs.length} · ${motifs[activeMotifIdx]?.label ?? ""}`}
+                  : `${activeMotifIdx + 1} / ${motifs.length} · ${motifs[activeMotifIdx]?.label_zh ?? motifs[activeMotifIdx]?.label ?? ""}`}
               </span>
               <span aria-hidden className="block w-4 h-px" style={{ background: "var(--accent)", opacity: 0.4 }} />
             </div>
           </div>
 
-          {/* 牌选择器 */}
+          {/* 牌组切换 + 选择器 */}
           <div className="flex flex-col gap-3 pt-2">
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {EXPLAIN_TABS.map((t) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => setActiveTab(t.id)}
+                  className={`hero-chip ${activeTab === t.id ? "is-active" : ""}`}
+                >
+                  <span>{t.label}</span>
+                  <span className="opacity-60 ml-1">{t.count}</span>
+                </button>
+              ))}
+            </div>
             <div className="flex items-center justify-center gap-3">
               <DividerLine width={28} />
               <span
                 className="text-[10px] tracking-[0.22em]"
                 style={{ color: "var(--text-faint)", fontFamily: "var(--font-serif-like)" }}
               >
-                大 阿 尔 卡 那 · {CARDS.length} 张
+                {EXPLAIN_TABS.find((t) => t.id === activeTab)?.label} · {cards.length} 张
+                {activeTab !== "major" ? " · 符号坐标为示意" : ""}
               </span>
               <DividerLine width={28} />
             </div>
-            <div className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-11 gap-2 justify-items-center">
-              {CARDS.map((c) => {
+            <p className="text-center text-[10px] tracking-[0.06em]" style={{ color: "var(--text-faint)" }}>
+              完整 78 张档案与精确标注见{" "}
+              <Link href="/archive" className="underline underline-offset-2" style={{ color: "var(--accent)" }}>
+                牌义档案库
+              </Link>
+            </p>
+            <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-10 lg:grid-cols-11 gap-2 justify-items-center">
+              {cards.map((c) => {
                 const isSel = c.id === selectedCardId;
                 return (
                   <button
@@ -406,10 +483,11 @@ function ExplainStage({
   aspect,
 }: {
   card: ExplainCard;
-  activeMotif: Motif | null;
+  activeMotif: ExplainMotif | null;
   activeMotifIdx: number;
   aspect: Aspect;
 }) {
+  const anchor = activeMotif?.anchor ?? null;
   return (
     <div
       className={`relative w-full ${aspectClass(aspect)} rounded-2xl overflow-hidden`}
@@ -494,31 +572,23 @@ function ExplainStage({
               alt={card.zh_name}
               fill
               sizes="240px"
-              className="object-cover"
+              className="object-contain"
               priority
             />
 
-            {/* 活跃 motif 高亮框（按 bbox 定位） */}
+            {/* 活跃 motif：锚点柔光（避免生硬方框；坐标相对完整牌面） */}
             <AnimatePresence>
-              {activeMotif && (
+              {activeMotif && anchor && (
                 <motion.div
                   key={activeMotif.id}
-                  initial={{ opacity: 0, scale: 0.92 }}
+                  initial={{ opacity: 0, scale: 0.6 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
+                  exit={{ opacity: 0, scale: 0.85 }}
                   transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute pointer-events-none"
+                  className="motif-spot motif-spot--explain"
                   style={{
-                    left: `${activeMotif.bbox.x * 100}%`,
-                    top: `${activeMotif.bbox.y * 100}%`,
-                    width: `${activeMotif.bbox.w * 100}%`,
-                    height: `${activeMotif.bbox.h * 100}%`,
-                    border: "1.5px solid var(--accent)",
-                    borderRadius: 6,
-                    boxShadow:
-                      "0 0 0 2px rgba(214,178,109,0.15), 0 0 18px rgba(214,178,109,0.45)",
-                    background:
-                      "radial-gradient(ellipse at center, rgba(214,178,109,0.10) 0%, transparent 70%)",
+                    left: `${anchor.x * 100}%`,
+                    top: `${anchor.y * 100}%`,
                   }}
                 />
               )}
@@ -555,16 +625,15 @@ function ExplainStage({
                 className="absolute left-1/2 -translate-x-1/2 -top-[1px] w-6 h-px"
                 style={{ background: "var(--accent)", opacity: 0.5 }}
               />
-              <p
+              <ExplainMotifLabel
+                text={activeMotif.label_zh ?? activeMotif.label}
                 className="text-[14px] md:text-[15px] leading-[1.55] tracking-[0.02em] mb-1"
                 style={{
                   color: "var(--accent)",
                   fontFamily: "var(--font-serif-like)",
                   fontWeight: 500,
                 }}
-              >
-                {activeMotif.label}
-              </p>
+              />
               <p
                 className="text-[12px] md:text-[12.5px] leading-[1.6]"
                 style={{
@@ -572,7 +641,7 @@ function ExplainStage({
                   fontFamily: "var(--font-serif-like)",
                 }}
               >
-                {activeMotif.meaning}
+                {activeMotif.meaning_zh ?? activeMotif.meaning}
               </p>
               <p
                 className="text-[9.5px] tracking-[0.12em] mt-2"
@@ -620,7 +689,7 @@ export default function ExplainPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <div className="w-5 h-5 rounded-full animate-spin" style={{ border: "1px solid var(--border-glass)", borderTopColor: "var(--text-tertiary)" }} />
+          <ReadingStatusIndicator status="archive_browsing" />
         </div>
       }
     >

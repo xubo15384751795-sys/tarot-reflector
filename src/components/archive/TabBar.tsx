@@ -1,7 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useCallback, useRef } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import {
+  animateArchiveTabIndicator,
+  measureTabIndicator,
+  useReducedMotion,
+} from "@/features/motion";
 import type { ArchiveTabId, ArchiveTabItem } from "./types";
 
 export function TabBar({
@@ -13,51 +19,62 @@ export function TabBar({
   activeTab: ArchiveTabId;
   onTabChange: (id: ArchiveTabId) => void;
 }) {
+  const reducedMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
+  const indicatorRef = useRef<HTMLDivElement>(null);
   const buttonRefs = useRef<Map<ArchiveTabId, HTMLButtonElement>>(new Map());
-  const [indicator, setIndicator] = useState<{ left: number; width: number } | null>(
-    null,
+  const firstPaint = useRef(true);
+
+  const updateIndicator = useCallback(
+    (immediate = false) => {
+      const container = containerRef.current;
+      const indicator = indicatorRef.current;
+      const btn = buttonRefs.current.get(activeTab);
+      if (!container || !indicator || !btn) return;
+
+      const metrics = measureTabIndicator(container, btn);
+      animateArchiveTabIndicator(indicator, metrics, {
+        reducedMotion,
+        immediate: immediate || firstPaint.current,
+      });
+      firstPaint.current = false;
+    },
+    [activeTab, reducedMotion],
   );
 
-  useEffect(() => {
-    const btn = buttonRefs.current.get(activeTab);
-    const container = containerRef.current;
-    if (!btn || !container) return;
+  useGSAP(
+    () => {
+      updateIndicator();
+      const container = containerRef.current;
+      if (!container) return;
 
-    const btnRect = btn.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
+      const ro = new ResizeObserver(() => updateIndicator(true));
+      ro.observe(container);
+      return () => ro.disconnect();
+    },
+    {
+      scope: containerRef,
+      dependencies: [activeTab, updateIndicator],
+      revertOnUpdate: true,
+    },
+  );
 
-    setIndicator({
-      left: btnRect.left - containerRect.left,
-      width: btnRect.width,
-    });
-  }, [activeTab]);
+  const handleTabClick = (id: ArchiveTabId) => {
+    const btn = buttonRefs.current.get(id);
+    if (btn && !reducedMotion) {
+      gsap.fromTo(
+        btn,
+        { scale: 0.97 },
+        { scale: 1, duration: 0.35, ease: "power2.out" },
+      );
+    }
+    onTabChange(id);
+  };
 
   return (
     <div className="flex justify-center">
-      <div
-        ref={containerRef}
-        className="inline-flex items-center gap-0 rounded-full px-1.5 py-1 relative"
-        style={{
-          background: "var(--bg-glass)",
-          border: "1px solid var(--border-glass)",
-        }}
-      >
-        {indicator && (
-          <motion.div
-            className="absolute top-1 bottom-1 rounded-full"
-            style={{ background: "var(--accent)" }}
-            animate={{
-              left: indicator.left,
-              width: indicator.width,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 380,
-              damping: 32,
-            }}
-          />
-        )}
+      <div ref={containerRef} className="archive-tab-bar inline-flex items-center gap-0 rounded-full px-1.5 py-1 relative">
+        <div ref={indicatorRef} className="archive-tab-indicator" aria-hidden />
 
         {tabs.map((tab) => {
           const isActive = tab.id === activeTab;
@@ -66,18 +83,16 @@ export function TabBar({
               key={tab.id}
               ref={(el) => {
                 if (el) buttonRefs.current.set(tab.id, el);
+                else buttonRefs.current.delete(tab.id);
               }}
-              onClick={() => onTabChange(tab.id)}
-              className="relative flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-full transition-colors duration-200 shrink-0 z-10"
-              style={{
-                color: isActive ? "var(--bg-base)" : "var(--text-tertiary)",
-              }}
+              type="button"
+              onClick={() => handleTabClick(tab.id)}
+              className={`archive-tab-btn relative flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-full shrink-0 z-10 ${
+                isActive ? "is-active" : ""
+              }`}
             >
               {tab.icon && (
-                <span
-                  className="transition-colors duration-200"
-                  style={{ color: isActive ? "var(--bg-base)" : "var(--text-faint)" }}
-                >
+                <span className="archive-tab-btn__icon" aria-hidden>
                   {tab.icon}
                 </span>
               )}
@@ -87,10 +102,7 @@ export function TabBar({
               >
                 {tab.label}
               </span>
-              <span
-                className="text-[10px] tabular-nums whitespace-nowrap"
-                style={{ opacity: isActive ? 0.75 : 0.5 }}
-              >
+              <span className="text-[10px] tabular-nums whitespace-nowrap archive-tab-btn__count">
                 {tab.count}
               </span>
             </button>

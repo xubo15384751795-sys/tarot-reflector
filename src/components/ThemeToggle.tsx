@@ -7,21 +7,27 @@
  * 避免页面切换时闪一下深色。
  */
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 type Theme = "dark" | "light";
 
 const STORAGE_KEY = "tarot:theme";
 
-function readInitial(): Theme {
-  if (typeof document === "undefined") return "dark";
-  const fromAttr = document.documentElement.getAttribute("data-theme") as Theme | null;
-  if (fromAttr === "dark" || fromAttr === "light") return fromAttr;
-  return "dark";
+function readThemeFromDom(): Theme {
+  const fromAttr = document.documentElement.getAttribute("data-theme");
+  return fromAttr === "light" ? "light" : "dark";
+}
+
+function subscribeTheme(onStoreChange: () => void): () => void {
+  const observer = new MutationObserver(onStoreChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+  return () => observer.disconnect();
 }
 
 function applyTheme(t: Theme) {
-  if (typeof document === "undefined") return;
   document.documentElement.setAttribute("data-theme", t);
   try {
     localStorage.setItem(STORAGE_KEY, t);
@@ -52,17 +58,14 @@ function IconMoon() {
 }
 
 export default function ThemeToggle({ variant = "pill" }: Props) {
-  const [theme, setTheme] = useState<Theme>("dark");
-  // 客户端挂载后读取真正的 theme（first-paint 由 layout 注入）。
-  // 一次性 sync，不会引发 cascading renders。
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setTheme(readInitial());
-  }, []);
+  const theme = useSyncExternalStore(
+    subscribeTheme,
+    readThemeFromDom,
+    () => "dark" as Theme,
+  );
 
   const toggle = () => {
     const next: Theme = theme === "dark" ? "light" : "dark";
-    setTheme(next);
     applyTheme(next);
   };
 

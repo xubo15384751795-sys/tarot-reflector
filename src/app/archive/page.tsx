@@ -3,6 +3,7 @@
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { useClientMounted } from "@/features/motion";
 import {
   AlchemicalRing,
   CornerOrnament,
@@ -10,13 +11,14 @@ import {
   ArchiveLabel,
 } from "@/components/ArchiveEmblems";
 import { ArchiveCard } from "@/components/archive/ArchiveCard";
+import AppShell from "@/components/AppShell";
+import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
 import { CardDetailModal } from "@/components/archive/CardDetailModal";
-import { TabBar } from "@/components/archive/TabBar";
 import {
-  ARCHIVE_TABS,
-  ARCHIVE_TAB_SUBTITLES,
-  loadArchiveTab,
-} from "@/components/archive/dataset";
+  ArchiveDeckEntrance,
+  getArchiveTabCaption,
+} from "@/components/archive/ArchiveDeckEntrance";
+import { ARCHIVE_TABS, loadArchiveTab } from "@/components/archive/dataset";
 import type { ArchiveCardData, ArchiveTabId } from "@/components/archive/types";
 
 function ArchivePageContent() {
@@ -24,8 +26,16 @@ function ArchivePageContent() {
   const debugMotifs = searchParams.get("debugMotifs") === "1";
   const [selectedCard, setSelectedCard] = useState<ArchiveCardData | null>(null);
   const [activeTab, setActiveTab] = useState<ArchiveTabId>("major");
-  const [activeCards, setActiveCards] = useState<ArchiveCardData[] | null>(null);
-  const [loadingTab, setLoadingTab] = useState(false);
+  const [tabData, setTabData] = useState<{
+    tab: ArchiveTabId;
+    cards: ArchiveCardData[];
+  } | null>(null);
+  const [hoverTab, setHoverTab] = useState<ArchiveTabId | null>(null);
+
+  const handleTabChange = useCallback((id: ArchiveTabId) => {
+    setHoverTab(null);
+    setActiveTab(id);
+  }, []);
 
   const handleCardClick = useCallback((card: ArchiveCardData) => {
     setSelectedCard(card);
@@ -45,32 +55,30 @@ function ArchivePageContent() {
     }
   }, [selectedCard]);
 
-  // tab 切换：dynamic import 该 tab 的卡片数据
   useEffect(() => {
     let cancelled = false;
-    // 一次性 sync 开 loading 状态：不会引发 cascading render（依赖只在 activeTab 变时跑）
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setLoadingTab(true);
     loadArchiveTab(activeTab)
       .then((result) => {
         if (!cancelled) {
-          setActiveCards(result.cards);
-          setLoadingTab(false);
+          setTabData({ tab: activeTab, cards: result.cards });
         }
       })
       .catch(() => {
-        if (!cancelled) setLoadingTab(false);
+        if (!cancelled) setTabData({ tab: activeTab, cards: [] });
       });
     return () => {
       cancelled = true;
     };
   }, [activeTab]);
 
-  const activeSubtitle = ARCHIVE_TAB_SUBTITLES[activeTab];
-  const activeTabConfig = ARCHIVE_TABS.find((t) => t.id === activeTab);
+  const loadingTab = !tabData || tabData.tab !== activeTab;
+  const activeCards = tabData?.tab === activeTab ? tabData.cards : null;
+  const mounted = useClientMounted();
+  const captionTab = hoverTab ?? activeTab;
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
+    <AppShell showActions={false}>
+    <div className="relative min-h-[calc(100vh-60px)] w-full overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -171,13 +179,8 @@ function ArchivePageContent() {
         style={{ opacity: 0.2 }}
       />
 
-      <main className="relative z-[1] max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-        <motion.header
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-10 md:mb-14"
-        >
+      <main className="relative z-[1] max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+        <header className="archive-page-hero text-center">
           <div className="flex items-center justify-center gap-3 mb-5">
             <DividerLine width={32} />
             <ArchiveLabel code="COD.ARCH" />
@@ -197,49 +200,29 @@ function ArchivePageContent() {
           >
             Rider–Waite–Smith 完整牌组 · 78 张图像档案
           </p>
-        </motion.header>
+        </header>
 
-        <motion.nav
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-10 md:mb-14"
-        >
-          <TabBar tabs={ARCHIVE_TABS} activeTab={activeTab} onTabChange={setActiveTab} />
-        </motion.nav>
+        <nav aria-label="牌组入口">
+          <ArchiveDeckEntrance
+            tabs={ARCHIVE_TABS}
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+            onPreviewHover={setHoverTab}
+            onPreviewLeave={() => setHoverTab(null)}
+          />
+        </nav>
 
-        <motion.div
-          key={`header-${activeTab}`}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="flex items-center gap-4 mb-8"
-        >
-          <div className="flex-1 h-px" style={{ background: "var(--border-glass)" }} />
-          <div className="text-center">
-            <h2
-              className="text-[16px] md:text-[18px] tracking-[0.06em] mb-1"
-              style={{
-                fontFamily: "var(--font-serif-like)",
-                color: "var(--text-primary)",
-              }}
-            >
-              {activeTabConfig?.label}
-              {activeTabConfig?.subtitle && (
-                <span className="ml-2" style={{ color: "var(--text-faint)" }}>
-                  · {activeTabConfig.subtitle}
-                </span>
-              )}
-            </h2>
-            <p
-              className="text-[11px] tracking-[0.08em]"
-              style={{ color: "var(--text-faint)" }}
-            >
-              {activeSubtitle}
-            </p>
-          </div>
-          <div className="flex-1 h-px" style={{ background: "var(--border-glass)" }} />
-        </motion.div>
+        <section className="archive-preview" aria-labelledby="archive-preview-heading">
+          <h2 id="archive-preview-heading" className="archive-preview__heading">
+            当前浏览
+          </h2>
+          <p
+            className="archive-preview__caption"
+            aria-live="polite"
+          >
+            {getArchiveTabCaption(captionTab)}
+          </p>
+        </section>
 
         <AnimatePresence mode="wait">
           {loadingTab || !activeCards ? (
@@ -251,34 +234,27 @@ function ArchivePageContent() {
               transition={{ duration: 0.25 }}
               className="flex justify-center py-24"
             >
-              <div
-                className="w-5 h-5 rounded-full animate-spin"
-                style={{
-                  border: "1px solid var(--border-glass)",
-                  borderTopColor: "var(--accent)",
-                }}
-              />
+              <ReadingStatusIndicator status="archive_browsing" />
             </motion.div>
           ) : (
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={mounted ? { opacity: 0, y: 16 } : false}
+              animate={mounted ? { opacity: 1, y: 0 } : false}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 items-stretch"
+              className="cards-grid"
             >
               {activeCards.map((card, i) => (
                 <motion.div
                   key={card.id}
-                  initial={{ opacity: 0, y: 16, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  initial={mounted ? { opacity: 0, y: 10 } : false}
+                  animate={mounted ? { opacity: 1, y: 0 } : false}
                   transition={{
-                    duration: 0.4,
-                    delay: i * 0.03,
+                    duration: 0.32,
+                    delay: Math.min(i * 0.02, 0.4),
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="h-full"
                 >
                   <ArchiveCard card={card} onClick={() => handleCardClick(card)} />
                 </motion.div>
@@ -320,6 +296,7 @@ function ArchivePageContent() {
         )}
       </AnimatePresence>
     </div>
+    </AppShell>
   );
 }
 

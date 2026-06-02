@@ -11,6 +11,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import CardDeck from "@/components/CardDeck";
+import { readingStatusText } from "@/lib/readingStatusCopy";
 import type {
   DrawnCardSnapshot,
   LocalCardMeaning,
@@ -36,7 +37,7 @@ export default function DrawingStage({
         <CardDeck
           isShuffling
           onShuffleComplete={() => {}}
-          statusText="正在翻开牌面……"
+          statusText={readingStatusText("shuffling")}
         />
       </div>
     );
@@ -49,7 +50,7 @@ export default function DrawingStage({
         <CardDeck
           isShuffling
           onShuffleComplete={() => {}}
-          statusText="正在抽取牌面……"
+          statusText={readingStatusText("generating_reading")}
         />
       </div>
     );

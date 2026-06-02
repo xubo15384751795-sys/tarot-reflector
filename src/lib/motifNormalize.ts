@@ -50,7 +50,7 @@ export function normalizeArchiveMotif(m: Motif, index: number): ArchiveMotif {
     id: m.id,
     label_zh: m.label_zh ?? m.label,
     meaning_zh: m.meaning_zh ?? m.meaning,
-    traditional_note_zh: m.traditional_note_zh ?? m.meaning_zh ?? m.meaning,
+    traditional_note_zh: m.traditional_note_zh ?? "",
     anchor,
     highlight,
     popoverSide: m.popover?.side ?? "auto",

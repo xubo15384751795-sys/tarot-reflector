@@ -42,7 +42,7 @@ describe("ModeSelector", () => {
 
     expect(screen.getByText("没有具体问题时使用。")).toBeInTheDocument();
     expect(screen.getByText("带着一个具体问题进入。")).toBeInTheDocument();
-    expect(screen.getByText("适合复杂、反复、牵涉较多的问题。")).toBeInTheDocument();
+    expect(screen.getByText("适合反复出现、暂时说不清的问题。")).toBeInTheDocument();
   });
 
   it("卡片可点击触发 onSelect", async () => {

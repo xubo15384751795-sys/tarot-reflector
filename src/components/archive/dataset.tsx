@@ -21,11 +21,11 @@ import {
 // ─── 静态元数据（必须立刻渲染的部分）───
 
 export const ARCHIVE_TABS: ArchiveTabItem[] = [
-  { id: "major", label: "大阿尔卡那", subtitle: "愚者之旅", count: 22 },
-  { id: "wands", label: "权杖", subtitle: "火之径", count: 14, icon: <SuitWands /> },
-  { id: "cups", label: "圣杯", subtitle: "水之域", count: 14, icon: <SuitCups /> },
-  { id: "swords", label: "宝剑", subtitle: "风之刃", count: 14, icon: <SuitSwords /> },
-  { id: "pentacles", label: "星币", subtitle: "土之环", count: 14, icon: <SuitPentacles /> },
+  { id: "major", label: "大阿尔卡那", subtitle: "22 · 愚者之旅", count: 22 },
+  { id: "wands", label: "权杖", subtitle: "14 · 火 / 行动", count: 14, icon: <SuitWands /> },
+  { id: "cups", label: "圣杯", subtitle: "14 · 水 / 情感", count: 14, icon: <SuitCups /> },
+  { id: "swords", label: "宝剑", subtitle: "14 · 风 / 判断", count: 14, icon: <SuitSwords /> },
+  { id: "pentacles", label: "星币", subtitle: "14 · 土 / 现实", count: 14, icon: <SuitPentacles /> },
 ];
 
 export const ARCHIVE_TAB_SUBTITLES: Record<ArchiveTabId, string> = {

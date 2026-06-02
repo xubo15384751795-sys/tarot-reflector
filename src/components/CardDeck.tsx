@@ -19,6 +19,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useClientMounted } from "@/features/motion";
+import { readingStatusText } from "@/lib/readingStatusCopy";
 import CardBackImage from "./CardBackImage";
 
 type Props = {
@@ -39,6 +41,7 @@ export default function CardDeck({
   onShuffleComplete,
   statusText,
 }: Props) {
+  const mounted = useClientMounted();
   const [phase, setPhase] = useState<"idle" | "stack" | "fan" | "swirl" | "collapse" | "sheen">(
     "idle"
   );
@@ -66,6 +69,25 @@ export default function CardDeck({
       clearTimeout(t5);
     };
   }, [isShuffling, onShuffleComplete]);
+
+  const label = statusText ?? readingStatusText("shuffling");
+
+  if (!mounted) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[340px] relative">
+        {isShuffling && (
+          <div className="flex flex-col items-center gap-3 mt-10">
+            <p
+              className="text-[13px] tracking-[0.08em]"
+              style={{ color: "var(--text-secondary)", fontFamily: "var(--font-serif-like)" }}
+            >
+              {label}
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[340px] relative">
@@ -247,7 +269,7 @@ export default function CardDeck({
             className="text-[13px] tracking-[0.08em]"
             style={{ color: "var(--text-secondary)", fontFamily: "var(--font-serif-like)" }}
           >
-            {statusText ?? "正在翻阅档案"}
+            {label}
           </p>
           {/* 进度点 · 也跟着脉冲 */}
           <div className="flex gap-1.5">

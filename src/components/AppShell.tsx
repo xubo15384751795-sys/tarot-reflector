@@ -1,14 +1,14 @@
 /**
- * 应用外壳：侧边栏导航 + 顶栏（含重新抽牌、分享等操作）。
- * 设置 / 语音按钮当前为 UI 占位。
+ * 应用外壳：图标导航 + 顶栏 + 主内容。
  */
 
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { ensureNotesRepository } from "@/features/notes/repository";
 import ThemeToggle from "./ThemeToggle";
 
 type NavItem = {
@@ -16,10 +16,6 @@ type NavItem = {
   label: string;
   href: string;
   icon: ReactNode;
-  active?: boolean;
-  disabled?: boolean;
-  /** 显示一个"即将推出"的微角标，表示位置已预留但功能未上线 */
-  soon?: boolean;
 };
 
 function IconStack() {
@@ -43,14 +39,6 @@ function IconNotes() {
   return (
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
       <path d="M6 4 H18 V20 L12 17 L6 20 Z" />
-    </svg>
-  );
-}
-function IconSettings() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
-      <circle cx="12" cy="12" r="3" />
-      <path d="M12 2 v3 M12 19 v3 M2 12 h3 M19 12 h3 M5 5 l2 2 M17 17 l2 2 M5 19 l2 -2 M17 7 l2 -2" />
     </svg>
   );
 }
@@ -91,23 +79,11 @@ function IconAudio() {
     </svg>
   );
 }
-
-type Props = {
-  children: ReactNode;
-  onRedraw?: () => void;
-  onShare?: () => void;
-  showActions?: boolean;
-  /** 分享操作后的短暂提示（如「已复制到剪贴板」） */
-  shareHint?: string | null;
-};
-
-function IconExplain() {
-  // 三层放大镜/聚光：呼应"科普聚焦"
+function IconSearch() {
   return (
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
-      <circle cx="11" cy="11" r="6" />
-      <circle cx="11" cy="11" r="2.5" />
-      <line x1="15.5" y1="15.5" x2="20" y2="20" strokeLinecap="round" />
+      <circle cx="11" cy="11" r="7" />
+      <line x1="16.5" y1="16.5" x2="21" y2="21" />
     </svg>
   );
 }
@@ -122,12 +98,22 @@ function IconArchive() {
 }
 
 const navItems: NavItem[] = [
-  { id: "draw", label: "抽牌", href: "/", icon: <IconStack /> },
+  { id: "draw", label: "开始", href: "/", icon: <IconStack /> },
   { id: "archive", label: "档案", href: "/archive", icon: <IconArchive /> },
   { id: "reading", label: "解读", href: "/reading", icon: <IconCompass /> },
-  { id: "explain", label: "科普", href: "/explain", icon: <IconExplain /> },
+  { id: "guide", label: "科普", href: "/guide", icon: <IconSearch /> },
   { id: "notes", label: "笔记", href: "/notes", icon: <IconNotes /> },
 ];
+
+type Props = {
+  children: ReactNode;
+  onRedraw?: () => void;
+  onShare?: () => void;
+  showActions?: boolean;
+  shareHint?: string | null;
+  /** 首页/入口：整页共用 hero 背景，顶栏无硬分割线 */
+  immersive?: boolean;
+};
 
 export default function AppShell({
   children,
@@ -135,15 +121,31 @@ export default function AppShell({
   onShare,
   showActions = true,
   shareHint,
+  immersive = false,
 }: Props) {
   const pathname = usePathname();
-  // 重新抽牌的二次确认 —— 默认"保留这次"，需要明确确认才会丢弃当前解读
   const [confirmRedraw, setConfirmRedraw] = useState(false);
 
+  useEffect(() => {
+    void ensureNotesRepository();
+  }, []);
+
   return (
-    <div className="flex flex-row min-h-screen w-full">
-      {/* Sidebar */}
-      <aside className="hidden md:flex flex-col items-center w-[88px] py-8 relative z-20" style={{ borderRight: "1px solid var(--border-glass)", background: "var(--bg-elevated)", opacity: 0.95 }}>
+    <div
+      className={`flex flex-row min-h-screen w-full relative ${immersive ? "app-shell--immersive" : ""}`}
+    >
+      {immersive && <div aria-hidden className="app-shell-atmosphere pointer-events-none" />}
+      <aside
+        className={`app-shell-sidebar hidden md:flex flex-col items-center w-[88px] py-8 relative z-30 shrink-0 ${immersive ? "app-shell-sidebar--immersive" : ""}`}
+        style={
+          immersive
+            ? undefined
+            : {
+                borderRight: "1px solid var(--border-glass)",
+                background: "var(--bg-elevated)",
+              }
+        }
+      >
         <Link
           href="/"
           className="flex items-center justify-center w-10 h-10 rounded-xl mb-10 transition-colors archive-border-thin"
@@ -156,134 +158,97 @@ export default function AppShell({
             const active =
               item.href === pathname ||
               (item.id === "reading" && pathname?.startsWith("/reading")) ||
-              (item.id === "archive" && pathname?.startsWith("/archive"));
+              (item.id === "archive" && pathname?.startsWith("/archive")) ||
+              (item.id === "guide" && pathname?.startsWith("/guide")) ||
+              (item.id === "notes" && pathname?.startsWith("/notes"));
             return (
               <Link
                 key={item.id}
                 href={item.href}
-                aria-disabled={item.disabled}
-                title={item.soon ? "即将推出" : item.disabled ? "尚未实现" : undefined}
-                onClick={item.disabled ? (e) => e.preventDefault() : undefined}
                 className="group flex flex-col items-center gap-1.5 px-2 py-3 rounded-xl w-[64px] transition-all"
                 style={{
-                  color: item.disabled
-                    ? "var(--text-faint)"
-                    : active
-                    ? "var(--text-primary)"
-                    : "var(--text-tertiary)",
+                  color: active ? "var(--text-primary)" : "var(--text-tertiary)",
                   background: active ? "var(--bg-glass-hover)" : "transparent",
-                  cursor: item.disabled ? "not-allowed" : "pointer",
-                  opacity: item.disabled ? 0.55 : 1,
                 }}
               >
-                <span
-                  className="relative"
-                  style={{ color: active ? "var(--accent)" : "currentColor" }}
-                >
+                <span style={{ color: active ? "var(--accent)" : "currentColor" }}>
                   {item.icon}
-                  {item.soon && (
-                    <span
-                      aria-hidden
-                      className="absolute -top-0.5 -right-1.5 w-1.5 h-1.5 rounded-full"
-                      style={{ background: "var(--accent)", opacity: 0.7 }}
-                    />
-                  )}
                 </span>
-                <span className="text-[10px] tracking-[0.08em]">
-                  {item.label}
-                </span>
-                {item.soon && (
-                  <span
-                    className="text-[8px] tracking-[0.12em] leading-none"
-                    style={{ color: "var(--accent)", opacity: 0.7 }}
-                  >
-                    SOON
-                  </span>
-                )}
+                <span className="text-[10px] tracking-[0.08em]">{item.label}</span>
               </Link>
             );
           })}
         </nav>
-        <div className="mt-auto pt-6">
-          <button
-            className="flex flex-col items-center gap-1.5 px-2 py-3 rounded-xl w-[64px] transition-all"
-            style={{ color: "var(--text-tertiary)" }}
-            aria-label="设置（尚未实现）"
-            title="尚未实现"
-          >
-            <IconSettings />
-            <span className="text-[10px] tracking-[0.08em]">设置</span>
-          </button>
-        </div>
       </aside>
 
-      {/* Main column */}
-      <div className="flex-1 flex flex-col min-w-0 relative">
-        {/* Top bar — 移动端隐藏副标题与样本徽章，避免按钮被挤到换行 */}
-        <header className="flex items-center justify-between px-4 md:px-10 py-4 md:py-5 z-10" style={{ borderBottom: "1px solid var(--border-glass)", background: "var(--bg-elevated)", backdropFilter: "blur(12px)" }}>
+      <div className="app-shell-main flex-1 flex flex-col min-w-0 relative z-[1]">
+        <header
+          className={`app-shell-header flex items-center justify-between px-4 md:px-10 py-4 md:py-5 z-10 shrink-0 ${immersive ? "app-shell-header--immersive" : ""}`}
+          style={
+            immersive
+              ? undefined
+              : {
+                  borderBottom: "1px solid var(--border-glass)",
+                  background: "var(--bg-elevated)",
+                  backdropFilter: "blur(12px)",
+                }
+          }
+        >
           <div className="flex items-baseline gap-3 min-w-0">
-            <h1 className="text-[18px] md:text-[20px] font-light tracking-[0.18em] shrink-0" style={{ color: "var(--text-primary)" }}>
+            <h1
+              className="text-[18px] md:text-[20px] font-light tracking-[0.18em] shrink-0"
+              style={{ color: "var(--text-primary)" }}
+            >
               阈牌
             </h1>
-            <span className="hidden md:inline text-[10px] tracking-[0.14em]" style={{ color: "var(--text-faint)" }}>
-              神秘档案馆
-            </span>
             <span
-              className="hidden lg:inline text-[9px] tracking-[0.12em] px-2 py-0.5 rounded archive-border-thin"
-              style={{ color: "var(--ink-warm)", opacity: 0.8 }}
-              title="本项目基于 Rider–Waite–Smith 韦特派传统牌义；不混入其他塔罗体系。"
+              className="hidden md:inline text-[10px] tracking-[0.14em]"
+              style={{ color: "var(--text-faint)" }}
             >
-              RWS · 传统牌义
+              神秘档案馆
             </span>
           </div>
 
-          {showActions && (
-            <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
-              {shareHint && (
-                <span className="hidden md:inline text-[12px] tracking-[0.02em] mr-1" style={{ color: "var(--accent)", opacity: 0.9 }}>
-                  {shareHint}
-                </span>
-              )}
-              <ThemeToggle variant="pill" />
-              {onShare && (
-                <button
-                  onClick={onShare}
-                  className="action-pill"
-                  aria-label="分享此刻"
-                >
-                  <IconShare />
-                  <span className="hidden md:inline">分享此刻</span>
-                </button>
-              )}
-              {onRedraw && (
-                /* 重新抽牌：弱化视觉权重 + 二次确认 —— 防止误触丢失当前解读 */
-                <button
-                  onClick={() => setConfirmRedraw(true)}
-                  className="action-pill"
-                  aria-label="重新抽牌"
-                  title="重新抽牌"
-                  style={{ opacity: 0.7 }}
-                >
-                  <IconRedraw />
-                  <span className="hidden lg:inline">重新抽牌</span>
-                </button>
-              )}
-              <button
-                className="action-pill action-pill-icon hidden md:inline-flex"
-                aria-label="语音（尚未实现）"
-                title="尚未实现"
+          <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
+            {shareHint && (
+              <span
+                className="hidden md:inline text-[12px] tracking-[0.02em] mr-1"
+                style={{ color: "var(--accent)", opacity: 0.9 }}
               >
-                <IconAudio />
+                {shareHint}
+              </span>
+            )}
+            <ThemeToggle variant="pill" />
+            {onShare && (
+              <button onClick={onShare} className="action-pill" aria-label="分享此刻">
+                <IconShare />
+                <span className="hidden md:inline">分享此刻</span>
               </button>
-            </div>
-          )}
+            )}
+            {onRedraw && (
+              <button
+                onClick={() => setConfirmRedraw(true)}
+                className="action-pill"
+                aria-label="重新抽牌"
+                style={{ opacity: 0.7 }}
+              >
+                <IconRedraw />
+                <span className="hidden lg:inline">重新抽牌</span>
+              </button>
+            )}
+            <button
+              className="action-pill action-pill-icon hidden md:inline-flex"
+              aria-label="语音（尚未实现）"
+              title="尚未实现"
+            >
+              <IconAudio />
+            </button>
+          </div>
         </header>
 
-        {/* Content */}
         <div className="flex-1 min-h-0 overflow-auto">{children}</div>
       </div>
 
-      {/* 重新抽牌的二次确认 —— 默认按钮是"保留这次" */}
       <AnimatePresence>
         {confirmRedraw && (
           <motion.div
@@ -291,7 +256,6 @@ export default function AppShell({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
             className="fixed inset-0 z-[60] flex items-center justify-center px-5"
             style={{ background: "rgba(8,7,10,0.62)", backdropFilter: "blur(8px)" }}
             onClick={() => setConfirmRedraw(false)}
@@ -300,40 +264,26 @@ export default function AppShell({
               initial={{ opacity: 0, y: 8, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 4, scale: 0.98 }}
-              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-[420px] rounded-2xl p-7 flex flex-col gap-5"
               style={{
                 background: "var(--bg-elevated)",
                 border: "1px solid var(--border)",
-                boxShadow:
-                  "inset 0 1px 0 rgba(255,247,225,0.08), 0 24px 56px rgba(0,0,0,0.5)",
               }}
             >
               <p
                 className="text-[15px] leading-[1.8] text-center"
-                style={{
-                  color: "var(--text-primary)",
-                  fontFamily: "var(--font-serif-like)",
-                }}
+                style={{ fontFamily: "var(--font-serif-like)" }}
               >
                 这次解读还在。
                 <br />
                 确定要重新开始吗？
-                <br />
-                <span
-                  className="text-[12px] block mt-2"
-                  style={{ color: "var(--text-faint)" }}
-                >
-                  你写下的笔记会保留。
-                </span>
               </p>
               <div className="flex flex-col items-center gap-3">
                 <button
                   type="button"
                   onClick={() => setConfirmRedraw(false)}
                   className="hero-cta w-full"
-                  style={{ padding: "12px 28px" }}
                 >
                   <span className="tracking-[0.1em]">保留这次，下次再说</span>
                 </button>
@@ -343,14 +293,8 @@ export default function AppShell({
                     setConfirmRedraw(false);
                     onRedraw?.();
                   }}
-                  className="text-[11px] tracking-[0.04em] underline underline-offset-4"
-                  style={{
-                    color: "var(--text-faint)",
-                    background: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                    opacity: 0.7,
-                  }}
+                  className="text-[11px] underline underline-offset-4"
+                  style={{ color: "var(--text-faint)" }}
                 >
                   确定重新开始
                 </button>
