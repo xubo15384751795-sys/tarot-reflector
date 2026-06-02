@@ -2,7 +2,7 @@ import { REGRESSION_STATIC_LAYOUT } from "./layoutStatic";
 
 /**
  * Archive motion — per-flag gates (default all off).
- * Phase 2 = surface only. Phase 3 = enable one flag at a time.
+ * Phase 2A = surface only. Phase 2B = enable one flag at a time (heroEntrance first).
  *
  * Dev / Playwright isolation: ?archiveMotion=<flagKey> enables exactly one flag.
  */

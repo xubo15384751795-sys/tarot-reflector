@@ -64,6 +64,18 @@
   text-shadow: 0 1px 24px color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
+/* Phase 2B-1: hero GSAP scope — no layout / size / image rules */
+.archive-hero-motion-scope {
+  transform: translateZ(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .archive-hero-motion-scope {
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
 .archive-page-hero {
   margin-bottom: 28px;
 }

@@ -1,9 +1,14 @@
 "use client";
 
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { useClientMounted, isArchiveMotionFlagEnabled } from "@/features/motion";
+import {
+  useClientMounted,
+  useReducedMotion,
+  isArchiveMotionFlagEnabled,
+} from "@/features/motion";
+import { useArchiveHeroEntrance } from "@/features/motion/archiveHeroEntrance.gsap";
 import { DividerLine, ArchiveLabel } from "@/components/ArchiveEmblems";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ArchiveCard } from "@/components/archive/ArchiveCard";
@@ -69,20 +74,23 @@ function ArchivePageContent() {
   const loadingTab = !tabData || tabData.tab !== activeTab;
   const activeCards = tabData?.tab === activeTab ? tabData.cards : null;
   const mounted = useClientMounted();
+  const reducedMotion = useReducedMotion();
+  const heroRef = useRef<HTMLElement>(null);
   const captionTab = hoverTab ?? activeTab;
   const thumbEntrance = isArchiveMotionFlagEnabled("thumbEntrance");
   const heroEntrance = isArchiveMotionFlagEnabled("heroEntrance");
+
+  useArchiveHeroEntrance(heroRef, { enabled: heroEntrance, reducedMotion });
 
   return (
     <AppShell showActions={false}>
       <div className="relative min-h-[calc(100vh-60px)] w-full archive-page parchment-noise">
         <div className="archive-page-ambient" aria-hidden="true" />
         <main className="relative z-[1] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 archive-page-main">
-          <motion.header
-            className="archive-page-hero archive-hero"
-            initial={heroEntrance && mounted ? { opacity: 0, y: 10 } : false}
-            animate={heroEntrance && mounted ? { opacity: 1, y: 0 } : false}
-            transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
+          <header
+            ref={heroRef}
+            className="archive-page-hero archive-hero archive-hero-motion-scope"
+            data-archive-hero-motion={heroEntrance ? "1" : undefined}
           >
             <div className="flex items-center justify-center gap-3 mb-4">
               <DividerLine width={32} />
@@ -94,7 +102,7 @@ function ArchivePageContent() {
               subtitle="Rider–Waite–Smith 完整牌组 · 78 张图像档案"
               className="archive-page-hero__head"
             />
-          </motion.header>
+          </header>
 
           <nav aria-label="牌组入口">
             <ArchiveDeckEntrance
