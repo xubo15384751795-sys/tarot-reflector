@@ -17,8 +17,6 @@ import relationshipRulesData from "@/data/tarot_rules/relationship_rules.json";
 import type {
   DrawnCard,
   ReadingContext,
-  SpreadDefinition,
-  SpreadId,
   UserInput,
 } from "./schema";
 import { drawForSpread, getSpread } from "./drawCards";

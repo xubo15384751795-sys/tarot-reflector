@@ -9,7 +9,7 @@
  * - 正逆位组合解读
  */
 
-import type { CardData, DrawnCard, Orientation, SpreadDefinition } from "./schema";
+import type { DrawnCard, SpreadDefinition } from "./schema";
 
 export type CardRelationship = {
   from_index: number;
@@ -117,7 +117,7 @@ export function analyzeCardRelationships(
 function analyzePairwiseRelationship(
   from: DrawnCard,
   to: DrawnCard,
-  spread: SpreadDefinition
+  _spread: SpreadDefinition
 ): CardRelationship {
   const fromElement = from.card.suit
     ? SUIT_ELEMENTS[from.card.suit]

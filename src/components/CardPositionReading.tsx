@@ -20,14 +20,6 @@ type Props = {
   totalCards?: number;
 };
 
-function IconSpark() {
-  return (
-    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.3">
-      <path d="M12 3 L13 10 L20 11 L13 12 L12 19 L11 12 L4 11 L11 10 Z" />
-    </svg>
-  );
-}
-
 function IconChevronRight() {
   return (
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5">

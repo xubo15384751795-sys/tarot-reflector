@@ -9,7 +9,7 @@
  * - 数字模式分析
  */
 
-import type { CardData, DrawnCard, Orientation } from "./schema";
+import type { DrawnCard } from "./schema";
 
 export type SpreadAnalysis = {
   major_arcana_count: number;
@@ -151,7 +151,7 @@ function generateRelationshipNotes(
   elementBalance: Record<string, number>,
   missingElements: string[],
   numberPatterns: Record<number, number>,
-  courtCount: number
+  _courtCount: number
 ): string[] {
   const notes: string[] = [];
 

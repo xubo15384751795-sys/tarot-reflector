@@ -20,8 +20,6 @@ type CheckResult = {
   details: string;
 };
 
-const results: CheckResult[] = [];
-
 function run(cmd: string, cwd = ROOT): { ok: boolean; output: string } {
   try {
     const output = execSync(cmd, { cwd, encoding: "utf-8", timeout: 120_000, stdio: ["pipe", "pipe", "pipe"] });

@@ -5,8 +5,6 @@
  * 让 AI 生成自然中文解读。
  */
 
-import type { ReadingContext } from "../reading/types";
-import { getCardMeaningContext, buildFullRulesContext } from "../buildReadingContext";
 import { analyzeSpread } from "../spreadAnalyzer";
 import { analyzeCardRelationships } from "../cardRelationshipAnalyzer";
 import type { DrawnCard } from "../schema";

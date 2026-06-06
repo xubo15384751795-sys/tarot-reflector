@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useEffect, useState } from "react";
+import { useRef, useCallback, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import "@/features/motion/gsapRegister";
@@ -11,10 +11,8 @@ import {
   resetHotspots,
   createHandwrittenPath,
   animateHandwrittenLine,
-  preloadImage,
   useReducedMotion,
   useCursorGlow,
-  gsapEase,
   duration,
 } from "@/features/motion";
 import type { HotspotConfig } from "@/features/motion";

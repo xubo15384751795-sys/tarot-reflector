@@ -14,6 +14,19 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     "storybook-static/**",
   ]),
+  {
+    rules: {
+      // Allow underscore-prefixed unused variables (standard convention for intentionally unused params)
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+        },
+      ],
+    },
+  },
 ]);
 
 export default eslintConfig;

@@ -1,5 +1,5 @@
 import { gsap } from "gsap";
-import { gsapEase, motionTokens } from "./motionTokens";
+import { gsapEase } from "./motionTokens";
 import { animateSplitReveal } from "./splitText.gsap";
 import "./gsapRegister";
 
@@ -36,7 +36,6 @@ export function createTarotRevealTimeline(
     cardNameZhEl,
   } = targets;
   const { onComplete, reducedMotion } = options;
-  const D = motionTokens.durations;
 
   const tl = gsap.timeline({
     onComplete,

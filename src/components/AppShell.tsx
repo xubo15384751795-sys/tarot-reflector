@@ -119,7 +119,7 @@ export default function AppShell({
   children,
   onRedraw,
   onShare,
-  showActions = true,
+  showActions: _showActions = true,
   shareHint,
   immersive = false,
 }: Props) {

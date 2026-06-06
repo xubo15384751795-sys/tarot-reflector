@@ -91,7 +91,6 @@ for (const { path, expectedArcana, suit } of SUIT_FILES) {
 // Check for missing cards
 const expectedMajor = 22;
 const expectedMinor = 56;
-const majorCards = [...allIds].filter((id) => id.startsWith("major_") || id === "the_fool").length;
 // Count by loading actual data
 let actualMajor = 0;
 let actualMinor = 0;

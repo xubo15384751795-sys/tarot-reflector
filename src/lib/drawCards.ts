@@ -17,7 +17,6 @@ import type {
   Orientation,
   SpreadDefinition,
   SpreadId,
-  UserInput,
 } from "./schema";
 
 // 完整 78 张牌

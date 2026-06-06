@@ -12,7 +12,7 @@ export type ConnectorPoints = {
  */
 export function buildMotifConnectorPath(
   points: ConnectorPoints,
-  side: "left" | "right",
+  _side: "left" | "right",
 ): string {
   const { anchorX, anchorY, noteX, noteY } = points;
   const midX = (anchorX + noteX) / 2;
