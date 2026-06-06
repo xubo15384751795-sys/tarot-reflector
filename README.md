@@ -96,6 +96,76 @@ AI 引擎在违规时最多重试 3 次，3 次仍失败则回退到模板引擎
 
 ---
 
+## AI 解读引擎（可选接入）
+
+> **不接入 AI 也能完整使用。** 系统内置本地模板引擎，基于 78 张牌的传统牌义 + 规则层自动生成解读。
+> 接入 AI 后，解读会更自然、更贴合用户的具体问题，但不是必须的。
+
+### 两种模式
+
+| 模式 | 说明 | 是否需要 API Key |
+|------|------|:---:|
+| **本地模板** | 基于规则层 + 传统牌义模板拼接，开箱即用 | ❌ |
+| **AI 解读** | 调用大语言模型，结合用户问题动态生成更自然的解读 | ✅ |
+
+### 支持的 AI 提供商
+
+| 提供商 | 环境变量 | 说明 |
+|--------|----------|------|
+| **DeepSeek** | `DEEPSEEK_API_KEY` | 默认推荐，中文效果好，成本低 |
+| **OpenAI 兼容** | `OPENAI_API_KEY` | 支持 OpenAI、Azure OpenAI、及任何 OpenAI-compatible API |
+| **自定义端点** | `OPENAI_BASE_URL` | 可指向任意 OpenAI-compatible 服务（如 Ollama、vLLM 等） |
+
+### 配置方式
+
+```bash
+# 1. 复制环境变量模板
+cp .env.example .env.local
+
+# 2. 编辑 .env.local，填入你的 API Key（任选一种）
+DEEPSEEK_API_KEY=sk-your-deepseek-key
+# 或
+OPENAI_API_KEY=sk-your-openai-key
+# 可选：自定义端点
+OPENAI_BASE_URL=https://your-api-endpoint.com/v1
+
+# 3. 重启开发服务器
+npm run dev
+```
+
+### AI 解读的工作方式
+
+```
+用户问题 → 规则层注入（禁用词 + 牌义 + 牌阵 + motif）
+    → LLM 生成解读
+    → rulesGuard 运行时校验（禁用词扫描、字段长度、断言检测）
+    → 违规则重试（最多 3 次）
+    → 仍违规则回退到本地模板
+```
+
+**关键特性：**
+- 规则层强制注入 LLM prompt，确保解读遵守 `tarot_rules.md` 规范
+- 运行时校验拦截违规输出（禁止替对方下判断、禁止命运预测、禁止恐吓）
+- 3 次重试 + 自动回退到模板引擎，保证用户始终能看到解读
+- 支持流式输出（SSE），牌面先出现，AI 解读后台生成
+
+### 不接入 AI 的体验
+
+不配置 API Key 时：
+- 今日一牌 → 本地模板生成单牌解读
+- 问题解读 → 本地模板 + 问题澄清 + 牌阵推荐
+- 深度牌阵 → 本地模板 + 多牌关系分析
+- 所有功能完整可用，只是解读文案更模板化
+
+### 接入 AI 后的提升
+
+- 解读更贴合用户的具体问题，而非通用牌义
+- 语言更自然，像朋友在帮你整理感受
+- 多牌阵的关系分析更深入
+- 但仍遵守所有规则（禁用词、免责声明、女性友好原则）
+
+---
+
 ## 动效系统
 
 - **GSAP 3.15** — 牌面翻牌 timeline、hotspot stagger、手写线条、SVG 绘制
@@ -147,16 +217,26 @@ npm run dev
 
 浏览器打开 [http://localhost:3000](http://localhost:3000)。
 
-### 环境变量（可选，用于 AI 解读）
+> **开箱即用：** 不需要任何 API Key，本地模板引擎即可生成完整解读。
+>
+> **想接入 AI？** 只需在 `.env.local` 中填入一个 API Key，解读效果会更自然。详见下方「AI 解读引擎」。
+
+### 环境变量（可选）
 
 ```bash
 cp .env.example .env.local
-# 编辑 .env.local，填入：
-# DEEPSEEK_API_KEY=your_key_here
-# 或 OPENAI_API_KEY=your_key_here
 ```
 
-不配置 AI key 时，系统使用本地模板引擎生成解读。
+可选配置：
+
+| 变量 | 说明 | 必填 |
+|------|------|:---:|
+| `DEEPSEEK_API_KEY` | DeepSeek API Key（推荐，中文效果好） | 否 |
+| `OPENAI_API_KEY` | OpenAI / OpenAI-compatible API Key | 否 |
+| `OPENAI_BASE_URL` | 自定义 API 端点 | 否 |
+| `NEXT_PUBLIC_SITE_URL` | 部署域名（用于 OG 图片） | 否 |
+
+不配置任何 API Key 时，系统使用本地模板引擎生成解读。
 
 ---
 
