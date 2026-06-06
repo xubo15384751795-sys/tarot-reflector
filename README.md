@@ -207,6 +207,10 @@ npm run dev
 
 ## 快速开始
 
+> **📖 详细部署指南（含 Agent 部署）：** [docs/部署与使用说明书.md](./docs/部署与使用说明书.md)
+>
+> 本指南面向没有代码经验的用户，提供手动部署和腾讯 CodeBuddy Agent 部署两种方式。
+
 ```bash
 # 安装依赖
 npm install
