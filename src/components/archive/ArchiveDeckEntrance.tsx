@@ -1,15 +1,30 @@
 "use client";
 
 import { useCallback, useRef } from "react";
+import type { ReactNode } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArchiveGroupCard } from "@/components/ui/ArchiveGroupCard";
+import {
+  AlchemicalRing,
+  SuitWands,
+  SuitCups,
+  SuitSwords,
+  SuitPentacles,
+} from "@/components/ArchiveEmblems";
 import {
   useReducedMotion,
   useCursorGlowOnScope,
   isArchiveMotionFlagEnabled,
 } from "@/features/motion";
 import type { ArchiveTabId, ArchiveTabItem } from "./types";
+
+const SUIT_GLYPH: Record<Exclude<ArchiveTabId, "major">, ReactNode> = {
+  wands: <SuitWands />,
+  cups: <SuitCups />,
+  swords: <SuitSwords />,
+  pentacles: <SuitPentacles />,
+};
 
 const DECK_META: Record<
   ArchiveTabId,
@@ -133,6 +148,7 @@ export function ArchiveDeckEntrance({
         title={majorTab.label}
         subtitle={`${majorMeta.theme} · ${majorMeta.desc}`}
         count={majorTab.count}
+        icon={<AlchemicalRing size={26} rings={3} />}
         active={activeTab === "major"}
         onClick={() => handleSelect("major")}
         onPointerEnter={() => onPreviewHover?.("major")}
@@ -152,19 +168,15 @@ export function ArchiveDeckEntrance({
                 key={id}
                 title={tab.label}
                 subtitle={meta.desc}
-                meta={`${tab.count} · ${meta.element} / ${meta.theme}`}
+                meta={`${meta.element} / ${meta.theme}`}
+                count={tab.count}
+                icon={SUIT_GLYPH[id as Exclude<ArchiveTabId, "major">]}
                 active={isActive}
                 onClick={() => handleSelect(id)}
                 onPointerEnter={() => onPreviewHover?.(id)}
                 onPointerLeave={onPreviewLeave}
                 className="minor-grid__card interactive-glow physical-card"
-              >
-                {tab.icon && (
-                  <span className="minor-grid__icon" aria-hidden>
-                    {tab.icon}
-                  </span>
-                )}
-              </ArchiveGroupCard>
+              />
             );
           })}
         </div>

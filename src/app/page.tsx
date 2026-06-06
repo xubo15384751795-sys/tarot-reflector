@@ -115,11 +115,17 @@ export default function Home() {
                   <ArchiveLabel code="COD.001" />
                   <DividerLine width={28} />
                 </div>
-                <div className="flex items-center justify-center gap-3 mb-4" style={{ color: "var(--accent)", opacity: 0.75 }}>
+                <div className="flex items-center justify-center gap-3 mb-3" style={{ color: "var(--accent)", opacity: 0.75 }}>
                   <span className="block w-8 h-px" style={{ background: "var(--accent)", opacity: 0.4 }} />
                   <span className="text-[14px] tracking-[0.42em]">阈&nbsp;牌</span>
                   <span className="block w-8 h-px" style={{ background: "var(--accent)", opacity: 0.4 }} />
                 </div>
+                <p
+                  className="mb-5 text-[12px] md:text-[13px] tracking-[0.16em] uppercase"
+                  style={{ color: "var(--text-tertiary)" }}
+                >
+                  塔罗反思工具 · 把一个问题摊成可以看的结构
+                </p>
                 <HeroTitleSplit className="hero-title text-[28px] md:text-[36px] font-light tracking-[-0.012em] leading-[1.3]">
                   翻开一页档案，
                   <br />

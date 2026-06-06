@@ -8,6 +8,8 @@ type Props = {
   subtitle?: string;
   meta?: string;
   count?: number | string;
+  /** 花色 / 旅程纹章 —— 让分组读起来像「一副牌的入口」而非指标卡 */
+  icon?: ReactNode;
   children?: ReactNode;
   active?: boolean;
   className?: string;
@@ -22,6 +24,7 @@ export function ArchiveGroupCard({
   subtitle,
   meta,
   count,
+  icon,
   children,
   active = false,
   className,
@@ -44,15 +47,20 @@ export function ArchiveGroupCard({
       )}
     >
       <div className="relative z-[2] flex flex-col gap-1.5">
+        {icon && (
+          <span className="archive-group-card__icon" aria-hidden>
+            {icon}
+          </span>
+        )}
         {meta && !count && (
           <span className="archive-card__meta-label text-[10px] tracking-[0.18em] uppercase">
             {meta}
           </span>
         )}
-        <div className="flex items-baseline gap-3 flex-wrap">
+        <div className="flex items-baseline gap-2 flex-wrap">
           <span className="archive-card__label">{title}</span>
           {count != null && (
-            <span className="major-arcana-card__count">{count}</span>
+            <span className="archive-card__count-note">{count} 张</span>
           )}
         </div>
         {subtitle && <span className="archive-card__desc">{subtitle}</span>}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import MotifCanvas from "@/components/MotifCanvas";
@@ -10,6 +10,8 @@ import type { ArchiveCardData } from "./types";
 import { getMotifsForCard } from "./dataset";
 
 type MeaningTabId = "upright" | "reversed" | "motifs" | "spread";
+
+const MOTIF_INTRO_KEY = "tarot:motif-intro-seen";
 
 export function CardDetailModal({
   card,
@@ -22,6 +24,22 @@ export function CardDetailModal({
 }) {
   const motifs = getMotifsForCard(card);
   const hasApproximate = motifs.some((m) => m.precision === "approximate");
+  // 首次打开有符号的牌面时，提示「牌面是活的，金点可点」。只出现一次。
+  // 弹层仅在点击后于客户端挂载，故 lazy initializer 读 localStorage 不会有水合不一致。
+  const [showIntro, setShowIntro] = useState(() => {
+    if (typeof window === "undefined" || motifs.length === 0) return false;
+    return !window.localStorage.getItem(MOTIF_INTRO_KEY);
+  });
+
+  useEffect(() => {
+    if (!showIntro) return;
+    window.localStorage.setItem(MOTIF_INTRO_KEY, "1");
+    const root = document.documentElement;
+    root.dataset.motifIntro = "1";
+    return () => {
+      delete root.dataset.motifIntro;
+    };
+  }, [showIntro]);
 
   return (
     <motion.div
@@ -76,6 +94,31 @@ export function CardDetailModal({
           )}
           {motifs.length > 0 ? (
             <>
+              <AnimatePresence>
+                {showIntro && (
+                  <motion.div
+                    key="motif-intro"
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.3 }}
+                    className="motif-intro-hint"
+                    role="status"
+                  >
+                    <span className="motif-intro-hint__dot" aria-hidden />
+                    <span className="motif-intro-hint__text">
+                      这是一张活牌面 —— 轻触牌面上的金点，看见每个符号的含义。
+                    </span>
+                    <button
+                      type="button"
+                      className="motif-intro-hint__dismiss"
+                      onClick={() => setShowIntro(false)}
+                    >
+                      知道了
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
               <MotifCanvas
                 cardImage={card.image}
                 cardName={card.name_en}

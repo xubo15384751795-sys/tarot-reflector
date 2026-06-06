@@ -5,6 +5,8 @@
 > 用塔罗牌作为视觉语言，帮助用户把模糊的内在状态外化、命名、重新观察。
 > 不预测未来，不替你做决定，不提供"运势"。
 
+![阈牌首页](docs/screenshots/home.png)
+
 ---
 
 ## 这是什么
@@ -14,6 +16,18 @@
 用户输入问题后，系统先澄清问题、推荐牌阵，再抽取牌面。牌面是可交互的——点击牌面上的符号热点，解释从牌面附近浮现。解读结束后可以写笔记、固定快照、回看历史。
 
 **核心定位：** 不是抽牌 + 牌义文本的工具，而是一个"活牌面"——用户靠近牌面探索，而不是操作后台。
+
+---
+
+## 界面一览
+
+| 档案馆 `/archive` | 活牌面（点击金点看符号） |
+|:---:|:---:|
+| ![档案馆](docs/screenshots/archive.png) | ![活牌面](docs/screenshots/card-detail.png) |
+| **解读流程** | **失败兜底（不报错，只是没展开）** |
+| ![解读](docs/screenshots/reading.png) | ![中断](docs/screenshots/error-stage.png) |
+
+> 截图由 `npx tsx scripts/capture_screenshots.ts` 对本地 dev server 自动生成。
 
 ---
 
