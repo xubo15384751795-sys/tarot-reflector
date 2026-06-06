@@ -1,127 +1,162 @@
 # 阈牌 Threshold Tarot
 
-> ## ⚠️ 这是一个象征性反思工具，不是命运预测工具
+> **象征性反思工具，不是命运预测工具。**
 >
-> 「阈牌」用塔罗牌作为视觉语言，帮助用户把模糊的内在状态外化、命名、重新观察。
-> 它**不预测未来**，**不替你做决定**，**不提供"运势"**，**不替代心理咨询 / 医疗 / 法律 / 财务专业建议**。
->
-> 项目的所有解读都必须遵守根目录 [**`tarot_rules.md`**](./tarot_rules.md) — 那里定义了体系（RWS）、牌池（仅 22 张大阿尔卡那）、牌义口径、语言规范、禁用话术、输出结构与免责声明。任何违反这些规则的输出都会被 `src/lib/rulesGuard.ts` 拦截并要求重新生成。
-
-> **🛠 状态说明：** 这不是完整产品，只是初始阶段的样本 / 原型（v0.1）。
->
-> 当前版本用于演示「提问 → 抽牌 → 分步解读」的交互流程。解读文案来自本地模板拼接，尚未接入真实 AI；部分 UI（笔记、设置、语音等）仅为占位，还不能使用。
+> 用塔罗牌作为视觉语言，帮助用户把模糊的内在状态外化、命名、重新观察。
+> 不预测未来，不替你做决定，不提供"运势"。
 
 ---
 
 ## 这是什么
 
-一个基于 **Next.js** 的塔罗象征性反思 Web 应用。用户输入问题并选择领域后，随机抽取一张大阿尔卡那牌，通过动画展示牌面，再按「整体 → 元素 → 综合 → 建议」分步阅读解读。
+一个基于 **Next.js 16 + React 19 + Tailwind CSS 4** 的中文塔罗象征性反思 Web 应用。
 
-**定位：** 用塔罗牌作为视觉语言，帮助整理当下感受 — **不是命运预测**。
+用户输入问题后，系统先澄清问题、推荐牌阵，再抽取牌面。牌面是可交互的——点击牌面上的符号热点，解释从牌面附近浮现。解读结束后可以写笔记、固定快照、回看历史。
 
-### 严格规则与输出守卫
+**核心定位：** 不是抽牌 + 牌义文本的工具，而是一个"活牌面"——用户靠近牌面探索，而不是操作后台。
+
+---
+
+## 主要功能
+
+### 三种进入方式
+
+| 模式 | 说明 |
+|------|------|
+| **今日一牌** | 没有具体问题时，抽一张牌看看今天有什么值得被轻轻看见 |
+| **问题解读** | 带着一个具体问题进入，系统先澄清再推荐牌阵（推荐入口） |
+| **深度牌阵** | 适合反复出现、暂时说不清的问题，用多张牌慢慢看见层次 |
+
+### 完整解读流程
+
+```
+输入问题 → 系统复述（可跳过/修改）→ 推荐牌阵 → 抽牌翻牌
+→ 牌面先出现（本地 1.2s）→ AI 解读后台生成 → 按位置分步阅读
+→ 关系分析 → 总结 → 写笔记 / 固定快照 / 退出
+```
+
+### 78 张完整牌组
+
+基于 Rider–Waite–Smith 传统，包含：
+- **22 张大阿尔卡纳** — 手工校准的 motif 符号坐标
+- **56 张小阿尔卡纳** — 权杖/圣杯/宝剑/星币四花色，正逆位各有解释
+
+### 档案馆 `/archive`
+
+- 78 张牌的图像档案，按大阿尔卡那 / 四花色分组
+- 牌面可交互：点击符号热点，浮现解释（MotifCanvas）
+- 正位 / 逆位 / 牌面符号 / 牌阵含义四个 tab
+
+### 科普导览 `/guide`
+
+- 8 章结构化导览，从"什么是塔罗"到"三种进入方式"
+- 左侧章节导航 rail，右侧内容区
+- 支持牌阵一览与详细说明
+
+### 牌面笔记 `/notes`
+
+- 解读结束后可写一句话感受
+- 快照固定：牌面、问题、解读、笔记一起保存
+- 按月分组，支持固定 / 删除 / 回看
+- 同牌提醒：24h 内同问题再次抽牌时温柔提示
+- 所有数据存在浏览器本地（localStorage），不上传
+
+### 演示模式 `/demo` `/explain`
+
+- ReadingScript 同时服务网页解读和视频演示
+- 9:16 预览结构，自动播放 + 字幕 + 牌面高亮
+- Remotion 集成，可导出短视频
+
+---
+
+## 安全与规则
+
+### 严格规则体系
 
 | 文档 / 代码 | 作用 |
 |------------|------|
 | [`tarot_rules.md`](./tarot_rules.md) | 规则源头：体系、牌义口径、语言规范、禁用话术、结构、免责声明 |
-| `src/lib/tarotRulesPrompt.ts` | 把关键规则注入到 LLM 提示词最前面（强制注入，不可关闭） |
-| `src/lib/rulesGuard.ts` | 运行时校验：禁用词扫描、字段字数、CJK 占比、可执行性、disclaimer 检查 |
-| `src/lib/rulesGuard.shared.ts` | 禁用词清单与字段上限常量（被 prompt 与 guard 共同读取） |
+| `src/lib/tarotRulesPrompt.ts` | 把关键规则注入 LLM 提示词最前面 |
+| `src/lib/rulesGuard.ts` | 运行时校验：禁用词扫描、字段字数、CJK 占比、断言式预测检测 |
+| `src/lib/rulesGuard.shared.ts` | 30+ 禁用词清单（命运/恐吓/感情承诺/强制性话术） |
 
-AI 引擎在违规时最多重试 **3 次**，每次把上次违规明细追加进 prompt 让模型针对性修正；3 次仍失败则抛 `ReadingRulesViolationError`，由调用方决定 fallback（默认回退到模板引擎）。
+AI 引擎在违规时最多重试 3 次，3 次仍失败则回退到模板引擎。
 
-### 女性友好原则（Safety-not-Pinkness）
+### 女性友好原则
 
-详见 [`tarot_rules.md` §11](./tarot_rules.md)。核心是：
+- **绝不替对方下判断**：「他一定爱你」「他会回来」「你们注定」等表达已加入禁用词
+- **不制造焦虑**：不神准、不倒计时、不恐吓、不说命中注定
+- **用户有修改权**：「这个观察不太像我，直接抽牌」「我想换个问法」「到这里就好」
+- **允许模糊和慢**：「不用马上知道答案」「可以慢慢写」「可以先停下」
+- **反刍护栏**：24h 内同问题 ≥2 次时温柔暂停
 
-- **安全感、边界感、温柔、尊重、克制**；不恐吓、不替用户决定、不消费焦虑、允许模糊、允许停止。
-- **感情类问题硬底线**：绝不替对方下判断（"他爱你 / 他会回来 / Ta 心里还有你"等表达已加入 `BANNED_SUBSTRINGS`）。
-- **反沉迷**：「重新抽牌」不是结束页主按钮，主操作是「继续看这个问题 / 写下我的感受 / 我想换个问法 / 到这里就好」。
-- **两套主题**：夜间玻璃（默认）与月白纸面，可在顶栏切换；浅色不少女、不甜，像 journal 的纸感。
-- **气质一句话**：像一个会看牌的安静朋友，不是一个神秘权威。它说不出你的命运，但能帮你说清你的感受。
+### 危机干预
 
----
-
-## 给接手者：这是什么、能参考什么
-
-本仓库是**参考样本**，供评估「是否继续做这个产品」时使用。你可以：
-
-1. **直接运行体验** — `npm install && npm run dev`，走一遍完整流程
-2. **看代码结构** — 重点文件见下方「项目结构」；注释均为中文
-3. **按需取舍** — 可以只用 UI 和交互，替换解读逻辑；也可以在此基础上接 AI
-4. **阅读讲解** — 详细架构与扩展说明见 **[docs/讲解.md](./docs/讲解.md)**
-
-### 已实现（可参考复用）
-
-| 模块 | 文件 | 说明 |
-|------|------|------|
-| 提问表单 | `src/components/QuestionForm.tsx` | 问题 + 领域选择 |
-| 抽牌动画 | `CardDeck.tsx` / `CardReveal.tsx` | 洗牌、翻牌 |
-| 牌面标注 | `AnnotatedCard.tsx` | 元素高亮 + 引线标签 |
-| 分步解读 | `ReadingPanel.tsx` + `StepRail.tsx` | 进度条 + 分幕文案 |
-| 数据接口 | `src/app/api/reading/route.ts` | GET 契约说明 + POST 生成解读 |
-| 解读引擎接口 | `src/lib/reading/types.ts` | `ReadingGenerator` / `CardDrawer` |
-| 模板引擎 | `src/lib/reading/templateGenerator.ts` | 默认实现 |
-| AI 引擎骨架 | `src/lib/reading/aiGenerator.stub.ts` | 待填 `callLLM()` |
-| 牌义数据 | `src/data/tarot_cards.json` | 22 张大阿卡纳 |
-
-### 尚未实现（占位或未接入）
-
-| 项目 | 说明 |
-|------|------|
-| AI 解读 | 见 `aiGenerator.stub.ts`；prompt 在 `prompts/`；切换 `READING_PROVIDER=ai` |
-| 补充背景 `context` | API 与 prompt 已支持；首页暂无输入框，可自加 |
-| 笔记 / 设置 / 语音 | UI 占位，点击无效或禁用 |
-| 用户系统 / 历史记录 | 无 |
-
-### 若决定继续做，建议优先级
-
-1. 实现 `aiGenerator.stub.ts` 中的 `callLLM()`（见 `docs/讲解.md` 第 6 节）
-2. 精调 `tarot_cards.json` 里各牌的 `motifs.bbox`（元素标注位置）
-3. 首页已中文化；可按品牌再调整文案
+输入中检测到危机词时，温和展示心理热线（希望 24 热线等），保留「我没事，继续」的自主权。
 
 ---
 
-## 环境要求
+## 动效系统
 
-- **Node.js** 18 或更高版本（推荐 20+）
-- **npm**（随 Node 安装）
-- 可选：Python 3（仅在你需要重新下载牌面图片时使用）
+- **GSAP 3.15** — 牌面翻牌 timeline、hotspot stagger、手写线条、SVG 绘制
+- **Framer Motion** — 页面切换、AnimatePresence、layoutId
+- **统一 motion tokens** — duration / stagger / ease 全项目一致
+- **Reduced motion 支持** — `prefers-reduced-motion` 下关闭所有复杂动效
+- **分层 flag 控制** — Archive / Guide / Reading 各有独立 motion flags，默认关闭
+
+动效分工详见 [`docs/MOTION_SYSTEM.md`](./docs/MOTION_SYSTEM.md)。
+
+---
+
+## 视觉系统
+
+- **双主题**：暗色（夜色档案馆）/ 浅色（月白档案室），同一套语义 token
+- **字体三层**：标题 LXGW WenKai（衬线）/ 正文 PingFang SC / 编号 Inter
+- **玻璃质感**：GlassCard、backdrop-filter、暖金光晕
+- **组件库**：GlassCard、ModeCard、TarotCardFrame、MotifHotspot、SymbolPopover、StatusPill 等
+
+视觉语言详见 [`docs/UI_LANGUAGE.md`](./docs/UI_LANGUAGE.md)。
+
+---
+
+## 技术栈
+
+| 层 | 技术 |
+|---|------|
+| 框架 | Next.js 16 (App Router) + React 19 |
+| 样式 | Tailwind CSS 4 + CSS 变量设计 tokens |
+| 动效 | GSAP 3.15 + @gsap/react + Framer Motion 12 |
+| UI 基础 | Radix UI (Popover / Dialog / Tabs) |
+| 状态 | React hooks + localStorage |
+| AI | DeepSeek / OpenAI-compatible，可配置 |
+| 视频 | Remotion (dev) |
+| 测试 | Vitest + Playwright |
+| 代码质量 | ESLint + TypeScript strict + Secretlint |
 
 ---
 
 ## 快速开始
 
-### 1. 安装依赖
-
 ```bash
-cd tarot-reflector
+# 安装依赖
 npm install
-```
 
-### 2. 启动开发服务器
-
-```bash
+# 启动开发服务器
 npm run dev
 ```
 
 浏览器打开 [http://localhost:3000](http://localhost:3000)。
 
-### 3. 使用流程
-
-1. 在首页输入你此刻关心的问题
-2. 选择一个领域标签（感情 / 工作 / 项目 / 学习 / 自我 / 财务）
-3. 点击「抽牌」
-4. 观看洗牌 → 翻牌动画
-5. 在解读页左右切换步骤，查看牌面元素标注与文字解读
-6. 可点击「全牌面」查看完整牌图，或「分享此刻」复制解读文本到剪贴板
-
-### 4. 生产构建（可选）
+### 环境变量（可选，用于 AI 解读）
 
 ```bash
-npm run build
-npm start
+cp .env.example .env.local
+# 编辑 .env.local，填入：
+# DEEPSEEK_API_KEY=your_key_here
+# 或 OPENAI_API_KEY=your_key_here
 ```
+
+不配置 AI key 时，系统使用本地模板引擎生成解读。
 
 ---
 
@@ -129,42 +164,18 @@ npm start
 
 | 命令 | 说明 |
 |------|------|
-| `npm run dev` | 本地开发，热更新 |
-| `npm run build` | 构建生产版本 |
-| `npm start` | 运行生产构建（需先 `build`） |
-| `npm run lint` | 代码检查 |
+| `npm run dev` | 本地开发 |
+| `npm run build` | 生产构建 |
 | `npm run typecheck` | TypeScript 类型检查 |
-| `npm run test:unit` | 运行单元/集成测试 (Vitest) |
-| `npm run test:e2e` | 运行 E2E 测试 (Playwright) |
-| `npm run check` | 完整质量检查 (typecheck + lint + test + secrets:scan) |
-| `npm run benchmark` | 运行全链路基准测度，输出报告到 `reports/benchmark_report.md` |
-| `npm run audit:cards` | 审计 78 张牌完整性 |
-| `npm run audit:motifs` | 审计 motif 数据质量 |
-| `npm run secrets:scan` | 扫描泄露的密钥 |
-| `npm run cards:download` | 从 Wikimedia 下载 22 张大阿卡纳牌面 |
-| `npm run cards:wire` | 将牌面路径写入 `tarot_cards.json` |
-
-> 牌面图片已包含在 `public/cards/major/` 中，一般无需重新下载。只有图片缺失时才运行上面两条命令。
-
-### 运行 Benchmark
-
-```bash
-npm run benchmark
-```
-
-输出报告位于 `reports/benchmark_report.md`，包含 12 大类、100 分评分体系的自动化检测结果。
-
-**评级标准：**
-
-| 分数 | 等级 | 含义 |
-|------|------|------|
-| 90–100 | 优秀样本 | 可作为参考项目公开 |
-| 80–89 | 演示项目 | 可演示，需标注未完成部分 |
-| 70–79 | 原型可用 | 不适合作为参考样本 |
-| 60–69 | 工程风险 | 功能有雏形，风险明显 |
-| <60 | 实验 demo | 仍是实验性 |
-
-详见 [`BENCHMARK.md`](./BENCHMARK.md)。
+| `npm run lint` | ESLint 检查 |
+| `npm run test:unit` | 单元测试 (Vitest) |
+| `npm run test:e2e` | E2E 测试 (Playwright) |
+| `npm run test:frontend-regression` | 前端回归 guards |
+| `npm run check` | 完整质量检查 |
+| `npm run benchmark` | 全链路基准测试 |
+| `npm run benchmark:frontend` | 前端体验基准测试 |
+| `npm run audit:cards` | 78 张牌完整性审计 |
+| `npm run audit:motifs` | Motif 数据质量审计 |
 
 ---
 
@@ -173,111 +184,70 @@ npm run benchmark
 ```
 tarot-reflector/
 ├── src/
-│   ├── app/                    # Next.js 页面与 API
-│   │   ├── page.tsx            # 首页：输入问题
-│   │   ├── reading/page.tsx    # 解读页：动画 + 分步阅读
-│   │   └── api/reading/route.ts # POST 接口：生成解读
-│   ├── components/             # UI 组件（牌组、翻牌、标注、解读面板等）
-│   ├── lib/
-│   │   ├── schema.ts           # 类型定义（前后端契约）
-│   │   ├── constants.ts        # 领域、配置、环境变量名
-│   │   ├── drawCard.ts         # 随机抽牌
-│   │   ├── generateReading.ts  # 兼容入口（re-export）
-│   │   └── reading/            # ★ 解读引擎（template / ai）
-│   └── data/
-│       └── tarot_cards.json    # 22 张大阿卡纳数据
-├── docs/
-│   └── 讲解.md                 # 架构与扩展接口详细说明
-├── prompts/                    # AI 提示词模板
-├── .env.example                # 环境变量示例
+│   ├── app/                          # Next.js 页面
+│   │   ├── page.tsx                  # 首页：三模式入口
+│   │   ├── reading/page.tsx          # 解读页：抽牌 + 分步阅读
+│   │   ├── archive/page.tsx          # 档案馆：78 张牌索引
+│   │   ├── guide/page.tsx            # 科普导览
+│   │   ├── notes/page.tsx            # 牌面笔记
+│   │   ├── demo/page.tsx             # 演示模式
+│   │   ├── explain/page.tsx          # 录屏科普工作台
+│   │   └── api/                      # API 路由
+│   ├── components/                   # UI 组件
+│   │   ├── ui/                       # 基础组件 (GlassCard, ModeCard, etc.)
+│   │   ├── archive/                  # 档案馆组件
+│   │   └── ...                       # 页面级组件
+│   ├── features/
+│   │   ├── motion/                   # 动效系统 (GSAP hooks, tokens, flags)
+│   │   ├── reading/                  # 解读引擎 (hooks, types, lib)
+│   │   └── notes/                    # 笔记系统 (hooks, types, repository)
+│   ├── lib/                          # 核心逻辑
+│   │   ├── rulesGuard.ts             # 运行时规则守卫
+│   │   ├── schema.ts                 # 类型定义
+│   │   ├── reading/                  # 解读引擎 (template / AI)
+│   │   └── ai/                       # AI provider 抽象层
+│   ├── styles/                       # CSS (tokens, typography, pages)
+│   └── data/                         # 牌义数据 (78 张 JSON)
+├── docs/                             # 设计文档
+├── scripts/                          # 工具脚本 (benchmark, audit)
+├── tests/                            # 测试 (unit, e2e, visual)
+├── remotion/                         # 视频演示 (Remotion)
+├── prompts/                          # AI 提示词模板
+├── tarot_rules.md                    # 规则源头文档
+└── reports/                          # 自动生成的报告
 ```
 
 ---
 
-## 核心流程（给开发者）
-
-```
-用户提交问题
-    ↓
-首页 page.tsx → 跳转 /reading?question=...&domain=...
-    ↓
-reading/page.tsx → POST /api/reading
-    ↓
-drawCard.ts 随机抽牌 + 正逆位
-    ↓
-lib/reading/ 解读引擎（template 默认，可切换 ai）
-    ↓
-前端播放洗牌 → 翻牌 → 分步展示 AnnotatedCard + ReadingPanel
-```
-
----
-
-## 当前限制（原型阶段）
-
-- 解读文案为**本地模板**，质量与个性化有限
-- 仅支持 **22 张大阿卡纳**，无小阿卡纳
-- `prompts/dynamic_reading_prompt.txt` 已预留，但**未接入 LLM API**
-- 侧边栏「笔记」「设置」、顶部「语音」按钮为 UI 占位
-- 无用户账号、历史记录、付费等后端能力
-- 「分享此刻」仅复制文本到剪贴板，不生成图片或链接
-
----
-
-## 发给别人：能用微信传吗？
-
-**可以，但要注意打包方式。**
-
-| 内容 | 大小（约） | 能否微信直接传 |
-|------|-----------|----------------|
-| 整个文件夹（含 `node_modules` + `.next`） | ~800 MB | ❌ 太大，微信单文件上限约 100 MB（手机端有时更严） |
-| **源码包**（排除 `node_modules`、`.next`） | ~20 MB | ✅ 可以 |
-
-### 推荐做法
-
-**方式一：压缩后微信发文件（最简单）**
-
-在项目根目录执行：
+## 基准测试
 
 ```bash
-# macOS / Linux
-tar -czf tarot-reflector-src.tgz \
-  --exclude=node_modules \
-  --exclude=.next \
-  --exclude=.git \
-  .
+npm run benchmark            # 全链路 (100 分)
+npm run benchmark:frontend   # 前端体验 (100 分)
 ```
 
-把生成的 `tarot-reflector-src.tgz`（约 20 MB）通过微信「文件」发给对方。
-
-对方收到后：
-
-```bash
-tar -xzf tarot-reflector-src.tgz -C tarot-reflector
-cd tarot-reflector
-npm install
-npm run dev
-```
-
-**方式二：网盘 / GitHub**
-
-- 上传到百度网盘、阿里云盘等，分享链接（适合长期协作）
-- 推到 GitHub 私有/公开仓库，对方 `git clone`
-
-**方式三：部署后分享链接（最适合非技术人员体验）**
-
-部署到 [Vercel](https://vercel.com) 等免费平台，直接发网址，对方打开浏览器就能用，无需安装 Node。
+报告输出到 `reports/`，涵盖工程治理、类型安全、功能完整性、规则正确性、AI 质量、motif 数据、视频就绪度等维度。
 
 ---
 
-## 技术栈
+## 当前状态
 
-- [Next.js 16](https://nextjs.org)（App Router）
-- [React 19](https://react.dev)
-- [Tailwind CSS 4](https://tailwindcss.com)
-- [Framer Motion](https://www.framer.com/motion/)（动画）
+- ✅ 完整解读流程（问题澄清 → 抽牌 → 分步解读 → 笔记）
+- ✅ 78 张牌完整数据（大阿尔卡那 + 小阿尔卡那）
+- ✅ 档案馆（可交互牌面、符号热点）
+- ✅ 科普导览
+- ✅ 笔记系统（快照、回看、同牌提醒）
+- ✅ 双主题（暗色 / 浅色）
+- ✅ 动效系统（GSAP + Framer Motion，分层 flag 控制）
+- ✅ 女性友好规则守卫（30+ 禁用词、反刍护栏、危机干预）
+- ✅ 演示模式（9:16 预览、Remotion 集成）
+- ✅ AI 解读（DeepSeek / OpenAI-compatible，可配置）
+- ✅ 基准测试体系
+- 🔧 Storybook 组件文档（部分）
+- 🔧 视频导出（Remotion，开发中）
 
 ---
 
-## 许可与牌面版权
+## 许可
 
-牌面图片来自 Wikimedia Commons 上的 Rider-Waite-Smith 公版扫描。详见 `scripts/download_major_arcana.py` 中的说明。
+牌面图片来自 Wikimedia Commons 上的 Rider–Waite–Smith 公版扫描。
