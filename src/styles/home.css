@@ -422,11 +422,11 @@
     0 1px 1px rgba(0, 0, 0, 0.18),
     0 4px 12px rgba(0, 0, 0, 0.16),
     0 16px 32px rgba(0, 0, 0, 0.12);
-  transition: border-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              background 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 0.45s var(--ease-soft),
+              color 0.45s var(--ease-soft),
+              background 0.45s var(--ease-soft),
+              box-shadow 0.45s var(--ease-soft),
+              transform 0.45s var(--ease-soft);
 }
 .hero-chip::before {
   content: "";
@@ -444,7 +444,7 @@
     transparent 100%
   );
   transform: skewX(-18deg);
-  transition: left 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: left 0.85s var(--ease-soft);
   pointer-events: none;
   z-index: 1;
 }
@@ -522,8 +522,8 @@
     0 6px 16px rgba(146, 100, 40, 0.30),
     0 20px 44px rgba(206, 165, 95, 0.28);
   transition:
-    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    transform 0.45s var(--ease-soft),
+    box-shadow 0.45s var(--ease-soft);
 }
 /* 暖金 CTA 用更亮的白光带 + 更慢的扫光速度，凸显主按钮的仪式感 */
 .hero-cta::before {
@@ -542,7 +542,7 @@
     transparent 100%
   );
   transform: skewX(-18deg);
-  transition: left 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: left 1s var(--ease-soft);
   pointer-events: none;
   z-index: 1;
 }

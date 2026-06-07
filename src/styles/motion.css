@@ -18,13 +18,13 @@
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 280ms;
-  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation-timing-function: var(--ease-soft);
 }
 
 ::view-transition-group(hero-text),
 ::view-transition-group(hero-card) {
   animation-duration: 520ms;
-  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation-timing-function: var(--ease-soft);
 }
 
 ::view-transition-old(hero-text),
@@ -148,7 +148,7 @@
     transparent 72%
   );
   opacity: 0;
-  transition: opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.32s var(--ease-soft);
   pointer-events: none;
   z-index: 1;
 }
@@ -256,7 +256,7 @@
 
 .physical-card {
   transition:
-    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.22s var(--ease-soft),
     box-shadow 0.28s ease,
     border-color 0.28s ease;
   will-change: transform;

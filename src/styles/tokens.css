@@ -257,9 +257,9 @@
   --dur-page: 320ms;
 
   /* —— 缓动 —— */
-  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);   /* 品牌主缓动（= motionTokens.easeSoft） */
-  --ease-standard: cubic-bezier(0.2, 0, 0, 1);    /* 中性进出 */
-  --ease-gentle: cubic-bezier(0.16, 1, 0.3, 1);   /* 更柔（= motionTokens.easeGentle） */
+  --ease-soft: var(--ease-soft);   /* 品牌主缓动（= motionTokens.easeSoft） */
+  --ease-standard: var(--ease-standard);    /* 中性进出 */
+  --ease-gentle: var(--ease-gentle);   /* 更柔（= motionTokens.easeGentle） */
 
   /* —— 层级 —— */
   --z-base: 1;

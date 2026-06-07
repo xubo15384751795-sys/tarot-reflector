@@ -283,7 +283,10 @@
   font-size: 12px;
   letter-spacing: 0.04em;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition:
+    background var(--dur-hover) var(--ease-soft),
+    border-color var(--dur-hover) var(--ease-soft),
+    color var(--dur-hover) var(--ease-soft);
 }
 .action-pill:hover {
   background: var(--bg-glass-hover);
@@ -372,7 +375,11 @@
   height: 8px;
   border-radius: 100px;
   background: rgba(255, 255, 255, 0.10);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background var(--dur-page) var(--ease-soft),
+    box-shadow var(--dur-page) var(--ease-soft),
+    width var(--dur-page) var(--ease-soft),
+    height var(--dur-page) var(--ease-soft);
 }
 .step-dot.is-done {
   background: var(--accent-a4);

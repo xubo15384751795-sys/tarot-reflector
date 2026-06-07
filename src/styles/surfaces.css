@@ -121,7 +121,7 @@
     transparent 100%
   );
   transform: skewX(-18deg);
-  transition: left 0.95s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: left 0.95s var(--ease-soft);
   pointer-events: none;
   z-index: 1;
 }
@@ -131,10 +131,10 @@
   border: 1px solid var(--border-glass);
   color: inherit;
   transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    background 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.35s var(--ease-soft),
+    background 0.35s var(--ease-soft),
+    border-color 0.35s var(--ease-soft),
+    box-shadow 0.35s var(--ease-soft);
 }
 .mode-card:hover {
   border-color: var(--brass-dim) !important;
@@ -289,11 +289,11 @@
     0 1px 1px rgba(0, 0, 0, 0.14),
     0 3px 10px rgba(0, 0, 0, 0.12),
     0 12px 24px rgba(0, 0, 0, 0.10);
-  transition: color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              background 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 0.45s var(--ease-soft),
+              border-color 0.45s var(--ease-soft),
+              background 0.45s var(--ease-soft),
+              box-shadow 0.45s var(--ease-soft),
+              transform 0.45s var(--ease-soft);
 }
 .archive-link::before {
   content: "";
@@ -311,7 +311,7 @@
     transparent 100%
   );
   transform: skewX(-18deg);
-  transition: left 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: left 0.85s var(--ease-soft);
   pointer-events: none;
   z-index: 1;
 }
@@ -437,7 +437,7 @@
 /* Symbol popover (ui/SymbolPopover) */
 .symbol-popover {
   animation-duration: 0.28s;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-timing-function: var(--ease-soft);
 }
 
 /* Storybook: simulate hover/active for static review */
@@ -475,7 +475,7 @@
   height: 100%;
   background: var(--accent-a4);
   border-radius: 1px;
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.6s var(--ease-soft);
 }
 
 /* Input field - minimal */
@@ -510,7 +510,10 @@
   background: transparent;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition:
+    border-color var(--dur-hover) var(--ease-soft),
+    background var(--dur-hover) var(--ease-soft),
+    color var(--dur-hover) var(--ease-soft);
   letter-spacing: -0.01em;
 }
 
@@ -752,8 +755,8 @@
     inset 0 -1px 0 rgba(80, 50, 18, 0.10),
     0 1px 2px rgba(0, 0, 0, 0.10),
     0 4px 12px rgba(146, 100, 40, 0.10);
-  transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 0.4s var(--ease-soft),
+              border-color 0.4s var(--ease-soft);
 }
 .theme-toggle-icon:hover {
   transform: translateY(-1px);
@@ -814,11 +817,11 @@
     0 1px 1px rgba(0, 0, 0, 0.18),
     0 4px 12px rgba(0, 0, 0, 0.16),
     0 16px 32px rgba(0, 0, 0, 0.12);
-  transition: border-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              background 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 0.45s var(--ease-soft),
+              color 0.45s var(--ease-soft),
+              background 0.45s var(--ease-soft),
+              box-shadow 0.45s var(--ease-soft),
+              transform 0.45s var(--ease-soft);
 }
 .hero-chip::before {
   content: "";
@@ -836,7 +839,7 @@
     transparent 100%
   );
   transform: skewX(-18deg);
-  transition: left 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: left 0.85s var(--ease-soft);
   pointer-events: none;
   z-index: 1;
 }
@@ -914,8 +917,8 @@
     0 6px 16px rgba(146, 100, 40, 0.30),
     0 20px 44px rgba(206, 165, 95, 0.28);
   transition:
-    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    transform 0.45s var(--ease-soft),
+    box-shadow 0.45s var(--ease-soft);
 }
 /* 暖金 CTA 用更亮的白光带 + 更慢的扫光速度，凸显主按钮的仪式感 */
 .hero-cta::before {
@@ -934,7 +937,7 @@
     transparent 100%
   );
   transform: skewX(-18deg);
-  transition: left 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: left 1s var(--ease-soft);
   pointer-events: none;
   z-index: 1;
 }
