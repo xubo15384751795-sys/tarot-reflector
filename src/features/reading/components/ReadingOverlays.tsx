@@ -159,7 +159,7 @@ export default function ReadingOverlays({
                     <span aria-hidden className="block w-6 h-px" style={{ background: "var(--accent)", opacity: 0.5 }} />
                   </div>
                   <h2
-                    className="hero-title text-[22px] md:text-[26px] font-light tracking-[-0.012em]"
+                    className="hero-title text-[22px] md:text-[length:var(--text-title-lg)] font-light tracking-[-0.012em]"
                     style={{ color: "var(--text-primary)" }}
                   >
                     解读短片预览

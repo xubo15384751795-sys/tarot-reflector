@@ -373,7 +373,7 @@
 }
 .error-stage__title {
   font-family: var(--font-display, var(--font-ui));
-  font-size: 19px;
+  font-size: var(--text-title-sm);
   font-weight: 400;
   letter-spacing: 0.01em;
   color: var(--text-primary);

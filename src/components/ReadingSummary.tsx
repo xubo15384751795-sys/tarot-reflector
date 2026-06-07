@@ -122,7 +122,7 @@ export default function ReadingSummary({
           <DividerLine width={36} />
         </div>
         <h2
-          className="hero-title text-[28px] md:text-[34px] font-light tracking-[-0.015em] leading-[1.25]"
+          className="hero-title text-[28px] md:text-[length:var(--text-display-sm)] font-light tracking-[-0.015em] leading-[1.25]"
           style={{ color: "var(--text-primary)" }}
         >
           {title}
@@ -139,7 +139,7 @@ export default function ReadingSummary({
       <div className="relative px-6 md:px-10 py-2 mx-auto max-w-[480px]">
         <span
           aria-hidden
-          className="absolute left-0 top-0 text-[42px] leading-none select-none"
+          className="absolute left-0 top-0 text-[length:var(--text-display-lg)] leading-none select-none"
           style={{ color: "var(--accent)", opacity: 0.35, fontFamily: "var(--font-serif-like)" }}
         >
           “
@@ -156,7 +156,7 @@ export default function ReadingSummary({
         </p>
         <span
           aria-hidden
-          className="absolute right-0 bottom-0 text-[42px] leading-none select-none"
+          className="absolute right-0 bottom-0 text-[length:var(--text-display-lg)] leading-none select-none"
           style={{ color: "var(--accent)", opacity: 0.35, fontFamily: "var(--font-serif-like)" }}
         >
           ”

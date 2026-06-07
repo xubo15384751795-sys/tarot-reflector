@@ -790,7 +790,7 @@
 
 .card-title-zh {
   font-family: var(--font-title);
-  font-size: 32px;
+  font-size: var(--text-display-xs);
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1.25;
@@ -1501,7 +1501,7 @@
   }
 
   .card-title-zh {
-    font-size: 26px;
+    font-size: var(--text-title-lg);
   }
 
   .archive-card-stage-section {

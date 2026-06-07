@@ -232,9 +232,12 @@
   --text-body: 15px;
   --text-body-lg: 16px;
   --text-title-sm: 18px;
+  --text-title-md: 20px;
   --text-title: 22px;
   --text-title-lg: 28px;
+  --text-display-xs: 32px;
   --text-display-sm: 36px;
+  --text-display-lg: 42px;
   --text-display: 48px;
 
   /* —— 行高 —— */

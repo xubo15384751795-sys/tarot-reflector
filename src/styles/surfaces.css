@@ -229,7 +229,7 @@
 
 /* 标题与说明 */
 .mode-card__title {
-  font-size: 17px;
+  font-size: var(--text-title-sm);
   font-weight: 400;
   letter-spacing: -0.01em;
   color: var(--text-primary);

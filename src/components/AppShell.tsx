@@ -197,7 +197,7 @@ export default function AppShell({
         >
           <div className="flex items-baseline gap-3 min-w-0">
             <h1
-              className="text-[18px] md:text-[20px] font-light tracking-[0.18em] shrink-0"
+              className="text-[length:var(--text-title-sm)] md:text-[length:var(--text-title-md)] font-light tracking-[0.18em] shrink-0"
               style={{ color: "var(--text-primary)" }}
             >
               阈牌

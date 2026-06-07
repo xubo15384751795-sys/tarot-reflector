@@ -74,7 +74,7 @@ export default function CardPositionReading({
           )}
           <div className="mb-3 text-center">
             <div className="flex items-center justify-center gap-2">
-              <h3 className="text-[20px] font-light tracking-[-0.01em]" style={{ color: "var(--text-primary)" }}>
+              <h3 className="text-[length:var(--text-title-md)] font-light tracking-[-0.01em]" style={{ color: "var(--text-primary)" }}>
                 {zhName}
               </h3>
               <span className="text-[10px] tracking-[0.08em] px-2 py-0.5 rounded-full annotation-ink" style={{ color: "var(--ink-warm)", border: "1px solid var(--ink-filigree)" }}>

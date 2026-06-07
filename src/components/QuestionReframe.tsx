@@ -100,7 +100,7 @@ export default function QuestionReframe({
           <span className="block w-6 h-px" style={{ background: "var(--accent)", opacity: 0.3 }} />
         </div>
         <p
-          className="hero-title text-[22px] md:text-[28px] lg:text-[32px] font-light leading-[1.4] tracking-[-0.012em]"
+          className="hero-title text-[22px] md:text-[28px] lg:text-[length:var(--text-display-xs)] font-light leading-[1.4] tracking-[-0.012em]"
           style={{ color: "var(--text-primary)" }}
         >
           {reframed}

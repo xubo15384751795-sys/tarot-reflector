@@ -41,7 +41,7 @@ export default function ReflectionNote({ onSave, onSkip, prompt }: Props) {
         <p className="text-[11px] tracking-[0.18em] mb-3" style={{ color: "var(--ink-warm)" }}>
           在页边留下一行注记
         </p>
-        <p className="text-[20px] font-light tracking-[-0.01em] leading-[1.45] mb-5" style={{ color: "var(--text-primary)" }}>
+        <p className="text-[length:var(--text-title-md)] font-light tracking-[-0.01em] leading-[1.45] mb-5" style={{ color: "var(--text-primary)" }}>
           {prompt ?? "这张牌面上，哪条符号最贴近你此刻的感受？"}
         </p>
         <textarea

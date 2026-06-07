@@ -90,7 +90,7 @@ export default function SpreadRecommendation({
             {difficultyLabel(recommended.difficulty)}
           </span>
         </div>
-        <h3 className="text-[20px] font-light tracking-[-0.01em] mb-1.5" style={{ color: "var(--text-primary)" }}>
+        <h3 className="text-[length:var(--text-title-md)] font-light tracking-[-0.01em] mb-1.5" style={{ color: "var(--text-primary)" }}>
           {recommended.name_zh}
         </h3>
         <p className="text-[13px] leading-[1.7] mb-3" style={{ color: "var(--text-secondary)" }}>

@@ -99,7 +99,7 @@ export default function ReadingPanel({
             {/* Headline + subtitle */}
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center gap-2.5">
-                <h2 className="scene-title text-[34px] md:text-[40px] font-light tracking-[-0.015em] leading-[1.1]" style={{ color: "var(--text-primary)" }}>
+                <h2 className="scene-title text-[length:var(--text-display-sm)] md:text-[length:var(--text-display-lg)] font-light tracking-[-0.015em] leading-[1.1]" style={{ color: "var(--text-primary)" }}>
                   {scene.headline}
                 </h2>
                 <span style={{ color: "var(--accent)", opacity: 0.6 }} className="mb-1">

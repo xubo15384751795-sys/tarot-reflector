@@ -98,6 +98,43 @@
   font-family: var(--font-title);
 }
 
+/* ── 语义角色类（标题/display 层；P1 迁移目标）──
+ * 角色命名表达「这是什么文字」，内部全部取 token。
+ * 保持楷体仪式感 + font-light/regular 的克制，禁止 bold/semibold。
+ */
+.type-hero {
+  font-family: var(--font-title);
+  font-size: var(--text-display-xs);
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-regular);
+  letter-spacing: -0.012em;
+}
+.type-display {
+  font-family: var(--font-title);
+  font-size: var(--text-display-lg);
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-regular);
+  letter-spacing: -0.015em;
+}
+.type-page-title {
+  font-family: var(--font-title);
+  font-size: var(--text-title-lg);
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-regular);
+}
+.type-section-title {
+  font-family: var(--font-title);
+  font-size: var(--text-title-md);
+  line-height: var(--leading-snug);
+  font-weight: var(--weight-regular);
+}
+.type-card-title {
+  font-family: var(--font-ui);
+  font-size: var(--text-title-sm);
+  line-height: var(--leading-snug);
+  font-weight: var(--weight-medium);
+}
+
 /* 全局纸张噪点（极淡，只有凑近能看到） */
 body::after {
   content: "";

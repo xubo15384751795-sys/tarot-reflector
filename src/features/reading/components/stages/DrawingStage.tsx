@@ -102,7 +102,7 @@ export default function DrawingStage({
         className="text-center"
       >
         <h2
-          className="text-[24px] font-light"
+          className="text-[length:var(--text-title)] font-light"
           style={{
             color: "var(--text-primary)",
             fontFamily: "var(--font-serif-like)",

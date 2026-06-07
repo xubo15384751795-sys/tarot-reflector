@@ -66,7 +66,7 @@ export default function SavePanel({ visible, onSaveSnapshot, onSaveNoteOnly, onS
                 解读已完成
               </p>
               <p
-                className="text-[20px] font-light tracking-[-0.01em] leading-[1.45] mb-3"
+                className="text-[length:var(--text-title-md)] font-light tracking-[-0.01em] leading-[1.45] mb-3"
                 style={{ color: "var(--text-primary)" }}
               >
                 要不要留下这次解读？
