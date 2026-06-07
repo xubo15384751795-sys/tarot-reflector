@@ -128,7 +128,7 @@ export default function ReadingSummary({
           {title}
         </h2>
         <p
-          className="mt-3 text-[10.5px] tracking-[0.22em]"
+          className="mt-3 text-[11px] tracking-[0.22em]"
           style={{ color: "var(--text-faint)" }}
         >
           档 案 · 总 览
@@ -194,7 +194,7 @@ export default function ReadingSummary({
               className="block w-1 h-3"
               style={{ background: "var(--accent)", opacity: 0.6 }}
             />
-            <span className="text-[10.5px] tracking-[0.16em]" style={{ color: "var(--accent)", opacity: 0.85 }}>
+            <span className="text-[11px] tracking-[0.16em]" style={{ color: "var(--accent)", opacity: 0.85 }}>
               牌 间 关 系
             </span>
           </div>
@@ -202,7 +202,7 @@ export default function ReadingSummary({
             {analysis.relationship_notes.map((note, i) => (
               <p
                 key={i}
-                className="text-[12.5px] leading-[1.7]"
+                className="text-[13px] leading-[1.7]"
                 style={{ color: "var(--text-secondary)" }}
               >
                 {note}

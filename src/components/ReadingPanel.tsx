@@ -147,7 +147,7 @@ export default function ReadingPanel({
                   <p className="annotation text-[12px] tracking-[0.04em]" style={{ color: "var(--text-tertiary)" }}>
                     与问题的连接
                   </p>
-                  <p className="text-[13.5px] leading-[1.7]" style={{ color: "var(--text-secondary)" }}>
+                  <p className="text-[14px] leading-[1.7]" style={{ color: "var(--text-secondary)" }}>
                     {scene.connection}
                   </p>
                 </div>

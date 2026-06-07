@@ -1160,7 +1160,7 @@
 .motif-popover__body {
   margin: 0;
   font-family: var(--font-ui);
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.75;
   color: var(--archive-text-secondary);
 }
@@ -1174,7 +1174,7 @@
 .motif-popover__source {
   margin: 0;
   font-family: var(--font-ui);
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.75;
   color: var(--archive-text-muted);
 }
@@ -1256,7 +1256,7 @@
 .motif-intro-hint__text {
   flex: 1;
   font-family: var(--font-ui);
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.5;
   letter-spacing: 0.01em;
   color: var(--archive-text-muted, var(--text-secondary));
@@ -1488,7 +1488,7 @@
 .spread-map__value {
   margin: 0;
   font-family: var(--font-ui);
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.75;
   color: var(--archive-text-secondary);
 }
@@ -1517,6 +1517,6 @@
   }
 
   .archive-card-modal .meaning-text {
-    font-size: 14.5px;
+    font-size: 15px;
   }
 }

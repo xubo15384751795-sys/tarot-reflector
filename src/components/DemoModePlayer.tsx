@@ -201,7 +201,7 @@ export default function DemoModePlayer({
               <polygon points="5,3 19,12 5,21" />
             </svg>
           )}
-          <span className="ml-2 text-[12.5px] tracking-[0.08em]">
+          <span className="ml-2 text-[13px] tracking-[0.08em]">
             {state.isPlaying ? "暂停" : "播放"}
           </span>
         </button>
@@ -245,7 +245,7 @@ export default function DemoModePlayer({
           style={{ background: "var(--accent)", opacity: 0.4 }}
         />
         <span
-          className="text-[10.5px] tracking-[0.18em]"
+          className="text-[11px] tracking-[0.18em]"
           style={{ color: "var(--text-faint)", fontFamily: "var(--font-serif-like)" }}
         >
           {state.currentScene + 1} / {script.scenes.length} · {currentScene.headline_zh}

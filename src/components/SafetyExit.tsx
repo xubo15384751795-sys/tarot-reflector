@@ -111,7 +111,7 @@ export default function SafetyExit({ onContinueAnyway, onBack }: Props) {
             </span>
             {h.note && (
               <span
-                className="text-[10.5px] tracking-[0.10em] shrink-0 text-right"
+                className="text-[11px] tracking-[0.10em] shrink-0 text-right"
                 style={{ color: "var(--text-faint)" }}
               >
                 {h.note}

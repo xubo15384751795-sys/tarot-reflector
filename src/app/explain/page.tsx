@@ -325,7 +325,7 @@ function ExplainContent() {
                     <polygon points="5,3 19,12 5,21" />
                   </svg>
                 )}
-                <span className="ml-2 text-[12.5px] tracking-[0.10em]">{playing ? "暂停" : "播放"}</span>
+                <span className="ml-2 text-[13px] tracking-[0.10em]">{playing ? "暂停" : "播放"}</span>
               </button>
               <button
                 onClick={handleNext}
@@ -348,7 +348,7 @@ function ExplainContent() {
             <div className="flex items-center gap-2">
               <span aria-hidden className="block w-4 h-px" style={{ background: "var(--accent)", opacity: 0.4 }} />
               <span
-                className="text-[10.5px] tracking-[0.18em]"
+                className="text-[11px] tracking-[0.18em]"
                 style={{ color: "var(--text-faint)", fontFamily: "var(--font-serif-like)" }}
               >
                 {activeMotifIdx < 0
@@ -605,7 +605,7 @@ function ExplainStage({
                 }}
               />
               <p
-                className="text-[12px] md:text-[12.5px] leading-[1.6]"
+                className="text-[12px] md:text-[13px] leading-[1.6]"
                 style={{
                   color: "var(--text-secondary)",
                   fontFamily: "var(--font-serif-like)",
@@ -614,7 +614,7 @@ function ExplainStage({
                 {activeMotif.meaning_zh ?? activeMotif.meaning}
               </p>
               <p
-                className="text-[9.5px] tracking-[0.12em] mt-2"
+                className="text-[10px] tracking-[0.12em] mt-2"
                 style={{ color: "var(--text-faint)", opacity: 0.7 }}
               >
                 {activeMotifIdx + 1} / {card.motifs.length}

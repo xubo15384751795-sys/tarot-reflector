@@ -46,6 +46,58 @@
   letter-spacing: 0.14em;
 }
 
+/* ── 语义字号工具类（绑定 --text-* + --leading-*）──
+ * 新代码用这些类，不要再写裸 font-size / text-[Npx]。
+ * 命名对应尺度层：meta < caption < label < body < title < display。
+ */
+.text-meta {
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  letter-spacing: 0.08em;
+  font-family: var(--font-meta);
+}
+.text-caption {
+  font-size: var(--text-caption);
+  line-height: var(--leading-normal);
+}
+.text-label {
+  font-size: var(--text-label);
+  line-height: var(--leading-snug);
+  font-weight: var(--weight-medium);
+}
+.text-body-sm {
+  font-size: var(--text-body-sm);
+  line-height: var(--leading-normal);
+}
+.text-body {
+  font-size: var(--text-body);
+  line-height: var(--leading-normal);
+}
+.text-body-lg {
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-normal);
+}
+.text-title-sm {
+  font-size: var(--text-title-sm);
+  line-height: var(--leading-snug);
+  font-family: var(--font-title);
+}
+.text-title {
+  font-size: var(--text-title);
+  line-height: var(--leading-tight);
+  font-family: var(--font-title);
+}
+.text-title-lg {
+  font-size: var(--text-title-lg);
+  line-height: var(--leading-tight);
+  font-family: var(--font-title);
+}
+.text-display {
+  font-size: var(--text-display-sm);
+  line-height: var(--leading-tight);
+  font-family: var(--font-title);
+}
+
 /* 全局纸张噪点（极淡，只有凑近能看到） */
 body::after {
   content: "";

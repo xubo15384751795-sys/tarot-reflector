@@ -144,7 +144,7 @@ export default function SavePanel({ visible, onSaveSnapshot, onSaveNoteOnly, onS
                 onChange={(e) => setText(e.target.value)}
                 placeholder="不需要写完整，一行就好……"
                 rows={4}
-                className="w-full rounded-2xl px-4 py-3 text-[14.5px] leading-[1.7] outline-none transition-colors resize-none"
+                className="w-full rounded-2xl px-4 py-3 text-[15px] leading-[1.7] outline-none transition-colors resize-none"
                 style={{
                   background: "var(--surface)",
                   border: "1px solid var(--border)",

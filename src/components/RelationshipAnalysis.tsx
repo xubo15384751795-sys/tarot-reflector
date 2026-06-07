@@ -109,7 +109,7 @@ export default function RelationshipAnalysis({
                     {r.relationship_type}
                   </span>
                 </div>
-                <p className="text-[12.5px] leading-[1.65]" style={{ color: "var(--text-secondary)" }}>
+                <p className="text-[13px] leading-[1.65]" style={{ color: "var(--text-secondary)" }}>
                   {r.description_zh}
                 </p>
               </div>
@@ -155,7 +155,7 @@ export default function RelationshipAnalysis({
       </div>
 
       {/* Flow description */}
-      <p className="text-[13.5px] leading-[1.75]" style={{ color: "var(--text-secondary)" }}>
+      <p className="text-[14px] leading-[1.75]" style={{ color: "var(--text-secondary)" }}>
         {flow_description}
       </p>
 

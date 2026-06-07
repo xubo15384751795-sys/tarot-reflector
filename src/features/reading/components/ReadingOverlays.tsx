@@ -165,7 +165,7 @@ export default function ReadingOverlays({
                     解读短片预览
                   </h2>
                   <p
-                    className="text-[10.5px] tracking-[0.22em]"
+                    className="text-[11px] tracking-[0.22em]"
                     style={{
                       color: "var(--text-faint)",
                       fontFamily: "var(--font-serif-like)",
