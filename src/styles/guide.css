@@ -97,12 +97,8 @@
   max-width: 760px;
 }
 
+/* 透明布局壳：分区表面由内部 GlassCard 承担，避免 panel 套 card 的框套框 */
 .guide-section {
-  padding: 32px 36px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-2xl);
-  background: var(--surface);
-  box-shadow: var(--shadow-card);
   scroll-margin-top: calc(var(--app-header-height, 73px) + 24px);
 }
 
@@ -226,9 +222,12 @@
   max-width: 680px;
 }
 
+/* footer 没有内部 GlassCard，自带一个虚线轮廓盒子 */
 .guide-section--footer {
+  padding: var(--space-6) var(--space-7);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-2xl);
   background: transparent;
-  border-style: dashed;
   box-shadow: none;
 }
 
@@ -279,8 +278,8 @@
     max-width: 100%;
   }
 
-  .guide-section {
-    padding: 24px 22px;
+  .guide-section--footer {
+    padding: var(--space-5) var(--space-5);
     border-radius: var(--radius-lg);
   }
 }
