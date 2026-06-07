@@ -34,9 +34,13 @@
 - 不要引入 Material `cubic-bezier(0.4,0,0.2,1)`。
 - hover≈`--dur-hover`，面板≈`--dur-panel`，页面切换≈`--dur-page`；都用 `--ease-soft`。
 
-## 阴影
+## 阴影 / 表面层级
 
-- 用 elevation 四档：`--shadow-rest / -hover / -overlay / -modal`。少手写大阴影。
+- 用 elevation 四档：`--shadow-rest`(卡 rest) `/ -hover`(卡 hover) `/ -overlay`(popover) `/ -modal`(弹层)。
+- **卡片圆角取 `--radius-*`**，不要写裸 `border-radius:Npx`（≥2 位数会被 guard 拦）。
+- **inset 内嵌块不要有自己的阴影**；底色用 `--surface`/`--accent-a*`，不要裸 `rgba(255,255,255,.0x)`。
+- **不要 panel 套 card**：一个分区要么是「带边带影的卡」，要么是「透明布局壳 + 内部卡」，二选一。
+- 签名厚玻璃卡（mode-card / hero-cta / 牌面舞台）刻意保留厚度，**不要拍平**。
 
 ## 组件 primitive
 

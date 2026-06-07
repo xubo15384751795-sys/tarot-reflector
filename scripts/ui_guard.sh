@@ -39,6 +39,14 @@ check "旧 pill 圆角 (100/999px)" "${PILL:-0}" 0
 MAT=$(grep -rho "cubic-bezier(0.4, 0, 0.2, 1)" src/styles 2>/dev/null | wc -l | tr -d ' ')
 check "Material 缓动 (0.4,0,0.2,1)" "${MAT:-0}" 0
 
+# 6) 卡片裸圆角（≥2 位数 px；1/4px 发丝线除外）—— Phase 10 P0
+CARDR=$(grep -rhoE "border-radius: ?[0-9]{2,}px" src/styles 2>/dev/null | wc -l | tr -d ' ')
+check "卡片裸圆角 (应 var(--radius-*))" "${CARDR:-0}" 0
+
+# 7) 裸白透明 surface 底（不随主题切换）—— Phase 10 P3
+NSURF=$(grep -rhoE "background: rgba\(255, ?255, ?255, ?0?\.[0-9]+\)" src/styles 2>/dev/null | wc -l | tr -d ' ')
+check "裸白透明 surface 底 (应 --surface*)" "${NSURF:-0}" 0
+
 echo
 if [ "$fail" -eq 0 ]; then
   echo "UI guard ✓ 全部通过"
