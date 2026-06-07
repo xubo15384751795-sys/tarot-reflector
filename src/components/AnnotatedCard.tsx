@@ -60,7 +60,7 @@ export default function AnnotatedCard({
           style={{
             inset: "-12% -18%",
             background:
-              "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(206, 185, 138, 0.16) 0%, rgba(206, 185, 138, 0.04) 45%, rgba(0,0,0,0) 75%)",
+              "radial-gradient(ellipse 70% 60% at 50% 50%, var(--accent-a2) 0%, var(--accent-a0) 45%, rgba(0,0,0,0) 75%)",
             filter: "blur(8px)",
           }}
         />
@@ -135,7 +135,7 @@ export default function AnnotatedCard({
                   style={{
                     borderRadius: "14px",
                     background:
-                      "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(206,185,138,0.18) 0%, rgba(206,185,138,0) 70%)",
+                      "radial-gradient(ellipse 80% 70% at 50% 50%, var(--accent-a2) 0%, var(--accent-a0) 70%)",
                   }}
                 />
               );

@@ -53,6 +53,7 @@
   /* 语义金色（统一收口，随主题切换） */
   --accent-strong: var(--gold-deep);
   --accent-muted: #ceb98a;            /* 旧纸上的柔金（原 orphan 206,185,138，已制度化） */
+  --accent-a0: rgba(198, 161, 92, 0.05); /* 超浅纸面晕染 */
   --accent-a1: rgba(198, 161, 92, 0.10); /* 轻背景 / 微弱光晕 */
   --accent-a2: rgba(198, 161, 92, 0.18); /* 边框 / hover 背景 */
   --accent-a3: rgba(198, 161, 92, 0.28); /* 强调边框 / active */
@@ -136,6 +137,7 @@
   /* 语义金色（统一收口，随主题切换） */
   --accent-strong: var(--gold-deep);
   --accent-muted: #b39a6a;            /* 月白纸上的柔金（深一度，确保对比度） */
+  --accent-a0: rgba(185, 149, 82, 0.05);
   --accent-a1: rgba(185, 149, 82, 0.10);
   --accent-a2: rgba(185, 149, 82, 0.18);
   --accent-a3: rgba(185, 149, 82, 0.28);

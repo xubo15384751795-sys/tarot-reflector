@@ -149,7 +149,7 @@ export default function SnapshotDetailPage() {
                     style={{
                       width: 80,
                       aspectRatio: "600/1050",
-                      border: "1px solid rgba(214,178,109,0.28)",
+                      border: "1px solid var(--accent-a3)",
                       boxShadow: "0 2px 8px rgba(0,0,0,0.22)",
                       transform: dc.orientation === "reversed" ? "rotate(180deg)" : undefined,
                     }}

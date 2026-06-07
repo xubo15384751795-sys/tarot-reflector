@@ -109,7 +109,7 @@ export default function CardDeck({
               style={{
                 inset: "8%",
                 background:
-                  "radial-gradient(circle at 50% 55%, rgba(214,178,109,0.28) 0%, rgba(214,178,109,0.08) 40%, transparent 72%)",
+                  "radial-gradient(circle at 50% 55%, var(--accent-a3) 0%, var(--accent-a1) 40%, transparent 72%)",
                 filter: "blur(18px)",
               }}
               animate={{
@@ -140,7 +140,7 @@ export default function CardDeck({
                     width: 3,
                     height: 3,
                     background: "rgba(255, 247, 220, 0.85)",
-                    boxShadow: "0 0 8px rgba(214,178,109,0.6)",
+                    boxShadow: "0 0 8px var(--accent-a4)",
                   }}
                   initial={{ x, y, opacity: 0 }}
                   animate={{

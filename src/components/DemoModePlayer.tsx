@@ -121,14 +121,14 @@ export default function DemoModePlayer({
             inset: "-8%",
             borderRadius: 28,
             background:
-              "radial-gradient(ellipse at 50% 50%, rgba(214,178,109,0.18) 0%, rgba(214,178,109,0.04) 50%, transparent 75%)",
+              "radial-gradient(ellipse at 50% 50%, var(--accent-a2) 0%, var(--accent-a0) 50%, transparent 75%)",
             filter: "blur(22px)",
           }}
         />
         <div
           className="relative aspect-[9/16] rounded-2xl overflow-hidden"
           style={{
-            border: "1px solid rgba(214,178,109,0.32)",
+            border: "1px solid var(--accent-a3)",
             background: "var(--bg-base)",
             boxShadow:
               "inset 0 1px 0 rgba(255,247,225,0.08), 0 24px 56px rgba(0,0,0,0.55)",

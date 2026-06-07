@@ -156,7 +156,7 @@ export default function ReadingPanel({
 
             {/* 感情类问题的固定保护提示 — 仅在最后一幕（建议）出现一次 */}
             {isLoveDomain && atEnd && (
-              <div className="subcard mt-2" style={{ borderColor: "rgba(185,149,82,0.20)" }}>
+              <div className="subcard mt-2" style={{ borderColor: "var(--accent-a2)" }}>
                 <p className="text-[12px] leading-[1.75] tracking-[0.01em]" style={{ color: "var(--text-faint)" }}>
                   这张牌不能替对方发言，但可以帮你看见自己在这段关系里的感受。
                 </p>

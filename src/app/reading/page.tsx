@@ -147,7 +147,7 @@ function ReadingContent() {
             style={{
               background: "var(--bg-glass)",
               backdropFilter: "blur(14px)",
-              border: "1px solid rgba(214,178,109,0.28)",
+              border: "1px solid var(--accent-a3)",
               boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
             }}
           >

@@ -900,8 +900,8 @@
   letter-spacing: 0.04em;
   text-align: center;
   color: var(--archive-gold-deep);
-  background: rgba(185, 149, 82, 0.1);
-  border: 1px dashed rgba(185, 149, 82, 0.35);
+  background: var(--accent-a1);
+  border: 1px dashed var(--accent-a3);
 }
 
 /* ── 档案 Motif Phase 1（桌面三栏 / 移动堆叠） ── */
@@ -980,7 +980,7 @@
   background: radial-gradient(
     ellipse at 50% 50%,
     var(--card-warm-glow) 0%,
-    rgba(185, 149, 82, 0.06) 45%,
+    var(--accent-a0) 45%,
     transparent 72%
   );
   box-shadow: 0 0 24px var(--card-warm-glow);
@@ -1011,8 +1011,8 @@
     radial-gradient(
       circle at center,
       rgba(255, 247, 220, 0.55) 0%,
-      rgba(214, 178, 109, 0.32) 22%,
-      rgba(214, 178, 109, 0.08) 55%,
+      var(--accent-a3) 22%,
+      var(--accent-a1) 55%,
       transparent 80%
     );
   border-radius: 999px;
@@ -1029,7 +1029,7 @@
   height: 14%;
   border-radius: 999px;
   background: rgba(255, 252, 235, 0.85);
-  box-shadow: 0 0 8px rgba(214, 178, 109, 0.55);
+  box-shadow: 0 0 8px var(--accent-a4);
 }
 
 /* 科普工作台：柔光略大，无矩形描边 */
@@ -1054,7 +1054,7 @@
   stroke-width: 1.4;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 4px rgba(185, 149, 82, 0.16));
+  filter: drop-shadow(0 0 4px var(--accent-a2));
 }
 
 /* Hotspot 层 */
@@ -1084,7 +1084,7 @@
 }
 
 .motif-hotspot:focus-visible {
-  outline: 2px solid rgba(185, 149, 82, 0.5);
+  outline: 2px solid var(--accent-a4);
   outline-offset: 2px;
   border-radius: 999px;
 }
@@ -1093,10 +1093,10 @@
   width: 9px;
   height: 9px;
   border-radius: 999px;
-  background: rgba(185, 149, 82, 0.92);
+  background: var(--accent);
   box-shadow:
-    0 0 0 4px rgba(185, 149, 82, 0.12),
-    0 0 12px rgba(185, 149, 82, 0.28);
+    0 0 0 4px var(--accent-a1),
+    0 0 12px var(--accent-a3);
   transition: background 0.25s ease, box-shadow 0.25s ease;
   opacity: 0.78;
 }
@@ -1105,7 +1105,7 @@
   position: absolute;
   inset: -8px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(185, 149, 82, 0.26) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--accent-a3) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -1115,8 +1115,8 @@
   opacity: 1;
   background: #c9a45e;
   box-shadow:
-    0 0 0 6px rgba(185, 149, 82, 0.2),
-    0 0 22px rgba(185, 149, 82, 0.5);
+    0 0 0 6px var(--accent-a2),
+    0 0 22px var(--accent-a4);
 }
 
 .motif-hotspot.is-lit .motif-hotspot__halo {
@@ -1249,8 +1249,8 @@
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: rgba(185, 149, 82, 0.95);
-  box-shadow: 0 0 0 4px rgba(185, 149, 82, 0.18);
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-a2);
   animation: motif-intro-pulse 1.9s ease-in-out infinite;
 }
 .motif-intro-hint__text {
@@ -1290,7 +1290,7 @@
   font-size: 9px;
   color: var(--archive-gold-deep);
   background: rgba(255, 249, 236, 0.94);
-  border: 1px solid rgba(185, 149, 82, 0.32);
+  border: 1px solid var(--accent-a3);
   border-radius: 4px;
   padding: 1px 5px;
   white-space: nowrap;
@@ -1372,11 +1372,11 @@
 .archive-card-modal .keyword-chip {
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(185, 149, 82, 0.12);
+  background: var(--accent-a1);
   color: var(--archive-gold-deep);
   font-family: var(--font-ui);
   font-size: 12px;
-  border: 1px solid rgba(185, 149, 82, 0.16);
+  border: 1px solid var(--accent-a2);
 }
 
 .archive-card-modal .keyword-chip--muted {

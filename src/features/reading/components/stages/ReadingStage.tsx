@@ -252,7 +252,7 @@ export default function ReadingStage(props: Props) {
           {domain === "love" && (
             <div
               className="subcard"
-              style={{ borderColor: "rgba(185,149,82,0.20)" }}
+              style={{ borderColor: "var(--accent-a2)" }}
             >
               <p
                 className="text-[12px] leading-[1.75] tracking-[0.01em]"

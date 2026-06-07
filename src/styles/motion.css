@@ -93,19 +93,19 @@
 
 .luminous__layer--a {
   background-image:
-    radial-gradient(circle at 18% 32%, rgba(198, 161, 92, 0.05) 0%, transparent 22%),
-    radial-gradient(circle at 78% 22%, rgba(198, 161, 92, 0.04) 0%, transparent 18%),
-    radial-gradient(circle at 30% 76%, rgba(198, 161, 92, 0.045) 0%, transparent 20%),
-    radial-gradient(circle at 86% 68%, rgba(198, 161, 92, 0.035) 0%, transparent 18%),
+    radial-gradient(circle at 18% 32%, var(--accent-a0) 0%, transparent 22%),
+    radial-gradient(circle at 78% 22%, var(--accent-a0) 0%, transparent 18%),
+    radial-gradient(circle at 30% 76%, var(--accent-a0) 0%, transparent 20%),
+    radial-gradient(circle at 86% 68%, var(--accent-a0) 0%, transparent 18%),
     radial-gradient(circle at 50% 50%, rgba(255, 232, 190, 0.025) 0%, transparent 30%);
   animation: luminous-drift-a 32s ease-in-out infinite alternate;
 }
 
 .luminous__layer--b {
   background-image:
-    radial-gradient(circle at 42% 14%, rgba(198, 161, 92, 0.03) 0%, transparent 16%),
-    radial-gradient(circle at 12% 56%, rgba(198, 161, 92, 0.025) 0%, transparent 16%),
-    radial-gradient(circle at 72% 88%, rgba(198, 161, 92, 0.028) 0%, transparent 18%);
+    radial-gradient(circle at 42% 14%, var(--accent-a0) 0%, transparent 16%),
+    radial-gradient(circle at 12% 56%, var(--accent-a0) 0%, transparent 16%),
+    radial-gradient(circle at 72% 88%, var(--accent-a0) 0%, transparent 18%);
   animation: luminous-drift-b 52s ease-in-out infinite alternate;
 }
 
@@ -143,8 +143,8 @@
   border-radius: inherit;
   background: radial-gradient(
     220px circle at var(--mx) var(--my),
-    rgba(198, 161, 92, 0.14) 0%,
-    rgba(198, 161, 92, 0.05) 38%,
+    var(--accent-a2) 0%,
+    var(--accent-a0) 38%,
     transparent 72%
   );
   opacity: 0;
@@ -158,8 +158,8 @@
 :root[data-theme="light"] .mode-card::after {
   background: radial-gradient(
     220px circle at var(--mx) var(--my),
-    rgba(185, 149, 82, 0.18) 0%,
-    rgba(185, 149, 82, 0.06) 40%,
+    var(--accent-a2) 0%,
+    var(--accent-a0) 40%,
     transparent 74%
   );
 }
@@ -215,7 +215,7 @@
   background: radial-gradient(
     circle at 50% 48%,
     var(--card-warm-glow) 0%,
-    rgba(214, 178, 109, 0.06) 40%,
+    var(--accent-a0) 40%,
     transparent 72%
   );
   filter: blur(18px);
@@ -251,7 +251,7 @@
 
 :root[data-theme="dark"] .card-frame {
   background: rgba(22, 18, 14, 0.55);
-  border-color: rgba(198, 161, 92, 0.14);
+  border-color: var(--accent-a2);
 }
 
 .physical-card {
@@ -288,7 +288,7 @@
   background: radial-gradient(
     220px circle at var(--mx, 50%) var(--my, 50%),
     var(--glow-gold),
-    rgba(214, 178, 109, 0.06) 38%,
+    var(--accent-a0) 38%,
     transparent 68%
   );
 }
@@ -334,5 +334,5 @@
   box-shadow:
     0 16px 40px rgba(92, 66, 38, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.65),
-    inset 0 0 28px rgba(198, 161, 92, 0.06);
+    inset 0 0 28px var(--accent-a0);
 }

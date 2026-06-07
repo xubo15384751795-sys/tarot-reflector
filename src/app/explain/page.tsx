@@ -411,7 +411,7 @@ function ExplainContent() {
                           ? "1.5px solid var(--accent)"
                           : "1px solid var(--border-glass)",
                         boxShadow: isSel
-                          ? "0 0 16px rgba(214,178,109,0.35), 0 4px 12px rgba(0,0,0,0.25)"
+                          ? "0 0 16px var(--accent-a3), 0 4px 12px rgba(0,0,0,0.25)"
                           : "0 2px 6px rgba(0,0,0,0.22)",
                         opacity: isSel ? 1 : 0.78,
                       }}
@@ -478,9 +478,9 @@ function ExplainStage({
     <div
       className={`relative w-full ${aspectClass(aspect)} rounded-2xl overflow-hidden`}
       style={{
-        border: "1px solid rgba(214,178,109,0.28)",
+        border: "1px solid var(--accent-a3)",
         background:
-          "radial-gradient(ellipse 70% 50% at 50% 38%, rgba(214,178,109,0.14) 0%, transparent 65%), linear-gradient(180deg, #0a0810 0%, #0d0c11 100%)",
+          "radial-gradient(ellipse 70% 50% at 50% 38%, var(--accent-a2) 0%, transparent 65%), linear-gradient(180deg, #0a0810 0%, #0d0c11 100%)",
         boxShadow:
           "inset 0 1px 0 rgba(255,247,225,0.08), 0 24px 56px rgba(0,0,0,0.55)",
       }}
@@ -548,7 +548,7 @@ function ExplainStage({
           <div
             className="relative w-full h-full overflow-hidden rounded-[10px]"
             style={{
-              border: "1px solid rgba(214,178,109,0.35)",
+              border: "1px solid var(--accent-a3)",
               boxShadow:
                 "inset 0 1px 0 rgba(255,247,225,0.12), 0 16px 36px rgba(0,0,0,0.55)",
             }}
@@ -637,9 +637,9 @@ function ExplainStage({
                   key={kw}
                   className="text-[10px] px-2 py-0.5 rounded-full"
                   style={{
-                    background: "rgba(214,178,109,0.12)",
+                    background: "var(--accent-a1)",
                     color: "var(--accent)",
-                    border: "1px solid rgba(214,178,109,0.32)",
+                    border: "1px solid var(--accent-a3)",
                     fontFamily: "var(--font-serif-like)",
                   }}
                 >

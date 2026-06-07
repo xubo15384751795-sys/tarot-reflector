@@ -34,9 +34,9 @@ export default function VideoProgressBar({
           style={{
             width: `${progress}%`,
             background:
-              "linear-gradient(90deg, rgba(214,178,109,0.85) 0%, rgba(232,200,150,1) 50%, rgba(214,178,109,0.85) 100%)",
+              "linear-gradient(90deg, var(--accent-soft) 0%, rgba(232,200,150,1) 50%, var(--accent-soft) 100%)",
             boxShadow:
-              "0 0 6px rgba(214,178,109,0.45), inset 0 1px 0 rgba(255,252,235,0.45)",
+              "0 0 6px var(--accent-a4), inset 0 1px 0 rgba(255,252,235,0.45)",
           }}
         />
       </div>

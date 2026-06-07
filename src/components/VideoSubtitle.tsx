@@ -37,7 +37,7 @@ export default function VideoSubtitle({ text, position = "bottom" }: Props) {
               "linear-gradient(180deg, rgba(20,16,12,0.62) 0%, rgba(16,12,8,0.55) 100%)",
             backdropFilter: "blur(14px) saturate(1.2)",
             WebkitBackdropFilter: "blur(14px) saturate(1.2)",
-            border: "1px solid rgba(214,178,109,0.28)",
+            border: "1px solid var(--accent-a3)",
             boxShadow:
               "inset 0 1px 0 rgba(255,247,225,0.12), 0 4px 12px rgba(0,0,0,0.28)",
           }}
