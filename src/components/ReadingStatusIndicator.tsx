@@ -19,14 +19,11 @@ export default function ReadingStatusIndicator({ status, className }: Props) {
       role="status"
       aria-live="polite"
     >
-      <div
-        className="w-5 h-5 rounded-full animate-spin"
-        style={{
-          border: "1px solid var(--border-glass)",
-          borderTopColor: "var(--accent)",
-        }}
-        aria-hidden
-      />
+      <div className="reading-status-dots" aria-hidden>
+        <span />
+        <span />
+        <span />
+      </div>
       <StatusPill variant="status">{readingStatusText(status)}</StatusPill>
     </div>
   );
