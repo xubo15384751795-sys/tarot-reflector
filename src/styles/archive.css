@@ -107,7 +107,7 @@
     inset 0 1px 0 color-mix(in srgb, #fff 46%, transparent),
     inset 0 -1px 0 color-mix(in srgb, var(--gold-deep) 10%, transparent),
     0 1px 0 color-mix(in srgb, var(--accent) 6%, transparent),
-    var(--shadow-card);
+    var(--shadow-rest);
   backdrop-filter: blur(var(--backdrop-blur)) saturate(1.12);
   -webkit-backdrop-filter: blur(var(--backdrop-blur)) saturate(1.12);
   cursor: pointer;
@@ -758,6 +758,7 @@
   background: var(--archive-surface);
   border: 1px solid var(--archive-border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
   color: var(--archive-text-primary);
   font-family: var(--font-ui);
 }
