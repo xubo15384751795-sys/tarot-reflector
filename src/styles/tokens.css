@@ -50,12 +50,24 @@
   --accent-soft: #d8b87c;
   --accent-dim: rgba(198, 161, 92, 0.18);
   --accent-glow: rgba(198, 161, 92, 0.12);
+  /* 语义金色（统一收口，随主题切换） */
+  --accent-strong: var(--gold-deep);
+  --accent-muted: #ceb98a;            /* 旧纸上的柔金（原 orphan 206,185,138，已制度化） */
+  --accent-a1: rgba(198, 161, 92, 0.10); /* 轻背景 / 微弱光晕 */
+  --accent-a2: rgba(198, 161, 92, 0.18); /* 边框 / hover 背景 */
+  --accent-a3: rgba(198, 161, 92, 0.28); /* 强调边框 / active */
+  --accent-a4: rgba(198, 161, 92, 0.45); /* 强光 / 重点描边 */
 
   /* —— 阴影与状态 —— */
   --shadow-card:
     0 1px 2px rgba(0, 0, 0, 0.30),
     0 8px 24px rgba(0, 0, 0, 0.30),
     0 24px 56px rgba(0, 0, 0, 0.22);
+  /* Elevation 分层（rest → hover → overlay → modal） */
+  --shadow-rest: 0 12px 32px rgba(0, 0, 0, 0.28);
+  --shadow-hover: 0 18px 48px rgba(0, 0, 0, 0.36);
+  --shadow-overlay: 0 24px 72px rgba(0, 0, 0, 0.46);
+  --shadow-modal: 0 36px 96px rgba(0, 0, 0, 0.56);
   --danger: #d35a45;
   --backdrop-blur: 20px;
 
@@ -121,12 +133,24 @@
   --accent-soft: #d4b06a;
   --accent-dim: rgba(185, 149, 82, 0.14);
   --accent-glow: rgba(185, 149, 82, 0.10);
+  /* 语义金色（统一收口，随主题切换） */
+  --accent-strong: var(--gold-deep);
+  --accent-muted: #b39a6a;            /* 月白纸上的柔金（深一度，确保对比度） */
+  --accent-a1: rgba(185, 149, 82, 0.10);
+  --accent-a2: rgba(185, 149, 82, 0.18);
+  --accent-a3: rgba(185, 149, 82, 0.28);
+  --accent-a4: rgba(185, 149, 82, 0.45);
 
   /* —— 阴影与状态 —— */
   --shadow-card:
     0 1px 2px rgba(92, 66, 38, 0.10),
     0 8px 22px rgba(92, 66, 38, 0.10),
     0 24px 56px rgba(92, 66, 38, 0.10);
+  /* Elevation 分层（暖棕、偏柔，避免廉价黑弹窗感） */
+  --shadow-rest: 0 12px 32px rgba(20, 12, 4, 0.10);
+  --shadow-hover: 0 18px 48px rgba(20, 12, 4, 0.16);
+  --shadow-overlay: 0 24px 72px rgba(20, 12, 4, 0.20);
+  --shadow-modal: 0 36px 96px rgba(20, 12, 4, 0.26);
   --danger: #b04030;
   --backdrop-blur: 14px;
 
@@ -166,6 +190,81 @@
     radial-gradient(ellipse 50% 55% at 18% 88%, rgba(179, 136, 63, 0.10) 0%, rgba(179, 136, 63, 0.025) 38%, transparent 65%),
     radial-gradient(ellipse 70% 50% at 50% 5%, rgba(245, 235, 210, 0.6) 0%, transparent 55%),
     linear-gradient(180deg, #f1e8d7 0%, #e9dec8 50%, #e3d6be 100%);
+}
+
+/* ═══════════════════════════════════════════════
+ * 尺度层（与主题无关，全站唯一来源）
+ * 颜色/字体族在上面按主题定义；以下是「尺子」：
+ * 间距 / 圆角 / 字号 / 行高 / 字重 / 动效 / 层级。
+ * 任何尺寸类决策都应取自这里，不再各文件手写。
+ * ═══════════════════════════════════════════════ */
+:root {
+  /* —— 间距（4px 基） —— */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 56px;
+  --space-10: 72px;
+
+  /* —— 圆角 —— */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 28px;
+  --radius-pill: 999px;
+
+  /* —— 字号（语义命名，配套 line-height 见 .text-* 工具类） —— */
+  --text-xs: 10px;
+  --text-sm: 11px;
+  --text-caption: 12px;
+  --text-label: 13px;
+  --text-body-sm: 14px;
+  --text-body: 15px;
+  --text-body-lg: 16px;
+  --text-title-sm: 18px;
+  --text-title: 22px;
+  --text-title-lg: 28px;
+  --text-display-sm: 36px;
+  --text-display: 48px;
+
+  /* —— 行高 —— */
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.55;
+  --leading-loose: 1.75;
+
+  /* —— 字重 —— */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* —— 动效时长（镜像 motionTokens.ts，让 CSS 与 JS 共用一套手感） —— */
+  --dur-instant: 80ms;
+  --dur-hover: 140ms;
+  --dur-micro: 180ms;
+  --dur-panel: 240ms;
+  --dur-page: 320ms;
+
+  /* —— 缓动 —— */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);   /* 品牌主缓动（= motionTokens.easeSoft） */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);    /* 中性进出 */
+  --ease-gentle: cubic-bezier(0.16, 1, 0.3, 1);   /* 更柔（= motionTokens.easeGentle） */
+
+  /* —— 层级 —— */
+  --z-base: 1;
+  --z-nav: 20;
+  --z-overlay: 40;
+  --z-modal: 60;
+  --z-toast: 80;
 }
 
 @theme inline {
