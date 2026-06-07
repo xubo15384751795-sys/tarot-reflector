@@ -690,7 +690,7 @@
   bottom: 4px;
   left: 0;
   width: 48px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   pointer-events: none;
   z-index: 0;
   opacity: 0;
@@ -832,7 +832,7 @@
   align-items: center;
   gap: 8px;
   padding: 7px 12px 7px 10px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--bg-glass, rgba(255, 255, 255, 0.04));
   border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.08));
   color: var(--text-tertiary, rgba(255, 255, 255, 0.55));
@@ -994,7 +994,7 @@
 }
 
 .motif-highlight--oval {
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 /* approximate 精度的 motif —— 不画严格 bbox，画一道以 anchor 为中心的柔光
@@ -1015,7 +1015,7 @@
       var(--accent-a1) 55%,
       transparent 80%
     );
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   filter: blur(2px);
   mix-blend-mode: screen;
 }
@@ -1027,7 +1027,7 @@
   transform: translate(-50%, -50%);
   width: 14%;
   height: 14%;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: rgba(255, 252, 235, 0.85);
   box-shadow: 0 0 8px var(--accent-a4);
 }
@@ -1086,13 +1086,13 @@
 .motif-hotspot:focus-visible {
   outline: 2px solid var(--accent-a4);
   outline-offset: 2px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .motif-hotspot__dot {
   width: 9px;
   height: 9px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent);
   box-shadow:
     0 0 0 4px var(--accent-a1),
@@ -1104,7 +1104,7 @@
 .motif-hotspot__halo {
   position: absolute;
   inset: -8px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: radial-gradient(circle, var(--accent-a3) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -1240,7 +1240,7 @@
   max-width: 460px;
   margin: 0 auto 16px;
   padding: 9px 14px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   background: color-mix(in srgb, var(--accent) 9%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
 }
@@ -1248,7 +1248,7 @@
   flex: none;
   width: 8px;
   height: 8px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent);
   box-shadow: 0 0 0 4px var(--accent-a2);
   animation: motif-intro-pulse 1.9s ease-in-out infinite;
@@ -1264,7 +1264,7 @@
 .motif-intro-hint__dismiss {
   flex: none;
   padding: 4px 12px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
   background: transparent;
   font-size: 12px;
@@ -1338,7 +1338,7 @@
   padding: 4px;
   background: rgba(92, 66, 38, 0.05);
   border: 1px solid var(--archive-border);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   width: fit-content;
   margin: 0 auto 18px;
 }
@@ -1348,7 +1348,7 @@
   border: none;
   background: transparent;
   padding: 7px 14px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   font-family: var(--font-ui);
   font-size: 13px;
   color: var(--archive-text-secondary);
@@ -1371,7 +1371,7 @@
 
 .archive-card-modal .keyword-chip {
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent-a1);
   color: var(--archive-gold-deep);
   font-family: var(--font-ui);

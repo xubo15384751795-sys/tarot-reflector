@@ -192,7 +192,7 @@
   letter-spacing: 0.10em;
   color: var(--accent);
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent-dim);
   border: 1px solid var(--accent-a3);
   pointer-events: none;
@@ -205,7 +205,7 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--bg-glass-hover);
   color: var(--text-tertiary);
   border: 1px solid var(--border-glass);
@@ -268,7 +268,7 @@
   align-items: center;
   gap: 6px;
   padding: 10px 24px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   background: var(--bg-glass);
   border: 1px solid var(--border-glass);
   color: var(--text-tertiary);
@@ -346,7 +346,7 @@
   align-items: center;
   gap: 5px;
   padding: 2px 10px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   font-size: 10px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -384,28 +384,75 @@
   box-shadow: var(--shadow-card), 0 0 0 1px var(--surface) inset;
 }
 
-/* Accent pill */
+/* ── Badge 系统（统一 chip/pill/status 的标签家族）──
+ * 一套基底 + 两个尺寸 + 语义色。
+ * .pill-accent / .status-pill 作为兼容别名复用这套尺度（见下）。
+ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-meta);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.badge-sm {
+  min-height: 22px;
+  padding: 0 var(--space-3);
+  font-size: var(--text-xs);
+}
+.badge-md {
+  min-height: 28px;
+  padding: 0 var(--space-4);
+  font-size: var(--text-caption);
+}
+.badge-accent {
+  color: var(--accent-strong);
+  background: var(--accent-a1);
+  border: 1px solid var(--accent-a2);
+}
+.badge-muted {
+  color: var(--text-tertiary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.badge-neutral {
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-strong);
+}
+.badge-danger {
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+}
+
+/* 兼容别名：沿用同一套 Badge 尺度（旧用法不必改） */
 .pill-accent {
   display: inline-flex;
   align-items: center;
-  padding: 4px 14px;
-  background: var(--accent-dim);
+  min-height: 28px;
+  padding: 0 var(--space-4);
+  background: var(--accent-a1);
   border: 1px solid var(--accent-a2);
-  border-radius: 100px;
-  color: var(--accent);
-  font-size: 12px;
-  letter-spacing: 0.04em;
+  border-radius: var(--radius-pill);
+  color: var(--accent-strong);
+  font-size: var(--text-caption);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-/* Status pill variants (ui/StatusPill) */
 .status-pill {
   display: inline-flex;
   align-items: center;
-  padding: 3px 12px;
-  border-radius: 100px;
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  min-height: 22px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-meta);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
 }
 .status-pill--muted {
   background: var(--surface);
@@ -503,7 +550,7 @@
 /* Choice chip */
 .chip {
   padding: 8px 18px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   font-size: 13px;
   font-weight: 450;
   border: 1px solid var(--border-glass);
@@ -741,7 +788,7 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   color: var(--accent);
   background:
     radial-gradient(ellipse at 30% 28%, rgba(255, 244, 210, 0.40) 0%, transparent 55%),
@@ -793,7 +840,7 @@
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   background: var(--bg-glass);
   border: 1px solid var(--border-glass);
   color: var(--text-secondary);
@@ -885,7 +932,7 @@
   align-items: center;
   justify-content: center;
   padding: 16px 54px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   /* 香槟金渐变 — 比 bronze 高亮、降饱和，避免铜土感 */
   background: linear-gradient(
     155deg,

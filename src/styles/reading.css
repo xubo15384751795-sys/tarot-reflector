@@ -165,7 +165,7 @@
   transform: translate(-50%, -50%);
   width: 8px;
   height: 8px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--accent);
   box-shadow:
     0 0 0 4px var(--accent-a1),
@@ -220,7 +220,7 @@
 .motif-anchor:focus-visible {
   outline: 2px solid var(--accent-a4);
   outline-offset: 2px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 }
 
 .motif-anchor__debug {
@@ -276,7 +276,7 @@
   align-items: center;
   gap: 6px;
   padding: 7px 14px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   background: var(--bg-glass);
   border: 1px solid var(--border-glass);
   color: var(--text-secondary);
@@ -373,7 +373,7 @@
 .step-dot {
   width: 8px;
   height: 8px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.10);
   transition:
     background var(--dur-page) var(--ease-soft),
@@ -582,7 +582,7 @@
   justify-content: center;
   width: 22px;
   height: 22px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   background: var(--accent-a1);
   border: 1px solid var(--accent-a2);
   color: var(--accent-soft);
@@ -624,7 +624,7 @@
   align-items: center;
   gap: 8px;
   padding: 7px 12px 7px 10px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--bg-glass, rgba(255, 255, 255, 0.04));
   border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.08));
   color: var(--text-tertiary, rgba(255, 255, 255, 0.55));
