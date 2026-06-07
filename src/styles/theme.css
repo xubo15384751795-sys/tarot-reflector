@@ -68,14 +68,7 @@
   border-color: var(--accent);
   color: var(--text-primary);
 }
-:root[data-theme="light"] .btn-primary {
-  background: rgba(47, 42, 37, 0.92);
-  color: #F3EBDD;
-}
-:root[data-theme="light"] .btn-primary:hover {
-  background: rgba(47, 42, 37, 1);
-  box-shadow: 0 4px 20px rgba(92, 66, 38, 0.18);
-}
+/* btn-primary 已统一为金色实心（随主题切换，见 surfaces.css），不再按主题反相 */
 :root[data-theme="light"] .btn-secondary {
   border-color: var(--border-glass);
   color: var(--text-secondary);

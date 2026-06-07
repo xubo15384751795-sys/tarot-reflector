@@ -526,58 +526,159 @@
 }
 
 /* Primary button */
+/* ── Button system — 统一「主操作 = 金」语言 ──
+ * primary  : 金色实心（香槟金渐变）
+ * secondary: 描边 / 浅底
+ * ghost    : 低强调文字按钮
+ * danger   : 危险操作
+ * 共用一套圆角(--radius-pill)与动效(--dur-hover/--ease-soft)。
+ */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-2);
   padding: 14px 32px;
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.92);
-  color: #050506;
-  font-size: 15px;
-  font-weight: 500;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    155deg,
+    var(--accent-soft) 0%,
+    var(--accent) 58%,
+    var(--accent-strong) 100%
+  );
+  color: var(--accent-ink);
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
   letter-spacing: -0.01em;
-  border: none;
+  border: 1px solid var(--accent-a3);
   cursor: pointer;
-  transition: all 0.2s ease;
+  box-shadow: var(--shadow-rest);
+  transition:
+    transform var(--dur-hover) var(--ease-soft),
+    box-shadow var(--dur-hover) var(--ease-soft),
+    border-color var(--dur-hover) var(--ease-soft),
+    background var(--dur-hover) var(--ease-soft);
 }
 
 .btn-primary:hover {
-  background: rgba(255, 255, 255, 1);
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent-a4);
 }
 
 .btn-primary:active {
   transform: translateY(0);
+  box-shadow: var(--shadow-rest);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--accent-a4);
+  outline-offset: 2px;
 }
 
 .btn-primary:disabled {
-  opacity: 0.3;
+  opacity: 0.52;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
-/* Secondary button */
+/* loading 态：内容半透明，禁止交互 */
+.btn-primary[data-loading="true"],
+.btn-secondary[data-loading="true"] {
+  pointer-events: none;
+  opacity: 0.72;
+}
+
+/* Secondary button — 描边 / 浅底 */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-2);
   padding: 12px 28px;
-  border-radius: 100px;
+  border-radius: var(--radius-pill);
   background: transparent;
-  border: 1px solid var(--border-glass);
+  border: 1px solid var(--border-strong);
   color: var(--text-secondary);
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition:
+    border-color var(--dur-hover) var(--ease-soft),
+    color var(--dur-hover) var(--ease-soft),
+    background var(--dur-hover) var(--ease-soft);
 }
 
 .btn-secondary:hover {
-  border-color: rgba(255, 255, 255, 0.20);
+  border-color: var(--accent-a3);
+  background: var(--accent-a1);
   color: var(--text-primary);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--accent-a4);
+  outline-offset: 2px;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Ghost — 低强调文字按钮 */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: var(--text-body-sm);
+  cursor: pointer;
+  transition:
+    color var(--dur-hover) var(--ease-soft),
+    background var(--dur-hover) var(--ease-soft);
+}
+
+.btn-ghost:hover {
+  color: var(--accent-strong);
+  background: var(--accent-a1);
+}
+
+.btn-ghost:focus-visible {
+  outline: 2px solid var(--accent-a4);
+  outline-offset: 2px;
+}
+
+/* Danger — 危险操作 */
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--danger) 40%, transparent);
+  color: var(--danger);
+  font-size: var(--text-body-sm);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-hover) var(--ease-soft),
+    background var(--dur-hover) var(--ease-soft);
+}
+
+.btn-danger:hover {
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+  border-color: color-mix(in srgb, var(--danger) 60%, transparent);
+}
+
+.btn-danger:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--danger) 50%, transparent);
+  outline-offset: 2px;
 }
 
 

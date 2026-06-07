@@ -267,6 +267,9 @@
   --z-overlay: 40;
   --z-modal: 60;
   --z-toast: 80;
+
+  /* 金色上的墨色文字（金底在明暗两主题下都偏亮，故用同一深墨） */
+  --accent-ink: #17110a;
 }
 
 @theme inline {
