@@ -100,7 +100,7 @@
 .guide-section {
   padding: 32px 36px;
   border: 1px solid var(--border);
-  border-radius: 28px;
+  border-radius: var(--radius-2xl);
   background: var(--surface);
   box-shadow: var(--shadow-card);
   scroll-margin-top: calc(var(--app-header-height, 73px) + 24px);
@@ -148,7 +148,7 @@
 .guide-section-tip {
   margin: 16px 0 0;
   padding: 12px 14px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   font-family: var(--font-ui);
   font-size: 13px;
   line-height: 1.65;
@@ -171,7 +171,7 @@
   width: 100%;
   text-align: left;
   padding: 10px 12px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border);
   background: var(--surface-strong);
   cursor: pointer;
@@ -281,7 +281,7 @@
 
   .guide-section {
     padding: 24px 22px;
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
   }
 }
 .app-guide-page {
@@ -342,7 +342,7 @@
   width: 100%;
   text-align: left;
   padding: 8px 10px;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border-glass);
   background: transparent;
   cursor: pointer;

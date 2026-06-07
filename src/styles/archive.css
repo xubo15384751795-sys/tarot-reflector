@@ -183,7 +183,7 @@
   min-height: 0;
   margin: 0 auto 20px;
   padding: 16px 20px;
-  border-radius: 22px;
+  border-radius: var(--radius-xl);
 }
 
 .major-arcana-card__inner {
@@ -245,7 +245,7 @@
   flex-direction: column;
   min-height: 0;
   padding: 14px 16px;
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
 }
 
 .minor-grid__card:hover,
@@ -377,7 +377,7 @@
   margin: 0 auto 12px;
   padding: 10px 20px 12px;
   text-align: center;
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   background:
     linear-gradient(
       180deg,
@@ -460,7 +460,7 @@
   width: 100%;
   max-width: none;
   aspect-ratio: 2.75 / 4.75;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   border: 1px solid rgba(120, 88, 48, 0.12);
   box-shadow:
@@ -604,7 +604,7 @@
   .major-arcana-card {
     width: 100%;
     padding: 14px 16px;
-    border-radius: 18px;
+    border-radius: var(--radius-lg);
     margin-bottom: 16px;
   }
 
@@ -757,7 +757,7 @@
 
   background: var(--archive-surface);
   border: 1px solid var(--archive-border);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   color: var(--archive-text-primary);
   font-family: var(--font-ui);
 }
@@ -894,7 +894,7 @@
   margin: 0 auto 14px;
   max-width: 640px;
   padding: 6px 12px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-family: var(--font-meta);
   font-size: 10px;
   letter-spacing: 0.04em;
@@ -946,7 +946,7 @@
 .motif-canvas__card-frame {
   position: absolute;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   box-shadow:
     0 14px 36px rgba(92, 66, 38, 0.14),
     0 0 0 1px rgba(92, 66, 38, 0.08);
@@ -990,7 +990,7 @@
 }
 
 .motif-highlight--rect {
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
 }
 
 .motif-highlight--oval {
@@ -1138,7 +1138,7 @@
   padding: 14px 16px 16px;
   background: rgba(255, 252, 244, 0.78);
   border: 1px solid rgba(140, 106, 50, 0.18);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   box-shadow:
     0 16px 40px rgba(92, 66, 38, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.65);

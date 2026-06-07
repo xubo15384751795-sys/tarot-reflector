@@ -69,7 +69,7 @@
   max-width: 100%;
   aspect-ratio: 600 / 1050;
   margin: 0 auto;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow:
     0 14px 36px rgba(92, 66, 38, 0.14),
@@ -343,7 +343,7 @@
   margin: 0 auto;
   padding: 40px 32px 34px;
   text-align: center;
-  border-radius: 22px;
+  border-radius: var(--radius-xl);
   background: var(--bg-glass);
   border: 1px solid var(--border-glass);
   backdrop-filter: blur(10px);
@@ -433,7 +433,7 @@
 .insight-card {
   position: relative;
   padding: 18px 22px;
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   background: linear-gradient(
     135deg,
     var(--accent-a0) 0%,
@@ -445,7 +445,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   pointer-events: none;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
@@ -453,7 +453,7 @@
 /* Subcard for "与您的问题的连接" */
 .subcard {
   padding: 16px 18px;
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -597,7 +597,7 @@
   align-items: center;
   gap: 10px;
   padding: 14px 18px;
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(255, 255, 255, 0.06);
   color: rgba(198, 198, 203, 0.95);

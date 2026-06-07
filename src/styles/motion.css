@@ -210,7 +210,7 @@
 .card-glow {
   position: absolute;
   inset: -18%;
-  border-radius: 32px;
+  border-radius: var(--radius-2xl);
   z-index: 0;
   background: radial-gradient(
     circle at 50% 48%,
@@ -243,7 +243,7 @@
 
 .card-frame {
   padding: 8px;
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   background: rgba(255, 252, 244, 0.62);
   border: 1px solid rgba(92, 66, 38, 0.16);
   box-shadow: var(--card-contact-shadow), var(--card-ambient-shadow);

@@ -24,7 +24,7 @@
   max-width: 100%;
   aspect-ratio: 600 / 1050;
   margin: 0 auto;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow:
     0 14px 36px rgba(92, 66, 38, 0.14),
