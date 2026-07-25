@@ -549,32 +549,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .card-silhouette-float { animation: none; }
-}
-
-/* 5. 侧边栏活跃项光晕 */
-.nav-item-active-glow {
-  position: relative;
-}
-.nav-item-active-glow::after {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: radial-gradient(
-    ellipse at 50% 50%,
-    var(--accent-a2) 0%,
-    transparent 70%
-  );
-  opacity: 0;
-  transition: opacity 0.4s var(--ease-soft);
-  pointer-events: none;
-  z-index: -1;
-}
-.nav-item-active-glow.is-active::after {
-  opacity: 1;
-}
-
-/* 首页模式选择屏的容器。
+}/* 首页模式选择屏的容器。
    刻意不复用 .hero-entry / .reading-entry-page--editorial ——
    那两个是「问题输入屏」的布局，min-height:100vh 会和外层
    已经是视口高的 .hero-shell 叠加，凭空多出一屏滚动。 */

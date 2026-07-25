@@ -7,7 +7,6 @@ import AppShell from "@/components/AppShell";
 import HeroTitleSplit from "@/components/HeroTitleSplit";
 import ModeSelector from "@/components/ModeSelector";
 import HeroEntry from "@/components/HeroEntry";
-import ThemeToggle from "@/components/ThemeToggle";
 import BookStageBackground from "@/components/BookStageBackground";
 import EditorialViewport from "@/components/EditorialViewport";
 import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
@@ -52,20 +51,9 @@ export default function Home() {
       <div className="home-page home-hero-canvas home-hero-canvas--book relative w-full flex-1 min-h-0 flex flex-col overflow-x-hidden">
         <BookStageBackground />
 
-        {stage === "mode" && (
-          <>
-            <div className="absolute top-6 left-6 md:top-8 md:left-10 z-10 md:hidden">
-              <div className="flex items-center justify-center w-11 h-11 rounded-xl glass-lens">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" strokeWidth="1.2" style={{ opacity: 0.9 }}>
-                  <path d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z" />
-                </svg>
-              </div>
-            </div>
-            <div className="absolute top-5 right-5 md:top-7 md:right-9 z-10 md:hidden">
-              <ThemeToggle variant="icon" />
-            </div>
-          </>
-        )}
+        {/* 这里原本有一组「仅窄屏」的浮动品牌图标 + 主题切换：
+            当时顶栏在窄屏既不显示导航、品牌也很弱，只好在页面上补两个。
+            现在顶栏在所有断点都有品牌、导航和主题切换，它们只会重复。 */}
 
         <main className="hero-shell relative z-[1] flex-1 min-h-0 flex flex-col">
           <LayoutGroup id="home-entry-flow">

@@ -467,67 +467,7 @@
   inset: 0;
   z-index: 0;
   background: var(--hero-bg);
-}
-
-.app-shell--immersive .app-shell-sidebar--immersive {
-  border-right: 1px solid color-mix(in srgb, var(--border-glass) 55%, transparent);
-  background: color-mix(in srgb, var(--surface-strong) 58%, transparent);
-  backdrop-filter: blur(16px) saturate(1.18);
-  -webkit-backdrop-filter: blur(16px) saturate(1.18);
-  box-shadow:
-    inset -1px 0 0 rgba(255, 248, 232, 0.06),
-    4px 0 24px rgba(0, 0, 0, 0.12);
-}
-
-.app-shell-sidebar--glass {
-  background: color-mix(in srgb, var(--surface) 82%, transparent);
-  backdrop-filter: blur(14px) saturate(1.16);
-  -webkit-backdrop-filter: blur(14px) saturate(1.16);
-  box-shadow: inset -1px 0 0 rgba(255, 248, 232, 0.05);
-}
-
-/* ── 侧栏导航项 · 唯一所有者 ────────────────────────────
-   配色以前写在 AppShell 的内联 style 上，导致沉浸式侧栏只能靠
-   !important 才能改写。现在状态全部由 .is-active 表达。 */
-
-.app-shell-nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  width: 64px;
-  padding: var(--space-3) var(--space-2);
-  border-radius: var(--radius-md);
-  color: var(--text-tertiary);
-  background: transparent;
-  transition:
-    color var(--dur-hover) var(--ease-soft),
-    background var(--dur-hover) var(--ease-soft);
-}
-
-.app-shell-nav-item:hover {
-  color: var(--text-secondary);
-}
-
-.app-shell-nav-item.is-active {
-  color: var(--text-primary);
-  background: var(--bg-glass-hover);
-}
-
-.app-shell-nav-item__icon {
-  color: currentColor;
-}
-
-.app-shell-nav-item.is-active .app-shell-nav-item__icon {
-  color: var(--accent);
-}
-
-.app-shell-nav-item__label {
-  font-size: var(--text-xs);
-  letter-spacing: 0.08em;
-}
-
-.app-shell--immersive .app-shell-header--immersive {
+}.app-shell--immersive .app-shell-header--immersive {
   border-bottom: none;
   background: linear-gradient(
     180deg,

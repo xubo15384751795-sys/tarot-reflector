@@ -1,47 +1,20 @@
 /**
- * 应用外壳：图标导航 + 顶栏 + 主内容。
+ * 应用外壳：顶栏（品牌 + 导航 + 操作）+ 主内容。
+ *
+ * 全站只有这一套导航。之前首页用顶部横排、其余页面用左侧 88px 图标栏，
+ * 换个页面就换一次导航骨架；而且两套都是 `hidden md:flex`，窄屏上
+ * 等于没有导航。现在统一成顶部横排，并且在窄屏也保留。
  */
 
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ensureNotesRepository } from "@/features/notes/repository";
 import ThemeToggle from "./ThemeToggle";
 import EditorialTopNav from "./EditorialTopNav";
 
-type NavItem = {
-  id: string;
-  label: string;
-  href: string;
-  icon: ReactNode;
-};
-
-function IconStack() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
-      <rect x="6" y="4" width="12" height="16" rx="2" />
-      <line x1="9" y1="9" x2="15" y2="9" />
-      <line x1="9" y1="13" x2="15" y2="13" />
-    </svg>
-  );
-}
-function IconNotes() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
-      <path d="M6 4 H18 V20 L12 17 L6 20 Z" />
-    </svg>
-  );
-}
-function IconSpark() {
-  return (
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.2">
-      <path d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z" />
-    </svg>
-  );
-}
 function IconRedraw() {
   return (
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.4">
@@ -61,22 +34,6 @@ function IconShare() {
     </svg>
   );
 }
-function IconArchive() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
-      <rect x="3" y="3" width="18" height="5" rx="1" />
-      <path d="M5 8 v10 a2 2 0 0 0 2 2 h10 a2 2 0 0 0 2-2 V8" />
-      <line x1="10" y1="12" x2="14" y2="12" />
-    </svg>
-  );
-}
-
-const primaryNavItems: NavItem[] = [
-  { id: "draw", label: "开始", href: "/", icon: <IconStack /> },
-  { id: "archive", label: "档案", href: "/archive", icon: <IconArchive /> },
-  { id: "notes", label: "笔记", href: "/notes", icon: <IconNotes /> },
-];
-
 type Props = {
   children: ReactNode;
   /** 传入即显示「重新抽牌」；不传即隐藏（不需要额外的 showActions 开关） */
@@ -95,7 +52,6 @@ export default function AppShell({
   shareHint,
   immersive = false,
 }: Props) {
-  const pathname = usePathname();
   const [confirmRedraw, setConfirmRedraw] = useState(false);
 
   useEffect(() => {
@@ -104,63 +60,9 @@ export default function AppShell({
 
   return (
     <div
-      className={`flex flex-row min-h-screen w-full relative ${immersive ? "app-shell--immersive" : ""}`}
+      className={`flex flex-col min-h-screen w-full relative ${immersive ? "app-shell--immersive" : ""}`}
     >
       {immersive && <div aria-hidden className="app-shell-atmosphere pointer-events-none" />}
-      <aside
-        className={`app-shell-sidebar ${
-          immersive ? "hidden" : "hidden md:flex"
-        } flex-col items-center w-[88px] py-8 sticky top-0 h-screen z-30 shrink-0 ${
-          immersive ? "app-shell-sidebar--immersive" : "app-shell-sidebar--glass"
-        }`}
-        style={
-          immersive
-            ? undefined
-            : {
-                borderRight: "1px solid var(--border-glass)",
-              }
-        }
-      >
-        <Link
-          href="/"
-          aria-label="回到首页"
-          className="flex items-center justify-center w-10 h-10 rounded-xl mb-10 transition-colors archive-border-thin"
-          style={{ color: "var(--accent)" }}
-        >
-          <IconSpark />
-        </Link>
-        <nav className="flex-1 flex flex-col items-center gap-1 w-full">
-          {primaryNavItems.map((item) => {
-            const active =
-              item.href === pathname ||
-              (item.id === "draw" && pathname?.startsWith("/reading")) ||
-              (item.id === "archive" && pathname?.startsWith("/archive")) ||
-              (item.id === "notes" && pathname?.startsWith("/notes"));
-            return (
-              /* 配色交给 .app-shell-nav-item[.is-active]（见 reading.css）。
-                 之前这里写内联 style，沉浸式侧栏就只能用 !important 才压得过去。 */
-              <Link
-                key={item.id}
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={`group app-shell-nav-item nav-item-active-glow ${active ? "is-active" : ""}`}
-              >
-                <span className="app-shell-nav-item__icon">{item.icon}</span>
-                <span className="app-shell-nav-item__label">{item.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
-        <Link
-          href="/guide"
-          className="mt-4 px-2 py-2 rounded-lg text-[10px] tracking-[0.1em] transition-colors"
-          style={{
-            color: pathname?.startsWith("/guide") ? "var(--accent)" : "var(--text-faint)",
-          }}
-        >
-          科普
-        </Link>
-      </aside>
 
       <div className="app-shell-main flex-1 flex flex-col min-w-0 relative z-[1]">
         <header
@@ -187,7 +89,7 @@ export default function AppShell({
             </Link>
             {!immersive && (
               <span
-                className="hidden md:inline app-shell-header__tagline"
+                className="hidden lg:inline app-shell-header__tagline"
                 style={{ color: "var(--text-faint)" }}
               >
                 神秘档案馆
@@ -195,7 +97,7 @@ export default function AppShell({
             )}
           </div>
 
-          {immersive && <EditorialTopNav />}
+          <EditorialTopNav />
 
           <div className="app-shell-header__actions flex items-center gap-1.5 md:gap-2 shrink-0">
             {shareHint && (

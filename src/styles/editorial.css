@@ -146,46 +146,6 @@
   margin-inline: auto;
 }
 
-/* .reading-entry-page--editorial 已随首页改版删除：
-   它的三个 !important padding 只是为了压过工具类，首页模式选择屏
-   现在用 .home-mode-screen 自己拥有布局，不需要再打这场覆盖战。 */
-
-/* 沉浸式侧栏 — 细线下划线导航，非 pill */
-.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow {
-  border-radius: 0;
-  width: auto;
-  min-width: 56px;
-  width: auto;
-  padding: 10px 4px 12px;
-  background: transparent;
-}
-
-.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow::after {
-  display: none;
-}
-
-.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow span:last-child {
-  position: relative;
-  padding-bottom: 4px;
-}
-
-.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow span:last-child::after {
-  content: "";
-  position: absolute;
-  left: 15%;
-  right: 15%;
-  bottom: 0;
-  height: 1px;
-  background: var(--accent-a3);
-  transform: scaleX(0);
-  transition: transform 0.35s var(--ease-soft);
-}
-
-.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow.is-active span:last-child::after,
-.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow:hover span:last-child::after {
-  transform: scaleX(1);
-}
-
 .app-shell--immersive .app-shell-header--immersive h1 {
   font-family: var(--font-serif-like);
   font-weight: 300;
@@ -199,27 +159,30 @@
   font-size: 11px;
 }
 
+/* 顶栏布局 — 三列网格，导航居中。
+   以前只挂在 --editorial（= 首页 immersive）上，因为只有首页有顶部导航。
+   现在全站共用这一套导航，布局也必须对所有顶栏生效。 */
 @media (max-width: 767px) {
-  .app-shell-header--editorial {
+  .app-shell-header {
     display: flex;
     justify-content: space-between;
+    gap: 12px;
   }
 }
 
-/* 沉浸式顶栏 — 三列网格，居中细线导航 */
 @media (min-width: 768px) {
-  .app-shell-header--editorial {
+  .app-shell-header {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: 16px;
   }
 
-  .app-shell-header--editorial .app-shell-header__brand {
+  .app-shell-header .app-shell-header__brand {
     justify-self: start;
   }
 
-  .app-shell-header--editorial .app-shell-header__actions {
+  .app-shell-header .app-shell-header__actions {
     justify-self: end;
   }
 }

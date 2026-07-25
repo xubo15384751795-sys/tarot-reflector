@@ -20,13 +20,19 @@ function isActive(id: string, href: string, pathname: string | null) {
   return false;
 }
 
-/** 首页沉浸式 desktop 顶栏 — 居中细线下划线导航 */
+/**
+ * 全站唯一导航 — 居中细线下划线。
+ *
+ * 原本只在首页 immersive 时渲染，且是 `hidden md:flex`；
+ * 侧栏同样 `hidden md:flex`，于是窄屏上一个导航都没有。
+ * 现在所有页面、所有断点都渲染它，窄屏只是收紧间距和字号。
+ */
 export default function EditorialTopNav() {
   const pathname = usePathname();
 
   return (
     <nav
-      className="editorial-top-nav hidden md:flex items-center gap-8 lg:gap-10"
+      className="editorial-top-nav flex items-center gap-4 sm:gap-8 lg:gap-10"
       aria-label="主菜单"
     >
       {ITEMS.map((item) => {
