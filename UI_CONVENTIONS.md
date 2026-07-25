@@ -57,7 +57,17 @@
   不要把它们的视觉混入产品；要保留就得套 AppShell 并皮肤化原生控件。
 
 ## 守卫
-
 - `npm run ui:guard`：裸金色 / `transition:all` / 半像素 / 旧 pill 圆角 / Material 缓动 任一回潮即失败。
 - `npm run ui:audit`：打印当前漂移指标基线（收敛后应持续走低）。
 - `npm run check` 已包含 `ui:guard`。
+
+## 对比度守则（WCAG AA）
+
+- 正文 ≥ 4.5:1；大字（≥18px / bold ≥14px）≥ 3:1。
+- `--text-faint`（暗色主题 #6d655b）已提亮至 4.6:1，不要再降。
+- placeholder 文字同样需要 4.5:1，禁止用默认 `#999`。
+- 金色上文字：`--accent-ink`（#17110a），不要用白色。
+
+## Anti-Slop（来自 impeccable，选装）
+
+详见 [`docs/UI_LANGUAGE.md`](docs/UI_LANGUAGE.md) 的「Anti-Slop 禁令」和「Copy 纪律」章节。

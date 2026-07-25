@@ -8,6 +8,8 @@ type Props = {
   title: string;
   subtitle?: string;
   align?: "center" | "left";
+  /** 文学页眉节奏 — notes / archive */
+  literary?: boolean;
   className?: string;
   children?: ReactNode;
 };
@@ -18,6 +20,7 @@ export function SectionHeader({
   title,
   subtitle,
   align = "center",
+  literary = false,
   className,
   children,
 }: Props) {
@@ -25,24 +28,25 @@ export function SectionHeader({
     <header
       className={cn(
         "section-header flex flex-col gap-2",
+        literary && "section-header--literary",
         align === "center" && "text-center items-center",
         className,
       )}
     >
       {kicker && (
-        <span className="section-header__kicker text-[11px] tracking-[0.18em] uppercase">
+        <span className="section-header__kicker">
           {kicker}
         </span>
       )}
-      <h2 className="section-header__title hero-title text-[clamp(22px,3vw,32px)] font-light tracking-[-0.012em] leading-[1.3]">
+      <h2 className="section-header__title hero-title">
         {title}
       </h2>
       {subtitle && (
-        <p className="section-header__subtitle text-[13px] tracking-[0.04em] leading-[1.7] max-w-md">
+        <p className="section-header__subtitle">
           {subtitle}
         </p>
       )}
-      {children}
+      {children && <div className="section-header__meta">{children}</div>}
     </header>
   );
 }

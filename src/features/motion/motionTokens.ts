@@ -90,11 +90,11 @@ export const motionColors = {
   cardShadowReveal: "rgba(0, 0, 0, 0.55)",
 } as const;
 
-/** Framer page / stage transition */
+/** Framer page / stage transition — 纸感位移，不用 blur 模版切换 */
 export const pageTransition = {
-  initial: { opacity: 0, y: 10, filter: "blur(8px)" },
-  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-  exit: { opacity: 0, y: -8, filter: "blur(6px)" },
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
   transition: {
     duration: motionTokens.durations.page,
     ease: motionTokens.easeSoft,

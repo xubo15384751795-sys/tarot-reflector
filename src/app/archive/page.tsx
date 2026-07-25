@@ -9,7 +9,10 @@ import {
   isArchiveMotionFlagEnabled,
 } from "@/features/motion";
 import { useArchiveHeroEntrance } from "@/features/motion/archiveHeroEntrance.gsap";
-import { DividerLine, ArchiveLabel } from "@/components/ArchiveEmblems";
+import StageAmbient from "@/components/StageAmbient";
+import AtmosphereDust from "@/components/AtmosphereDust";
+import EditorialViewport from "@/components/EditorialViewport";
+import { DividerLine } from "@/components/ArchiveEmblems";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ArchiveCard } from "@/components/archive/ArchiveCard";
 import AppShell from "@/components/AppShell";
@@ -84,7 +87,10 @@ function ArchivePageContent() {
 
   return (
     <AppShell showActions={false}>
+      <EditorialViewport credit="Tarot Reflector">
       <div className="relative min-h-[calc(100vh-60px)] w-full archive-page parchment-noise">
+        <StageAmbient variant="archive" />
+        <AtmosphereDust density={28} />
         <div className="archive-page-ambient" aria-hidden="true" />
         <main className="relative z-[1] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 archive-page-main">
           <header
@@ -92,15 +98,13 @@ function ArchivePageContent() {
             className="archive-page-hero archive-hero archive-hero-motion-scope"
             data-archive-hero-motion={heroEntrance ? "1" : undefined}
           >
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <DividerLine width={32} />
-              <ArchiveLabel code="COD.ARCH" />
-              <DividerLine width={32} />
-            </div>
             <SectionHeader
+              kicker="图像档案"
               title="档案馆"
-              subtitle="Rider–Waite–Smith 完整牌组 · 78 张图像档案"
-              className="archive-page-hero__head"
+              subtitle="78 张 Rider–Waite–Smith 牌面，按花色与序号浏览。点击牌面，从符号开始靠近。"
+              align="left"
+              literary
+              className="archive-page-hero__head items-start text-left"
             />
           </header>
 
@@ -180,6 +184,7 @@ function ArchivePageContent() {
           )}
         </AnimatePresence>
       </div>
+      </EditorialViewport>
     </AppShell>
   );
 }

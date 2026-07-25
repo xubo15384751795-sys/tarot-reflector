@@ -10,6 +10,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ensureNotesRepository } from "@/features/notes/repository";
 import ThemeToggle from "./ThemeToggle";
+import EditorialTopNav from "./EditorialTopNav";
 
 type NavItem = {
   id: string;
@@ -24,14 +25,6 @@ function IconStack() {
       <rect x="6" y="4" width="12" height="16" rx="2" />
       <line x1="9" y1="9" x2="15" y2="9" />
       <line x1="9" y1="13" x2="15" y2="13" />
-    </svg>
-  );
-}
-function IconCompass() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
-      <circle cx="12" cy="12" r="9" />
-      <polygon points="12,6 14,12 12,18 10,12" fill="currentColor" stroke="none" opacity="0.7" />
     </svg>
   );
 }
@@ -79,14 +72,6 @@ function IconAudio() {
     </svg>
   );
 }
-function IconSearch() {
-  return (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
-      <circle cx="11" cy="11" r="7" />
-      <line x1="16.5" y1="16.5" x2="21" y2="21" />
-    </svg>
-  );
-}
 function IconArchive() {
   return (
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
@@ -97,11 +82,9 @@ function IconArchive() {
   );
 }
 
-const navItems: NavItem[] = [
+const primaryNavItems: NavItem[] = [
   { id: "draw", label: "开始", href: "/", icon: <IconStack /> },
   { id: "archive", label: "档案", href: "/archive", icon: <IconArchive /> },
-  { id: "reading", label: "解读", href: "/reading", icon: <IconCompass /> },
-  { id: "guide", label: "科普", href: "/guide", icon: <IconSearch /> },
   { id: "notes", label: "笔记", href: "/notes", icon: <IconNotes /> },
 ];
 
@@ -136,13 +119,16 @@ export default function AppShell({
     >
       {immersive && <div aria-hidden className="app-shell-atmosphere pointer-events-none" />}
       <aside
-        className={`app-shell-sidebar hidden md:flex flex-col items-center w-[88px] py-8 relative z-30 shrink-0 ${immersive ? "app-shell-sidebar--immersive" : ""}`}
+        className={`app-shell-sidebar ${
+          immersive ? "hidden" : "hidden md:flex"
+        } flex-col items-center w-[88px] py-8 relative z-30 shrink-0 ${
+          immersive ? "app-shell-sidebar--immersive" : "app-shell-sidebar--glass"
+        }`}
         style={
           immersive
             ? undefined
             : {
                 borderRight: "1px solid var(--border-glass)",
-                background: "var(--bg-elevated)",
               }
         }
       >
@@ -154,19 +140,18 @@ export default function AppShell({
         >
           <IconSpark />
         </Link>
-        <nav className="flex-1 flex flex-col items-center gap-1">
-          {navItems.map((item) => {
+        <nav className="flex-1 flex flex-col items-center gap-1 w-full">
+          {primaryNavItems.map((item) => {
             const active =
               item.href === pathname ||
-              (item.id === "reading" && pathname?.startsWith("/reading")) ||
+              (item.id === "draw" && pathname?.startsWith("/reading")) ||
               (item.id === "archive" && pathname?.startsWith("/archive")) ||
-              (item.id === "guide" && pathname?.startsWith("/guide")) ||
               (item.id === "notes" && pathname?.startsWith("/notes"));
             return (
               <Link
                 key={item.id}
                 href={item.href}
-                className="group flex flex-col items-center gap-1.5 px-2 py-3 rounded-xl w-[64px] transition-all"
+                className={`group flex flex-col items-center gap-1.5 px-2 py-3 rounded-xl w-[64px] transition-all nav-item-active-glow ${active ? "is-active" : ""}`}
                 style={{
                   color: active ? "var(--text-primary)" : "var(--text-tertiary)",
                   background: active ? "var(--bg-glass-hover)" : "transparent",
@@ -180,11 +165,22 @@ export default function AppShell({
             );
           })}
         </nav>
+        <Link
+          href="/guide"
+          className="mt-4 px-2 py-2 rounded-lg text-[10px] tracking-[0.1em] transition-colors"
+          style={{
+            color: pathname?.startsWith("/guide") ? "var(--accent)" : "var(--text-faint)",
+          }}
+        >
+          科普
+        </Link>
       </aside>
 
       <div className="app-shell-main flex-1 flex flex-col min-w-0 relative z-[1]">
         <header
-          className={`app-shell-header flex items-center justify-between px-4 md:px-10 py-4 md:py-5 z-10 shrink-0 ${immersive ? "app-shell-header--immersive" : ""}`}
+          className={`app-shell-header flex items-center justify-between px-4 md:px-10 py-4 md:py-5 z-10 shrink-0 ${
+            immersive ? "app-shell-header--immersive app-shell-header--editorial" : ""
+          }`}
           style={
             immersive
               ? undefined
@@ -195,22 +191,27 @@ export default function AppShell({
                 }
           }
         >
-          <div className="flex items-baseline gap-3 min-w-0">
-            <h1
-              className="text-[length:var(--text-title-sm)] md:text-[length:var(--text-title-md)] font-light tracking-[0.18em] shrink-0"
-              style={{ color: "var(--text-primary)" }}
+          <div className="app-shell-header__brand flex items-baseline gap-3 min-w-0">
+            <Link
+              href="/"
+              className="text-[length:var(--text-title-sm)] md:text-[length:var(--text-title-md)] font-light tracking-[0.18em] shrink-0 transition-opacity hover:opacity-80"
+              style={{ color: "var(--text-primary)", fontFamily: "var(--font-serif-like)" }}
             >
               阈牌
-            </h1>
-            <span
-              className="hidden md:inline text-[10px] tracking-[0.14em]"
-              style={{ color: "var(--text-faint)" }}
-            >
-              神秘档案馆
-            </span>
+            </Link>
+            {!immersive && (
+              <span
+                className="hidden md:inline app-shell-header__tagline"
+                style={{ color: "var(--text-faint)" }}
+              >
+                神秘档案馆
+              </span>
+            )}
           </div>
 
-          <div className="flex items-center gap-1.5 md:gap-2 shrink-0">
+          {immersive && <EditorialTopNav />}
+
+          <div className="app-shell-header__actions flex items-center gap-1.5 md:gap-2 shrink-0">
             {shareHint && (
               <span
                 className="hidden md:inline text-[12px] tracking-[0.02em] mr-1"

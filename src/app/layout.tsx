@@ -88,7 +88,7 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@200;300;400;500&family=ZCOOL+XiaoWei&display=swap"
         />
       </head>
       <body className="min-h-full flex flex-col relative">

@@ -1,0 +1,140 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "回到首页" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]
+      - navigation [ref=e7]:
+        - link "开始" [ref=e8] [cursor=pointer]:
+          - /url: /
+          - img [ref=e10]
+          - generic [ref=e12]: 开始
+        - link "档案" [ref=e13] [cursor=pointer]:
+          - /url: /archive
+          - img [ref=e15]
+          - generic [ref=e18]: 档案
+        - link "解读" [ref=e19] [cursor=pointer]:
+          - /url: /reading
+          - img [ref=e21]
+          - generic [ref=e24]: 解读
+        - link "科普" [ref=e25] [cursor=pointer]:
+          - /url: /guide
+          - img [ref=e27]
+          - generic [ref=e30]: 科普
+        - link "笔记" [ref=e31] [cursor=pointer]:
+          - /url: /notes
+          - img [ref=e33]
+          - generic [ref=e35]: 笔记
+    - generic [ref=e36]:
+      - banner [ref=e37]:
+        - generic [ref=e38]:
+          - heading "阈牌" [level=1] [ref=e39]
+          - generic [ref=e40]: 神秘档案馆
+        - generic [ref=e41]:
+          - button "切换到月白主题" [ref=e42] [cursor=pointer]:
+            - img [ref=e43]
+            - generic [ref=e46]: 月白
+          - button "语音（尚未实现）" [ref=e47] [cursor=pointer]:
+            - img [ref=e48]
+      - main [ref=e50]:
+        - generic [ref=e52]:
+          - generic [ref=e53]: ARCH.01
+          - heading "科普" [level=2] [ref=e54]
+          - paragraph [ref=e55]: 塔罗、牌阵与使用方式
+        - generic [ref=e56]:
+          - complementary "章节导航" [ref=e57]:
+            - button "塔罗在这里是什么" [ref=e58] [cursor=pointer]: "01"
+            - button "牌组与体系" [ref=e59] [cursor=pointer]: "02"
+            - button "什么是牌阵" [ref=e60] [cursor=pointer]: "03"
+            - button "三种进入方式" [ref=e61] [cursor=pointer]: "04"
+            - button "解读流程" [ref=e62] [cursor=pointer]: "05"
+            - button "牌义档案库" [ref=e63] [cursor=pointer]: "06"
+            - button "解读笔记" [ref=e64] [cursor=pointer]: "07"
+            - button "科普工作台" [ref=e65] [cursor=pointer]: "08"
+            - button "牌阵一览" [ref=e66] [cursor=pointer]: +
+          - generic [ref=e67]:
+            - generic [ref=e69]:
+              - generic [ref=e70]: "01"
+              - heading "塔罗在这里是什么" [level=2] [ref=e71]
+              - paragraph [ref=e72]: 一面镜子，用来外化与命名你此刻的感受。
+              - paragraph [ref=e73]: 阈牌把塔罗当作一面镜子，用来外化、命名你此刻的感受——不预测命运，不替你做决定，也不替代专业咨询。
+            - generic [ref=e75]:
+              - generic [ref=e76]: "02"
+              - heading "牌组与体系" [level=2] [ref=e77]
+              - paragraph [ref=e78]: 韦特派公版牌面，正逆位各有自己的语气。
+              - paragraph [ref=e79]: 采用 Rider–Waite–Smith（韦特派）公版牌面。牌义以项目内牌义档案为准；正位偏外显与流动，逆位偏内隐、阻滞或需要向内看，不是简单的「反义词」。
+            - generic [ref=e81]:
+              - generic [ref=e82]: "03"
+              - heading "什么是牌阵" [level=2] [ref=e83]
+              - paragraph [ref=e84]: 选牌阵，是选一种看问题的结构。
+              - paragraph [ref=e85]: 牌阵是把多张牌放在固定位置上，每个位置回答问题的一个侧面（例如「过去」「阻碍」「建议」）。选牌阵 ≈ 选一种看问题的结构，不是选「更准」的魔法。
+              - paragraph [ref=e86]: 不是选「更准」的魔法，而是选你要照亮哪些侧面。
+            - generic [ref=e88]:
+              - generic [ref=e89]: "04"
+              - heading "三种进入方式" [level=2] [ref=e90]
+              - paragraph [ref=e91]: 按你此刻的状态选入口，而不是选难度。
+              - paragraph [ref=e92]: 今日一牌：没有具体问题时使用。抽一张牌，看看今天有什么值得被轻轻看见。
+              - paragraph [ref=e93]: 问题解读：带着一个具体问题进入。系统会先帮你澄清问法，再推荐合适的牌阵。
+              - paragraph [ref=e94]: 深度牌阵：适合反复出现、暂时说不清的问题。用多张牌，慢慢看见它的层次。
+            - generic [ref=e96]:
+              - generic [ref=e97]: "05"
+              - heading "解读流程" [level=2] [ref=e98]
+              - paragraph [ref=e99]: 从澄清问题到收束，像靠近一张被翻开的牌。
+              - paragraph [ref=e100]: 澄清问题 → 推荐或自选牌阵 → 抽牌翻牌 → 按位置读牌 → 收束总结。
+              - paragraph [ref=e101]: 选牌阵时可查看各牌位含义与连读规则，不必一次记牢。
+            - generic [ref=e103]:
+              - generic [ref=e104]: "06"
+              - heading "牌义档案库" [level=2] [ref=e105]
+              - paragraph [ref=e106]: 78 张牌义与符号坐标，供慢读与对照。
+              - paragraph [ref=e107]: 78 张韦特牌的正逆位关键词、领域含义与牌面符号（motif）坐标。大阿尔卡那为手工校准，小阿尔卡那符号位置为示意。
+              - paragraph [ref=e108]: 大阿尔卡那为手工校准；小阿尔卡那符号位置为示意。
+            - generic [ref=e110]:
+              - generic [ref=e111]: "07"
+              - heading "解读笔记" [level=2] [ref=e112]
+              - paragraph [ref=e113]: 把当下的牌面与感受留在本设备。
+              - paragraph [ref=e114]: 解读结束后可把牌面与感受存为快照，仅保存在本设备。可回看，不会上传到服务器。
+            - generic [ref=e116]:
+              - generic [ref=e117]: "08"
+              - heading "科普工作台" [level=2] [ref=e118]
+              - paragraph [ref=e119]: 为录屏讲解准备的符号工作台。
+              - paragraph [ref=e120]: 为录屏讲解准备：逐张牌、逐个符号高亮，可设 9:16 比例与纯净模式。不是个人解读流程。
+            - generic [ref=e121]:
+              - generic [ref=e122]: 附
+              - heading "牌阵一览" [level=2] [ref=e123]
+              - paragraph [ref=e124]: 点击名称，在下方查看牌位与连读规则。
+              - list [ref=e125]:
+                - listitem [ref=e126]:
+                  - button "单牌解读 1 张 · 入门" [ref=e127] [cursor=pointer]:
+                    - generic [ref=e128]: 单牌解读
+                    - generic [ref=e129]: 1 张 · 入门
+                - listitem [ref=e130]:
+                  - button "过去 / 现在 / 趋势 3 张 · 入门" [ref=e131] [cursor=pointer]:
+                    - generic [ref=e132]: 过去 / 现在 / 趋势
+                    - generic [ref=e133]: 3 张 · 入门
+                - listitem [ref=e134]:
+                  - button "情况 / 阻碍 / 建议 3 张 · 入门" [ref=e135] [cursor=pointer]:
+                    - generic [ref=e136]: 情况 / 阻碍 / 建议
+                    - generic [ref=e137]: 3 张 · 入门
+                - listitem [ref=e138]:
+                  - button "结构三牌阵 3 张 · 进阶" [ref=e139] [cursor=pointer]:
+                    - generic [ref=e140]: 结构三牌阵
+                    - generic [ref=e141]: 3 张 · 进阶
+                - listitem [ref=e142]:
+                  - button "关系镜像牌阵 5 张 · 进阶" [ref=e143] [cursor=pointer]:
+                    - generic [ref=e144]: 关系镜像牌阵
+                    - generic [ref=e145]: 5 张 · 进阶
+                - listitem [ref=e146]:
+                  - button "凯尔特十字 10 张 · 深入" [ref=e147] [cursor=pointer]:
+                    - generic [ref=e148]: 凯尔特十字
+                    - generic [ref=e149]: 10 张 · 深入
+            - generic [ref=e150]:
+              - heading "快捷入口" [level=2] [ref=e151]
+              - paragraph [ref=e152]:
+                - link "牌义档案库 →" [ref=e153] [cursor=pointer]:
+                  - /url: /archive
+                - text: ·
+                - link "录屏科普工作台 →" [ref=e154] [cursor=pointer]:
+                  - /url: /explain
+  - button "Open Next.js Dev Tools" [ref=e160] [cursor=pointer]:
+    - img [ref=e161]
+  - alert [ref=e164]

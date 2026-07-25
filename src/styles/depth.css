@@ -1,0 +1,159 @@
+/* ═══ 空间深度 · 玻璃分层 · 手稿材质（色彩仍用 tokens，只调结构与光影）═══ */
+
+.glass-lens--panel {
+  backdrop-filter: blur(calc(var(--backdrop-blur) + 6px)) saturate(1.28);
+  -webkit-backdrop-filter: blur(calc(var(--backdrop-blur) + 6px)) saturate(1.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 232, 0.32),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.16),
+    var(--shadow-hover),
+    0 0 0 1px color-mix(in srgb, var(--border-strong) 65%, transparent);
+}
+
+.glass-lens--input {
+  backdrop-filter: blur(calc(var(--backdrop-blur) + 2px)) saturate(1.2);
+  -webkit-backdrop-filter: blur(calc(var(--backdrop-blur) + 2px)) saturate(1.2);
+}
+
+/* 手稿标签 — 领域选择，非 SaaS pill */
+.manuscript-tag {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-bottom-color: color-mix(in srgb, var(--border-strong) 80%, var(--ink-filigree));
+  background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+  color: var(--text-secondary);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 232, 0.2),
+    var(--shadow-rest);
+  transition:
+    border-color 0.28s var(--ease-soft),
+    color 0.28s var(--ease-soft),
+    background 0.28s var(--ease-soft),
+    box-shadow 0.28s var(--ease-soft),
+    transform 0.28s var(--ease-soft);
+}
+
+.manuscript-tag:hover {
+  border-color: var(--border-active);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-hover);
+}
+
+.manuscript-tag.is-active {
+  border-color: var(--accent-a3);
+  border-bottom-color: var(--accent-a4);
+  background: color-mix(in srgb, var(--accent-dim) 55%, var(--surface-strong));
+  color: var(--text-primary);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 232, 0.14),
+    0 0 18px var(--accent-glow);
+}
+
+.manuscript-tag:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-glow), var(--shadow-hover);
+}
+
+/* 舞台环境光 — 固定层，按页面微调 */
+.stage-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.stage-ambient__candle {
+  position: absolute;
+  top: -10%;
+  left: -6%;
+  width: 52%;
+  height: 52%;
+  background: radial-gradient(
+    ellipse 50% 45% at 28% 28%,
+    var(--candlelight) 0%,
+    transparent 72%
+  );
+}
+
+.stage-ambient__well {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 90% 70% at 50% 38%,
+    color-mix(in srgb, var(--accent) 5%, transparent) 0%,
+    transparent 62%
+  );
+}
+
+.stage-ambient__floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  background: radial-gradient(
+    ellipse 80% 55% at 50% 100%,
+    color-mix(in srgb, var(--bg-base) 40%, transparent) 0%,
+    transparent 70%
+  );
+}
+
+/* 牌桌透视 */
+.mode-deck__layout {
+  perspective: 1400px;
+  perspective-origin: 50% 42%;
+}
+
+.mode-deck__stage {
+  transform-style: preserve-3d;
+}
+
+.home-entry-card--deck {
+  animation: none;
+}
+
+.home-entry-card__float {
+  animation: card-table-rest 7s ease-in-out infinite;
+  transform-origin: 50% 80%;
+}
+
+@keyframes card-table-rest {
+  0%, 100% { transform: translateY(0) rotateX(0deg) rotateZ(-1.5deg); }
+  50% { transform: translateY(-5px) rotateX(1.2deg) rotateZ(-1.5deg); }
+}
+
+.mode-deck__slot--question .mode-deck-slot:not(:disabled):hover {
+  transform: translateY(-2px) rotateY(5deg);
+}
+
+.mode-deck__slot--daily .mode-deck-slot:not(:disabled):hover {
+  transform: translateY(-2px) rotateY(-4deg);
+}
+
+.mode-deck__slot--deep .mode-deck-slot:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-entry-card--deck {
+    animation: none;
+  }
+
+  .mode-deck__slot--question .mode-deck-slot:hover,
+  .mode-deck__slot--daily .mode-deck-slot:hover,
+  .mode-deck__slot--deep .mode-deck-slot:hover {
+    transform: none;
+  }
+}

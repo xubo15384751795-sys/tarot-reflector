@@ -1,0 +1,283 @@
+/* ═══ 编辑级质感层 — 画框视口 · 雾感 · 浮尘 · 大标题（色彩仍用 tokens）═══ */
+
+.editorial-viewport {
+  position: relative;
+  min-height: inherit;
+  isolation: isolate;
+}
+
+.editorial-viewport__frame {
+  position: fixed;
+  inset: 10px;
+  border: 1px solid color-mix(in srgb, var(--border-strong) 55%, transparent);
+  border-radius: 22px;
+  pointer-events: none;
+  z-index: 24;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--border) 35%, transparent),
+    0 0 80px color-mix(in srgb, var(--bg-base) 40%, transparent);
+}
+
+@media (min-width: 768px) {
+  .editorial-viewport__frame {
+    inset: 14px 18px;
+    border-radius: 26px;
+  }
+}
+
+.editorial-viewport__credit {
+  position: fixed;
+  right: max(22px, 2.8vw);
+  bottom: max(18px, 2.2vw);
+  z-index: 23;
+  margin: 0;
+  font-family: var(--font-serif-like);
+  font-size: 11px;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* 浮尘 */
+.atmosphere-dust {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.atmosphere-dust__mote {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--sz);
+  height: var(--sz);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--text-primary) 28%, transparent);
+  opacity: 0.35;
+  animation: dust-drift var(--dur) var(--delay) ease-in-out infinite;
+}
+
+:root[data-theme="light"] .atmosphere-dust__mote {
+  background: color-mix(in srgb, var(--text-secondary) 35%, transparent);
+  opacity: 0.4;
+}
+
+@keyframes dust-drift {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.2;
+  }
+  35% {
+    transform: translate(var(--drift), -14px);
+    opacity: 0.5;
+  }
+  70% {
+    transform: translate(calc(var(--drift) * -0.6), 8px);
+    opacity: 0.28;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere-dust__mote {
+    animation: none;
+    opacity: 0.15;
+  }
+}
+
+/* 雾幕与有机底景 — 由 StageAmbient 挂载 */
+.stage-ambient__fog {
+  position: absolute;
+  inset: -5% 0 0;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 18%, color-mix(in srgb, var(--text-primary) 4%, transparent) 0%, transparent 58%),
+    radial-gradient(ellipse 70% 45% at 72% 8%, color-mix(in srgb, var(--accent) 6%, transparent) 0%, transparent 52%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg-base) 0%, transparent) 0%, transparent 42%, color-mix(in srgb, var(--bg-base) 25%, transparent) 100%);
+  opacity: 0.9;
+}
+
+.stage-ambient__organic {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: min(42vh, 380px);
+  pointer-events: none;
+  opacity: 0.55;
+  color: var(--ink-filigree);
+}
+
+.stage-ambient__organic svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 编辑级主标题 */
+.hero-title--editorial {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5.6vw, 54px);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+  max-width: 14ch;
+  margin-inline: auto;
+}
+
+.hero-title__emphasis {
+  font-family: "LXGW WenKai", var(--font-display);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+.editorial-lead {
+  margin-top: clamp(20px, 3.5vw, 32px);
+  font-family: var(--font-ui);
+  font-size: clamp(13px, 1.5vw, 15px);
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  max-width: 36ch;
+  margin-inline: auto;
+}
+
+.reading-entry-page--editorial {
+  max-width: min(920px, 94vw) !important;
+  padding-top: clamp(28px, 6vh, 56px) !important;
+  padding-bottom: clamp(32px, 8vh, 72px) !important;
+}
+
+/* 沉浸式侧栏 — 细线下划线导航，非 pill */
+.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow {
+  border-radius: 0;
+  width: auto;
+  min-width: 56px;
+  padding: 10px 4px 12px;
+  background: transparent !important;
+}
+
+.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow::after {
+  display: none;
+}
+
+.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow span:last-child {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow span:last-child::after {
+  content: "";
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent-a3);
+  transform: scaleX(0);
+  transition: transform 0.35s var(--ease-soft);
+}
+
+.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow.is-active span:last-child::after,
+.app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow:hover span:last-child::after {
+  transform: scaleX(1);
+}
+
+.app-shell--immersive .app-shell-header--immersive h1 {
+  font-family: var(--font-serif-like);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+}
+
+.app-shell--immersive .app-shell-header--immersive .app-shell-header__tagline {
+  font-family: var(--font-serif-like);
+  font-style: italic;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+}
+
+@media (max-width: 767px) {
+  .app-shell-header--editorial {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+/* 沉浸式顶栏 — 三列网格，居中细线导航 */
+@media (min-width: 768px) {
+  .app-shell-header--editorial {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .app-shell-header--editorial .app-shell-header__brand {
+    justify-self: start;
+  }
+
+  .app-shell-header--editorial .app-shell-header__actions {
+    justify-self: end;
+  }
+}
+
+.editorial-underline-link {
+  position: relative;
+  font-family: var(--font-serif-like);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  padding: 4px 2px 8px;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.32s var(--ease-soft),
+    border-color 0.32s var(--ease-soft);
+}
+
+.editorial-underline-link:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--border-strong);
+}
+
+.editorial-underline-link.is-active {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent-a4);
+}
+
+.editorial-underline-link:focus-visible {
+  outline: none;
+  border-bottom-color: var(--accent);
+  box-shadow: 0 2px 0 var(--accent-glow);
+}
+
+/* 书页上的牌桌 — 减少模拟展台 */
+.mode-deck--exhibit .mode-deck__layout {
+  padding: clamp(20px, 5vh, 48px) 0 clamp(28px, 6vh, 56px);
+  gap: clamp(18px, 3vh, 28px);
+}
+
+.mode-deck--exhibit .mode-deck__stage {
+  padding: clamp(12px, 3vh, 32px) 0;
+}
+
+.mode-deck--exhibit .mode-deck__stage::before,
+.mode-deck--exhibit .mode-deck__stage::after {
+  display: none;
+}
+
+.mode-deck__lead {
+  font-family: var(--font-kicker);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+}
+
+.mode-deck--exhibit .mode-deck__hint {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  margin-top: clamp(16px, 3vh, 28px);
+}

@@ -41,7 +41,7 @@
   --text-secondary: #b9aea0;
   --text-tertiary: #8a8175;
   --text-muted: #756c63;
-  --text-faint: #5e574e;
+  --text-faint: #6d655b;
 
   /* —— 金色 / 强调 —— */
   --gold: #c6a15c;
@@ -70,7 +70,7 @@
   --shadow-overlay: 0 24px 72px rgba(0, 0, 0, 0.46);
   --shadow-modal: 0 36px 96px rgba(0, 0, 0, 0.56);
   --danger: #d35a45;
-  --backdrop-blur: 20px;
+  --backdrop-blur: 24px;
 
   /* —— 兼容别名（旧组件仍引用） —— */
   --bg-glass: var(--surface);
@@ -92,7 +92,9 @@
   --ring-subtle: rgba(198, 161, 92, 0.10);
 
   /* —— 字体分层（全站） —— */
-  --font-title: "LXGW WenKai", "霞鹜文楷", "STKaiti", "KaiTi", "Songti SC", serif;
+  --font-display: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "LXGW WenKai", serif;
+  --font-kicker: "ZCOOL XiaoWei", "Noto Serif SC", serif;
+  --font-title: var(--font-display);
   --font-ui: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
   --font-meta: "Inter", "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
 
@@ -115,12 +117,12 @@
   /* —— 核心 surface / border / text —— */
   --bg-base: #f1e8d7;
   --bg-elevated: #e9dec8;
-  --surface: rgba(255, 251, 242, 0.72);
-  --surface-strong: rgba(255, 250, 240, 0.90);
-  --surface-hover: rgba(255, 251, 242, 0.88);
-  --border: rgba(92, 66, 38, 0.16);
-  --border-strong: rgba(92, 66, 38, 0.26);
-  --border-active: rgba(92, 66, 38, 0.32);
+  --surface: rgba(255, 251, 242, 0.88);
+  --surface-strong: rgba(255, 250, 240, 0.94);
+  --surface-hover: rgba(255, 251, 242, 0.92);
+  --border: rgba(92, 66, 38, 0.22);
+  --border-strong: rgba(92, 66, 38, 0.30);
+  --border-active: rgba(92, 66, 38, 0.38);
   --text-primary: #2f2a25;
   --text-secondary: #514941;
   --text-tertiary: #7e7468;
@@ -154,7 +156,7 @@
   --shadow-overlay: 0 24px 72px rgba(20, 12, 4, 0.20);
   --shadow-modal: 0 36px 96px rgba(20, 12, 4, 0.26);
   --danger: #b04030;
-  --backdrop-blur: 14px;
+  --backdrop-blur: 18px;
 
   /* —— 兼容别名 —— */
   --bg-glass: var(--surface);
@@ -176,7 +178,9 @@
   --ring-subtle: rgba(185, 149, 82, 0.10);
 
   /* —— 字体分层（全站） —— */
-  --font-title: "LXGW WenKai", "霞鹜文楷", "STKaiti", "KaiTi", "Songti SC", serif;
+  --font-display: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "LXGW WenKai", serif;
+  --font-kicker: "ZCOOL XiaoWei", "Noto Serif SC", serif;
+  --font-title: var(--font-display);
   --font-ui: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
   --font-meta: "Inter", "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
 
@@ -270,6 +274,7 @@
   --z-overlay: 40;
   --z-modal: 60;
   --z-toast: 80;
+  --z-noise: 9998;    /* 纸张噪点纹理叠层 */
 
   /* 金色上的墨色文字（金底在明暗两主题下都偏亮，故用同一深墨） */
   --accent-ink: #17110a;
@@ -281,7 +286,7 @@
   /* 1. UI 字体：正文、按钮、输入框、导航、标签 */
   --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
   /* 2. 标题字体：Logo、大标题、幕标题、收束句 */
-  --font-serif-like: "LXGW WenKai", "霞鹜文楷", "STKaiti", "KaiTi", "Songti SC", serif;
+  --font-serif-like: var(--font-display);
   /* 3. 数字与进度字体：进度、编号、日期、状态 */
   --font-mono: "Inter", "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
 }

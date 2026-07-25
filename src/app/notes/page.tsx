@@ -4,8 +4,11 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import AppShell from "@/components/AppShell";
+import StageAmbient from "@/components/StageAmbient";
+import AtmosphereDust from "@/components/AtmosphereDust";
+import EditorialViewport from "@/components/EditorialViewport";
 import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
-import { DividerLine, ArchiveLabel } from "@/components/ArchiveEmblems";
+import { DividerLine } from "@/components/ArchiveEmblems";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SnapshotCard } from "@/components/ui/SnapshotCard";
 import { StatusPill } from "@/components/ui/StatusPill";
@@ -52,17 +55,17 @@ export default function NotesPage() {
 
   return (
     <AppShell showActions={false}>
-      <div className="relative min-h-[calc(100vh-60px)]" style={{ background: "var(--bg-base)" }}>
+      <EditorialViewport credit="Tarot Reflector">
+      <div className="relative min-h-[calc(100vh-60px)] notes-page" style={{ background: "var(--bg-base)" }}>
+        <StageAmbient variant="minimal" />
+        <AtmosphereDust density={24} />
         <div className="relative z-[1] max-w-[680px] mx-auto px-5 md:px-8 py-10 md:py-14 flex flex-col gap-10">
-          <header className="text-center flex flex-col gap-3">
-            <div className="flex items-center justify-center gap-3">
-              <DividerLine width={32} />
-              <ArchiveLabel code="COD.NOTE" />
-              <DividerLine width={32} />
-            </div>
+          <header className="text-center flex flex-col gap-4">
             <SectionHeader
+              kicker="解读快照"
               title="牌面笔记"
               subtitle="这里保存的不是答案，而是你曾经如何靠近一个问题。"
+              literary
             />
             <StatusPill variant="muted">
               {snapshots.length} 次解读 · {totalNotes} 条笔记 · 只存在你的设备上
@@ -154,6 +157,7 @@ export default function NotesPage() {
           )}
         </div>
       </div>
+      </EditorialViewport>
     </AppShell>
   );
 }

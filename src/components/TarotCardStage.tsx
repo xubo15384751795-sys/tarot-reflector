@@ -14,6 +14,7 @@ type Props = {
   rotate?: number;
   showGroundShadow?: boolean;
   className?: string;
+  layoutId?: string;
   animate?: MotionProps["animate"];
   initial?: MotionProps["initial"];
   transition?: MotionProps["transition"];
@@ -24,12 +25,14 @@ export default function TarotCardStage({
   rotate = -2.2,
   showGroundShadow = true,
   className,
+  layoutId,
   animate,
   initial,
   transition,
 }: Props) {
   return (
     <motion.div
+      layoutId={layoutId}
       className={`tarot-card-stage relative flex items-center justify-center ${className ?? ""}`}
       style={{ width: "100%", maxWidth: 280, aspectRatio: "2 / 3.45" }}
       initial={

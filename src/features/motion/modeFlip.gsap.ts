@@ -6,7 +6,9 @@ import "./gsapRegister";
 export type ModeFlipState = ReturnType<typeof Flip.getState>;
 
 export function captureModeFlipState(container: HTMLElement): ModeFlipState {
-  return Flip.getState(container.querySelectorAll(".mode-card"));
+  return Flip.getState(
+    container.querySelectorAll(".mode-deck-slot, .mode-card"),
+  );
 }
 
 /**
@@ -30,7 +32,7 @@ export function playModeSelectionFlip(
   );
 
   const others = container.querySelectorAll(
-    `.mode-card:not([data-mode="${chosenMode}"])`,
+    `.mode-deck-slot:not([data-mode="${chosenMode}"]), .mode-card:not([data-mode="${chosenMode}"])`,
   );
   tl.to(
     others,

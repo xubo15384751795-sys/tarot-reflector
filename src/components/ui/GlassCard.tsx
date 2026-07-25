@@ -30,7 +30,7 @@ export function GlassCard<T extends ElementType = "div">({
   return (
     <Tag
       className={cn(
-        "glass-card",
+        "glass-lens glass-lens--panel",
         glow && "interactive-glow",
         paddingClass[padding],
         className,

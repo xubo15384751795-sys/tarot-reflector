@@ -16,7 +16,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import AppShell from "@/components/AppShell";
 import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
-import { AlchemicalRing } from "@/components/ArchiveEmblems";
 import SavePanel from "@/components/SavePanel";
 import { useReadingSession } from "@/features/reading/hooks/useReadingSession";
 import { useReadingApi } from "@/features/reading/hooks/useReadingApi";
@@ -68,13 +67,6 @@ function ReadingContent() {
     >
       <div className="relative min-h-[calc(100vh-60px)]">
         <ReadingFlowProgress mode={mode} stage={stage} onJump={session.goTo} />
-
-        <div
-          aria-hidden
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.06]"
-        >
-          <AlchemicalRing size={500} rings={4} />
-        </div>
 
         <AnimatePresence mode="wait">
           <motion.div

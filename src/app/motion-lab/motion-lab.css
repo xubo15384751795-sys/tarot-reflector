@@ -1,0 +1,375 @@
+/* ═══ /motion-lab — Cinematic Scroll Prototype ═══ */
+
+.motion-lab {
+  position: relative;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  --motion-ivory: var(--text-primary);
+  --motion-ivory-muted: var(--text-secondary);
+}
+
+.motion-lab__scroll-track {
+  height: calc(var(--motion-track-vh, 260) * 1vh);
+  pointer-events: none;
+}
+
+.motion-lab__hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-base);
+}
+
+/* ── Layer 0: base darkness + 极弱 grain ── */
+.motion-lab__base-dark {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 58%, color-mix(in srgb, var(--bg-elevated) 35%, transparent) 0%, transparent 55%),
+    linear-gradient(180deg, #0a0806 0%, var(--bg-base) 45%, #080604 100%);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.motion-lab__base-dark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.018;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── Layer 1: vignette ── */
+.motion-lab__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 92% 88% at 50% 48%,
+    transparent 32%,
+    color-mix(in srgb, var(--bg-base) 75%, transparent) 100%
+  );
+  opacity: 0.84;
+}
+
+/* ── Camera rig ── */
+.motion-lab__camera-rig {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  will-change: transform;
+}
+
+/* ── Layer 2: main visual ── */
+.motion-lab__main-visual {
+  position: absolute;
+  left: 46%;
+  top: 54%;
+  z-index: 20;
+  width: min(72vw, 920px);
+  height: min(58vh, 520px);
+  transform: translate(-50%, -50%) rotate(-5deg);
+  transform-origin: 50% 55%;
+}
+
+.motion-lab__book {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+.motion-lab__book img {
+  object-fit: cover;
+}
+
+.motion-lab__card-on-book {
+  position: absolute;
+  right: 14%;
+  top: 22%;
+  width: 22%;
+  aspect-ratio: 600 / 1050;
+  transform: rotate(7deg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+/* ── Layer 3: grain ── */
+.motion-lab__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.022;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── Layer 4: dust ── */
+.motion-lab__dust {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.11;
+}
+
+.motion-lab__dust-mote {
+  position: absolute;
+  width: 1.5px;
+  height: 1.5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--text-primary) 30%, transparent);
+  opacity: 0.22;
+}
+
+/* ── Layer 5: light falloff ── */
+.motion-lab__light {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 42% 36% at 24% 20%,
+    var(--candlelight) 0%,
+    transparent 68%
+  );
+  opacity: 0.06;
+}
+
+/* ── Layer 6–7: title group ── */
+.motion-lab__title-group {
+  position: absolute;
+  left: 50%;
+  top: 11%;
+  z-index: 60;
+  width: min(88vw, 640px);
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.motion-lab__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5.2vw, 56px);
+  font-weight: 300;
+  line-height: 1.22;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--text-primary) 92%, #e8dcc8);
+  opacity: 1;
+}
+
+.motion-lab__subtitle {
+  margin: 14px 0 0;
+  font-family: var(--font-ui);
+  font-size: clamp(13px, 1.6vw, 15px);
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: 0.06em;
+  color: var(--motion-ivory-muted);
+  opacity: 0;
+}
+
+/* ── Layer 8: archive cards（桌缘纸条，非三等分 feature row）── */
+.motion-lab__cards {
+  position: absolute;
+  left: 10%;
+  bottom: 14%;
+  z-index: 80;
+  width: min(248px, 40vw);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  align-items: flex-start;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(8px);
+}
+
+.motion-lab__archive-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  padding: 12px 14px;
+  text-align: left;
+  border: 1px solid color-mix(in srgb, var(--border-strong) 70%, transparent);
+  background: color-mix(in srgb, var(--bg-base) 22%, transparent);
+  color: var(--text-secondary);
+  cursor: default;
+  transition:
+    border-color 0.22s linear,
+    color 0.22s linear,
+    box-shadow 0.22s linear;
+}
+
+.motion-lab__archive-card:nth-child(1) {
+  transform: rotate(-1.2deg);
+}
+
+.motion-lab__archive-card:nth-child(2) {
+  transform: rotate(0.5deg);
+  margin-left: 8px;
+}
+
+.motion-lab__archive-card:nth-child(3) {
+  transform: rotate(-0.7deg);
+  margin-left: 3px;
+}
+
+@media (min-width: 768px) {
+  .motion-lab__cards {
+    left: 11%;
+    bottom: 16%;
+    width: min(268px, 26vw);
+  }
+}
+
+.motion-lab__archive-card:hover {
+  border-color: var(--accent-a3);
+  color: var(--text-primary);
+  box-shadow: inset 0 0 12px color-mix(in srgb, var(--accent) 2.5%, transparent);
+}
+
+.motion-lab__archive-card:focus-visible {
+  outline: 2px solid var(--accent-a3);
+  outline-offset: 3px;
+}
+
+.motion-lab__archive-card__title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: inherit;
+}
+
+.motion-lab__archive-card__line {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.55;
+  letter-spacing: 0.03em;
+  color: var(--text-faint);
+}
+
+.motion-lab__archive-card:hover .motion-lab__archive-card__line {
+  color: var(--text-tertiary);
+}
+
+/* ── Layer 9: frame ── */
+.motion-lab__frame {
+  position: absolute;
+  inset: 10px;
+  z-index: 90;
+  border: 1px solid color-mix(in srgb, var(--border-strong) 50%, transparent);
+  border-radius: 22px;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border) 30%, transparent);
+}
+
+@media (min-width: 768px) {
+  .motion-lab__frame {
+    inset: 14px 18px;
+    border-radius: 26px;
+  }
+}
+
+/* ── Layer 10: scroll hint ── */
+.motion-lab__scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  z-index: 100;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.motion-lab__scroll-hint__line {
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--text-faint) 50%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+.motion-lab__scroll-hint__label {
+  margin: 0;
+  font-family: var(--font-kicker);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--text-faint);
+}
+
+.motion-lab__chrome-link {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 100;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.22s linear,
+    border-color 0.22s linear;
+}
+
+.motion-lab__chrome-link:hover {
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-strong);
+}
+
+.motion-lab__reduced-note {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  z-index: 100;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-lab__camera-rig {
+    will-change: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .motion-lab__main-visual {
+    width: 92vw;
+    height: 50vh;
+    left: 50%;
+    top: 56%;
+  }
+
+  .motion-lab__cards {
+    bottom: 10%;
+  }
+}

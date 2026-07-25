@@ -3,9 +3,11 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import type { Domain, UserInput } from "@/lib/schema";
-import AstrolabeStarCard from "./AstrolabeStarCard";
-import ScrambleReveal from "./ScrambleReveal";
-import { AlchemicalRing, CornerOrnament, ArchiveLabel, DividerLine } from "./ArchiveEmblems";
+import { HomeEntryCard } from "@/components/HomeEntryCard";
+import { ManuscriptTag } from "@/components/ui/ManuscriptTag";
+import ScrambleReveal from "@/components/ScrambleReveal";
+import StageAmbient from "@/components/StageAmbient";
+import { springSmall } from "@/features/motion";
 
 type Props = {
   onSubmit: (input: UserInput) => void;
@@ -95,6 +97,13 @@ function IconShield() {
     </svg>
   );
 }
+function IconChevronLeft() {
+  return (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <polyline points="14,6 8,12 14,18" />
+    </svg>
+  );
+}
 
 const DOMAINS: { value: Domain; label: string; icon: ReactNode }[] = [
   { value: "love", label: "感情", icon: <IconHeart /> },
@@ -104,14 +113,6 @@ const DOMAINS: { value: Domain; label: string; icon: ReactNode }[] = [
   { value: "self", label: "自我", icon: <IconUser /> },
   { value: "money", label: "财务", icon: <IconDollar /> },
 ];
-
-function IconChevronLeft() {
-  return (
-    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <polyline points="14,6 8,12 14,18" />
-    </svg>
-  );
-}
 
 export default function HeroEntry({ onSubmit, embedded = false, onBack }: Props) {
   const [question, setQuestion] = useState("");
@@ -129,26 +130,12 @@ export default function HeroEntry({ onSubmit, embedded = false, onBack }: Props)
   };
 
   return (
-    <div
-      className={
-        embedded
-          ? "hero-entry hero-entry--embedded"
-          : "hero-entry"
-      }
-    >
+    <div className={embedded ? "hero-entry hero-entry--embedded" : "hero-entry"}>
       {!embedded && (
         <>
-          <div
-            aria-hidden
-            className="hero-entry__bg"
-            style={{ background: "var(--hero-bg)" }}
-          />
-          <div
-            aria-hidden
-            className="hero-entry__noise"
-          />
-          <div aria-hidden className="hero-entry__candle" />
-          <div aria-hidden className="hero-entry-sparkles" />
+          <StageAmbient variant="home" />
+          <div aria-hidden className="hero-entry__bg" style={{ background: "var(--hero-bg)" }} />
+          <div aria-hidden className="hero-entry__noise" />
         </>
       )}
 
@@ -164,37 +151,40 @@ export default function HeroEntry({ onSubmit, embedded = false, onBack }: Props)
 
         <div className="hero-entry__grid">
           <motion.section
-            initial={{ opacity: 0, y: 12 }}
+            initial={embedded ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={springSmall}
             className="hero-entry__copy"
           >
-            <div className="hero-entry__meta">
-              <ArchiveLabel code="COD.001" />
-              <DividerLine width={32} />
-            </div>
-
-            <div className="hero-entry__brand">
-              <span className="hero-entry__brand-line" />
-              <span className="hero-entry__brand-text">阈&nbsp;牌</span>
-              <span className="hero-entry__brand-line" />
-            </div>
-
             <h1 className="hero-entry__headline hero-title">
-              翻开一页档案，
-              <br />
-              看见你问题的结构。
+              {embedded ? (
+                <>
+                  写下你想
+                  <br />
+                  靠近的事。
+                </>
+              ) : (
+                <>
+                  翻开一页档案，
+                  <br />
+                  看见你问题的结构。
+                </>
+              )}
             </h1>
 
             <p className="hero-entry__intro">
-              慢慢写下此刻最占据你的那件事。
-              <span className="hero-entry__intro-muted">
-                {" "}
-                这张牌不是答案，是一面古老的镜子。
-              </span>
+              {embedded
+                ? "不用写得很完整。牌面会帮你看见问题的轮廓。"
+                : "慢慢写下此刻最占据你的那件事。"}
+              {!embedded && (
+                <span className="hero-entry__intro-muted">
+                  {" "}
+                  这张牌不是答案，是一面古老的镜子。
+                </span>
+              )}
             </p>
 
-            <div className="hero-input">
+            <div className="hero-input glass-lens glass-lens--input">
               <input
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
@@ -218,66 +208,38 @@ export default function HeroEntry({ onSubmit, embedded = false, onBack }: Props)
               />
             )}
 
-            <div className="hero-entry__chips">
-              {DOMAINS.map((d) => {
-                const active = domain === d.value;
-                return (
-                  <button
-                    key={d.value}
-                    type="button"
-                    onClick={() => setDomain(d.value)}
-                    className={`hero-chip ${active ? "is-active" : ""}`}
-                  >
-                    <span
-                      style={{
-                        color: active ? "var(--accent)" : "var(--text-tertiary)",
-                      }}
-                    >
-                      {d.icon}
-                    </span>
-                    <span>{d.label}</span>
-                  </button>
-                );
-              })}
+            <div className="hero-entry__chips" role="group" aria-label="问题领域">
+              {DOMAINS.map((d) => (
+                <ManuscriptTag
+                  key={d.value}
+                  active={domain === d.value}
+                  icon={d.icon}
+                  onClick={() => setDomain(d.value)}
+                >
+                  {d.label}
+                </ManuscriptTag>
+              ))}
             </div>
 
-            <ScrambleReveal
-              text={domainTips[domain]}
-              className="hero-entry__domain-tip"
-            />
+            <ScrambleReveal text={domainTips[domain]} className="hero-entry__domain-tip" />
 
             <motion.button
               type="button"
               onClick={handleSubmit}
               disabled={!canSubmit}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.35, duration: 0.5 }}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ...springSmall, delay: 0.12 }}
               className={`hero-cta hero-entry__cta ${canSubmit ? "" : "is-disabled"}`}
             >
               <IconSparkSmall />
-              <span className="ml-2 tracking-[0.18em]">看看这一页</span>
+              <span className="ml-2 tracking-[0.12em]">翻开这一页</span>
             </motion.button>
           </motion.section>
 
-          <motion.section
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.12 }}
-            className="hero-entry__visual"
-            aria-hidden
-          >
-            <div className="hero-entry__visual-ring">
-              <AlchemicalRing size={360} rings={4} />
-            </div>
-            <CornerOrnament size={28} position="tl" className="hero-entry__corner hero-entry__corner--tl" />
-            <CornerOrnament size={28} position="tr" className="hero-entry__corner hero-entry__corner--tr" />
-            <CornerOrnament size={28} position="bl" className="hero-entry__corner hero-entry__corner--bl" />
-            <CornerOrnament size={28} position="br" className="hero-entry__corner hero-entry__corner--br" />
-            <div className="hero-entry__card-wrap">
-              <AstrolabeStarCard />
-            </div>
-          </motion.section>
+          <section className="hero-entry__visual">
+            <HomeEntryCard size="hero" />
+          </section>
         </div>
       </main>
 
@@ -286,7 +248,7 @@ export default function HeroEntry({ onSubmit, embedded = false, onBack }: Props)
           <IconShield />
         </span>
         <span>
-          基于 Rider–Waite–Smith 传统牌义的图像档案 — 系统不会替你做决定，只照亮牌面上的符号。
+          基于 Rider–Waite–Smith 传统牌义的图像档案。系统不会替你做决定，只照亮牌面上的符号。
         </span>
       </footer>
     </div>
