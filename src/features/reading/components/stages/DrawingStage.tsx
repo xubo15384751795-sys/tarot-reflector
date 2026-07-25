@@ -8,9 +8,9 @@
  *   card_revealed — 显示首牌 + 本地传统牌义 + 「继续」按钮
  */
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import CardDeck from "@/components/CardDeck";
+import CardReveal from "@/components/CardReveal";
 import { readingStatusText } from "@/lib/readingStatusCopy";
 import type {
   DrawnCardSnapshot,
@@ -57,68 +57,23 @@ export default function DrawingStage({
   }
 
   const localMeaning = localMeanings[0];
-  const isReversed = firstCard.orientation === "reversed";
 
   return (
     <div className="flex-1 flex flex-col items-center justify-center min-h-[60vh] px-6 py-12 gap-6">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-        className="relative"
-      >
-        <div
-          className="card-stage"
-          style={{ width: "min(220px, 50vw)", aspectRatio: "600/1050" }}
-        >
-          <div
-            className="absolute inset-0 rounded-[18px] overflow-hidden"
-            style={{
-              boxShadow: "0 30px 80px rgba(0,0,0,0.6)",
-              // 逆位不再 180° 翻转牌图——视觉上倒立的人/牌在低落情绪时会
-              // 放大不适感。改用底色微调（轻微暗金描边）+ 标签传达逆位语义。
-              border: isReversed
-                ? "1.5px solid rgba(146, 110, 60, 0.5)"
-                : undefined,
-              boxSizing: "border-box",
-            }}
-          >
-            <Image
-              src={firstCard.image}
-              alt={firstCard.card_name_zh}
-              fill
-              sizes="220px"
-              className="object-cover"
-              priority
-            />
-          </div>
-        </div>
-      </motion.div>
+      {/* 翻牌这一刻只在这里发生一次；position_readings 不再重画一张同样的牌 */}
+      <CardReveal
+        image={firstCard.image}
+        cardName={firstCard.card_name_en}
+        zhName={firstCard.card_name_zh}
+        orientation={firstCard.orientation}
+        motifs={[]}
+      />
 
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
-        className="text-center"
-      >
-        <h2
-          className="text-[length:var(--text-title)] font-light"
-          style={{
-            color: "var(--text-primary)",
-            fontFamily: "var(--font-serif-like)",
-          }}
-        >
-          {firstCard.card_name_zh}
-          <span className="ml-2 text-[14px]" style={{ color: "var(--accent)" }}>
-            {firstCard.orientation_zh}
-          </span>
-        </h2>
-        {firstCard.position_name_zh && (drawnCards?.length ?? 0) > 1 && (
-          <p className="text-[12px] mt-1" style={{ color: "var(--text-faint)" }}>
-            {firstCard.position_name_zh}
-          </p>
-        )}
-      </motion.div>
+      {firstCard.position_name_zh && (drawnCards?.length ?? 0) > 1 && (
+        <p className="text-[12px]" style={{ color: "var(--text-faint)" }}>
+          {firstCard.position_name_zh}
+        </p>
+      )}
 
       {localMeaning && (
         <motion.div

@@ -177,7 +177,7 @@ function ExplainContent() {
 
   if (loadingTab) {
     return (
-      <AppShell showActions={false}>
+      <AppShell>
         <div className="min-h-[50vh] flex items-center justify-center">
           <ReadingStatusIndicator status="archive_browsing" />
         </div>
@@ -219,7 +219,7 @@ function ExplainContent() {
   }
 
   return (
-    <AppShell showActions={false}>
+    <AppShell>
       <div className="relative min-h-[calc(100vh-60px)] flex flex-col items-center">
         {/* 背景纹饰 */}
         <CornerOrnament size={28} position="tl" className="absolute top-3 left-3 hidden sm:block" style={{ opacity: 0.18 }} />

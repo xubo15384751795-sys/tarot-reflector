@@ -53,16 +53,16 @@ function ReadingContent() {
   }, [session, mode]);
 
   const { stage } = session.state;
-  const showActions = stage === "position_readings" || stage === "summary";
+  // 「重新抽牌」只在牌已经出来之后露出
+  const canRedraw = stage === "position_readings" || stage === "summary";
   // 分享按钮仅 summary 阶段露出，避免在用户还在读的过程中诱导社交分享
   const canShare = stage === "summary";
 
   // Summary 阶段：显示保存面板
   return (
     <AppShell
-      onRedraw={showActions ? () => router.push("/") : undefined}
+      onRedraw={canRedraw ? () => router.push("/") : undefined}
       onShare={canShare ? actions.share : undefined}
-      showActions={showActions}
       shareHint={actions.shareHint}
     >
       <div className="relative min-h-[calc(100vh-60px)]">
@@ -177,7 +177,7 @@ export default function ReadingPage() {
   return (
     <Suspense
       fallback={
-        <AppShell showActions={false}>
+        <AppShell>
           <main className="flex-1 flex items-center justify-center p-8 min-h-[60vh]">
             <ReadingStatusIndicator status="question_reframing" />
           </main>

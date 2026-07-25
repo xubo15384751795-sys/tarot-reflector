@@ -72,7 +72,7 @@ export default function SnapshotDetailPage() {
 
   if (!loaded) {
     return (
-      <AppShell showActions={false}>
+      <AppShell>
         <div className="flex justify-center py-20">
           <ReadingStatusIndicator status="archive_browsing" />
         </div>
@@ -82,7 +82,7 @@ export default function SnapshotDetailPage() {
 
   if (!snapshot) {
     return (
-      <AppShell showActions={false}>
+      <AppShell>
         <div className="flex flex-col items-center gap-6 py-20 text-center">
           <p style={{ color: "var(--text-tertiary)" }}>找不到这次解读。</p>
           <button onClick={() => router.push("/notes")} className="action-pill">
@@ -97,7 +97,7 @@ export default function SnapshotDetailPage() {
   const followUpNotes = notes.filter((n) => n.type !== "initial");
 
   return (
-    <AppShell showActions={false}>
+    <AppShell>
       <div className="relative min-h-[calc(100vh-60px)]">
         <CornerOrnament size={28} position="tl" className="absolute top-3 left-3 hidden sm:block" style={{ opacity: 0.18 }} />
         <CornerOrnament size={28} position="tr" className="absolute top-3 right-3 hidden sm:block" style={{ opacity: 0.18 }} />

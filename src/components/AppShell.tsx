@@ -61,17 +61,6 @@ function IconShare() {
     </svg>
   );
 }
-function IconAudio() {
-  return (
-    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.4">
-      <line x1="4" y1="12" x2="4" y2="12" strokeWidth="2" />
-      <line x1="8" y1="9" x2="8" y2="15" strokeWidth="2" />
-      <line x1="12" y1="6" x2="12" y2="18" strokeWidth="2" />
-      <line x1="16" y1="9" x2="16" y2="15" strokeWidth="2" />
-      <line x1="20" y1="11" x2="20" y2="13" strokeWidth="2" />
-    </svg>
-  );
-}
 function IconArchive() {
   return (
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.4">
@@ -90,9 +79,10 @@ const primaryNavItems: NavItem[] = [
 
 type Props = {
   children: ReactNode;
+  /** 传入即显示「重新抽牌」；不传即隐藏（不需要额外的 showActions 开关） */
   onRedraw?: () => void;
+  /** 传入即显示「分享此刻」 */
   onShare?: () => void;
-  showActions?: boolean;
   shareHint?: string | null;
   /** 首页/入口：整页共用 hero 背景，顶栏无硬分割线 */
   immersive?: boolean;
@@ -102,7 +92,6 @@ export default function AppShell({
   children,
   onRedraw,
   onShare,
-  showActions: _showActions = true,
   shareHint,
   immersive = false,
 }: Props) {
@@ -121,7 +110,7 @@ export default function AppShell({
       <aside
         className={`app-shell-sidebar ${
           immersive ? "hidden" : "hidden md:flex"
-        } flex-col items-center w-[88px] py-8 relative z-30 shrink-0 ${
+        } flex-col items-center w-[88px] py-8 sticky top-0 h-screen z-30 shrink-0 ${
           immersive ? "app-shell-sidebar--immersive" : "app-shell-sidebar--glass"
         }`}
         style={
@@ -178,7 +167,7 @@ export default function AppShell({
 
       <div className="app-shell-main flex-1 flex flex-col min-w-0 relative z-[1]">
         <header
-          className={`app-shell-header flex items-center justify-between px-4 md:px-10 py-4 md:py-5 z-10 shrink-0 ${
+          className={`app-shell-header flex items-center justify-between px-4 md:px-10 py-4 md:py-5 sticky top-0 z-20 shrink-0 ${
             immersive ? "app-shell-header--immersive app-shell-header--editorial" : ""
           }`}
           style={
@@ -238,17 +227,11 @@ export default function AppShell({
                 <span className="hidden lg:inline">重新抽牌</span>
               </button>
             )}
-            <button
-              className="action-pill action-pill-icon hidden md:inline-flex"
-              aria-label="语音（尚未实现）"
-              title="尚未实现"
-            >
-              <IconAudio />
-            </button>
           </div>
         </header>
 
-        <div className="flex-1 min-h-0 overflow-auto">{children}</div>
+        {/* 单一滚动上下文：内容随 document 滚动，不再嵌套 overflow-auto */}
+        <div className="flex-1 min-w-0">{children}</div>
       </div>
 
       <AnimatePresence>

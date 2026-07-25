@@ -427,7 +427,9 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
     await runDrawAndGenerate("single_card", {
       spreadNameOverride: "单牌解读",
       generationContext: { question: "今日气息", domain: "self" },
-      revealedStage: "position_readings",
+      // daily 走和其它模式一样的 card_revealed —— 翻牌这一刻由 DrawingStage
+      // 统一负责，position_readings 只负责「读」，不再重复画一次牌。
+      revealedStage: "card_revealed",
     });
   }, [runDrawAndGenerate]);
 

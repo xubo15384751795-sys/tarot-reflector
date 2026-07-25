@@ -86,7 +86,7 @@ function ArchivePageContent() {
   useArchiveHeroEntrance(heroRef, { enabled: heroEntrance, reducedMotion });
 
   return (
-    <AppShell showActions={false}>
+    <AppShell>
       <EditorialViewport credit="Tarot Reflector">
       <div className="relative min-h-[calc(100vh-60px)] w-full archive-page parchment-noise">
         <StageAmbient variant="archive" />

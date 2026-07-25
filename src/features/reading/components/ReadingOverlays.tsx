@@ -198,7 +198,6 @@ export default function ReadingOverlays({
                     orientation: c.orientation,
                   }))}
                   autoPlay
-                  onComplete={() => {}}
                 />
 
                 <div className="flex items-center justify-center gap-3 w-full pt-2">

@@ -54,7 +54,7 @@ export default function NotesPage() {
   const totalNotes = repo.getNoteCount();
 
   return (
-    <AppShell showActions={false}>
+    <AppShell>
       <EditorialViewport credit="Tarot Reflector">
       <div className="relative min-h-[calc(100vh-60px)] notes-page" style={{ background: "var(--bg-base)" }}>
         <StageAmbient variant="minimal" />

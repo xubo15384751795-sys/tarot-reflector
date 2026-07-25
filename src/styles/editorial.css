@@ -10,7 +10,7 @@
   position: fixed;
   inset: 10px;
   border: 1px solid color-mix(in srgb, var(--border-strong) 55%, transparent);
-  border-radius: 22px;
+  border-radius: var(--radius-xl);
   pointer-events: none;
   z-index: 24;
   box-shadow:
@@ -21,7 +21,7 @@
 @media (min-width: 768px) {
   .editorial-viewport__frame {
     inset: 14px 18px;
-    border-radius: 26px;
+    border-radius: var(--radius-2xl);
   }
 }
 

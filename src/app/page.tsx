@@ -47,7 +47,7 @@ export default function Home() {
   };
 
   return (
-    <AppShell showActions={false} immersive>
+    <AppShell immersive>
       <EditorialViewport credit="Tarot Reflector">
       <div className="home-page home-hero-canvas home-hero-canvas--book relative w-full min-h-full overflow-x-hidden">
         <BookStageBackground />

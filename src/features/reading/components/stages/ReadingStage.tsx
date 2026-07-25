@@ -14,13 +14,11 @@ import { useEffect, useMemo } from "react";
 import { AnimatePresence } from "framer-motion";
 import AnnotatedCard from "@/components/AnnotatedCard";
 import ReadingPanel from "@/components/ReadingPanel";
-import CardReveal from "@/components/CardReveal";
 import ReadingStatusIndicator from "@/components/ReadingStatusIndicator";
 import SpreadOverview from "@/components/SpreadOverview";
 import CardPositionReading from "@/components/CardPositionReading";
 import RelationshipAnalysis from "@/components/RelationshipAnalysis";
 import ReadingSummary from "@/components/ReadingSummary";
-import tarotCards from "@/data/tarot_cards.json";
 import type { DrawnCard } from "@/lib/schema";
 import { readingStatusText } from "@/lib/readingStatusCopy";
 import { getSpreadDef } from "../../lib/spreads";
@@ -168,9 +166,6 @@ export default function ReadingStage(props: Props) {
   }
 
   if (stage === "position_readings") {
-    const cardNumber =
-      tarotCards.find((c) => c.id === script.card_id)?.number ?? undefined;
-
     return (
       <div className="flex flex-col relative">
         {(aiPending || readingSlowHint) && (
@@ -179,17 +174,6 @@ export default function ReadingStage(props: Props) {
             readingSlowHint={readingSlowHint}
           />
         )}
-        <div className="flex-1 flex items-center justify-center min-h-[60vh]">
-          <CardReveal
-            image={script.image}
-            cardName={script.card_name}
-            zhName={script.zh_name}
-            orientation={script.orientation}
-            motifs={script.motifs}
-            number={cardNumber}
-            onComplete={() => {}}
-          />
-        </div>
         <div className="px-6 md:px-10 py-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,_1fr)_minmax(0,_1fr)] gap-10 lg:gap-14">
             <section className="flex flex-col">

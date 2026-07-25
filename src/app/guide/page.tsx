@@ -6,7 +6,7 @@ import AppGuideContent from "@/components/AppGuideContent";
 
 export default function GuidePage() {
   return (
-    <AppShell showActions={false}>
+    <AppShell>
       <Suspense fallback={null}>
         <AppGuideContent />
       </Suspense>

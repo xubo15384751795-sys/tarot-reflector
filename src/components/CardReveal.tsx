@@ -20,7 +20,8 @@ type Props = {
   orientation: Orientation;
   motifs: Motif[];
   number?: number;
-  onComplete: () => void;
+  /** 翻牌落定后回调；不需要就别传（内联箭头函数不会再打断 timeline） */
+  onComplete?: () => void;
 };
 
 /**
@@ -48,6 +49,16 @@ export default function CardReveal({
   const tlRef = useRef<ReturnType<typeof createCardRevealTimeline> | null>(null);
   const [imageReady, setImageReady] = useState(false);
 
+  /**
+   * onComplete 常常是调用方内联的箭头函数，每次 render 都是新引用。
+   * 直接进 useGSAP 依赖会让父组件任何一次 re-render 都 kill 掉正在播放的
+   * 翻牌 timeline 并重建 —— 牌可能因此卡在中间帧。用 ref 稳定化。
+   */
+  const onCompleteRef = useRef(onComplete);
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
   useEffect(() => {
     let cancelled = false;
     preloadImage(image).then(
@@ -73,13 +84,13 @@ export default function CardReveal({
 
     const tl = createCardRevealTimeline(cardFront, cardBack, cardName, {
       reducedMotion,
-      onComplete,
+      onComplete: () => onCompleteRef.current?.(),
       cardNameZhEl: cardNameZhRef.current,
       warmGlow: warmGlowRef.current,
       groundShadow: groundShadowRef.current,
     });
     tlRef.current = tl;
-  }, [reducedMotion, onComplete]);
+  }, [reducedMotion]);
 
   useGSAP(
     () => {

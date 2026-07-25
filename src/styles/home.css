@@ -482,14 +482,17 @@
 
 /* 1. 全局鼠标追光 — 大面积柔和金光 */
 .cursor-ambient-glow {
+  /* 强度按主题微调；颜色统一走 --accent，明暗切换由 token 负责 */
+  --glow-core: 6%;
+  --glow-mid: 2%;
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   background: radial-gradient(
     600px circle at var(--cx) var(--cy),
-    rgba(198, 161, 92, 0.06) 0%,
-    rgba(198, 161, 92, 0.02) 30%,
+    color-mix(in srgb, var(--accent) var(--glow-core), transparent) 0%,
+    color-mix(in srgb, var(--accent) var(--glow-mid), transparent) 30%,
     transparent 60%
   );
   opacity: 0;
@@ -499,12 +502,8 @@
   opacity: 1;
 }
 :root[data-theme="light"] .cursor-ambient-glow {
-  background: radial-gradient(
-    600px circle at var(--cx) var(--cy),
-    rgba(185, 149, 82, 0.08) 0%,
-    rgba(185, 149, 82, 0.03) 30%,
-    transparent 60%
-  );
+  --glow-core: 8%;
+  --glow-mid: 3%;
 }
 @media (prefers-reduced-motion: reduce), (pointer: coarse) {
   .cursor-ambient-glow { display: none; }
