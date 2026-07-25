@@ -9,6 +9,5 @@ export { SectionHeader } from "./SectionHeader";
 export { ArchiveGroupCard } from "./ArchiveGroupCard";
 export { NoteCard } from "./NoteCard";
 export { SnapshotCard } from "./SnapshotCard";
-export { ModeCard } from "./ModeCard";
 export { ModeDeckSlot } from "./ModeDeckSlot";
 export { ManuscriptTag } from "./ManuscriptTag";

@@ -56,8 +56,36 @@
 - `/demo`、`/lab/*`、`/motion-lab/*` 是开发工具页，生产环境由 `src/middleware.ts` 一律 404。
   不要把它们的视觉混入产品；要保留就得套 AppShell 并皮肤化原生控件。
 
+## 一个组件，一个 CSS 所有者（P2）
+
+`src/styles/` 里的文件是按「质感层」切的（surfaces / depth / editorial / book-stage…）。
+这个切法有个陷阱：**同一个组件的样式会散进好几层**，然后靠 `!important` 互相推翻。
+
+`.mode-deck-slot` 曾经的样子：
+
+```
+home.css        定义基线（11 个 !important）
+depth.css       加 3D perspective + rotateY hover
+editorial.css   调 padding / gap
+book-stage.css  .marginal-note 用 17 个 !important 把上面的
+                background / border / radius / shadow 全部推翻
+```
+
+**规则：一个组件的形态（背景、边框、圆角、阴影、内距、字号）只能由一个文件拥有。**
+在那个文件顶部写明「这一节是 .x-* 的唯一所有者」。其它层只允许加
+**正交**的东西（如 depth.css 只留 perspective）。
+
+推论：**不要为了让 CSS 生效而写内联 `style`**。内联样式只能被 `!important`
+压过，于是又开一场覆盖战。侧栏导航项就是这么来的——配色写在 AppShell 的
+内联 style 上，沉浸式侧栏只好用 `!important`。现在它由 `.app-shell-nav-item.is-active` 表达。
+
+`!important` 只剩两个合法用途，且有预算守卫（上限 8）：
+
+1. `prefers-reduced-motion` 里强制关掉动效
+2. 压过 `next/image` 写在元素上的内联 `width` / `height`
+
 ## 守卫
-- `npm run ui:guard`：裸金色 / `transition:all` / 半像素 / 旧 pill 圆角 / Material 缓动 任一回潮即失败。
+- `npm run ui:guard`：裸金色 / `transition:all` / 半像素 / 旧 pill 圆角 / Material 缓动 / `!important` 超预算 任一回潮即失败。
 - `npm run ui:audit`：打印当前漂移指标基线（收敛后应持续走低）。
 - `npm run check` 已包含 `ui:guard`。
 

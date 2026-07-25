@@ -130,48 +130,6 @@
   .luminous__layer { animation: none !important; }
 }
 
-/* ── 2. Mode card · 鼠标追光（cursor spotlight） ── */
-.mode-card {
-  --mx: 50%;
-  --my: 50%;
-}
-
-.mode-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    220px circle at var(--mx) var(--my),
-    var(--accent-a2) 0%,
-    var(--accent-a0) 38%,
-    transparent 72%
-  );
-  opacity: 0;
-  transition: opacity 0.32s var(--ease-soft);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.mode-card:hover::after { opacity: 1; }
-
-:root[data-theme="light"] .mode-card::after {
-  background: radial-gradient(
-    220px circle at var(--mx) var(--my),
-    var(--accent-a2) 0%,
-    var(--accent-a0) 40%,
-    transparent 74%
-  );
-}
-
-@media (hover: none), (pointer: coarse) {
-  .mode-card::after { display: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mode-card::after { transition: none; }
-}
-
 /* ── 3. motif hotspot · 极淡呼吸（foil breath） ── */
 @keyframes hotspot-breathe {
   0%, 100% {

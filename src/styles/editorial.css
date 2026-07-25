@@ -146,19 +146,18 @@
   margin-inline: auto;
 }
 
-.reading-entry-page--editorial {
-  max-width: min(920px, 94vw) !important;
-  padding-top: clamp(28px, 6vh, 56px) !important;
-  padding-bottom: clamp(32px, 8vh, 72px) !important;
-}
+/* .reading-entry-page--editorial 已随首页改版删除：
+   它的三个 !important padding 只是为了压过工具类，首页模式选择屏
+   现在用 .home-mode-screen 自己拥有布局，不需要再打这场覆盖战。 */
 
 /* 沉浸式侧栏 — 细线下划线导航，非 pill */
 .app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow {
   border-radius: 0;
   width: auto;
   min-width: 56px;
+  width: auto;
   padding: 10px 4px 12px;
-  background: transparent !important;
+  background: transparent;
 }
 
 .app-shell--immersive .app-shell-sidebar--immersive .nav-item-active-glow::after {

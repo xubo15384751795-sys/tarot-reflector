@@ -137,19 +137,16 @@ export default function AppShell({
               (item.id === "archive" && pathname?.startsWith("/archive")) ||
               (item.id === "notes" && pathname?.startsWith("/notes"));
             return (
+              /* 配色交给 .app-shell-nav-item[.is-active]（见 reading.css）。
+                 之前这里写内联 style，沉浸式侧栏就只能用 !important 才压得过去。 */
               <Link
                 key={item.id}
                 href={item.href}
-                className={`group flex flex-col items-center gap-1.5 px-2 py-3 rounded-xl w-[64px] transition-all nav-item-active-glow ${active ? "is-active" : ""}`}
-                style={{
-                  color: active ? "var(--text-primary)" : "var(--text-tertiary)",
-                  background: active ? "var(--bg-glass-hover)" : "transparent",
-                }}
+                aria-current={active ? "page" : undefined}
+                className={`group app-shell-nav-item nav-item-active-glow ${active ? "is-active" : ""}`}
               >
-                <span style={{ color: active ? "var(--accent)" : "currentColor" }}>
-                  {item.icon}
-                </span>
-                <span className="text-[10px] tracking-[0.08em]">{item.label}</span>
+                <span className="app-shell-nav-item__icon">{item.icon}</span>
+                <span className="app-shell-nav-item__label">{item.label}</span>
               </Link>
             );
           })}

@@ -265,49 +265,7 @@
   box-shadow:
     0 4px 14px rgba(92, 66, 38, 0.08),
     inset 0 1px 0 rgba(255, 250, 230, 0.3);
-}
-
-/* Mode card — light variant · 厚玻璃 */
-:root[data-theme="light"] .mode-card {
-  background: linear-gradient(155deg, rgba(255,255,255,0.72) 0%, rgba(248,240,220,0.58) 100%) !important;
-  border-color: rgba(92, 66, 38, 0.20) !important;
-  box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.95),
-    inset 0 6px 16px rgba(255, 255, 255, 0.55),
-    inset 0 -1.5px 0 rgba(92, 66, 38, 0.14),
-    inset 0 -8px 16px rgba(92, 66, 38, 0.06),
-    inset 2px 0 0 rgba(255, 255, 255, 0.50),
-    inset -2px 0 0 rgba(92, 66, 38, 0.06),
-    0 1px 2px rgba(92, 66, 38, 0.12),
-    0 8px 22px rgba(92, 66, 38, 0.10),
-    0 28px 60px rgba(92, 66, 38, 0.08) !important;
-}
-:root[data-theme="light"] .mode-card::before {
-  background: linear-gradient(
-    115deg,
-    transparent 0%,
-    rgba(255, 252, 240, 0) 28%,
-    rgba(255, 252, 240, 0.6) 50%,
-    rgba(255, 252, 240, 0) 72%,
-    transparent 100%
-  );
-}
-:root[data-theme="light"] .mode-card:hover {
-  border-color: rgba(179, 136, 63, 0.45) !important;
-  box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, 1),
-    inset 0 7px 18px rgba(255, 250, 230, 0.70),
-    inset 0 -1.5px 0 rgba(92, 66, 38, 0.16),
-    inset 0 -8px 16px rgba(92, 66, 38, 0.06),
-    inset 2px 0 0 rgba(255, 255, 255, 0.60),
-    inset -2px 0 0 rgba(92, 66, 38, 0.06),
-    0 2px 4px rgba(92, 66, 38, 0.14),
-    0 14px 32px rgba(179, 136, 63, 0.22),
-    0 36px 76px rgba(92, 66, 38, 0.14),
-    0 0 36px var(--accent-a3) !important;
-}
-
-/* Archive link — light variant · 厚玻璃幽灵 */
+}/* Archive link — light variant · 厚玻璃幽灵 */
 :root[data-theme="light"] .archive-link {
   background: linear-gradient(155deg, rgba(255,255,255,0.74) 0%, rgba(248,240,222,0.62) 100%);
   border-color: rgba(92, 66, 38, 0.20);

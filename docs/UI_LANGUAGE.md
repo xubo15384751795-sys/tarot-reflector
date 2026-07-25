@@ -85,7 +85,7 @@
 | `StatusPill` | 轻量状态/标签，非按钮 |
 | `ArchiveGroupCard` | 档案分组入口 |
 | `NoteCard` | 解读快照卡片 |
-| `ModeCard` | 首页模式选择卡片 |
+| `ModeDeckSlot` | 首页模式选择卡片（原 `ModeCard` 已删除：无人使用，且它的样式散在 surfaces/motion/theme 三个文件里靠 !important 互相覆盖） |
 
 ---
 

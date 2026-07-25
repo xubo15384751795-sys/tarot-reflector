@@ -537,6 +537,8 @@
   width: 100%;
 }
 
+/* !important 在这里是必要的：next/image 会把 width/height 写成内联
+   style，样式表只有 !important 压得过内联。属于「无法改写来源」的例外。 */
 .card-thumb-frame__image img,
 .card-thumb-frame__image .tarot-card-image {
   width: 100% !important;

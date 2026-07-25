@@ -47,6 +47,19 @@ check "卡片裸圆角 (应 var(--radius-*))" "${CARDR:-0}" 0
 NSURF=$(grep -rhoE "background: rgba\(255, ?255, ?255, ?0?\.[0-9]+\)" src/styles 2>/dev/null | wc -l | tr -d ' ')
 check "裸白透明 surface 底 (应 --surface*)" "${NSURF:-0}" 0
 
+# 8) !important 预算 —— P2
+# 从 72 收敛到 9。剩下的只有两类合法用途：
+#   a) prefers-reduced-motion 里强制关掉动效
+#   b) 压过 next/image 写在元素上的内联 width/height
+# 其它任何一处新增，基本都意味着「又有第二个文件想拥有同一个组件」，
+# 那是 P2 之前的老毛病——请改成让单一文件拥有该组件的样式。
+# 先剥掉 /* */ 注释再数，否则解释「为什么不要用 !important」的注释
+# 自己会把预算撑爆。
+BANG=$(cat src/styles/*.css 2>/dev/null \
+  | perl -0777 -pe 's{/\*.*?\*/}{}gs' \
+  | grep -o "!important" | wc -l | tr -d ' ')
+check "!important 预算 (仅 reduced-motion / next-image)" "${BANG:-0}" 8
+
 echo
 if [ "$fail" -eq 0 ]; then
   echo "UI guard ✓ 全部通过"

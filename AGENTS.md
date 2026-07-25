@@ -45,7 +45,7 @@
 优先使用 `src/components/ui/` 基础组件：
 
 - `GlassCard` · `TarotCardFrame` · `MotifHotspot` · `SymbolPopover`
-- `StatusPill` · `ArchiveGroupCard` · `NoteCard` · `ModeCard`
+- `StatusPill` · `ArchiveGroupCard` · `NoteCard` · `ModeDeckSlot`
 
 Radix 仅作 headless 基础（Dialog / Popover / Tabs / Switch / Accordion）。**不要**直接套 shadcn Dashboard / Card 风格。
 
