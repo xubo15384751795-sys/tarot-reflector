@@ -189,6 +189,8 @@ export type UseReadingSession = {
   advanceFromCardRevealed: () => void;
   // 解读阶段
   nextPosition: () => void;
+  /** 卷轴滚动时回报当前正在读的是第几张（幂等，不改 stage） */
+  focusPosition: (index: number) => void;
   beginPositionReadings: () => void;
   goSummary: () => void;
   replay: () => void;
@@ -497,8 +499,18 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
     });
   }, []);
 
+  /**
+   * 卷轴滚到某一段时回报。只动 currentPosition，不动 stage ——
+   * 用户往回滚看前一张，不应该把会话状态也倒回去。
+   */
+  const focusPosition = useCallback((index: number) => {
+    setState((s) =>
+      s.currentPosition === index ? s : { ...s, currentPosition: index },
+    );
+  }, []);
+
   const goSummary = useCallback(() => {
-    setState((s) => ({ ...s, stage: "summary" }));
+    setState((s) => (s.stage === "summary" ? s : { ...s, stage: "summary" }));
   }, []);
 
   const replay = useCallback(() => {
@@ -528,6 +540,7 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
       drawForSpread,
       advanceFromCardRevealed,
       nextPosition,
+      focusPosition,
       beginPositionReadings,
       goSummary,
       replay,
@@ -549,6 +562,7 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
       drawForSpread,
       advanceFromCardRevealed,
       nextPosition,
+      focusPosition,
       beginPositionReadings,
       goSummary,
       replay,

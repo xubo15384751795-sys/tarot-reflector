@@ -15,7 +15,8 @@ type Props = {
   narrative: string;
   tension_points: string[];
   flow_description: string;
-  onNext: () => void;
+  /** 卷轴式阅读里没有「下一步」——不传就不渲染这个按钮 */
+  onNext?: () => void;
 };
 
 function IconSpark() {
@@ -159,12 +160,14 @@ export default function RelationshipAnalysis({
         {flow_description}
       </p>
 
-      <div className="flex justify-end">
-        <button onClick={onNext} className="btn-primary" style={{ padding: "12px 26px", fontSize: "14px" }}>
-          <span>查看整体解读</span>
-          <IconChevronRight />
-        </button>
-      </div>
+      {onNext && (
+        <div className="flex justify-end">
+          <button onClick={onNext} className="btn-primary" style={{ padding: "12px 26px", fontSize: "14px" }}>
+            <span>查看整体解读</span>
+            <IconChevronRight />
+          </button>
+        </div>
+      )}
     </motion.div>
   );
 }

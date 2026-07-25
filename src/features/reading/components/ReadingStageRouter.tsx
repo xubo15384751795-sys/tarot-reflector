@@ -37,8 +37,8 @@ type Props = {
   onSpreadBack: () => void;
   onContinueAfterReveal: () => void;
   onBeginReadings: () => void;
-  onNextPosition: () => void;
-  onRelationshipsNext: () => void;
+  /** 解读卷轴滚到第 N 张时回报 */
+  onFocusPosition: (index: number) => void;
   onSummary: () => void;
   onReplay: () => void;
   onWriteNote: () => void;
@@ -134,8 +134,7 @@ export default function ReadingStageRouter(props: Props) {
         aiPending={session.aiPending}
         readingSlowHint={session.readingSlowHint}
         onBeginReadings={props.onBeginReadings}
-        onNextPosition={props.onNextPosition}
-        onRelationshipsNext={props.onRelationshipsNext}
+        onFocusPosition={props.onFocusPosition}
         onSummary={props.onSummary}
         onReplay={props.onReplay}
         onWriteNote={props.onWriteNote}

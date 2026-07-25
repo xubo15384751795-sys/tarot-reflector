@@ -58,7 +58,18 @@ function ReadingContent() {
   // 分享按钮仅 summary 阶段露出，避免在用户还在读的过程中诱导社交分享
   const canShare = stage === "summary";
 
-  // Summary 阶段：显示保存面板
+  /**
+   * position_readings / relationships / summary 是同一份滚动文档的三段，
+   * 必须共用一个 AnimatePresence key —— 否则用户滚到收束时整块会被
+   * 卸载重建，滚动位置和 sticky 牌面一起被打回顶部。
+   */
+  const transitionKey =
+    stage === "position_readings" ||
+    stage === "relationships" ||
+    stage === "summary"
+      ? "reading-scroll"
+      : stage;
+
   return (
     <AppShell
       onRedraw={canRedraw ? () => router.push("/") : undefined}
@@ -70,7 +81,7 @@ function ReadingContent() {
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={stage}
+            key={transitionKey}
             initial={pageTransition.initial}
             animate={pageTransition.animate}
             exit={pageTransition.exit}
@@ -94,8 +105,7 @@ function ReadingContent() {
               onSpreadBack={session.backToReframe}
               onContinueAfterReveal={session.advanceFromCardRevealed}
               onBeginReadings={session.beginPositionReadings}
-              onNextPosition={session.nextPosition}
-              onRelationshipsNext={session.goSummary}
+              onFocusPosition={session.focusPosition}
               onSummary={session.goSummary}
               onReplay={session.replay}
               onWriteNote={actions.openSavePanel}

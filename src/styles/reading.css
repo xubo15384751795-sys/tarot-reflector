@@ -729,3 +729,236 @@
     animation: none;
   }
 }
+
+/* ═══ 解读卷轴 · ReadingScrollDocument ═══════════════════════
+   牌面 sticky 在左，解读连续向下。取代原来「一屏一张 + 继续翻阅」。
+   这一节是 .reading-scroll-* 的唯一所有者。
+   ═════════════════════════════════════════════════════════ */
+
+.reading-scroll {
+  position: relative;
+  width: 100%;
+  padding: var(--space-6) var(--space-5) var(--space-9);
+}
+
+.reading-scroll__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-7);
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+}
+
+/* ── 左：跟随滚动的牌面 ─────────────────────────────── */
+
+.reading-scroll__stage {
+  display: none;
+}
+
+.reading-scroll__stage-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.reading-scroll__ticks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.reading-scroll__tick {
+  width: 6px;
+  height: 3px;
+  border-radius: var(--radius-xs);
+  background: var(--border-glass);
+  transition:
+    width var(--dur-panel) var(--ease-soft),
+    background var(--dur-panel) var(--ease-soft);
+}
+
+.reading-scroll__tick.is-active {
+  width: 20px;
+  background: var(--accent);
+}
+
+.reading-scroll__stage-caption {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.reading-scroll__stage-name {
+  font-family: var(--font-display);
+  font-size: var(--text-title-sm);
+  font-weight: 300;
+  color: var(--text-primary);
+}
+
+.reading-scroll__stage-orientation {
+  font-size: var(--text-sm);
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+/* ── 右：连续向下的解读 ─────────────────────────────── */
+
+/* 段之间用 padding 而不是 gap：gap 会在段与段之间留下判定死区，
+   sticky 牌面的「正在读第几张」判定线落进空隙时就不更新。 */
+.reading-scroll__flow {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.reading-scroll__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: var(--space-7);
+}
+
+.reading-scroll__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-title-lg);
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+.reading-scroll__thesis {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.85;
+  color: var(--text-secondary);
+}
+
+.reading-scroll__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6) 0 var(--space-6) var(--space-5);
+  border-left: 1px solid var(--border-glass);
+  transition: border-color var(--dur-panel) var(--ease-soft);
+}
+
+/* 每一张牌至少占住一段可读的篇幅，读起来才有停顿感，
+   sticky 牌面也不会因为段落太短而快速跳牌 */
+@media (min-width: 900px) {
+  .reading-scroll__section {
+    min-height: 38vh;
+    justify-content: center;
+  }
+}
+
+/* 正在读的那一段：左脊点亮，不改变布局 */
+.reading-scroll__section.is-current {
+  border-left-color: var(--accent-a3);
+}
+
+.reading-scroll__section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.reading-scroll__ordinal {
+  font-size: var(--text-sm);
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-faint);
+}
+
+.reading-scroll__position {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-title-sm);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+}
+
+.reading-scroll__card-inline {
+  font-size: var(--text-caption);
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+.reading-scroll__position-meaning {
+  margin: 0;
+  font-size: var(--text-caption);
+  line-height: 1.7;
+  color: var(--text-tertiary);
+}
+
+.reading-scroll__warning {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid color-mix(in srgb, var(--danger) 22%, transparent);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--danger) 6%, transparent);
+  font-size: var(--text-caption);
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.reading-scroll__body {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: 1.85;
+  white-space: pre-line;
+  color: var(--text-secondary);
+}
+
+.reading-scroll__caveat {
+  margin: 0;
+  font-size: var(--text-caption);
+  line-height: 1.75;
+  color: var(--text-faint);
+}
+
+.reading-scroll__section--summary {
+  padding-left: 0;
+  border-left: none;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-glass);
+}
+
+/* ── 桌面：牌面 sticky ─────────────────────────────── */
+
+@media (min-width: 900px) {
+  .reading-scroll {
+    padding: var(--space-7) var(--space-8) var(--space-10);
+  }
+
+  .reading-scroll__layout {
+    grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+    gap: var(--space-9);
+    align-items: start;
+  }
+
+  .reading-scroll__stage {
+    display: block;
+    position: sticky;
+    /* 顶栏是 sticky 的，留出它的高度再加一点呼吸 */
+    top: calc(var(--app-header-height) + var(--space-5));
+  }
+
+  /* 有 sticky 牌面时，正文里不用再重复牌名 */
+  .reading-scroll__card-inline {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-scroll__tick,
+  .reading-scroll__section {
+    transition: none;
+  }
+}

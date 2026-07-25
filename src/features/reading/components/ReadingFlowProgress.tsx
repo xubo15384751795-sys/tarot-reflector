@@ -23,10 +23,20 @@ const FULL_STEPS: Step[] = [
   { id: "summary", label: "综合收束" },
 ];
 
+/**
+ * 解读卷轴（position_readings / relationships / summary）不再显示步骤条。
+ *
+ * 它原本是给「一屏一步」的幻灯片用的。进了卷轴之后，stage 表示的是
+ * 「读到哪了」而不是「在第几屏」——用户往回滚看第一张牌时，步骤条
+ * 仍然停在「综合收束」，反而在误导。阅读进度改由牌面旁的刻度和
+ * 段落里的「1 / 3」承担。
+ */
 const HIDDEN_STAGES: ReadingStage[] = [
   "safety_exit",
   "spread_select",
+  "position_readings",
   "relationships",
+  "summary",
   "reflection_note",
   "completed",
   "error",
