@@ -823,16 +823,21 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  padding: var(--space-6) 0 var(--space-6) var(--space-5);
+  padding: var(--space-7) 0 var(--space-7) var(--space-5);
   border-left: 1px solid var(--border-glass);
   transition: border-color var(--dur-panel) var(--ease-soft);
 }
 
-/* 每一张牌至少占住一段可读的篇幅，读起来才有停顿感，
-   sticky 牌面也不会因为段落太短而快速跳牌 */
+/* 每张牌给一个下限高度，保证有停顿感、sticky 牌面也不会快速跳牌；
+   但这只是**下限**，长解读照常往下长。
+
+   38vh 是照着占位文案定的，接上真实模型输出后实测：正文 130–160 字
+   约 83–110px，整段内容 75–131px，塞进 304px 的盒子里有 66–75% 是空的。
+   改成 24vh（约 192px）+ 更厚的上下 padding：短段落不再像排版事故，
+   长段落依然自由生长。 */
 @media (min-width: 900px) {
   .reading-scroll__section {
-    min-height: 38vh;
+    min-height: 24vh;
     justify-content: center;
   }
 }

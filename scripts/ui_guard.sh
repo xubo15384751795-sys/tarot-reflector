@@ -36,7 +36,9 @@ PILL=$(grep -rhoE "border-radius: ?(100|999)px" src/styles 2>/dev/null | wc -l |
 check "旧 pill 圆角 (100/999px)" "${PILL:-0}" 0
 
 # 5) Material 缓动
-MAT=$(grep -rho "cubic-bezier(0.4, 0, 0.2, 1)" src/styles 2>/dev/null | wc -l | tr -d ' ')
+# 同时扫 tsx/ts：内联 style 是这条规则最常见的漏网处
+# （CardImage 就在内联 transition 里带了一个，长期没被发现）。
+MAT=$(grep -rhoE "cubic-bezier\(0\.4, ?0, ?0\.2, ?1\)" src/styles src --include="*.tsx" --include="*.ts" 2>/dev/null | wc -l | tr -d ' ')
 check "Material 缓动 (0.4,0,0.2,1)" "${MAT:-0}" 0
 
 # 6) 卡片裸圆角（≥2 位数 px；1/4px 发丝线除外）—— Phase 10 P0

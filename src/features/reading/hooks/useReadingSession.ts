@@ -136,6 +136,18 @@ function pushHistorySnapshot(state: ReadingSessionState): void {
   }
 }
 
+/**
+ * 生成解读的超时时间，按牌数放大。
+ *
+ * 原来是固定 30s。实测（deepseek-v4-flash）：单牌 ~21s、三牌 ~25s、
+ * 凯尔特十字（10 张）**正好 30.0s** —— 卡在超时边界上被 abort，
+ * 用户拿到的是本地字典牌义，而界面只说「有点慢」。
+ * 牌越多越慢，超时也必须跟着牌数走。
+ */
+function generateTimeoutFor(cardCount: number): number {
+  return 20_000 + cardCount * 8_000;
+}
+
 const initialState = (input: ReadingSessionInput): ReadingSessionState => {
   const startStage: ReadingStage = (() => {
     if (input.mode !== "daily" && input.question) {
@@ -343,6 +355,7 @@ export function useReadingSession(input: ReadingSessionInput): UseReadingSession
           domain: genCtx.domain,
           spreadId,
           drawnCards: drawn.drawn_cards,
+          timeoutMs: generateTimeoutFor(drawn.drawn_cards.length),
         });
 
         // 3) 1.2s 洗牌动画

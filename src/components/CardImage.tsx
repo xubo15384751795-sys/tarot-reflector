@@ -38,7 +38,9 @@ export default function CardImage({
         className="absolute inset-0"
         style={{
           transform: isReversed ? "rotate(180deg)" : undefined,
-          transition: "transform 0.9s cubic-bezier(0.4, 0, 0.2, 1)",
+          // 用品牌缓动，不用 Material 的 (0.4,0,0.2,1)。
+          // ui:guard 禁了它，但以前只扫 src/styles，写在 tsx 内联里就漏过去了。
+          transition: "transform var(--dur-page) var(--ease-soft)",
         }}
       >
         <Image
