@@ -9,7 +9,7 @@ type Props = {
 /** 编辑级画框视口 — 薄边圆角框住主舞台，像展柜玻璃 */
 export default function EditorialViewport({ children, credit }: Props) {
   return (
-    <div className="editorial-viewport">
+    <div className="editorial-viewport flex-1 min-h-0 flex flex-col">
       <div className="editorial-viewport__frame" aria-hidden />
       {children}
       {credit && (

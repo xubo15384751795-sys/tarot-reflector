@@ -110,7 +110,7 @@
   );
 }
 
-/* 牌桌透视 */
+/* 牌桌透视（仅中央牌背；入口卡片的形态归 home.css） */
 .mode-deck__layout {
   perspective: 1400px;
   perspective-origin: 50% 42%;
@@ -134,26 +134,8 @@
   50% { transform: translateY(-5px) rotateX(1.2deg) rotateZ(-1.5deg); }
 }
 
-.mode-deck__slot--question .mode-deck-slot:not(:disabled):hover {
-  transform: translateY(-2px) rotateY(5deg);
-}
-
-.mode-deck__slot--daily .mode-deck-slot:not(:disabled):hover {
-  transform: translateY(-2px) rotateY(-4deg);
-}
-
-.mode-deck__slot--deep .mode-deck-slot:not(:disabled):hover {
-  transform: translateY(-1px);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .home-entry-card--deck {
     animation: none;
-  }
-
-  .mode-deck__slot--question .mode-deck-slot:hover,
-  .mode-deck__slot--daily .mode-deck-slot:hover,
-  .mode-deck__slot--deep .mode-deck-slot:hover {
-    transform: none;
   }
 }

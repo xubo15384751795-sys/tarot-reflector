@@ -51,7 +51,23 @@ describe("ModeSelector", () => {
 
     expect(screen.getByText("没有具体问题时使用。")).toBeInTheDocument();
     expect(screen.getByText("带着一个具体问题进入。")).toBeInTheDocument();
-    expect(screen.getByText("适合反复出现、暂时说不清的问题。")).toBeInTheDocument();
+    expect(screen.getByText("反复出现、暂时说不清的问题。")).toBeInTheDocument();
+  });
+
+  it("每个入口的 tagline 与 description 不重复", () => {
+    const onSelect = vi.fn();
+    const { container } = render(<ModeSelector onSelect={onSelect} />);
+
+    for (const slot of container.querySelectorAll(".mode-deck-slot")) {
+      const tagline = slot.querySelector(".mode-deck-slot__tagline")?.textContent;
+      const description = slot.querySelector(
+        ".mode-deck-slot__description",
+      )?.textContent;
+      expect(tagline).toBeTruthy();
+      expect(description).toBeTruthy();
+      // 「深度牌阵」原本两行说的是同一句话，读起来像重复排版事故
+      expect(description).not.toContain(tagline!.replace(/。$/, ""));
+    }
   });
 
   it("入口可点击触发 onSelect", async () => {

@@ -1,5 +1,7 @@
+/* 高度由 AppShell 的 flex 链给出，不再减去硬编码的 header 高度
+   （token 是 73px，实测顶栏 74px，差 1px 就凭空多一条滚动条）。 */
 .home-hero-canvas {
-  min-height: calc(100dvh - var(--app-header-height));
+  min-height: 0;
 }
 .hero-entry-sparkles {
   position: absolute;
@@ -572,49 +574,100 @@
   opacity: 1;
 }
 
-/* ═══ 牌桌模式入口 · ModeDeck ═══ */
+/* 首页模式选择屏的容器。
+   刻意不复用 .hero-entry / .reading-entry-page--editorial ——
+   那两个是「问题输入屏」的布局，min-height:100vh 会和外层
+   已经是视口高的 .hero-shell 叠加，凭空多出一屏滚动。 */
+.home-mode-screen {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(920px, 94vw);
+  margin-inline: auto;
+  padding: var(--space-5) var(--space-5) var(--space-6);
+  color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .home-mode-screen {
+    padding: var(--space-6) var(--space-8) var(--space-7);
+  }
+}
+
+/* ═══ 模式入口 · ModeDeck ═══════════════════════════════════
+   这一节是 .mode-deck-* 的唯一所有者。
+   不要在 depth/editorial/book-stage/surfaces 里再覆盖它——
+   之前那样做的结果是 17 个 !important 互相推翻。
+   depth.css 只保留中央牌背的 perspective。
+   ═════════════════════════════════════════════════════════ */
+
+.mode-deck {
+  width: 100%;
+  max-width: min(880px, 94vw);
+  margin-inline: auto;
+}
+
+.mode-deck__lead {
+  font-family: var(--font-kicker);
+  font-size: var(--text-caption);
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+}
 
 .mode-deck__layout {
   display: grid;
-  gap: 20px;
+  gap: var(--space-5);
   align-items: center;
 }
 
+/* 中央牌背是装饰性的品牌锚点。窄屏上它要吃掉 ~226px，
+   会把第三个入口挤到折叠线以下——那里入口比装饰重要，直接不渲染。 */
 .mode-deck__stage {
-  display: flex;
-  justify-content: center;
-  padding: 8px 0 4px;
+  display: none;
 }
 
-.mode-deck__card-wrap {
-  width: min(200px, 52vw);
+@media (min-width: 768px) {
+  .mode-deck__stage {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
 .mode-deck__slots {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-2);
 }
+
+/* ── 入口本体：一张能看出「可以点」的卡 ───────────────── */
 
 .mode-deck-slot {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 14px 16px;
-  border-radius: var(--radius-lg);
+  gap: var(--space-1);
+  width: 100%;
+  padding: var(--space-3) var(--space-5);
+  text-align: left;
   color: inherit;
   cursor: pointer;
-  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent-a2);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-rest);
   transition:
-    border-color 0.25s var(--ease-soft),
-    background 0.25s var(--ease-soft),
-    box-shadow 0.25s var(--ease-soft),
-    transform 0.25s var(--ease-soft);
+    border-color var(--dur-hover) var(--ease-soft),
+    background var(--dur-hover) var(--ease-soft),
+    box-shadow var(--dur-hover) var(--ease-soft),
+    transform var(--dur-hover) var(--ease-soft);
 }
 
-.mode-deck-slot:hover {
-  transform: translateY(-1px);
+.mode-deck-slot:hover:not(:disabled) {
+  background: var(--surface-strong);
+  border-color: var(--border-strong);
+  border-left-color: var(--accent);
   box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
 }
 
 .mode-deck-slot:focus-visible {
@@ -631,65 +684,29 @@
   transform: none;
 }
 
+/* 主入口：更实的底 + 更明确的金色左脊 */
 .mode-deck-slot--primary {
-  border-color: var(--accent-a3);
-}
-
-.mode-deck-slot--primary::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--accent-a4) 50%,
-    transparent 100%
-  );
-  pointer-events: none;
-}
-
-.mode-deck-slot--tertiary {
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border: none !important;
-  border-bottom: 1px solid var(--ink-filigree) !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  padding: 12px 8px;
-}
-
-.mode-deck-slot--tertiary.interactive-glow::before {
-  display: none;
-}
-
-.mode-deck-slot--tertiary:hover {
-  background: transparent !important;
-  border-bottom-color: var(--accent-a3) !important;
-  box-shadow: none !important;
-  transform: none;
+  background: var(--surface-strong);
+  border-left-color: var(--accent);
 }
 
 .mode-deck-slot.is-chosen {
   border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent-dim) 70%, var(--surface-strong)) !important;
-  box-shadow: 0 0 0 1px var(--accent-a2), 0 12px 28px var(--accent-a1);
+  background: color-mix(in srgb, var(--accent-dim) 70%, var(--surface-strong));
+  box-shadow: 0 0 0 1px var(--accent-a2), var(--shadow-hover);
 }
 
 .mode-deck-slot__title {
-  font-family: var(--font-title);
+  font-family: var(--font-display);
   font-size: var(--text-title-sm);
-  font-weight: 300;
-  letter-spacing: 0.01em;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
   color: var(--text-primary);
 }
 
 .mode-deck-slot--primary .mode-deck-slot__title {
   font-size: var(--text-title);
-  font-weight: 400;
 }
 
 .mode-deck-slot.is-chosen .mode-deck-slot__title {
@@ -697,59 +714,38 @@
 }
 
 .mode-deck-slot__tagline {
-  font-size: 13px;
+  font-family: var(--font-ui);
+  font-size: var(--text-body-sm);
   line-height: 1.55;
   color: var(--text-secondary);
 }
 
 .mode-deck-slot__description {
-  font-size: 12px;
+  font-size: var(--text-caption);
   line-height: 1.6;
-  color: var(--text-faint);
-  margin-top: 2px;
+  color: var(--text-tertiary);
 }
+
+.mode-deck__hint {
+  font-family: var(--font-ui);
+  font-size: var(--text-caption);
+  letter-spacing: 0.03em;
+  color: var(--text-faint);
+}
+
+/* ── 桌面：牌背在左，三个入口在右，整组保证在首屏内 ──── */
 
 @media (min-width: 768px) {
   .mode-deck__layout {
-    grid-template-columns: minmax(0, 1fr) minmax(200px, 220px) minmax(0, 1fr);
-    grid-template-rows: auto auto auto;
-    column-gap: 16px;
-    row-gap: 12px;
-  }
-
-  .mode-deck__stage {
-    grid-column: 2;
-    grid-row: 1 / 4;
-    align-self: center;
-    padding: 0;
-  }
-
-  .mode-deck__slots {
-    display: contents;
-  }
-
-  .mode-deck__slot--question {
-    grid-column: 1;
-    grid-row: 2;
-    align-self: center;
-  }
-
-  .mode-deck__slot--daily {
-    grid-column: 3;
-    grid-row: 1;
-    align-self: end;
-  }
-
-  .mode-deck__slot--deep {
-    grid-column: 3;
-    grid-row: 3;
-    align-self: start;
+    grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+    column-gap: var(--space-8);
+    align-items: center;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .mode-deck-slot,
-  .mode-deck-slot:hover {
+  .mode-deck-slot:hover:not(:disabled) {
     transform: none;
   }
 }
@@ -761,6 +757,12 @@
   justify-content: center;
   align-items: center;
   box-shadow: var(--shadow-card);
+}
+
+/* __inner 是 flex item，而它唯一的孩子 .tarot-card-stage 是 width:100% ——
+   不给定宽会退化成 min-content（实测塌成 20px 的一条），牌背就消失了。 */
+.home-entry-card__inner {
+  width: 100%;
 }
 
 .home-entry-card__light-pool {
@@ -788,8 +790,9 @@
   width: min(240px, 58vw);
 }
 
+/* deck 尺寸刻意压小：首屏要同时容纳标题、引导语和三个入口 */
 .home-entry-card--deck {
-  width: min(200px, 52vw);
+  width: min(132px, 34vw);
 }
 
 @media (min-width: 768px) {
@@ -798,6 +801,6 @@
   }
 
   .home-entry-card--deck {
-    width: 220px;
+    width: 172px;
   }
 }

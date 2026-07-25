@@ -8,10 +8,14 @@
   pointer-events: none;
 }
 
+/* 照片只当纸张肌理用，不当画面主体：
+   原来 100% 不透明时，第一屏读到的是「一本摊开的英文书 + 咖啡杯」，
+   和塔罗无关，还把入口文字的对比度压到不可读。 */
 .book-stage__photo {
   object-fit: cover;
   transform: scale(1.02);
-  filter: saturate(0.92) contrast(1.04);
+  filter: saturate(0.35) contrast(1.02) blur(1.5px);
+  opacity: 0.16;
 }
 
 .book-stage__veil {
@@ -48,7 +52,8 @@
 }
 
 :root[data-theme="light"] .book-stage__photo {
-  filter: saturate(0.88) contrast(1.02) brightness(1.02);
+  filter: saturate(0.3) contrast(1.02) brightness(1.04) blur(1.5px);
+  opacity: 0.1;
 }
 
 :root[data-theme="light"] .book-stage__veil--top {
@@ -60,75 +65,8 @@
   );
 }
 
-/* ═══ 页边批注式模式入口 — 贴在书页上，非玻璃卡片 ═══ */
-
-.marginal-note {
-  background: color-mix(in srgb, var(--bg-base) 18%, transparent) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border: none !important;
-  border-left: 1px solid var(--accent-a3) !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  padding: 14px 16px 14px 18px !important;
-  min-height: 0;
-}
-
-.marginal-note::before,
-.marginal-note.interactive-glow::before {
-  display: none !important;
-}
-
-.marginal-note:hover {
-  background: color-mix(in srgb, var(--accent) 8%, var(--bg-base) 12%) !important;
-  border-left-color: var(--accent-a4) !important;
-  box-shadow: none !important;
-  transform: translateX(2px);
-}
-
-.marginal-note.is-chosen {
-  background: color-mix(in srgb, var(--accent-dim) 45%, transparent) !important;
-  border-left-color: var(--accent) !important;
-  box-shadow: inset 0 0 0 1px var(--accent-a1) !important;
-}
-
-.marginal-note .mode-deck-slot__title {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  line-height: 1.35;
-}
-
-.marginal-note .mode-deck-slot__tagline {
-  font-family: var(--font-ui);
-  font-size: 13px;
-  line-height: 1.55;
-  margin-top: 4px;
-  color: var(--text-secondary);
-}
-
-.marginal-note .mode-deck-slot__description {
-  font-size: 12px;
-  line-height: 1.5;
-  margin-top: 6px;
-  color: var(--text-faint);
-}
-
-.mode-deck-slot--primary.marginal-note .mode-deck-slot__title,
-.mode-deck-slot--tertiary.marginal-note .mode-deck-slot__title {
-  font-size: 15px;
-  font-weight: 400;
-}
-
-.mode-deck-slot--tertiary.marginal-note {
-  border-bottom: none !important;
-  padding: 14px 16px 14px 18px !important;
-}
-
-.mode-deck-slot--tertiary.marginal-note:hover {
-  transform: translateX(2px);
-}
+/* 模式入口（.mode-deck-*）的全部样式归 home.css 单一所有，
+   这里不再用 .marginal-note 二次覆盖。 */
 
 /* 书页上的中央真牌 — 去掉模拟光池 */
 .home-entry-card--on-book .home-entry-card__light-pool,
@@ -200,12 +138,4 @@
 .home-hero-canvas--book .mode-deck {
   position: relative;
   z-index: 2;
-}
-
-.home-hero-canvas--book .marginal-note {
-  text-shadow: 0 1px 14px color-mix(in srgb, var(--bg-base) 75%, transparent);
-}
-
-.mode-deck--exhibit {
-  max-width: min(720px, 92vw);
 }

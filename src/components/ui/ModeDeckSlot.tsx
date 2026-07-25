@@ -38,7 +38,7 @@ export function ModeDeckSlot({
       onClick={onSelect}
       disabled={disabled}
       className={cn(
-        "mode-deck-slot marginal-note relative w-full text-left",
+        "mode-deck-slot",
         isTertiary && "mode-deck-slot--tertiary",
         isPrimary && "mode-deck-slot--primary",
         chosen && "is-chosen",

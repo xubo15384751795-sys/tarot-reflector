@@ -119,8 +119,9 @@
 /* 编辑级主标题 */
 .hero-title--editorial {
   font-family: var(--font-display);
-  font-size: clamp(34px, 5.6vw, 54px);
-  line-height: 1.2;
+  /* 上限收到 44px：标题 + 引导语 + 三个入口要一起放进首屏 */
+  font-size: clamp(30px, 4.4vw, 44px);
+  line-height: 1.24;
   letter-spacing: 0.04em;
   font-weight: 300;
   max-width: 14ch;
@@ -135,7 +136,7 @@
 }
 
 .editorial-lead {
-  margin-top: clamp(20px, 3.5vw, 32px);
+  margin-top: clamp(14px, 2.2vw, 22px);
   font-family: var(--font-ui);
   font-size: clamp(13px, 1.5vw, 15px);
   line-height: 1.85;
@@ -253,31 +254,4 @@
   box-shadow: 0 2px 0 var(--accent-glow);
 }
 
-/* 书页上的牌桌 — 减少模拟展台 */
-.mode-deck--exhibit .mode-deck__layout {
-  padding: clamp(20px, 5vh, 48px) 0 clamp(28px, 6vh, 56px);
-  gap: clamp(18px, 3vh, 28px);
-}
-
-.mode-deck--exhibit .mode-deck__stage {
-  padding: clamp(12px, 3vh, 32px) 0;
-}
-
-.mode-deck--exhibit .mode-deck__stage::before,
-.mode-deck--exhibit .mode-deck__stage::after {
-  display: none;
-}
-
-.mode-deck__lead {
-  font-family: var(--font-kicker);
-  font-size: 13px;
-  letter-spacing: 0.1em;
-  color: var(--text-tertiary);
-}
-
-.mode-deck--exhibit .mode-deck__hint {
-  font-family: var(--font-ui);
-  font-size: 12px;
-  letter-spacing: 0.03em;
-  margin-top: clamp(16px, 3vh, 28px);
-}
+/* 模式入口（.mode-deck-*）样式统一在 home.css，此处不再覆盖。 */

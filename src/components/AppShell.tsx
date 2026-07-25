@@ -230,8 +230,9 @@ export default function AppShell({
           </div>
         </header>
 
-        {/* 单一滚动上下文：内容随 document 滚动，不再嵌套 overflow-auto */}
-        <div className="flex-1 min-w-0">{children}</div>
+        {/* 单一滚动上下文：内容随 document 滚动，不再嵌套 overflow-auto。
+            flex 链让内容自然拿到「视口减顶栏」的高度，不用硬编码 header 高度。 */}
+        <div className="flex-1 min-w-0 min-h-0 flex flex-col">{children}</div>
       </div>
 
       <AnimatePresence>

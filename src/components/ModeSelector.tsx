@@ -30,7 +30,6 @@ const MODES: Array<{
   tagline: string;
   description: string;
   variant: "primary" | "secondary" | "tertiary";
-  slotClass: string;
 }> = [
   {
     value: "question",
@@ -38,7 +37,6 @@ const MODES: Array<{
     tagline: "带着一个具体问题进入。",
     description: "先澄清问题，再推荐合适的牌阵。",
     variant: "primary",
-    slotClass: "mode-deck__slot--question",
   },
   {
     value: "daily",
@@ -46,15 +44,13 @@ const MODES: Array<{
     tagline: "没有具体问题时使用。",
     description: "抽一张牌，看看今天有什么值得被轻轻看见。",
     variant: "secondary",
-    slotClass: "mode-deck__slot--daily",
   },
   {
     value: "deep",
     title: "深度牌阵",
-    tagline: "反复出现、暂时说不清的问题",
-    description: "适合反复出现、暂时说不清的问题。",
+    tagline: "反复出现、暂时说不清的问题。",
+    description: "多张牌铺开，看它们之间的关系。",
     variant: "tertiary",
-    slotClass: "mode-deck__slot--deep",
   },
 ];
 
@@ -105,9 +101,9 @@ export default function ModeSelector({ onSelect }: Props) {
   };
 
   return (
-    <div className="mode-selector mode-deck mode-deck--exhibit w-full max-w-[640px] mx-auto">
-      <p className="mode-deck__lead text-center mb-6" style={{ color: "var(--text-tertiary)" }}>
-        轻触页边批注，选择一种靠近问题的方式
+    <div className="mode-selector mode-deck">
+      <p className="mode-deck__lead text-center mb-5">
+        选择一种靠近问题的方式
       </p>
 
       <div ref={deckRef} className="mode-deck__layout">
@@ -122,11 +118,7 @@ export default function ModeSelector({ onSelect }: Props) {
           animate="show"
         >
           {MODES.map((mode) => (
-            <motion.div
-              key={mode.value}
-              variants={itemVariants}
-              className={mode.slotClass}
-            >
+            <motion.div key={mode.value} variants={itemVariants}>
               <ModeDeckSlot
                 mode={mode.value}
                 title={mode.title}
@@ -142,7 +134,7 @@ export default function ModeSelector({ onSelect }: Props) {
         </motion.div>
       </div>
 
-      <p className="mode-deck__hint text-center text-[11px] tracking-[0.04em] leading-[1.65] mt-5" style={{ color: "var(--text-faint)" }}>
+      <p className="mode-deck__hint text-center mt-5">
         不知道从哪开始？问题解读最常用。
       </p>
     </div>

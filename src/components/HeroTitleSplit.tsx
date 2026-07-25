@@ -42,8 +42,12 @@ export default function HeroTitleSplit({
     { scope: ref, dependencies: [reducedMotion, splitType] },
   );
 
+  // 刻意不写 opacity:0 —— 之前主标题靠 GSAP 把它从 0 抬起来，
+  // 一旦 GSAP 没加载 / 报错 / rAF 被挂起，首屏最重要的一行字就永远不显示。
+  // useGSAP 走 layout effect，split 和 tl.from 都在首次绘制前完成，
+  // 所以按可见渲染也不会闪一帧未拆分的文本。
   return (
-    <h1 ref={ref} className={className} style={{ opacity: reducedMotion ? 1 : 0 }}>
+    <h1 ref={ref} className={className}>
       {children}
     </h1>
   );

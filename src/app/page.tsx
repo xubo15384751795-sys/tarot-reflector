@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <AppShell immersive>
       <EditorialViewport credit="Tarot Reflector">
-      <div className="home-page home-hero-canvas home-hero-canvas--book relative w-full min-h-full overflow-x-hidden">
+      <div className="home-page home-hero-canvas home-hero-canvas--book relative w-full flex-1 min-h-0 flex flex-col overflow-x-hidden">
         <BookStageBackground />
 
         {stage === "mode" && (
@@ -67,7 +67,7 @@ export default function Home() {
           </>
         )}
 
-        <main className="hero-shell relative z-[1] min-h-[calc(100dvh-var(--app-header-height))] flex flex-col">
+        <main className="hero-shell relative z-[1] flex-1 min-h-0 flex flex-col">
           <LayoutGroup id="home-entry-flow">
             <AnimatePresence mode="popLayout">
               {loading ? (
@@ -90,9 +90,9 @@ export default function Home() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.45 }}
-                  className="reading-entry-page reading-entry-page--editorial hero-entry flex flex-1 flex-col items-center justify-center w-full mx-auto px-5 md:px-10 py-10 md:py-14"
+                  className="home-mode-screen flex flex-1 flex-col items-center justify-center w-full"
                 >
-                  <div className="text-center mb-10 md:mb-14 w-full max-w-2xl mx-auto">
+                  <div className="text-center mb-5 md:mb-7 w-full max-w-2xl mx-auto">
                     <HeroTitleSplit className="hero-title hero-title--editorial font-light">
                       翻开一页档案，
                       <br />

@@ -24,9 +24,9 @@ export function HomeEntryCard({
 }: Props) {
   const isHero = size === "hero";
   const rotate = isHero ? -2 : -1.5;
-  const stageClass = isHero
-    ? "!max-w-[240px] md:!max-w-[280px]"
-    : "!max-w-[200px] md:!max-w-[220px]";
+  // 宽度由 .home-entry-card--{hero,deck} 单独负责（见 home.css），
+  // 这里只解除 TarotCardStage 内联的 maxWidth:280 上限。
+  const stageClass = "!max-w-full";
 
   const inner = (
     <div
