@@ -203,7 +203,6 @@ export default function HeroEntry({ onSubmit, embedded = false, onBack }: Props)
                 id="hero-domain-hint"
                 as="p"
                 text={domainInputHints[domain]}
-                duration={0.75}
                 className="hero-entry__hint"
               />
             )}

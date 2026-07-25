@@ -4,12 +4,6 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { motion, type Transition, type Variants } from "framer-motion";
 import { ModeDeckSlot } from "@/components/ui/ModeDeckSlot";
 import { HomeEntryCard } from "@/components/HomeEntryCard";
-import { REGRESSION_STATIC_LAYOUT } from "@/features/motion";
-import {
-  captureModeFlipState,
-  playModeSelectionFlip,
-  type ModeFlipState,
-} from "@/features/motion/modeFlip.gsap";
 
 type Mode = "daily" | "question" | "deep";
 
@@ -57,7 +51,6 @@ const MODES: Array<{
 export default function ModeSelector({ onSelect }: Props) {
   const [chosen, setChosen] = useState<Mode | null>(null);
   const deckRef = useRef<HTMLDivElement>(null);
-  const flipStateRef = useRef<ModeFlipState | null>(null);
   const onSelectRef = useRef(onSelect);
 
   useLayoutEffect(() => {
@@ -65,30 +58,10 @@ export default function ModeSelector({ onSelect }: Props) {
   });
 
   const handleClick = (mode: Mode) => {
-    if (chosen || !deckRef.current) return;
-    if (REGRESSION_STATIC_LAYOUT) {
-      setChosen(mode);
-      onSelectRef.current(mode);
-      return;
-    }
-    flipStateRef.current = captureModeFlipState(deckRef.current);
+    if (chosen) return;
     setChosen(mode);
+    onSelectRef.current(mode);
   };
-
-  useLayoutEffect(() => {
-    if (REGRESSION_STATIC_LAYOUT) return;
-    if (!chosen || !deckRef.current || !flipStateRef.current) return;
-
-    const state = flipStateRef.current;
-    flipStateRef.current = null;
-    playModeSelectionFlip(state, deckRef.current, chosen);
-
-    const timer = window.setTimeout(() => {
-      onSelectRef.current(chosen);
-    }, 480);
-
-    return () => window.clearTimeout(timer);
-  }, [chosen]);
 
   const listVariants: Variants = {
     hidden: {},

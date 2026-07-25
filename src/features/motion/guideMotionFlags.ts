@@ -1,6 +1,6 @@
 /**
  * Guide motion — per-flag gates (default all off).
- * Do not use REGRESSION_STATIC_LAYOUT for guide scroll reveal.
+ * Guide scroll reveal 只受 GUIDE_MOTION_FLAGS 控制，不要再引入全局总开关。
  *
  * Dev isolation: ?guideMotion=<flagKey> enables exactly one flag.
  */

@@ -1,13 +1,7 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { CornerOrnament, DividerLine } from "./ArchiveEmblems";
-import {
-  captureSpreadFlipState,
-  playSpreadSelectionFlip,
-  type SpreadFlipState,
-} from "@/features/motion/spreadFlip.gsap";
 
 type SpreadItem = {
   spread_id: string;
@@ -63,21 +57,16 @@ export default function SpreadSelector({
   onConfirm,
   onBack,
 }: Props) {
-  const gridRef = useRef<HTMLDivElement>(null);
-  const flipStateRef = useRef<SpreadFlipState | null>(null);
-
+  /**
+   * 选中态只是「非选中项变暗」。原本用 GSAP Flip 做：但这个网格在选中
+   * 前后并不重排，Flip.from 实际没有位移可补，真正起作用的只有那句
+   * autoAlpha 0.72。改成 Framer 声明式表达后，主流程少了一个 GSAP 消费者，
+   * 也不再出现「父层 Framer 管 opacity、子层 GSAP 也管 opacity」的夹层。
+   */
   const handleSelect = (spreadId: string) => {
-    if (!gridRef.current || spreadId === selected) return;
-    flipStateRef.current = captureSpreadFlipState(gridRef.current);
+    if (spreadId === selected) return;
     onSelect(spreadId);
   };
-
-  useLayoutEffect(() => {
-    if (!selected || !gridRef.current || !flipStateRef.current) return;
-    const state = flipStateRef.current;
-    flipStateRef.current = null;
-    playSpreadSelectionFlip(state, gridRef.current, selected);
-  }, [selected]);
 
   return (
     <motion.div
@@ -94,15 +83,19 @@ export default function SpreadSelector({
         <DividerLine width={28} />
       </div>
 
-      <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {spreads.map((spread, i) => {
           const active = selected === spread.spread_id;
+          const dimmed = selected !== null && !active;
           return (
             <motion.div
               key={spread.spread_id}
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: i * 0.06 }}
+              animate={{ opacity: dimmed ? 0.72 : 1, y: 0 }}
+              transition={{
+                opacity: { duration: 0.28, ease: "easeOut", delay: selected ? 0 : i * 0.06 },
+                y: { duration: 0.4, ease: "easeOut", delay: i * 0.06 },
+              }}
             >
               <button
                 type="button"

@@ -53,16 +53,9 @@ export { initLuminousLayer, setupLuminousMotion } from "./luminousLayer";
 export type { LuminousLayerConfig } from "./luminousLayer";
 export { animateSplitReveal } from "./splitText.gsap";
 export type { SplitRevealOptions, SplitRevealResult } from "./splitText.gsap";
-export { captureModeFlipState, playModeSelectionFlip } from "./modeFlip.gsap";
 export { useMotifStepObserver } from "./useMotifStepObserver";
 export { scrambleToText } from "./scrambleText.gsap";
 export type { ScrambleTextOptions } from "./scrambleText.gsap";
-export {
-  captureSpreadFlipState,
-  playSpreadSelectionFlip,
-} from "./spreadFlip.gsap";
-export type { SpreadFlipState } from "./spreadFlip.gsap";
-export { REGRESSION_STATIC_LAYOUT } from "./layoutStatic";
 export {
   ARCHIVE_MOTION_FLAGS,
   isArchiveMotionFlagEnabled,
