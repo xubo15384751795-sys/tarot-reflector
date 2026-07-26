@@ -7,7 +7,7 @@
  * 一旦有人把它改回「一屏一张 + 继续翻阅」，这些断言会失败。
  */
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import ReadingScrollDocument from "@/features/reading/components/ReadingScrollDocument";
 import type { ReadingScript } from "@/features/reading/types/reading";
 
@@ -202,12 +202,54 @@ describe("ReadingScrollDocument", () => {
     ).toBe("宝剑二");
   });
 
+  it("多牌时渲染可点击的位置索引（凯尔特十字要滚 4 屏，没索引只能盲滚）", () => {
+    const { container } = renderDoc(3);
+    const ticks = container.querySelectorAll(".reading-scroll__tick");
+    expect(ticks).toHaveLength(3);
+    for (const t of ticks) {
+      expect(t.tagName).toBe("BUTTON");
+      // 每格都要能被读屏念出是第几张、什么位置
+      expect(t.getAttribute("aria-label")).toMatch(/第 \d 张：.+·.+/);
+    }
+    expect(ticks[0].getAttribute("aria-current")).toBe("true");
+    expect(ticks[1].getAttribute("aria-current")).toBeNull();
+  });
+
+  it("点索引滚到对应段落，但不自行改 currentPosition（保持单一事实来源）", () => {
+    const { container, props } = renderDoc(3);
+    const scrollSpy = vi.fn();
+    for (const el of container.querySelectorAll(".reading-scroll__section")) {
+      (el as HTMLElement).scrollIntoView = scrollSpy;
+    }
+
+    const ticks = container.querySelectorAll(".reading-scroll__tick");
+    fireEvent.click(ticks[2]);
+
+    expect(scrollSpy).toHaveBeenCalledTimes(1);
+    expect(scrollSpy).toHaveBeenCalledWith(
+      expect.objectContaining({ block: "center" }),
+    );
+    // 位置仍由 IntersectionObserver 回报，点击本身不越过它
+    expect(props.onPositionInView).not.toHaveBeenCalled();
+  });
+
+  it("索引显示当前是第几张、叫什么位置", () => {
+    const { container } = renderDoc(3, { currentPosition: 1 });
+    expect(
+      container.querySelector(".reading-scroll__index-count")?.textContent,
+    ).toBe("2 / 3");
+    expect(
+      container.querySelector(".reading-scroll__index-name")?.textContent,
+    ).toBe("当前状态");
+  });
+
   it("单牌时不渲染关系段和序号", () => {
     const { container } = renderDoc(1);
     expect(
       container.querySelector(".reading-scroll__section--relations"),
     ).not.toBeInTheDocument();
     expect(screen.queryByText("1 / 1")).not.toBeInTheDocument();
+    expect(container.querySelector(".reading-scroll__index")).not.toBeInTheDocument();
     expect(
       container.querySelector('[data-section="summary"]'),
     ).toBeInTheDocument();

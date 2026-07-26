@@ -166,6 +166,23 @@ export default function ReadingScrollDocument({
     [],
   );
 
+  /**
+   * 点索引跳到对应段落。
+   * 只滚动，不直接改 currentPosition —— 让 IntersectionObserver 照常回报，
+   * 这样「滚到哪就是哪一张」始终只有一个事实来源。
+   */
+  const scrollToPosition = useCallback(
+    (index: number) => {
+      const el = sectionRefs.current[index];
+      if (!el) return;
+      el.scrollIntoView({
+        behavior: reducedMotion ? "auto" : "smooth",
+        block: "center",
+      });
+    },
+    [reducedMotion],
+  );
+
   if (!cards) return null;
 
   const activeCard = cards[Math.min(currentPosition, cards.length - 1)];
@@ -187,17 +204,37 @@ export default function ReadingScrollDocument({
         {/* ── 左：跟随滚动的牌面 ───────────────────────── */}
         <aside className="reading-scroll__stage">
           <div className="reading-scroll__stage-inner">
+            {/* 刻度不再只是装饰：凯尔特十字有 10 张牌、要滚 5 屏，
+                没有索引就只能一路盲滚。每一格是可点的，点了滚到那一段。 */}
             {isMultiCard && (
-              <div className="reading-scroll__ticks" aria-hidden>
-                {cards.map((c, i) => (
-                  <span
-                    key={c.card_id + i}
-                    className={`reading-scroll__tick${
-                      i === currentPosition ? " is-active" : ""
-                    }`}
-                  />
-                ))}
-              </div>
+              <nav
+                className="reading-scroll__index"
+                aria-label={`牌阵位置导航，共 ${cards.length} 张`}
+              >
+                <ol className="reading-scroll__ticks">
+                  {cards.map((c, i) => (
+                    <li key={c.card_id + i}>
+                      <button
+                        type="button"
+                        className={`reading-scroll__tick${
+                          i === currentPosition ? " is-active" : ""
+                        }`}
+                        aria-label={`第 ${i + 1} 张：${c.position_name} · ${c.zh_name}`}
+                        aria-current={i === currentPosition ? "true" : undefined}
+                        onClick={() => scrollToPosition(i)}
+                      />
+                    </li>
+                  ))}
+                </ol>
+                <p className="reading-scroll__index-label">
+                  <span className="reading-scroll__index-count">
+                    {currentPosition + 1} / {cards.length}
+                  </span>
+                  <span className="reading-scroll__index-name">
+                    {cards[currentPosition]?.position_name}
+                  </span>
+                </p>
+              </nav>
             )}
 
             {/* 换牌不是硬切：旧牌向下沉一点、淡出，新牌从稍高处落定。
