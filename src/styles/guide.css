@@ -98,43 +98,88 @@
 }
 
 /* 透明布局壳：分区表面由内部 GlassCard 承担，避免 panel 套 card 的框套框 */
+/* 章节：不加框的编辑式排版，语言与解读卷轴一致
+   （渐变竖脊 + 手稿页码）。不要再套 GlassCard —— 八个大方块摞起来
+   就是被明令禁止的「说明书目录」。 */
 .guide-section {
+  position: relative;
+  padding-left: var(--space-6);
+  padding-block: var(--space-7);
   scroll-margin-top: calc(var(--app-header-height, 73px) + 24px);
 }
 
+.guide-section__spine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--border-glass) 12%,
+    var(--border-glass) 88%,
+    transparent 100%
+  );
+  transition:
+    width var(--dur-panel) var(--ease-soft),
+    background var(--dur-panel) var(--ease-soft);
+}
+
+/* 左侧目录高亮到哪一章，那一章的竖脊就点亮 */
+.guide-section.is-active .guide-section__spine {
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--accent-a2) 8%,
+    var(--accent) 42%,
+    var(--accent-a3) 78%,
+    transparent 100%
+  );
+  box-shadow: 0 0 14px var(--accent-a2);
+}
+
+/* 手稿页码 —— 和解读页的 folio 同一手法 */
 .guide-section-index {
-  font-family: var(--font-meta);
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  color: var(--gold);
-  margin-bottom: 18px;
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: color-mix(in srgb, var(--accent) 42%, transparent);
+  margin-bottom: var(--space-3);
 }
 
 .guide-section-title {
-  margin: 0 0 12px;
-  font-family: var(--font-ui);
-  font-size: var(--text-title-md);
-  font-weight: 500;
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-title-lg);
+  font-weight: 300;
   color: var(--text-primary);
-  line-height: 1.35;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
 }
 
+/* 导言比正文重一档，之前两者几乎一样粗，读不出主次 */
 .guide-section-lead {
-  margin: 0 0 12px;
+  margin: 0 0 var(--space-4);
   font-family: var(--font-ui);
-  font-size: 16px;
-  line-height: 1.8;
+  font-size: var(--text-body-lg);
+  line-height: 1.9;
   color: var(--text-primary);
-  max-width: 680px;
+  /* em 而不是 px：34 字/行是中文舒适区 */
+  max-width: 34em;
 }
 
 .guide-section-body {
   margin: 0;
   font-family: var(--font-ui);
-  font-size: 16px;
+  font-size: var(--text-body);
   line-height: 1.95;
   color: var(--text-secondary);
-  max-width: 680px;
+  /* 680px 在 16px 中文下是 42 字/行，偏长；收到 34em */
+  max-width: 34em;
 }
 
 .guide-section-body + .guide-section-body {
@@ -223,6 +268,8 @@
 }
 
 /* footer 没有内部 GlassCard，自带一个虚线轮廓盒子 */
+/* 快捷入口是旁注，不是章节：保留虚线框以示区别，
+   但不要继承章节的竖脊缩进 */
 .guide-section--footer {
   padding: var(--space-6) var(--space-7);
   border: 1px dashed var(--border);

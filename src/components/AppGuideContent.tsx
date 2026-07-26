@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { GlassCard } from "@/components/ui/GlassCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import {
   bindGuideSectionReveals,
@@ -127,6 +126,9 @@ export default function AppGuideContent() {
               type="button"
               className={activeSectionId === section.id ? "active" : undefined}
               aria-label={section.title}
+              /* 「+」（牌阵附录）光看是猜不出的；aria-label 只服务读屏，
+                 补一个原生 tooltip 给用眼睛的人 */
+              title={section.title}
               aria-current={activeSectionId === section.id ? "true" : undefined}
               onClick={() => scrollToSection(section.id)}
             >
@@ -142,21 +144,28 @@ export default function AppGuideContent() {
               id={section.id}
               data-section-id={section.id}
               data-arch={section.arch}
-              className="guide-section"
+              className={`guide-section${
+                activeSectionId === section.id ? " is-active" : ""
+              }`}
             >
-              <GlassCard padding="lg" glow className="guide-section-card">
-                <div className="guide-section-index" data-reveal>{section.index}</div>
-                <h2 className="guide-section-title" data-reveal>{section.title}</h2>
-                <p className="guide-section-lead" data-reveal>{section.lead}</p>
-                {section.body.map((paragraph, i) => (
-                  <p key={`${section.id}-body-${i}`} className="guide-section-body" data-reveal>
-                    {paragraph}
-                  </p>
-                ))}
-                {section.hint ? (
-                  <p className="guide-section-tip" data-reveal>{section.hint}</p>
-                ) : null}
-              </GlassCard>
+              {/* 这里原本每一章都套一个 GlassCard。八个带边带影的大方块摞
+                  在一起，读起来就是「说明书目录」—— AGENTS.md 明确禁止
+                  （「禁止后台表格、说明书目录」「禁止三栏文档布局作为默认」），
+                  UI_CONVENTIONS 也写了「不要 panel 套 card」。而且同一页
+                  底部的牌阵附录本来就没套卡，八章套、一章不套。
+                  改成和解读页同一套编辑语言：渐变竖脊 + 手稿页码，不加框。 */}
+              <span className="guide-section__spine" aria-hidden />
+              <div className="guide-section-index" data-reveal>{section.index}</div>
+              <h2 className="guide-section-title" data-reveal>{section.title}</h2>
+              <p className="guide-section-lead" data-reveal>{section.lead}</p>
+              {section.body.map((paragraph, i) => (
+                <p key={`${section.id}-body-${i}`} className="guide-section-body" data-reveal>
+                  {paragraph}
+                </p>
+              ))}
+              {section.hint ? (
+                <p className="guide-section-tip" data-reveal>{section.hint}</p>
+              ) : null}
             </section>
           ))}
 
@@ -164,8 +173,11 @@ export default function AppGuideContent() {
             id={APPENDIX_SECTION.id}
             data-section-id={APPENDIX_SECTION.id}
             data-arch={APPENDIX_SECTION.arch}
-            className="guide-section guide-section--spreads"
+            className={`guide-section guide-section--spreads${
+              activeSectionId === APPENDIX_SECTION.id ? " is-active" : ""
+            }`}
           >
+            <span className="guide-section__spine" aria-hidden />
             <div className="guide-section-index">{APPENDIX_SECTION.index}</div>
             <h2 className="guide-section-title">{APPENDIX_SECTION.title}</h2>
             <p className="guide-section-lead">{APPENDIX_SECTION.lead}</p>
@@ -217,12 +229,11 @@ export default function AppGuideContent() {
           <section className="guide-section guide-section--footer">
             <h2 className="guide-section-title">快捷入口</h2>
             <p className="guide-section-body">
+              {/* 「录屏科普工作台」(/explain) 从这里移除了：它是团队做短视频
+                  用的工具（9:16 导出比例、纯净录屏模式），不是给读者的内容，
+                  现已同 /demo 一起在生产环境 404。 */}
               <Link href="/archive" className="guide-footer-link">
                 牌义档案库 →
-              </Link>
-              {" · "}
-              <Link href="/explain" className="guide-footer-link">
-                录屏科普工作台 →
               </Link>
             </p>
           </section>

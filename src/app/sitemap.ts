@@ -4,6 +4,10 @@
  * Next.js app router 自动从这里生成 /sitemap.xml。
  * 动态页（/reading 带 query）不进 sitemap——它们是 ephemeral session URL，
  * 不需要 SEO 索引。
+ *
+ * 内部工具页（/demo、/lab/*、/motion-lab/*、/explain）同样不进：
+ * 它们在生产环境由 middleware 一律 404，列进 sitemap 只会给搜索引擎
+ * 送一堆死链。/explain 之前就在这里，是个遗留。
  */
 
 import type { MetadataRoute } from "next";
@@ -31,12 +35,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly",
       priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/explain`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.6,
     },
     {
       url: `${SITE_URL}/notes`,
