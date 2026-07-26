@@ -16,7 +16,7 @@
  */
 
 import { useCallback, useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import AnnotatedCard from "@/components/AnnotatedCard";
 import { useReducedMotion, easeSoft } from "@/features/motion";
 import RelationshipAnalysis from "@/components/RelationshipAnalysis";
@@ -44,6 +44,42 @@ function describeSpreadShape(majorCount: number, reversalCount: number): string 
   }
   return parts.join("；") + "。";
 }
+
+/* ── 滚动编排 ──────────────────────────────────────────────
+   段落进入视口时：金脊先自上而下画出来，文字随后逐条浮起。
+   位移只有 14px，但用 spring 而不是线性淡入 —— 读起来是「落定」，
+   不是「渐显」。once: true，往回滚不会重播（重播很烦人）。
+
+   之所以敢让初始态是 opacity 0：解读页的内容完全在客户端渲染
+   （SSR HTML 里只有 Suspense fallback，实测 0 处 reading-scroll 标记），
+   React 跑不起来时用户看到的是等待态而不是隐形文字。
+   ——首页大标题不能这么做，那里的文字是服务端就发出去的。
+   ═════════════════════════════════════════════════════════ */
+
+const REVEAL_VIEWPORT = { once: true, amount: 0.2 } as const;
+
+const sectionVariants: Variants = {
+  hidden: {},
+  shown: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } },
+};
+
+const spineVariants: Variants = {
+  hidden: { scaleY: 0, opacity: 0 },
+  shown: {
+    scaleY: 1,
+    opacity: 1,
+    transition: { duration: 0.62, ease: easeSoft },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 14 },
+  shown: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 130, damping: 22, mass: 0.9 },
+  },
+};
 
 type Props = {
   script: ReadingScript;
@@ -232,7 +268,7 @@ export default function ReadingScrollDocument({
           {cards.map((card, i) => {
             const position = spreadDef?.positions[i];
             return (
-              <section
+              <motion.section
                 key={card.card_id + i}
                 ref={registerSection(i)}
                 data-position-index={i}
@@ -240,8 +276,23 @@ export default function ReadingScrollDocument({
                   i === currentPosition ? " is-current" : ""
                 }`}
                 aria-label={`第 ${i + 1} 张：${card.zh_name}`}
+                variants={sectionVariants}
+                initial={reducedMotion ? false : "hidden"}
+                whileInView="shown"
+                viewport={REVEAL_VIEWPORT}
               >
-                <div className="reading-scroll__section-head">
+                {/* 金脊是真实元素而不是 ::before —— 伪元素没法交给 Framer
+                    编排。它从上往下「画」出来，正好领着下面的文字入场。 */}
+                <motion.span
+                  className="reading-scroll__spine"
+                  aria-hidden
+                  variants={spineVariants}
+                />
+
+                <motion.div
+                  className="reading-scroll__section-head"
+                  variants={itemVariants}
+                >
                   {isMultiCard && (
                     <span className="reading-scroll__ordinal">
                       {i + 1} / {cards.length}
@@ -255,22 +306,33 @@ export default function ReadingScrollDocument({
                     {card.zh_name} ·{" "}
                     {card.orientation === "upright" ? "正位" : "逆位"}
                   </span>
-                </div>
+                </motion.div>
 
                 {position?.meaning_zh && (
-                  <p className="reading-scroll__position-meaning">
+                  <motion.p
+                    className="reading-scroll__position-meaning"
+                    variants={itemVariants}
+                  >
                     {position.meaning_zh}
-                  </p>
+                  </motion.p>
                 )}
 
                 {position?.warning && (
-                  <p className="reading-scroll__warning">{position.warning}</p>
+                  <motion.p
+                    className="reading-scroll__warning"
+                    variants={itemVariants}
+                  >
+                    {position.warning}
+                  </motion.p>
                 )}
 
-                <p className="reading-scroll__body">
+                <motion.p
+                  className="reading-scroll__body"
+                  variants={itemVariants}
+                >
                   {script.scenes[i]?.body ?? ""}
-                </p>
-              </section>
+                </motion.p>
+              </motion.section>
             );
           })}
 

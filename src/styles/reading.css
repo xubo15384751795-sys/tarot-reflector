@@ -894,13 +894,17 @@
   padding: var(--space-7) 0 var(--space-7) var(--space-6);
 }
 
-.reading-scroll__section::before {
-  content: "";
+/* 金脊是真实元素（不是 ::before）——伪元素交不给 Framer 编排。
+   transform-origin: top 让它入场时自上而下「画」出来。
+   Framer 只管 transform/opacity，宽度和配色仍归 CSS，两边不打架。 */
+.reading-scroll__spine {
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   width: 1px;
+  transform-origin: top center;
+  pointer-events: none;
   background: linear-gradient(
     180deg,
     transparent 0%,
@@ -914,7 +918,7 @@
     box-shadow var(--dur-panel) var(--ease-soft);
 }
 
-.reading-scroll__section.is-current::before {
+.reading-scroll__section.is-current .reading-scroll__spine {
   width: 2px;
   background: linear-gradient(
     180deg,
@@ -925,6 +929,12 @@
     transparent 100%
   );
   box-shadow: 0 0 14px var(--accent-a2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-scroll__spine {
+    transition: none;
+  }
 }
 
 /* 每张牌给一个下限高度，保证有停顿感、sticky 牌面也不会快速跳牌；
