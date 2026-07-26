@@ -84,10 +84,14 @@ export default function ModeSelector({ onSelect }: Props) {
           <HomeEntryCard size="deck" />
         </div>
 
+        {/* initial={false}：三个入口必须在 SSR HTML 里就是可见的。
+            用 initial="hidden" 时它们会带着 opacity:0 发出去，
+            JS 没跑起来就等于首页没有入口 —— 这是首页最不能丢的东西。
+            代价是没有了逐条浮起的入场，换来的是「不依赖 JS 才能看见」。 */}
         <motion.div
           className="mode-deck__slots"
           variants={listVariants}
-          initial="hidden"
+          initial={false}
           animate="show"
         >
           {MODES.map((mode) => (

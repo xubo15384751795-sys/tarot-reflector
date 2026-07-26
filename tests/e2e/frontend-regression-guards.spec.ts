@@ -15,6 +15,67 @@ async function setTheme(page: import("@playwright/test").Page, theme: "light" | 
 }
 
 test.describe("Frontend regression DOM guards", () => {
+  /**
+   * 内容不得依赖 JS 才可见。
+   *
+   * 这条在本分支上栽过三次：
+   *   1. HeroTitleSplit 把 <h1> 渲染成 opacity:0，等 GSAP 抬起来；
+   *   2. 快照卡的「删除」用 Framer 内联 opacity:1 压过了 CSS 的 opacity:0；
+   *   3. 首页整屏 + 三个入口带着 opacity:0 发出 SSR HTML，
+   *      JS 不跑就只剩一条顶栏。
+   *
+   * 首页是预渲染的，所以 initial={{opacity:0}} 会真的写进 HTML。
+   * 关掉 JS 跑一遍是唯一可靠的验法。
+   */
+  test("home — 关闭 JS 时首页内容依然可见", async ({ browser }) => {
+    const ctx = await browser.newContext({ javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    /**
+     * 必须算上祖先的 opacity。
+     * opacity 不继承：包在 opacity:0 的 div 里的按钮，自己的
+     * computed opacity 仍是 1。第一版守卫就是这么写的，把 bug 放了过去。
+     * checkVisibility({opacityProperty:true}) 会把整条祖先链算进来。
+     */
+    const visible = async (selector: string) =>
+      page.evaluate(
+        (sel) =>
+          [...document.querySelectorAll(sel)].filter((e) => {
+            const r = e.getBoundingClientRect();
+            if (r.width === 0 || r.height === 0) return false;
+            return (e as HTMLElement).checkVisibility({
+              opacityProperty: true,
+              visibilityProperty: true,
+            });
+          }).length,
+        selector,
+      );
+
+    // 三个入口是首页最不能丢的东西
+    expect(await visible(".mode-deck-slot")).toBe(3);
+    expect(await visible(".hero-title")).toBe(1);
+
+    // 任何已布局的文本节点都不该停在 opacity:0
+    const stranded = await page.evaluate(() =>
+      [...document.querySelectorAll("p,h1,h2,h3,span,a,button,li")]
+        .filter((e) => (e.textContent ?? "").trim().length > 1)
+        .filter((e) => {
+          const r = e.getBoundingClientRect();
+          if (r.width === 0 || r.height === 0) return false;
+          // 已经占了版面，却因为自身或祖先的 opacity 而看不见
+          return !(e as HTMLElement).checkVisibility({
+            opacityProperty: true,
+            visibilityProperty: true,
+          });
+        })
+        .map((e) => e.tagName + "." + String(e.className).slice(0, 40)),
+    );
+    expect(stranded, `这些文本在无 JS 时不可见: ${stranded.join(", ")}`).toEqual([]);
+
+    await ctx.close();
+  });
+
   test("guide — no concatenated rail index string", async ({ page }) => {
     await page.goto("/guide");
     await page.waitForSelector(".guide-shell");

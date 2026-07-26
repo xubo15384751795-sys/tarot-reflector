@@ -57,7 +57,13 @@ export default function Home() {
 
         <main className="hero-shell relative z-[1] flex-1 min-h-0 flex flex-col">
           <LayoutGroup id="home-entry-flow">
-            <AnimatePresence mode="popLayout">
+            {/* initial={false}：首屏不播入场动画。
+                首页是预渲染的，内容实实在在写在 SSR HTML 里；一旦让
+                Framer 的 initial={{opacity:0}} 生效，整屏就以 opacity:0
+                发出去，只有 JS 跑起来才显形。JS 慢一点、报个错、被拦一下，
+                用户就只看到一条顶栏。阶段之间（选择 → 输入）的切换发生在
+                hydration 之后，仍然照常有过渡。 */}
+            <AnimatePresence mode="popLayout" initial={false}>
               {loading ? (
                 <motion.div
                   key="loading"
