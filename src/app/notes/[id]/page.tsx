@@ -141,29 +141,41 @@ export default function SnapshotDetailPage() {
             <h2 className="text-[11px] tracking-[0.16em]" style={{ color: "var(--accent)", opacity: 0.8 }}>
               {snapshot.spread_name_zh}
             </h2>
-            <div className="flex gap-4 flex-wrap">
+            {/* 牌面原本是固定 80px 的 flex 行，在 680px 的正文栏里靠左挤成一小撮，
+                右边空掉一半。改成按可用宽度分布的网格，牌数多时自然换行。
+                内联 style 也搬进 notes.css —— 免得以后又要用 !important 压它。 */}
+            <div className="snapshot-cards">
               {snapshot.drawn_cards.map((dc) => (
-                <div key={dc.card_id} className="flex flex-col items-center gap-2">
+                <figure key={dc.card_id} className="snapshot-cards__item">
                   <div
-                    className="relative overflow-hidden rounded-[5px]"
-                    style={{
-                      width: 80,
-                      aspectRatio: "600/1050",
-                      border: "1px solid var(--accent-a3)",
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.22)",
-                      transform: dc.orientation === "reversed" ? "rotate(180deg)" : undefined,
-                    }}
+                    className={`snapshot-cards__face${
+                      dc.orientation === "reversed" ? " is-reversed" : ""
+                    }`}
                   >
                     {lookupCardImage(dc.card_id) && (
-                      <Image src={lookupCardImage(dc.card_id)!} alt={dc.card_name_zh} fill sizes="80px" className="object-cover" />
+                      <Image
+                        src={lookupCardImage(dc.card_id)!}
+                        alt={dc.card_name_zh}
+                        fill
+                        sizes="(min-width: 768px) 150px, 30vw"
+                        className="object-cover"
+                      />
                     )}
                   </div>
-                  <span className="text-[11px]" style={{ color: "var(--text-secondary)" }}>{dc.card_name_zh}</span>
-                  <span className="text-[9px]" style={{ color: dc.orientation === "upright" ? "var(--accent)" : "var(--text-tertiary)" }}>
-                    {dc.orientation_zh}
-                  </span>
-                  <span className="text-[9px]" style={{ color: "var(--text-faint)" }}>{dc.position_name_zh}</span>
-                </div>
+                  <figcaption className="snapshot-cards__caption">
+                    <span className="snapshot-cards__name">{dc.card_name_zh}</span>
+                    <span
+                      className={`snapshot-cards__orientation${
+                        dc.orientation === "upright" ? " is-upright" : ""
+                      }`}
+                    >
+                      {dc.orientation_zh}
+                    </span>
+                    <span className="snapshot-cards__position">
+                      {dc.position_name_zh}
+                    </span>
+                  </figcaption>
+                </figure>
               ))}
             </div>
           </section>

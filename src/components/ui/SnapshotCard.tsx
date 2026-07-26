@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { easeSoft } from "@/features/motion";
 import { NoteCard } from "./NoteCard";
 import { cn } from "./cn";
 
@@ -43,8 +44,7 @@ export function SnapshotCard({
         <button
           type="button"
           onClick={onTogglePin}
-          className="text-[10px] tracking-[0.04em] bg-transparent border-none cursor-pointer"
-          style={{ color: pinned ? "var(--accent)" : "var(--text-faint)" }}
+          className={`snapshot-card__pin-toggle${pinned ? " is-pinned" : ""}`}
         >
           {pinned ? "取消固定" : "固定"}
         </button>
@@ -84,19 +84,18 @@ export function SnapshotCard({
           </motion.div>
         ) : (
           onRequestDelete && (
-            <motion.button
+            /* 删除是破坏性操作，不该和「固定」抢同样的视觉份额，
+               也不该一直挂在标题旁边等着被误点。默认隐去，
+               指针悬停或键盘聚焦到卡片时才出现（.note-card 上的
+               :hover / :focus-within 控制），颜色用 --danger 表明意图。 */
+            <button
               key="trash"
               type="button"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
-              exit={{ opacity: 0 }}
-              whileHover={{ opacity: 1 }}
               onClick={onRequestDelete}
-              className="text-[10px] tracking-[0.04em] bg-transparent border-none cursor-pointer"
-              style={{ color: "var(--text-faint)" }}
+              className="snapshot-card__delete"
             >
               删除
-            </motion.button>
+            </button>
           )
         )}
       </AnimatePresence>
@@ -107,7 +106,7 @@ export function SnapshotCard({
     <motion.div
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.45, ease: easeSoft }}
       className={cn(className)}
     >
       <NoteCard
@@ -118,12 +117,8 @@ export function SnapshotCard({
         pinned={pinned}
         onClick={onOpen}
         actions={actions}
+        noteCount={noteCount}
       />
-      {noteCount != null && noteCount > 1 && (
-        <p className="text-[10px] mt-1 px-5" style={{ color: "var(--text-faint)" }}>
-          共 {noteCount} 条笔记
-        </p>
-      )}
     </motion.div>
   );
 }
