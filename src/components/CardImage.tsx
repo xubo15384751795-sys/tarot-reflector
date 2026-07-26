@@ -15,10 +15,13 @@ type Props = {
 };
 
 /**
- * Renders a real Rider-Waite-Smith card face. Reversed cards are rotated 180°
- * around the card's center. The outer rounded mask and inset shadows match
- * the existing Obsidian Glass aesthetic so the photographic scan sits inside
- * the card frame cleanly.
+ * Renders a real Rider-Waite-Smith card face.
+ *
+ * 逆位一律把牌图旋转 180°（已定：全站统一）。
+ * 历史上 DrawingStage 单独不转，理由是「倒立的牌面会放大不适感」，
+ * 但那条决定从未推广到其余 5 处（notes / summary / video / 本组件），
+ * 结果同一张逆位牌在不同页面朝向不同。现在统一为「都转」——
+ * 要改回「都不转」，得五处一起改，别只改一处。
  */
 export default function CardImage({
   image,

@@ -59,16 +59,37 @@
   --accent-a3: rgba(198, 161, 92, 0.28); /* 强调边框 / active */
   --accent-a4: rgba(198, 161, 92, 0.45); /* 强光 / 重点描边 */
 
-  /* —— 阴影与状态 —— */
+  /* —— 阴影与状态 ——
+     每档都是三层：接触（贴地、几乎不糊）+ 中景（形体）+ 环境（大范围压暗）。
+     单层高斯模糊做不出厚度，只会让元素「浮」在背景上。
+     光源统一在上方，所以偏移量都是正 Y，配合 --rim-light 的顶部高光。 */
   --shadow-card:
-    0 1px 2px rgba(0, 0, 0, 0.30),
+    0 1px 2px rgba(0, 0, 0, 0.34),
     0 8px 24px rgba(0, 0, 0, 0.30),
     0 24px 56px rgba(0, 0, 0, 0.22);
+
   /* Elevation 分层（rest → hover → overlay → modal） */
-  --shadow-rest: 0 12px 32px rgba(0, 0, 0, 0.28);
-  --shadow-hover: 0 18px 48px rgba(0, 0, 0, 0.36);
-  --shadow-overlay: 0 24px 72px rgba(0, 0, 0, 0.46);
-  --shadow-modal: 0 36px 96px rgba(0, 0, 0, 0.56);
+  --shadow-rest:
+    0 1px 2px rgba(0, 0, 0, 0.32),
+    0 5px 12px rgba(0, 0, 0, 0.24),
+    0 16px 40px rgba(0, 0, 0, 0.22);
+  --shadow-hover:
+    0 1px 2px rgba(0, 0, 0, 0.36),
+    0 8px 20px rgba(0, 0, 0, 0.30),
+    0 26px 64px rgba(0, 0, 0, 0.30);
+  --shadow-overlay:
+    0 2px 4px rgba(0, 0, 0, 0.40),
+    0 12px 30px rgba(0, 0, 0, 0.36),
+    0 36px 88px rgba(0, 0, 0, 0.40);
+  --shadow-modal:
+    0 2px 6px rgba(0, 0, 0, 0.44),
+    0 18px 44px rgba(0, 0, 0, 0.42),
+    0 52px 120px rgba(0, 0, 0, 0.50);
+
+  /* 材质厚度：顶缘受光、底缘压暗。叠在 box-shadow 里表达「这是一块有厚度的东西」 */
+  --rim-light: inset 0 1px 0 rgba(255, 246, 226, 0.10);
+  --rim-shade: inset 0 -1px 0 rgba(0, 0, 0, 0.30);
+
   --danger: #d35a45;
   --backdrop-blur: 24px;
 
@@ -150,11 +171,29 @@
     0 1px 2px rgba(92, 66, 38, 0.10),
     0 8px 22px rgba(92, 66, 38, 0.10),
     0 24px 56px rgba(92, 66, 38, 0.10);
-  /* Elevation 分层（暖棕、偏柔，避免廉价黑弹窗感） */
-  --shadow-rest: 0 12px 32px rgba(20, 12, 4, 0.10);
-  --shadow-hover: 0 18px 48px rgba(20, 12, 4, 0.16);
-  --shadow-overlay: 0 24px 72px rgba(20, 12, 4, 0.20);
-  --shadow-modal: 0 36px 96px rgba(20, 12, 4, 0.26);
+  /* Elevation 分层（暖棕、偏柔，避免廉价黑弹窗感）。
+     同样是三层：接触 + 中景 + 环境，只是整体更淡。 */
+  --shadow-rest:
+    0 1px 2px rgba(20, 12, 4, 0.10),
+    0 5px 12px rgba(20, 12, 4, 0.08),
+    0 16px 40px rgba(20, 12, 4, 0.08);
+  --shadow-hover:
+    0 1px 2px rgba(20, 12, 4, 0.12),
+    0 8px 20px rgba(20, 12, 4, 0.12),
+    0 26px 64px rgba(20, 12, 4, 0.12);
+  --shadow-overlay:
+    0 2px 4px rgba(20, 12, 4, 0.14),
+    0 12px 30px rgba(20, 12, 4, 0.14),
+    0 36px 88px rgba(20, 12, 4, 0.16);
+  --shadow-modal:
+    0 2px 6px rgba(20, 12, 4, 0.16),
+    0 18px 44px rgba(20, 12, 4, 0.18),
+    0 52px 120px rgba(20, 12, 4, 0.20);
+
+  /* 浅色下顶缘受光更明显、底缘压暗更轻 */
+  --rim-light: inset 0 1px 0 rgba(255, 255, 255, 0.70);
+  --rim-shade: inset 0 -1px 0 rgba(92, 66, 38, 0.12);
+
   --danger: #b04030;
   --backdrop-blur: 18px;
 

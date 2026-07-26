@@ -16,7 +16,9 @@
  */
 
 import { useCallback, useEffect, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import AnnotatedCard from "@/components/AnnotatedCard";
+import { useReducedMotion, easeSoft } from "@/features/motion";
 import RelationshipAnalysis from "@/components/RelationshipAnalysis";
 import ReadingSummary from "@/components/ReadingSummary";
 import { readingStatusText } from "@/lib/readingStatusCopy";
@@ -73,6 +75,7 @@ export default function ReadingScrollDocument({
   onWriteNote,
   onClose,
 }: Props) {
+  const reducedMotion = useReducedMotion();
   const spreadDef = getSpreadDef(script.spread_id);
   const cards = script.cards.length > 0 ? script.cards : null;
   const sectionRefs = useRef<Array<HTMLElement | null>>([]);
@@ -161,23 +164,55 @@ export default function ReadingScrollDocument({
               </div>
             )}
 
-            <AnnotatedCard
-              key={activeCard.card_id + activeCard.position_index}
-              image={activeCard.image}
-              cardName={activeCard.card_name}
-              zhName={activeCard.zh_name}
-              orientation={activeCard.orientation}
-              motifs={activeCard.motifs}
-              activeMotifId={
-                script.scenes[currentPosition]?.focus_motif ?? null
-              }
-              bare={false}
-            />
+            {/* 换牌不是硬切：旧牌向下沉一点、淡出，新牌从稍高处落定。
+                位移很小（10px）但带 mass，读起来是「换了一张实物」，
+                而不是「图片被替换了」。 */}
+            {/* mode="wait"：旧牌先沉下去淡出，新牌再落定。
+                不用 popLayout —— 那会让新旧两张同时在场，需要一个定高
+                堆叠槽，而 AnnotatedCard 内部是 archive-layout 三栏网格，
+                一旦被塞进 grid 槽位就撑破 sticky 列。 */}
+            <div className="reading-scroll__card-slot">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={activeCard.card_id + activeCard.position_index}
+                  className="w-full"
+                  initial={reducedMotion ? false : { opacity: 0, y: -10, scale: 0.985 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.99 }}
+                  transition={
+                    reducedMotion
+                      ? { duration: 0.12 }
+                      : { type: "spring", stiffness: 120, damping: 20, mass: 1.05 }
+                  }
+                >
+                  <AnnotatedCard
+                    image={activeCard.image}
+                    cardName={activeCard.card_name}
+                    zhName={activeCard.zh_name}
+                    orientation={activeCard.orientation}
+                    motifs={activeCard.motifs}
+                    activeMotifId={
+                      script.scenes[currentPosition]?.focus_motif ?? null
+                    }
+                    bare={false}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
             <p className="reading-scroll__stage-caption">
-              <span className="reading-scroll__stage-name">
-                {activeCard.zh_name}
-              </span>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={activeCard.card_id}
+                  className="reading-scroll__stage-name"
+                  initial={reducedMotion ? false : { opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.26, ease: easeSoft }}
+                >
+                  {activeCard.zh_name}
+                </motion.span>
+              </AnimatePresence>
               <span className="reading-scroll__stage-orientation">
                 {activeCard.orientation === "upright" ? "正位" : "逆位"}
               </span>

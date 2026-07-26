@@ -629,7 +629,9 @@
   border: 1px solid var(--border);
   border-left: 2px solid var(--accent-a2);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-rest);
+  /* 顶缘受光 + 底缘压暗 + 三层投影 = 一块有厚度的东西，
+     而不是一个画了边框的矩形 */
+  box-shadow: var(--rim-light), var(--rim-shade), var(--shadow-rest);
   transition:
     border-color var(--dur-hover) var(--ease-soft),
     background var(--dur-hover) var(--ease-soft),
@@ -641,7 +643,7 @@
   background: var(--surface-strong);
   border-color: var(--border-strong);
   border-left-color: var(--accent);
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--rim-light), var(--rim-shade), var(--shadow-hover);
   transform: translateY(-2px);
 }
 
@@ -668,7 +670,10 @@
 .mode-deck-slot.is-chosen {
   border-color: var(--accent);
   background: color-mix(in srgb, var(--accent-dim) 70%, var(--surface-strong));
-  box-shadow: 0 0 0 1px var(--accent-a2), var(--shadow-hover);
+  box-shadow:
+    var(--rim-light),
+    0 0 0 1px var(--accent-a2),
+    var(--shadow-hover);
 }
 
 .mode-deck-slot__title {

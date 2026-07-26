@@ -12,6 +12,80 @@ body {
   letter-spacing: -0.01em;
 }
 
+/* ═══ 页面大气层 ═══════════════════════════════════════════
+   纯平的 --bg-base 读起来是「没做完」，不是「深」。这一层给出
+   三件东西，让内容有地方可站：
+     1. 顶部偏暖的光池 —— 暗示一个光源，页面才有上下关系
+     2. 底部压暗 —— 内容向下沉，视线不会漫出屏幕
+     3. 极细颗粒 —— 大面积渐变在暗色下必然出现色带，颗粒把它打散，
+        顺便让表面像纸/胶片而不是屏幕
+   固定定位、不参与滚动、不吃事件。
+   ═════════════════════════════════════════════════════════ */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* 光池在内容之下，颗粒在内容之上（颗粒要盖住卡片边缘才像同一张纸） */
+body::before { z-index: 0; }
+body::after { z-index: var(--z-noise); }
+
+/* 光池 + 暗角 */
+body::before {
+  background:
+    radial-gradient(
+      ellipse 120% 78% at 50% -12%,
+      color-mix(in srgb, var(--accent) 10%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 90% 60% at 50% 0%,
+      color-mix(in srgb, var(--text-primary) 7%, transparent) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 140% 100% at 50% 108%,
+      color-mix(in srgb, #000 42%, transparent) 0%,
+      transparent 58%
+    );
+}
+
+:root[data-theme="light"] body::before {
+  background:
+    radial-gradient(
+      ellipse 120% 78% at 50% -12%,
+      color-mix(in srgb, var(--accent) 9%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 140% 100% at 50% 110%,
+      color-mix(in srgb, #5c4226 12%, transparent) 0%,
+      transparent 58%
+    );
+}
+
+/* 颗粒 —— 128px 平铺的 fractalNoise，overlay 混合 */
+body::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  mix-blend-mode: overlay;
+  opacity: 0.05;
+}
+
+:root[data-theme="light"] body::after {
+  mix-blend-mode: multiply;
+  opacity: 0.035;
+}
+
+/* 内容必须压在大气层之上 */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* ── 字体三层系统 ── */
 
 /* 2. 标题字体：Logo、大标题、幕标题、收束句 — 仅限定场景使用 */
@@ -50,33 +124,9 @@ p, li, .scene-body, .annotation {
   text-wrap: pretty;
 }
 
-/* 全局纸张噪点（极淡，只有凑近能看到） */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: var(--z-noise);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 200px 200px;
-  opacity: 0.025;
-  mix-blend-mode: overlay;
-}
-:root[data-theme="light"] body::after {
-  opacity: 0.035;
-  mix-blend-mode: multiply;
-}
-
-/* Ambient background glow */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(180, 170, 140, 0.03) 0%, transparent 80%);
-  pointer-events: none;
-  z-index: 0;
-}
+/* 注：噪点与环境光都在文件顶部的「页面大气层」一节里，
+   不要在这里再写一份 body::before/::after —— 同选择器同优先级，
+   后面那份会静默盖掉前面那份（本文件真出过这个问题）。 */
 :root {
   --app-header-height: 73px;
 }
