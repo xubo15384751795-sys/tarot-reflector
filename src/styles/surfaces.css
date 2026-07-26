@@ -319,11 +319,24 @@
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--border-glass);
-  box-shadow: inset 0 1px 0 rgba(255, 247, 225, 0.05), var(--shadow-rest);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  /* 和首页入口卡、档案卡同一套材质语言：顶缘受光 + 底缘压暗 + 三层投影 */
+  box-shadow: var(--rim-light), var(--rim-shade), var(--shadow-rest);
+  transition:
+    border-color var(--dur-hover) var(--ease-soft),
+    box-shadow var(--dur-hover) var(--ease-soft),
+    transform var(--dur-hover) var(--ease-soft);
 }
 .note-card:hover {
   border-color: var(--border-strong);
+  box-shadow: var(--rim-light), var(--rim-shade), var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note-card,
+  .note-card:hover {
+    transform: none;
+  }
 }
 .note-card--pinned {
   border-color: var(--accent-a3);
@@ -333,7 +346,9 @@
 .symbol-popover {
   animation-duration: 0.28s;
   animation-timing-function: var(--ease-soft);
-}.storybook-force-hover .archive-glass-card {
+}
+
+.storybook-force-hover .archive-glass-card {
   border-color: var(--accent-a3);
 }
 .storybook-force-hover .note-card {
